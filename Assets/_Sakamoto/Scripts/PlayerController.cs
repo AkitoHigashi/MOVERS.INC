@@ -33,7 +33,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnInputMove(InputAction.CallbackContext context)
     {
-
+        if (context.performed)
+        {
+            Vector2 input = context.ReadValue<Vector2>();
+            _playerMove?.Move(input,_playerData);
+        }
+        else if (context.canceled)
+        {
+            _playerMove?.Stop();
+        }
     }
 
     private void OnInputJump(InputAction.CallbackContext context)
