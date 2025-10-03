@@ -7,9 +7,9 @@ public class InputBuffer : MonoBehaviour
     private const string MOVE_ACTION = "Move";
     private const string JUMP_ACTION = "Jump";
     private const string SPRINT_ACTION = "Sprint";
-    private InputAction MoveAction => _moveAction;
-    private InputAction JumpAction => _jumpAction;
-    private InputAction SprintAction => _sprintAction;
+    public InputAction MoveAction => _moveAction;
+    public InputAction JumpAction => _jumpAction;
+    public InputAction SprintAction => _sprintAction;
 
     private InputAction _moveAction;
     private InputAction _jumpAction;

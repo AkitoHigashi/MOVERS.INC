@@ -1,16 +1,13 @@
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class PlayerData : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Transform _cameraForward;
+    [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _jumpAction;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Transform CameraForward => _cameraForward;
+    public float MoveSpeed => _moveSpeed;
+    public float JumpAction => _jumpAction;
 }
