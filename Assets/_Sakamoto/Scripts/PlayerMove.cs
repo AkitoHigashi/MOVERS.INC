@@ -50,9 +50,11 @@ public class PlayerMove : MonoBehaviour, IStartSetVariables
 
     private void SpeedController()
     {
-        if (_rb.linearVelocity.magnitude > _moveSpeed)
+        Vector3 flatVel = new Vector3(_rb.linearVelocity.x, 0f, _rb.linearVelocity.z);
+        if (flatVel.magnitude > _moveSpeed)
         {
-            _rb.linearVelocity = _rb.linearVelocity.normalized * _moveSpeed;
+            Vector3 limitedVel = flatVel.normalized * _moveSpeed;
+            _rb.linearVelocity = new Vector3(limitedVel.x, _rb.linearVelocity.y, limitedVel.z);
         }
     }
 }
