@@ -4,7 +4,7 @@ public abstract class ItemBase : MonoBehaviour
 {
     protected virtual void SetUp()
     {
-        if (tag == "Item")
+        if (tag != "Item")
         {
             tag = "Item";
         }
