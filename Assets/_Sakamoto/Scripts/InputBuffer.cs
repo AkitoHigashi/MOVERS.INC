@@ -6,7 +6,7 @@ public class InputBuffer : MonoBehaviour
 {
     private const string MOVE_ACTION = "Move";
     private const string JUMP_ACTION = "Jump";
-    private const string DASH_ACTION = "Dash";
+    private const string SPRINT_ACTION = "Sprint";
     private const string CROUCH_ACTION = "Crouch";
     private const string CATCH_ACTION = "Catch";
     private const string RELEASE_ACTION = "Release";
@@ -15,7 +15,7 @@ public class InputBuffer : MonoBehaviour
 
     public InputAction PlayerMove => _playerMove;
     public InputAction PlayerJump => _playerJump;
-    public InputAction PlayerDash => _playerDash;
+    public InputAction PlayerSprint => _playerSprint;
     public InputAction PlayerCrouch => _playerCrouch;
     public InputAction PlayerCatch => _playerCatch;
     public InputAction PlayerRelease => _playerRelease;
@@ -25,7 +25,7 @@ public class InputBuffer : MonoBehaviour
 
     private InputAction _playerMove;
     private InputAction _playerJump;
-    private InputAction _playerDash;
+    private InputAction _playerSprint;
     private InputAction _playerCrouch;
     private InputAction _playerCatch;
     private InputAction _playerRelease;
@@ -38,7 +38,7 @@ public class InputBuffer : MonoBehaviour
         {
             _playerMove = playerInput.actions[MOVE_ACTION];
             _playerJump = playerInput.actions[JUMP_ACTION];
-            _playerDash = playerInput.actions[DASH_ACTION];
+            _playerSprint = playerInput.actions[SPRINT_ACTION];
             _playerCrouch = playerInput.actions[CROUCH_ACTION];
             _playerCatch = playerInput.actions[CATCH_ACTION];
             _playerRelease = playerInput.actions[RELEASE_ACTION];
