@@ -11,6 +11,8 @@ public class EnemyData : ScriptableObject
     [SerializeField] private int _enemyFov;
     [SerializeField] private int _enemyPower;
     [SerializeField] private float _enemyAttackRange;
+    [Header("“G‘ÎŠÖŒW")]
+    [SerializeField] private EnemyState _enemyState;
 
     /// <summary>“G‚ÌHP‰Šú’l</summary>
     public int EnemyHpData => _enemyHp;
@@ -22,4 +24,12 @@ public class EnemyData : ScriptableObject
     public int EnemyPowerData => _enemyPower;
     /// <summary>“G‚ÌUŒ‚”ÍˆÍ‚Ì‰Šú’l</summary>
     public float EnemyAttackRangeData => _enemyAttackRange;
+    /// <summary>“G‘ÎŠÖŒW</summary>
+    public EnemyState EnemyStateData => _enemyState;
+}
+public enum EnemyState
+{
+    Friendly, // —FD“I
+    Neutral,  // ’†—§“I
+    Hostile   // “G‘Î“I
 }
