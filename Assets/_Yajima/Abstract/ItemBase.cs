@@ -2,6 +2,9 @@ using UnityEngine;
 
 public abstract class ItemBase : MonoBehaviour
 {
+    /// <summary>
+    /// 初期設定を行う関数で、必ずbaseも呼び出すこと
+    /// </summary>
     protected virtual void SetUp()
     {
         if (tag != "Item")
@@ -11,7 +14,7 @@ public abstract class ItemBase : MonoBehaviour
     }
 
     /// <summary>
-    /// アイテムを使用する関数
+    /// アイテムの効果を発動する関数
     /// </summary>
-    public abstract void UseItem();
+    public abstract void ItemActivate();
 }

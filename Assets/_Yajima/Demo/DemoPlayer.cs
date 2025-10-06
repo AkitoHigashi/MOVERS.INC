@@ -6,6 +6,13 @@ using UnityEngine;
 public class DemoPlayer : MonoBehaviour
 {
     [SerializeField] ItemBase _item;
+    [SerializeField] Inventory _inventory;
+    GameObject _go;
+
+    private void Start()
+    {
+        _go = transform.GetChild(0).gameObject;
+    }
 
     // Update is called once per frame
     void Update()
@@ -14,10 +21,34 @@ public class DemoPlayer : MonoBehaviour
         {
             UseItem();
         }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            _go = _inventory.StoreItem(_go, 0);
+            _go?.transform.SetParent(transform);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            _go = _inventory.StoreItem(_go, 1);
+            _go?.transform.SetParent(transform);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            _go = _inventory.StoreItem(_go, 2);
+            _go?.transform.SetParent(transform);
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            CatchObject();
+        }
+    }
+
+    void CatchObject()
+    {
+        _go = transform.GetChild(0).gameObject;
     }
 
     void UseItem()
     {
-        _item.UseItem();
+        _item.ItemActivate();
     }
 }
