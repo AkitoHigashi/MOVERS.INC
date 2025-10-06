@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
         else if (context.canceled)
         {
             _currentInput = Vector2.zero;
+            _playerMove?.StopMove();
         }
 
     }
