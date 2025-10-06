@@ -12,4 +12,16 @@ public class PlayerState : MonoBehaviour
         Throwing,
         Idle
     }
+
+    public void UpdateState(bool isSprint)
+    {
+        if (isSprint)
+        {
+            CurrentState = State.Sprinting;
+        }
+        else
+        {
+            CurrentState = State.Walking;
+        }
+    }
 }

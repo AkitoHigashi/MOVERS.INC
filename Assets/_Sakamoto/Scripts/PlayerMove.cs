@@ -6,7 +6,7 @@ public class PlayerMove : MonoBehaviour, IStartSetVariables
     private Rigidbody _rb;
     private Transform _cameraForward;
     //‰¼
-    private float _moveSpeed=10f;
+    private float _moveSpeed = 10f;
     private float _walkSpeed;
     private float _sprintSpeed;
     private Vector2 _currentInput;
@@ -57,6 +57,21 @@ public class PlayerMove : MonoBehaviour, IStartSetVariables
         {
             Vector3 limitedVel = flatVel.normalized * _moveSpeed;
             _rb.linearVelocity = new Vector3(limitedVel.x, _rb.linearVelocity.y, limitedVel.z);
+        }
+    }
+
+    public void UpdateSpeed(PlayerState playerState)
+    {
+        if (playerState == null) return;
+
+        switch (playerState.CurrentState)
+        {
+            case PlayerState.State.Walking:
+                _moveSpeed = _walkSpeed;
+                break;
+            case PlayerState.State.Sprinting:
+                _moveSpeed = _sprintSpeed;
+                break;
         }
     }
 }
