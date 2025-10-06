@@ -16,16 +16,18 @@ public class EnemyBase : MonoBehaviour
     protected float _enemyAttackRange;
 
     protected NavMeshAgent _navMeshAgent;
-    protected Vector3 _currentDestination;
-    protected Vector3 _lastDestination;
-    protected bool isFind = false;
+    private bool _isFind = false;
 
-    private void Awake()
+    public float EnemyFov => _enemyFov;
+    public bool IsFind
+    {
+        get { return _isFind; }
+        set { _isFind = value; }
+    }
+
+    protected virtual void Awake()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
-    }
-    private void Start()
-    {
         SetParameter();
     }
     /// <summary>
