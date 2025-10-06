@@ -822,7 +822,7 @@ GameObject:
   - component: {fileID: 2122687356}
   - component: {fileID: 2122687355}
   - component: {fileID: 2122687354}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1121,8 +1121,11 @@ GameObject:
   - component: {fileID: 2141787237}
   - component: {fileID: 2141787236}
   - component: {fileID: 2141787235}
+  - component: {fileID: 2141787241}
   - component: {fileID: 2141787234}
   - component: {fileID: 2141787233}
+  - component: {fileID: 2141787240}
+  - component: {fileID: 2141787239}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1258,9 +1261,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraForward: {fileID: 1172961701}
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  _playerHeight: 2
   _walkSpeed: 5
   _sprintSpeed: 10
-  _jumpForce: 10
+  _jumpForce: 5
 --- !u!114 &2141787236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1330,6 +1337,43 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &2141787239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141787228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21dfd3a94df8934fba4729c13b9b5ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _groundCheckDistance: 0.2
+--- !u!114 &2141787240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141787228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e6afad4a0e4fb34fbcf4970406325b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2141787241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141787228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad3a06c8a435c4c428e01a9e0ae363c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
