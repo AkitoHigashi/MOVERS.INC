@@ -2,15 +2,14 @@ using UnityEngine;
 
 public class PlayerState : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public State CurrentState { get; private set; } = State.Idle;
+    public enum State
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Walking,
+        Sprinting,
+        Crouching,
+        Carrying,
+        Throwing,
+        Idle
     }
 }
