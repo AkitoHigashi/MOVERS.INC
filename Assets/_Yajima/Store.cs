@@ -7,15 +7,13 @@ public class Store : MonoBehaviour
 {
     [SerializeField] ItemDataList _itemDataList;
     [SerializeField, Tooltip("アイテムを並べる座標")] Transform[] _transforms;
-
-    Storage _storage;
+    [SerializeField] Storage _storage;
 
     /// <summary>仮の会社評価</summary>
     [SerializeField] int _companyReview = 100;
 
     private void Start()
     {
-        _storage = FindFirstObjectByType<Storage>();
         StoreSet();
     }
 
@@ -41,30 +39,32 @@ public class Store : MonoBehaviour
     /// アイテムを購入する関数
     /// </summary>
     /// <param name="item">購入するアイテム</param>
-    /// <param name="money">所持金</param>
+    /// <param name="money">所持金の参照</param>
     /// <return>払う金額の値を返す</return>
-    public int PurchaseItem(GameObject item, int money)
+    public void PurchaseItem(GameObject item, ref int money)
     {
         var data = item.GetComponent<Display>().Data;
         //お金が足りているかどうか
         if (money >= data.PurchaseCost)
         {
             //所持上限まで買っているかどうか
-            if (_storage.PossessCount[data] < data.PossessionLimit)
+            if (StorageData.PossessCount[data] < data.PossessionLimit)
             {
-                _storage.IteminStorage(data);
-                return data.PurchaseCost;
+                //所持金を更新
+                money -= data.PurchaseCost;
+                //保管庫に情報を送る
+                StorageData.IteminStorage(data);
+                //保管庫の配置を更新
+                _storage.StorageUpdate();
             }
             else
             {
                 Debug.Log("これ以上買えません");
-                return 0;
             }
         }
         else
         {
             Debug.Log("お金が足りません");
-            return 0;
         }
     }
 }

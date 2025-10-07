@@ -1,17 +1,20 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 
 /// <summary>
-/// ÉvÉåÉCÉÑÅ[ÅiâºÅj
+/// „Éó„É¨„Ç§„É§„ÉºÔºà‰ªÆÔºâ
 /// </summary>
 public class DemoPlayer : MonoBehaviour
 {
     [SerializeField] ItemBase _item;
     [SerializeField] Inventory _inventory;
     GameObject _go;
+    Store _store;
+    int _money = 1000;
 
     private void Start()
     {
         _go = transform.GetChild(0).gameObject;
+        _store = FindFirstObjectByType<Store>();
     }
 
     // Update is called once per frame
@@ -39,6 +42,11 @@ public class DemoPlayer : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             CatchObject();
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            _store.PurchaseItem(_go, ref _money);
+            Debug.Log(_money);
         }
     }
 

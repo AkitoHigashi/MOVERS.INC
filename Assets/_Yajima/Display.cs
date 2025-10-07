@@ -5,6 +5,7 @@
 /// </summary>
 public class Display : MonoBehaviour
 {
+    /// <summary>このアイテムのデータ</summary>
     ItemData _data;
 
     /// <summary>
