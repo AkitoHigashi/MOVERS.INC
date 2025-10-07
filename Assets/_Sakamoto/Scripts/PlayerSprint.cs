@@ -1,10 +1,10 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class PlayerSprint : MonoBehaviour, IStartSetVariables
 {
     private float _staminaRecoverySpeed;
     private float _stamina;
-    private float _staminaMaxVaue;
+    private float _staminaMaxValue;
     private bool _isSprint = false;
 
     private void Update()
@@ -13,7 +13,7 @@ public class PlayerSprint : MonoBehaviour, IStartSetVariables
     }
 
     /// <summary>
-    /// ƒXƒ^ƒ~ƒiŠÇ—
+    /// ã‚¹ã‚¿ãƒŸãƒŠç®¡ç†
     /// </summary>
     private void StaminaManager()
     {
@@ -27,7 +27,7 @@ public class PlayerSprint : MonoBehaviour, IStartSetVariables
         }
         else if (!_isSprint)
         {
-            if (_stamina <= _staminaMaxVaue)
+            if (_stamina <= _staminaMaxValue)
             {
                 _stamina += Time.deltaTime * _staminaRecoverySpeed;
             }
@@ -38,12 +38,12 @@ public class PlayerSprint : MonoBehaviour, IStartSetVariables
     public void StartSetVariables(PlayerData playerData)
     {
         _stamina = playerData.Stamina;
-        _staminaMaxVaue = playerData.Stamina;
+        _staminaMaxValue = playerData.Stamina;
         _staminaRecoverySpeed = playerData.StaminaRecoverySpeed;
     }
 
     /// <summary>
-    /// ƒ_ƒbƒVƒ…ŠJn
+    /// ãƒ€ãƒƒã‚·ãƒ¥é–‹å§‹
     /// </summary>
     public void StartSprint()
     {
@@ -54,7 +54,7 @@ public class PlayerSprint : MonoBehaviour, IStartSetVariables
     }
 
     /// <summary>
-    /// ƒ_ƒbƒVƒ…I—¹
+    /// ãƒ€ãƒƒã‚·ãƒ¥çµ‚äº†
     /// </summary>
     public void StopSprint()
     {
@@ -62,7 +62,7 @@ public class PlayerSprint : MonoBehaviour, IStartSetVariables
     }
 
     /// <summary>
-    /// ƒ_ƒbƒVƒ…’†‚©‚Ç‚¤‚©
+    /// ãƒ€ãƒƒã‚·ãƒ¥ä¸­ã‹ã©ã†ã‹
     /// </summary>
     /// <returns></returns>
     public bool ReturnIsSprint() => _isSprint;

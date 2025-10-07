@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerData : MonoBehaviour
 {
@@ -10,18 +10,24 @@ public class PlayerData : MonoBehaviour
     [Header("Move")]
     [SerializeField] private float _walkSpeed;
     [SerializeField] private float _sprintSpeed;
+    [SerializeField] private float _crouchSpeed;
     [SerializeField] private float _stamina = 100f;
     [SerializeField] private float _staminaRecoverySpeed = 2f;
 
     [Header("Jump")]
     [SerializeField] private float _jumpForce;
 
+    [Header("Crouch")]
+    [SerializeField] private float _couchHeight;
+
     public Transform CameraForward => _cameraForward;
     public LayerMask GroundLayer => _groundLayer;
     public float PlayerHeight => _playerHeight;
     public float WalkSpeed => _walkSpeed;
     public float SprintSpeed => _sprintSpeed;
+    public float CrouchSpeed => _crouchSpeed;
     public float Stamina => _stamina;
     public float StaminaRecoverySpeed => _staminaRecoverySpeed;
     public float JumpForce => _jumpForce;
+    public float CouchHeight => _couchHeight;
 }
