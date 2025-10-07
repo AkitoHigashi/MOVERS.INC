@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce9e37331544db340957ba7e287bc8a9, type: 3}
   m_Name: Lizard
   m_EditorClassIdentifier: 
-  _enemyHp: 0
-  _enemyMoveSpeed: 0
-  _enemyFov: 0
-  _enemyPower: 0
-  _enemyAttackRange: 0
-  _enemyState: 0
+  _enemyHp: 30
+  _enemyMoveSpeed: 5
+  _enemyFov: 7
+  _enemyPower: 5
+  _enemyAttackRange: 3
+  _enemyState: 1
