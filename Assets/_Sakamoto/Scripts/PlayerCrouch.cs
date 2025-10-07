@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerCrouch : MonoBehaviour,IStartSetVariables
+public class PlayerCrouch : MonoBehaviour, IStartSetVariables
 {
     private CapsuleCollider _capsuleCollider;
     private float _startHeight;
@@ -15,7 +15,7 @@ public class PlayerCrouch : MonoBehaviour,IStartSetVariables
 
     public void StartSetVariables(PlayerData playerData)
     {
-        _crouchHeight = playerData.CouchHeight;
+        _crouchHeight = playerData.CrouchHeight;
     }
 
     public void StartCrouch()
