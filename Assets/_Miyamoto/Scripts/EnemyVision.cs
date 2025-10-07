@@ -1,26 +1,41 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ‹–ìƒgƒŠƒK[ê—pƒXƒNƒŠƒvƒgiqƒIƒuƒWƒFƒNƒg‚ÉƒAƒ^ƒbƒ`j
+/// è¦–é‡ãƒˆãƒªã‚¬ãƒ¼å°‚ç”¨ã‚¹ã‚¯ãƒªãƒ—ãƒˆï¼ˆå­ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ã‚¢ã‚¿ãƒƒãƒï¼‰
 /// </summary>
 public class EnemyVision : MonoBehaviour
 {
+    const string PLAYER = "Player";
+    const string LUGGAGE = "Luggage";
     private EnemyBase _enemyBase;
-    private EnemyMove _enemyMove;
-    private SphereCollider _sphereCollider;
-    private void Awake()
+    private Collider _collider;
+    private bool _isTrigger;
+    private void Start()
     {
         _enemyBase = GetComponentInParent<EnemyBase>();
-        _enemyMove = GetComponentInParent<EnemyMove>();
-        _sphereCollider = GetComponentInParent<SphereCollider>();
-        _sphereCollider.radius = _enemyBase.EnemyFov;
     }
-    private void OnTriggerStay(Collider other)
+    private void Update()
     {
-        if (other.CompareTag("Player") && _enemyMove != null)
+        if (_isTrigger)
         {
-            Debug.Log("ƒvƒŒƒCƒ„[‚ª“ü‚Á‚Ä‚«‚½");
-            _enemyMove.FindPlayer(other);
+            _enemyBase.FindObject(_collider);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(PLAYER) || CompareTag(LUGGAGE))
+        {
+            Debug.Log("ç¯„å›²å†…ã«ãªã«ã‹å…¥ã£ã¦ããŸ");
+            _collider = other;
+            _isTrigger = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") || CompareTag("Baggage"))
+        {
+            _enemyBase.ReturnDestination();
+            _isTrigger = false;
         }
     }
 }

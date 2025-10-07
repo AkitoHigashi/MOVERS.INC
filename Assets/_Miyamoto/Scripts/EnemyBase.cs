@@ -1,13 +1,16 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
-/// “G‚ÌŠî’êƒNƒ‰ƒX
+/// æ•µã®åŸºåº•ã‚¯ãƒ©ã‚¹
 /// </summary>
 public abstract class EnemyBase : MonoBehaviour
 {
+    const string PLAYER = "Player";
+    const string LUGGAGE = "Luggage";
     public List<Transform> Destinations => _destinations;
     public float WaitTime => _waitTime;
     public float AngularSpeed => _angularSpeed;
@@ -24,34 +27,34 @@ public abstract class EnemyBase : MonoBehaviour
     public Vector3 LastDesination => _lastDestination;
     public bool HasSeen => _hasSeen;
 
-    [SerializeField, Header("“G‚Ìƒf[ƒ^")]
+    [SerializeField, Header("æ•µã®ãƒ‡ãƒ¼ã‚¿")]
     protected EnemyData _enemyData;
-    [SerializeField, Header("–Ú“I’n‚ÌƒŠƒXƒg")]
+    [SerializeField, Header("ç›®çš„åœ°ã®ãƒªã‚¹ãƒˆ")]
     protected List<Transform> _destinations = new List<Transform>();
-    [SerializeField, Header("–Ú“I’n‚É“’…‚µ‚½‚Ì‘Ò‹@ŠÔ")]
+    [SerializeField, Header("ç›®çš„åœ°ã«åˆ°ç€ã—ãŸæ™‚ã®å¾…æ©Ÿæ™‚é–“")]
     protected float _waitTime;
-    [SerializeField, Header("–Ú“I’n‚É‹“_‚ğ‡‚í‚¹‚é‘¬“x")]
+    [SerializeField, Header("ç›®çš„åœ°ã«è¦–ç‚¹ã‚’åˆã‚ã›ã‚‹é€Ÿåº¦")]
     protected float _angularSpeed;
-    [SerializeField, Header("~‚Ü‚é‚Ü‚Å‚Ì‹——£")]
+    [SerializeField, Header("æ­¢ã¾ã‚‹ã¾ã§ã®è·é›¢")]
     protected float _stopDistance = 5f;
-    [SerializeField, Header("‹–ìŠp")]
+    [SerializeField, Header("è¦–é‡è§’")]
     protected float _angle;
-    [SerializeField, Header("ƒIƒuƒWƒFƒNƒg‚ğŒ©‚Â‚¯‚½‚ÌFov‚ÌŠg‘å”{—¦")]
+    [SerializeField, Header("ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è¦‹ã¤ã‘ãŸæ™‚ã®Fovã®æ‹¡å¤§å€ç‡")]
     protected float _magnification;
 
-    //ƒXƒe[ƒ^ƒX
+    //ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹
     protected float _enemyHp;
     protected float _enemyMoveSpeed;
     protected float _enemyFov;
     protected float _enemyPower;
     protected float _enemyAttackRange;
 
-    /// <summary>ƒvƒŒƒCƒ„[‚ğŒ©‚Â‚¯‚½‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO</summary>
+    /// <summary>ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¦‹ã¤ã‘ãŸã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°</summary>
     protected bool _hasSeen = false;
     protected EnemyState _currentEnemyState;
-    /// <summary>Œ»İ‚Ì–Ú“I’n</summary>
+    /// <summary>ç¾åœ¨ã®ç›®çš„åœ°</summary>
     protected Vector3 _currentDestination;
-    /// <summary>ÅŒã‚É–K‚ê‚½–Ú“I’n</summary>
+    /// <summary>æœ€å¾Œã«è¨ªã‚ŒãŸç›®çš„åœ°</summary>
     protected Vector3 _lastDestination;
     protected NavMeshAgent _navMeshAgent;
 
@@ -66,7 +69,7 @@ public abstract class EnemyBase : MonoBehaviour
         Patrol();
     }
     /// <summary>
-    /// “G‚Ì‰Šú’l‚ğİ’è‚·‚é
+    /// æ•µã®åˆæœŸå€¤ã‚’è¨­å®šã™ã‚‹
     /// </summary>
     private void SetParameter()
     {
@@ -94,53 +97,53 @@ public abstract class EnemyBase : MonoBehaviour
         sphere.isTrigger = true;
     }
     /// <summary>
-    /// –Ú“I’n‚ğƒ‰ƒ“ƒ_ƒ€‚Éœpœj‚·‚é
+    /// ç›®çš„åœ°ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«å¾˜å¾Šã™ã‚‹
     /// </summary>
     private void Patrol()
     {
-        //–Ú“I’n‚ğƒZƒbƒg‚·‚é
+        //ç›®çš„åœ°ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
         _navMeshAgent.SetDestination(_currentDestination);
 
         float distance = Vector3.Distance(this.transform.position, _currentDestination);
 
-        // ƒvƒŒƒCƒ„[‚ğŒ©‚Â‚¯‚Ä‚¢‚È‚¢ê‡‚Å–Ú“I’n•t‹ß‚É‚¢‚é‚È‚çŸ‚Ì–Ú“I’n‚Ö
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¦‹ã¤ã‘ã¦ã„ãªã„å ´åˆã§ç›®çš„åœ°ä»˜è¿‘ã«ã„ã‚‹ãªã‚‰æ¬¡ã®ç›®çš„åœ°ã¸
         if (!_navMeshAgent.isStopped && !_hasSeen && distance <= _stopDistance)
         {
             StartCoroutine(ChangeDestination());
         }
-        // ƒvƒŒƒCƒ„[’ÇÕ’†‚Í„‰ñ•ÏXˆ—‚ğ~‚ß‚é
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼è¿½è·¡ä¸­ã¯å·¡å›å¤‰æ›´å‡¦ç†ã‚’æ­¢ã‚ã‚‹
         else if (_hasSeen)
         {
             StopCoroutine(ChangeDestination());
         }
     }
     /// <summary>
-    /// ˆê’â~‚µ‚Ä–Ú“I’n‚ğ•ÏX‚·‚é
+    /// ä¸€æ™‚åœæ­¢ã—ã¦ç›®çš„åœ°ã‚’å¤‰æ›´ã™ã‚‹
     /// </summary>
     /// <returns></returns>
     private IEnumerator ChangeDestination()
     {
         _navMeshAgent.isStopped = true;
-        Debug.Log("ˆê’â~");
+        Debug.Log("ä¸€æ™‚åœæ­¢");
         yield return new WaitForSeconds(_waitTime);
 
         _lastDestination = _currentDestination;
         _currentDestination = _destinations[Random.Range(0, _destinations.Count)].position;
         _navMeshAgent.isStopped = false;
-        Debug.Log("ÄŠJ");
+        Debug.Log("å†é–‹");
     }
     /// <summary>
-    /// Œ©¸‚Á‚½‚çŒ³‚Ì–Ú“I’n‚É–ß‚é
+    /// è¦‹å¤±ã£ãŸã‚‰å…ƒã®ç›®çš„åœ°ã«æˆ»ã‚‹
     /// </summary>
     public void ReturnDestination()
     {
-        Debug.Log("Œ©¸‚Á‚½");
+        Debug.Log("è¦‹å¤±ã£ãŸ");
         _hasSeen = false;
-        _currentDestination = _lastDestination; //Œ³‚Ì–Ú“I’n‚É–ß‚é
+        _currentDestination = _lastDestination; //å…ƒã®ç›®çš„åœ°ã«æˆ»ã‚‹
         _navMeshAgent.isStopped = false;
     }
     /// <summary>
-    /// ƒIƒuƒWƒFƒNƒg‚ª‹ŠE‚É“ü‚Á‚½‚©‚Ç‚¤‚©”»’è‚·‚é
+    /// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒè¦–ç•Œã«å…¥ã£ãŸã‹ã©ã†ã‹åˆ¤å®šã™ã‚‹
     /// </summary>
     /// <param name="collider"></param>
     public void FindObject(Collider collider)
@@ -151,11 +154,11 @@ public abstract class EnemyBase : MonoBehaviour
         float distance = Vector3.Distance(this.transform.position, collider.transform.position);
         float currentFov = _enemyFov;
 
-        // ‹–ìŠp“à‚É‚¢‚é‚©”»’è
+        // è¦–é‡è§’å†…ã«ã„ã‚‹ã‹åˆ¤å®š
         if (targetAngle < _angle / 2)
         {
             RaycastHit hit;
-            // Raycast‚ÅáŠQ•¨‚Ì—L–³‚ğƒ`ƒFƒbƒN‚·‚é
+            // Raycastã§éšœå®³ç‰©ã®æœ‰ç„¡ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹
             if (Physics.Raycast(origin, toPlayer, out hit, _enemyFov) && hit.collider == collider)
             {
                 _enemyFov = _magnification;
@@ -170,48 +173,48 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
     /// <summary>
-    /// ƒGƒlƒ~[‚Ìˆ—
+    /// ã‚¨ãƒãƒŸãƒ¼ã®å‡¦ç†
     /// </summary>
     /// <param name="collider"></param>
     /// <param name="distance"></param>
     private void EnemyProcces(Collider collider, float distance)
     {
-        if (collider.CompareTag("Player"))
+        if (collider.CompareTag(PLAYER))
         {
             ProccesToPlayer(collider, distance);
         }
-        else if (collider.CompareTag("Baggage"))
+        else if (collider.CompareTag(LUGGAGE))
         {
-            ProccesToBaggage(collider, distance);
+            ProccesToLuggage(collider, distance);
         }
     }
     /// <summary>
-    /// ƒvƒŒƒCƒ„[‚É‰½‚©‚µ‚ç‚Ìs“®‚ğs‚¤
+    /// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ä½•ã‹ã—ã‚‰ã®è¡Œå‹•ã‚’è¡Œã†
     /// </summary>
     /// <param name="player"></param>
     /// <param name="distance"></param>
     protected virtual void ProccesToPlayer(Collider player, float distance) { }
     /// <summary>
-    /// ‰×•¨‚É‰½‚©‚µ‚ç‚Ìs“®‚ğs‚¤
+    /// è·ç‰©ã«ä½•ã‹ã—ã‚‰ã®è¡Œå‹•ã‚’è¡Œã†
     /// </summary>
     /// <param name="baggage"></param>
     /// <param name="distance"></param>
-    protected virtual void ProccesToBaggage(Collider baggage, float distance) { }
+    protected virtual void ProccesToLuggage(Collider baggage, float distance) { }
 
-    //“G‚Ì‹ŠE‚ğ‰Â‹‰»‚·‚éŠÖ”(•K—v‚É‰‚¶‚ÄƒRƒƒ“ƒgƒAƒEƒg‚µ‚Ä<3)
+    //æ•µã®è¦–ç•Œã‚’å¯è¦–åŒ–ã™ã‚‹é–¢æ•°(å¿…è¦ã«å¿œã˜ã¦ã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆã—ã¦<3)
     private void OnDrawGizmos()
     {
         if (_navMeshAgent == null) return;
 
         Vector3 origin = transform.position;
         Vector3 forward = transform.forward;
-        float viewAngle = _angle; // ‹–ìŠp
+        float viewAngle = _angle; // è¦–é‡è§’
         int segments = 20;
 
-        // F‚ğİ’è
+        // è‰²ã‚’è¨­å®š
         Gizmos.color = _hasSeen ? new Color(0, 1, 0, 0.3f) : new Color(1, 1, 0, 0.3f);
 
-        // îŒ`‚ğOŠpŒ`‚Å“h‚è‚Â‚Ô‚·
+        // æ‰‡å½¢ã‚’ä¸‰è§’å½¢ã§å¡—ã‚Šã¤ã¶ã™
         for (int i = 0; i < segments; i++)
         {
             float angle1 = -_angle / 2 + (viewAngle * i / segments);
@@ -220,10 +223,10 @@ public abstract class EnemyBase : MonoBehaviour
             Vector3 dir1 = Quaternion.Euler(0, angle1, 0) * forward * _enemyFov;
             Vector3 dir2 = Quaternion.Euler(0, angle2, 0) * forward * _enemyFov;
 
-            // OŠpŒ`‚ğ•`‰æ
+            // ä¸‰è§’å½¢ã‚’æç”»
             Vector3[] vertices = new Vector3[] { origin, origin + dir1, origin + dir2 };
 
-            // Gizmos‚ÅOŠpŒ`‚ğ“h‚è‚Â‚Ô‚µ
+            // Gizmosã§ä¸‰è§’å½¢ã‚’å¡—ã‚Šã¤ã¶ã—
             DrawTriangle(vertices[0], vertices[1], vertices[2]);
         }
     }
@@ -233,7 +236,7 @@ public abstract class EnemyBase : MonoBehaviour
         Gizmos.DrawLine(p2, p3);
         Gizmos.DrawLine(p3, p1);
 
-        // ­‚µ‚‚³‚ğ•Ï‚¦‚Äd‚Ë‚é‚±‚Æ‚Å“h‚è‚Â‚Ô‚µ‚Ì‚æ‚¤‚ÉŒ©‚¹‚é
+        // å°‘ã—é«˜ã•ã‚’å¤‰ãˆã¦é‡ã­ã‚‹ã“ã¨ã§å¡—ã‚Šã¤ã¶ã—ã®ã‚ˆã†ã«è¦‹ã›ã‚‹
         for (float t = 0; t <= 1; t += 0.1f)
         {
             Vector3 a = Vector3.Lerp(p1, p2, t);
