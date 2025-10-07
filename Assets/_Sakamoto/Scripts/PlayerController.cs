@@ -1,24 +1,36 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     public bool IsGrounded { get; private set; } = true;
+    public bool IsSprinting { get; private set; } = false;
+    public bool IsCrouching { get; private set; } = false;
+    public bool IsSliding { get; set; } = false;
+    public bool CanSliding { get; private set; } = false;
     private InputBuffer _inputBuffer;
     private PlayerData _playerData;
+    private PlayerState _playerState;
     private PlayerMove _playerMove;
     private PlayerJump _playerJump;
     private GroundCheck _groundCheck;
+    private PlayerSprint _playerSprint;
+    private PlayerCrouch _playerCrouch;
+    private PlayerSliding _playerSliding;
     private Vector2 _currentInput = Vector2.zero;
 
     private void Awake()
     {
         _inputBuffer = GetComponent<InputBuffer>();
         _playerData = GetComponent<PlayerData>();
+        _playerState = GetComponent<PlayerState>();
         _playerMove = GetComponent<PlayerMove>();
         _playerJump = GetComponent<PlayerJump>();
         _groundCheck = GetComponent<GroundCheck>();
+        _playerSprint = GetComponent<PlayerSprint>();
+        _playerCrouch = GetComponent<PlayerCrouch>();
+        _playerSliding = GetComponent<PlayerSliding>();
     }
 
     private void Start()
@@ -26,25 +38,35 @@ public class PlayerController : MonoBehaviour
         _inputBuffer.PlayerMove.performed += OnInputMove;
         _inputBuffer.PlayerMove.canceled += OnInputMove;
         _inputBuffer.PlayerJump.started += OnInputJump;
-        _playerMove?.StartSetVariables(_playerData);
-        _playerJump?.StartSetVariables(_playerData);
-    } 
+        _inputBuffer.PlayerSprint.started += OnInputSprint;
+        _inputBuffer.PlayerSprint.canceled += OnInputSprint;
+        _inputBuffer.PlayerCrouch.started += OnInputCrouch;
+        SetUp();
+    }
 
     private void OnDestroy()
     {
         _inputBuffer.PlayerMove.performed -= OnInputMove;
         _inputBuffer.PlayerMove.canceled -= OnInputMove;
         _inputBuffer.PlayerJump.started -= OnInputJump;
+        _inputBuffer.PlayerSprint.started -= OnInputSprint;
+        _inputBuffer.PlayerSprint.canceled -= OnInputSprint;
+        _inputBuffer.PlayerCrouch.started -= OnInputCrouch;
     }
 
     private void Update()
     {
         IsGrounded = _groundCheck.IsGrounded(_playerData);
+        UpdateReturnBool();
+        UpdateCanBool();
+        UpdateSetBool();
+        _playerState.UpdateState(IsSprinting, IsCrouching, IsSliding);
+        _playerMove?.UpdateSpeed(_playerState);
     }
 
     private void OnInputMove(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if (context.performed)
         {
             Vector2 input = context.ReadValue<Vector2>();
             _currentInput = input;
@@ -64,5 +86,69 @@ public class PlayerController : MonoBehaviour
         {
             _playerJump?.Jump();
         }
+    }
+
+    private void OnInputSprint(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            if (IsCrouching) return;
+            _playerSprint?.StartSprint();
+        }
+        else if (context.canceled)
+        {
+            _playerSprint?.StopSprint();
+        }
+    }
+
+    private void OnInputCrouch(InputAction.CallbackContext context)
+    {
+        if (CanSliding)
+        {
+            _playerSliding?.StartSliding();
+        }
+        else if (IsGrounded && !IsCrouching)
+        {
+            _playerCrouch?.StartCrouch();
+        }
+        else if (IsCrouching)
+        {
+            _playerCrouch?.StopCrouch();
+        }
+    }
+
+    /// <summary>
+    /// 各種状態の更新のためのブール値の戻り値
+    /// </summary>
+    private void UpdateReturnBool()
+    {
+        IsSprinting = _playerSprint.ReturnIsSprint();
+        IsCrouching = _playerCrouch.ReturnIsCrouch();
+        IsSliding = _playerSliding.ReturnIsSliding();
+    }
+
+    /// <summary>
+    /// 可能状態かどうか判定するためのブール値の更新
+    /// </summary>
+    private void UpdateCanBool()
+    {
+        CanSliding = _playerSliding.CanSliding(IsSprinting, IsGrounded, _currentInput);
+    }
+
+    /// <summary>
+    /// 各種状態の更新のためのブール値のセット
+    /// </summary>
+    private void UpdateSetBool()
+    {
+        _playerMove?.SetBool(IsSliding);
+    }
+
+    private void SetUp()
+    {
+        _playerMove?.StartSetVariables(_playerData);
+        _playerJump?.StartSetVariables(_playerData);
+        _playerSprint?.StartSetVariables(_playerData);
+        _playerCrouch?.StartSetVariables(_playerData);
+        _playerSliding?.StartSetVariables(_playerData);
     }
 }
