@@ -10,36 +10,36 @@ public class PlayerData : MonoBehaviour
     [Header("Move")]
     [SerializeField] private float _walkSpeed;
     [SerializeField] private float _sprintSpeed;
-<<<<<<< HEAD
-=======
     [SerializeField] private float _crouchSpeed;
->>>>>>> 1f4ad52ea75e7d3628b5e82c8569a960909f3905
+    [SerializeField] private float _slidingSpeed;
     [SerializeField] private float _stamina = 100f;
     [SerializeField] private float _staminaRecoverySpeed = 2f;
 
     [Header("Jump")]
     [SerializeField] private float _jumpForce;
 
-<<<<<<< HEAD
-=======
     [Header("Crouch")]
-    [SerializeField] private float _couchHeight;
+    [SerializeField] private float _crouchHeight;
 
->>>>>>> 1f4ad52ea75e7d3628b5e82c8569a960909f3905
+    [Header("Sliding")]
+    [SerializeField] private float _slidingForce;
+    [SerializeField] private float _slidingMaxTime;
+    [SerializeField] private float _slidingCoolTime;
+    [SerializeField] private float _slidingYScale;
+
     public Transform CameraForward => _cameraForward;
     public LayerMask GroundLayer => _groundLayer;
     public float PlayerHeight => _playerHeight;
     public float WalkSpeed => _walkSpeed;
     public float SprintSpeed => _sprintSpeed;
-<<<<<<< HEAD
-    public float Stamina => _stamina;
-    public float StaminaRecoverySpeed => _staminaRecoverySpeed;
-    public float JumpForce => _jumpForce;
-=======
     public float CrouchSpeed => _crouchSpeed;
+    public float SlidingSpeed => _slidingSpeed;
     public float Stamina => _stamina;
     public float StaminaRecoverySpeed => _staminaRecoverySpeed;
     public float JumpForce => _jumpForce;
-    public float CouchHeight => _couchHeight;
->>>>>>> 1f4ad52ea75e7d3628b5e82c8569a960909f3905
+    public float CrouchHeight => _crouchHeight;
+    public float SlidingForce => _slidingForce;
+    public float SlidingTimer => _slidingMaxTime;
+    public float SlidingCoolTime => _slidingCoolTime;
+    public float SlidingYScale => _slidingYScale;
 }

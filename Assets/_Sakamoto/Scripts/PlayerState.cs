@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-using UnityEngine;
-=======
 ﻿using UnityEngine;
->>>>>>> 1f4ad52ea75e7d3628b5e82c8569a960909f3905
 
 public class PlayerState : MonoBehaviour
 {
@@ -12,33 +8,31 @@ public class PlayerState : MonoBehaviour
         Walking,
         Sprinting,
         Crouching,
+        Sliding,
         Carrying,
         Throwing,
         Idle
     }
 
-<<<<<<< HEAD
-    public void UpdateState(bool isSprint)
-=======
     /// <summary>
     /// bool値によってStateを更新する
     /// </summary>
     /// <param name="isSprint"></param>
     /// <param name="isCrouch"></param>
-    public void UpdateState(bool isSprint,bool isCrouch)
->>>>>>> 1f4ad52ea75e7d3628b5e82c8569a960909f3905
+    public void UpdateState(bool isSprint, bool isCrouch, bool isSliding)
     {
-        if (isSprint)
+        if (isSliding)
         {
-            CurrentState = State.Sprinting;
+            CurrentState = State.Sliding;
         }
-<<<<<<< HEAD
-=======
         else if (isCrouch)
         {
             CurrentState = State.Crouching;
         }
->>>>>>> 1f4ad52ea75e7d3628b5e82c8569a960909f3905
+        else if (isSprint)
+        {
+            CurrentState = State.Sprinting;
+        }
         else
         {
             CurrentState = State.Walking;
