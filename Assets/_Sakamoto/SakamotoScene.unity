@@ -269,7 +269,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0b5537adce02a4c9bda450f09ebd74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+  _playerPosition: {fileID: 2141787229}
+=======
   _cameraFollowPosition: {fileID: 1767087497}
+>>>>>>> 1f4ad52ea75e7d3628b5e82c8569a960909f3905
 --- !u!4 &318395565
 Transform:
   m_ObjectHideFlags: 0
@@ -643,6 +647,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
+=======
 --- !u!1 &1767087496
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,6 +680,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2141787229}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+>>>>>>> 1f4ad52ea75e7d3628b5e82c8569a960909f3905
 --- !u!43 &1928749485
 Mesh:
   m_ObjectHideFlags: 0
@@ -1157,9 +1164,12 @@ GameObject:
   - component: {fileID: 2141787233}
   - component: {fileID: 2141787240}
   - component: {fileID: 2141787239}
+<<<<<<< HEAD
+=======
   - component: {fileID: 2141787243}
   - component: {fileID: 2141787242}
   - component: {fileID: 2141787244}
+>>>>>>> 1f4ad52ea75e7d3628b5e82c8569a960909f3905
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1179,8 +1189,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
+<<<<<<< HEAD
+  m_Children: []
+=======
   m_Children:
   - {fileID: 1767087497}
+>>>>>>> 1f4ad52ea75e7d3628b5e82c8569a960909f3905
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &2141787230
@@ -1302,11 +1316,15 @@ MonoBehaviour:
   _playerHeight: 2
   _walkSpeed: 5
   _sprintSpeed: 10
+<<<<<<< HEAD
+  _jumpForce: 5
+=======
   _crouchSpeed: 3
   _stamina: 100
   _staminaRecoverySpeed: 2
   _jumpForce: 5
   _couchHeight: 1
+>>>>>>> 1f4ad52ea75e7d3628b5e82c8569a960909f3905
 --- !u!114 &2141787236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1413,6 +1431,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3a06c8a435c4c428e01a9e0ae363c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+=======
 --- !u!114 &2141787242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1449,6 +1469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04662f1f9ebb8b54fa69f4aeb3ea649e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+>>>>>>> 1f4ad52ea75e7d3628b5e82c8569a960909f3905
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

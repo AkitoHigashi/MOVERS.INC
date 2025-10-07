@@ -1,14 +1,25 @@
+<<<<<<< HEAD
+using UnityEngine;
+=======
 ï»¿using UnityEngine;
+>>>>>>> 1f4ad52ea75e7d3628b5e82c8569a960909f3905
 using UnityEngine.EventSystems;
 
 public class PlayerMove : MonoBehaviour, IStartSetVariables
 {
     private Rigidbody _rb;
     private Transform _cameraForward;
+<<<<<<< HEAD
+    //‰¼
+    private float _moveSpeed = 10f;
+    private float _walkSpeed;
+    private float _sprintSpeed;
+=======
     private float _moveSpeed;
     private float _walkSpeed;
     private float _sprintSpeed;
     private float _crouchSpeed;
+>>>>>>> 1f4ad52ea75e7d3628b5e82c8569a960909f3905
     private Vector2 _currentInput;
     private Vector3 _moveDirection;
 
@@ -31,7 +42,10 @@ public class PlayerMove : MonoBehaviour, IStartSetVariables
     {
         _walkSpeed = playerData.WalkSpeed;
         _sprintSpeed = playerData.SprintSpeed;
+<<<<<<< HEAD
+=======
         _crouchSpeed = playerData.CrouchSpeed;
+>>>>>>> 1f4ad52ea75e7d3628b5e82c8569a960909f3905
     }
 
     public void Move(Vector2 input, PlayerData playerData)
@@ -73,10 +87,13 @@ public class PlayerMove : MonoBehaviour, IStartSetVariables
             case PlayerState.State.Sprinting:
                 _moveSpeed = _sprintSpeed;
                 break;
+<<<<<<< HEAD
+=======
             case PlayerState.State.Crouching:
                 _moveSpeed = _crouchSpeed;
                 break;
 
+>>>>>>> 1f4ad52ea75e7d3628b5e82c8569a960909f3905
         }
     }
 }
