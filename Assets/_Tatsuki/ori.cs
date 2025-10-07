@@ -28,6 +28,18 @@ public class FallButton : MonoBehaviour
             _score.SetText(_score.nowScore.ToString());
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            var score = collision.gameObject.GetComponent<TatukiItem>();
+            TatukiItemManager.UnregisterItem(collision.gameObject);
+            Destroy(collision.gameObject);
+
+            _score.SetScore(-score.Score);
+            _score.SetText(_score.nowScore.ToString());
+        }
+    }
     private void Start()
     {
         originalPosition = target.position;
