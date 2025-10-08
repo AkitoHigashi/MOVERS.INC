@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public bool IsSprinting { get; private set; } = false;
     public bool IsCrouching { get; private set; } = false;
     public bool IsSliding { get; set; } = false;
+    public bool IsCarrying { get; private set; } = false;
     public bool CanSliding { get; private set; } = false;
     private InputBuffer _inputBuffer;
     private PlayerData _playerData;
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private PlayerSprint _playerSprint;
     private PlayerCrouch _playerCrouch;
     private PlayerSliding _playerSliding;
+    private PlayerCarry _playerCarry;
     private Vector2 _currentInput = Vector2.zero;
 
     private void Awake()
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
         _playerSprint = GetComponent<PlayerSprint>();
         _playerCrouch = GetComponent<PlayerCrouch>();
         _playerSliding = GetComponent<PlayerSliding>();
+        _playerCarry = GetComponent<PlayerCarry>();
     }
 
     private void Start()
@@ -41,6 +44,7 @@ public class PlayerController : MonoBehaviour
         _inputBuffer.PlayerSprint.started += OnInputSprint;
         _inputBuffer.PlayerSprint.canceled += OnInputSprint;
         _inputBuffer.PlayerCrouch.started += OnInputCrouch;
+        _inputBuffer.PlayerCarry.started += OnInputCarry;
         SetUp();
     }
 
@@ -52,6 +56,7 @@ public class PlayerController : MonoBehaviour
         _inputBuffer.PlayerSprint.started -= OnInputSprint;
         _inputBuffer.PlayerSprint.canceled -= OnInputSprint;
         _inputBuffer.PlayerCrouch.started -= OnInputCrouch;
+        _inputBuffer.PlayerCarry.started -= OnInputCarry;
     }
 
     private void Update()
@@ -60,7 +65,7 @@ public class PlayerController : MonoBehaviour
         UpdateReturnBool();
         UpdateCanBool();
         UpdateSetBool();
-        _playerState.UpdateState(IsSprinting, IsCrouching, IsSliding);
+        _playerState.UpdateState(IsSprinting, IsCrouching, IsSliding, IsCarrying);
         _playerMove?.UpdateSpeed(_playerState);
     }
 
@@ -117,6 +122,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnInputCarry(InputAction.CallbackContext context)
+    {
+        _playerCarry?.CarryAction();
+    }
+
     /// <summary>
     /// 各種状態の更新のためのブール値の戻り値
     /// </summary>
@@ -125,6 +135,7 @@ public class PlayerController : MonoBehaviour
         IsSprinting = _playerSprint.ReturnIsSprint();
         IsCrouching = _playerCrouch.ReturnIsCrouch();
         IsSliding = _playerSliding.ReturnIsSliding();
+        IsCarrying = _playerCarry.ReturnIsCarrying();
     }
 
     /// <summary>
@@ -132,7 +143,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void UpdateCanBool()
     {
-        CanSliding = _playerSliding.CanSliding(IsSprinting, IsGrounded, _currentInput);
+        CanSliding = _playerSliding.CanSliding(IsCarrying, IsSprinting, IsGrounded, _currentInput);
     }
 
     /// <summary>
@@ -150,5 +161,6 @@ public class PlayerController : MonoBehaviour
         _playerSprint?.StartSetVariables(_playerData);
         _playerCrouch?.StartSetVariables(_playerData);
         _playerSliding?.StartSetVariables(_playerData);
+        _playerCarry?.StartSetVariables(_playerData);
     }
 }
