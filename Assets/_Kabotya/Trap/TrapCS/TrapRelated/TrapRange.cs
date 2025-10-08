@@ -2,21 +2,8 @@
 
 public class TrapRange : MonoBehaviour
 {
-    public static TrapRange Instance;
     [SerializeField] private GameObject _trap;
-    [SerializeField] public bool _deactivateWhenExit = true;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    public bool _deactivateWhenExit = true;
 
     private void OnTriggerEnter(Collider other)
     {
