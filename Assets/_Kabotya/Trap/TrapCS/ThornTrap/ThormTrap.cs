@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ThormTrap : MonoBehaviour
 {
-    [SerializeField] private TrapRange _trapRange; // 直接参照
+    [SerializeField] private TrapRange _trapRange;
 
     [Tooltip("下げたらスピードが上がる")]
     [SerializeField] private float _duration = 1f;
@@ -16,7 +16,7 @@ public class ThormTrap : MonoBehaviour
 
     private void Start()
     {
-        // TrapRangeが未設定の場合、親や子から探す
+        //親オブジェクトと子オブジェクトから探す
         if (_trapRange == null)
         {
             _trapRange = GetComponentInParent<TrapRange>();
@@ -25,12 +25,6 @@ public class ThormTrap : MonoBehaviour
                 _trapRange = GetComponentInChildren<TrapRange>();
             }
         }
-
-        if (_trapRange == null)
-        {
-            Debug.LogError("TrapRangeが見つかりません！Inspectorで設定してください。");
-        }
-
         RotateFuriko();
     }
 
@@ -41,12 +35,6 @@ public class ThormTrap : MonoBehaviour
 
     private void TrapCheck()
     {
-        // TrapRangeが存在しない場合は何もしない
-        if (_trapRange == null || _furikoTween == null)
-        {
-            return;
-        }
-
         if (_trapRange._deactivateWhenExit)
         {
             // プレイヤーが範囲外にいる場合、トラップを停止
@@ -70,11 +58,5 @@ public class ThormTrap : MonoBehaviour
         _furikoTween = transform.DORotate(new Vector3(0, 0, _swingAngle), _duration)
             .SetLoops(_loopNumber, LoopType.Yoyo)
             .SetEase(Ease.InOutQuad);
-    }
-
-    private void OnDestroy()
-    {
-        // Tweenをクリーンアップ
-        _furikoTween?.Kill();
     }
 }
