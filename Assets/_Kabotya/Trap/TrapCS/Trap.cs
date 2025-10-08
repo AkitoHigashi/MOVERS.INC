@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class TrapDamage : MonoBehaviour
+public class Trap : MonoBehaviour
 {
     [SerializeField] private int _trapDamage;
 }
