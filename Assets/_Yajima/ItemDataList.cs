@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Item;
 
 [CreateAssetMenu(fileName = "ItemDataList", menuName = "Data/ItemData")]
 public class ItemDataList : ScriptableObject
@@ -13,22 +14,27 @@ public class ItemData
 {
     [SerializeField, Tooltip("アイテムのプレハブ")] GameObject _item;
     [SerializeField, Tooltip("購入サンプル")] GameObject _display;
-    [SerializeField, Tooltip("底面の中心")] Vector3 _position;
-    [SerializeField, Tooltip("購入コスト")] int _purchaseCost;
-    [SerializeField, Tooltip("購入するために必要な会社の評価")] int _purchaseCondition;
-    [SerializeField, Tooltip("所持上限")] int _possessionLimit;
-    [SerializeField] ItemType _type;
+    [SerializeField, Tooltip("購入コスト")] uint _purchaseCost;
+    [SerializeField, Tooltip("購入するために必要な会社の評価")] uint _purchaseCondition;
+    [SerializeField, Tooltip("所持上限")] uint _possessionLimit;
+    [SerializeField, Tooltip("アイテムのラベル")] ItemLabel _itemLabel;
 
     public GameObject Item => _item;
     public GameObject Display => _display;
-    public Vector3 Position => _position;
-    public int PurchaseCost => _purchaseCost;
-    public int PurchaseCondition => _purchaseCondition;
-    public int PossessionLimit => _possessionLimit;
+    public uint PurchaseCost => _purchaseCost;
+    public uint PurchaseCondition => _purchaseCondition;
+    public uint PossessionLimit => _possessionLimit;
+    public ItemLabel ItemLabel => _itemLabel;
+}
 
-    public enum ItemType
+namespace Item
+{
+    /// <summary>アイテムを区別するためのラベル</summary>
+    public enum ItemLabel
     {
-        [InspectorName("買い切り")] Endless,
-        [InspectorName("消耗品")] Consume
+        //これをコピーしてラベルを追加
+        //[InspectorName("")]
+        [InspectorName("回復薬")] Heal,
+        [InspectorName("モンスターボール")] Ball
     }
 }

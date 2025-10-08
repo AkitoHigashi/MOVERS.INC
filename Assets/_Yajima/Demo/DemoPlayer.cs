@@ -13,8 +13,9 @@ public class DemoPlayer : MonoBehaviour
 
     private void Start()
     {
-        _go = transform.GetChild(0).gameObject;
+        //_go = transform.GetChild(0).gameObject;
         _store = FindFirstObjectByType<Store>();
+        Debug.Log(_store);
     }
 
     // Update is called once per frame

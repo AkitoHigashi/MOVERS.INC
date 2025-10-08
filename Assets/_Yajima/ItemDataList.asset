@@ -13,24 +13,24 @@ MonoBehaviour:
   m_Name: ItemDataList
   m_EditorClassIdentifier: 
   _itemList:
-  - _item: {fileID: 0}
+  - _item: {fileID: 5451025074193678712, guid: 8208f49abe0fbd54e89cbf219493833e, type: 3}
+    _shelf: {fileID: 7066514777144303594, guid: a7afac7342b662f46b4c2ea8c046ca8b, type: 3}
     _display: {fileID: 5451025074193678712, guid: c1bc2407c3bcafc4095cdc7e17b2199b, type: 3}
     _position: {x: 0, y: -0.5, z: 0}
     _purchaseCost: 50
     _purchaseCondition: 50
-    _possessionLimit: 0
-    _type: 0
-  - _item: {fileID: 0}
+    _possessionLimit: 5
+  - _item: {fileID: 1977168569128644056, guid: 8720c92787cf3924c8dd3c9a9a955d3e, type: 3}
+    _shelf: {fileID: 0}
     _display: {fileID: 1977168569128644056, guid: 8c078963741fa7e46a9774efa697f60e, type: 3}
     _position: {x: 0, y: -0.5, z: 0}
     _purchaseCost: 100
     _purchaseCondition: 100
-    _possessionLimit: 0
-    _type: 0
-  - _item: {fileID: 0}
+    _possessionLimit: 5
+  - _item: {fileID: 1249758660480598837, guid: 78dd5d59f8279ae4bb25afd9b2647810, type: 3}
+    _shelf: {fileID: 0}
     _display: {fileID: 1249758660480598837, guid: c0dad2f8b73aafb4b835bb940c95d53e, type: 3}
     _position: {x: 0, y: -0.5, z: 0}
     _purchaseCost: 200
     _purchaseCondition: 200
-    _possessionLimit: 0
-    _type: 0
+    _possessionLimit: 5

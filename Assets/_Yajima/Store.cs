@@ -28,7 +28,9 @@ public class Store : MonoBehaviour
             //アイテムを購入する条件を達成しているかどうか
             if (item.PurchaseCondition <= _companyReview)
             {
-                var go = Instantiate(item.Display, _transforms[positionIndex].position - item.Position, Quaternion.identity);
+                var go = Instantiate(item.Display);
+                go.transform.SetParent(_transforms[positionIndex]);
+                go.transform.localPosition = Vector3.zero;
                 go.GetComponent<Display>().Data = item;
                 positionIndex++;
             }
@@ -47,11 +49,22 @@ public class Store : MonoBehaviour
         //お金が足りているかどうか
         if (money >= data.PurchaseCost)
         {
-            //所持上限まで買っているかどうか
-            if (StorageData.PossessCount[data] < data.PossessionLimit)
+            if (!StorageData.PossessCount.ContainsKey(data))
             {
+                //始めて買うとき
+                Debug.Log("初購入");
                 //所持金を更新
-                money -= data.PurchaseCost;
+                money -= (int)data.PurchaseCost;
+                //保管庫に情報を送る
+                StorageData.IteminStorage(data);
+                //保管庫の配置を更新
+                _storage.StorageUpdate();
+            }
+            else if (StorageData.PossessCount[data] < data.PossessionLimit)
+            {
+                Debug.Log("購入");
+                //所持金を更新
+                money -= (int)data.PurchaseCost;
                 //保管庫に情報を送る
                 StorageData.IteminStorage(data);
                 //保管庫の配置を更新
