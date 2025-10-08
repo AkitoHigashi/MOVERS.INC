@@ -3,13 +3,24 @@ using UnityEngine;
 
 public class FurikoTrap : MonoBehaviour
 {
-    [SerializeField] private float swingAngle = 90f;
+
+    [Tooltip("下げたらスピードが上がる")]
     [SerializeField] private float duration = 1f;
+    [Tooltip("-1ならループ、その他の整数を入れるとその回数ループ")]
+    [SerializeField] private int _loopNumber　= -1;
+
+    [Tooltip("何度回転するか")]
+    private float swingAngle = 180f;
 
     private void Start()
     {
+        RotateFuriko();
+    }
+
+    private void RotateFuriko() 
+    {
         transform.DORotate(new Vector3(0, 0, swingAngle), duration)
-                 .SetLoops(-1, LoopType.Yoyo) 
-                 .SetEase(Ease.InOutSine);
+         .SetLoops(_loopNumber, LoopType.Yoyo)
+         .SetEase(Ease.InOutQuad);
     }
 }
