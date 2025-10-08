@@ -87,7 +87,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Catch",
+                    "name": "Carry",
                     "type": "Button",
                     "id": "e32d3f98-a18b-4213-94bd-7c4ff7136f23",
                     "expectedControlType": "",
@@ -96,7 +96,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Release",
+                    "name": "Throw",
                     "type": "Button",
                     "id": "dbb495c3-050f-43df-81b1-cd0d526c641f",
                     "expectedControlType": "",
@@ -507,7 +507,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Catch",
+                    "action": "Carry",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -518,7 +518,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Release",
+                    "action": "Throw",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

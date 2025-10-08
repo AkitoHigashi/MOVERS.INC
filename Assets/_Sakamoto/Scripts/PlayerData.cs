@@ -4,6 +4,7 @@ public class PlayerData : MonoBehaviour
 {
     [Header("Reference")]
     [SerializeField] private Transform _cameraForward;
+    [SerializeField] private Transform _luggagePosition;
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private float _playerHeight;
 
@@ -27,7 +28,12 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private float _slidingCoolTime;
     [SerializeField] private float _slidingYScale;
 
+    [Header("Carry")]
+    [SerializeField] private float _carryRayDistance;
+    [SerializeField] private string _luggageTag = "Luggage";
+
     public Transform CameraForward => _cameraForward;
+    public Transform LuggagePosition => _luggagePosition;
     public LayerMask GroundLayer => _groundLayer;
     public float PlayerHeight => _playerHeight;
     public float WalkSpeed => _walkSpeed;
@@ -42,4 +48,6 @@ public class PlayerData : MonoBehaviour
     public float SlidingTimer => _slidingMaxTime;
     public float SlidingCoolTime => _slidingCoolTime;
     public float SlidingYScale => _slidingYScale;
+    public float CarryRayDistance => _carryRayDistance;
+    public string LuggageTag => _luggageTag;
 }
