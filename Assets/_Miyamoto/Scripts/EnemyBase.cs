@@ -161,14 +161,22 @@ public abstract class EnemyBase : MonoBehaviour
             // Raycastで障害物の有無をチェックする
             if (Physics.Raycast(origin, toPlayer, out hit, _enemyFov) && hit.collider == collider)
             {
-                _enemyFov = _magnification;
-                _hasSeen = true;
+                //始めて見えた瞬間視野を拡大
+                if (!_hasSeen)
+                {
+                    _enemyFov *= _magnification;
+                    _hasSeen = true;
+                }
                 EnemyProcces(collider, distance);
             }
-            else if (_hasSeen)
+        }
+        else
+        {
+            //見失ったら視野を元に戻す
+            if (_hasSeen)
             {
-                _enemyFov = currentFov;
-                return;
+                _enemyFov /= _magnification;
+                _hasSeen = false;
             }
         }
     }
