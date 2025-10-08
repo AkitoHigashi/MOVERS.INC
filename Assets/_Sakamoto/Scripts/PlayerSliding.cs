@@ -61,8 +61,8 @@ public class PlayerSliding : MonoBehaviour, IStartSetVariables
         }
     }
 
-    public bool CanSliding(bool isSprint, bool IsGround, Vector2 input)
-        => isSprint && IsGround && input.magnitude > 0.1f && !_isSliding;
+    public bool CanSliding(bool IsCarrying, bool isSprint, bool IsGround, Vector2 input)
+        => !IsCarrying && isSprint && IsGround && input.magnitude > 0.1f && !_isSliding;
 
     public bool ReturnIsSliding() => _isSliding;
 }
