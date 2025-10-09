@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private PlayerCrouch _playerCrouch;
     private PlayerSliding _playerSliding;
     private PlayerCarry _playerCarry;
+    private PlayerThrow _playerThrow;
     private Vector2 _currentInput = Vector2.zero;
 
     private void Awake()
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour
         _playerCrouch = GetComponent<PlayerCrouch>();
         _playerSliding = GetComponent<PlayerSliding>();
         _playerCarry = GetComponent<PlayerCarry>();
+        _playerThrow = GetComponent<PlayerThrow>();
     }
 
     private void Start()
@@ -45,6 +47,8 @@ public class PlayerController : MonoBehaviour
         _inputBuffer.PlayerSprint.canceled += OnInputSprint;
         _inputBuffer.PlayerCrouch.started += OnInputCrouch;
         _inputBuffer.PlayerCarry.started += OnInputCarry;
+        _inputBuffer.PlayerThrow.started += OnInputThrowAction;
+        _inputBuffer.PlayerThrow.canceled += OnInputThrowAction;
         SetUp();
     }
 
@@ -57,6 +61,8 @@ public class PlayerController : MonoBehaviour
         _inputBuffer.PlayerSprint.canceled -= OnInputSprint;
         _inputBuffer.PlayerCrouch.started -= OnInputCrouch;
         _inputBuffer.PlayerCarry.started -= OnInputCarry;
+        _inputBuffer.PlayerThrow.started -= OnInputThrowAction;
+        _inputBuffer.PlayerThrow.canceled -= OnInputThrowAction;
     }
 
     private void Update()
@@ -125,6 +131,18 @@ public class PlayerController : MonoBehaviour
     private void OnInputCarry(InputAction.CallbackContext context)
     {
         _playerCarry?.CarryAction();
+    }
+
+    private void OnInputThrowAction(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            _playerThrow?.StartThrow();
+        }
+        else if (context.canceled)
+        {
+            _playerThrow?.StopThrow();
+        }
     }
 
     /// <summary>
