@@ -1,50 +1,50 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
 /// <summary>
-/// ƒCƒ“ƒxƒ“ƒgƒŠ‚ÌƒNƒ‰ƒX
+/// ã‚¤ãƒ³ãƒ™ãƒ³ãƒˆãƒªã®ã‚¯ãƒ©ã‚¹
 /// </summary>
 public class Inventory : MonoBehaviour
 {
     [SerializeField] List<InventoryData> _inventoryList;
 
     /// <summary>
-    /// ƒAƒCƒeƒ€‚ÌŠi”[Aæ‚èo‚µ‚ğs‚¤ŠÖ”
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã®æ ¼ç´ã€å–ã‚Šå‡ºã—ã‚’è¡Œã†é–¢æ•°
     /// </summary>
-    /// <param name="item">Ši”[‚·‚éƒAƒCƒeƒ€</param>
-    /// <param name="inventoryNum">Ši”[‚·‚éƒCƒ“ƒxƒ“ƒgƒŠ‚ÌƒCƒ“ƒfƒbƒNƒX</param>
+    /// <param name="item">æ ¼ç´ã™ã‚‹ã‚¢ã‚¤ãƒ†ãƒ </param>
+    /// <param name="inventoryNum">æ ¼ç´ã™ã‚‹ã‚¤ãƒ³ãƒ™ãƒ³ãƒˆãƒªã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹</param>
     /// <returns>
-    /// Ši”[‚µ‚æ‚¤‚Æ‚µ‚Ä‚¢‚é‚à‚Ì‚Ìí—Ş‚É‚æ‚Á‚ÄAŠi”[‚³‚ê‚Ä‚¢‚½ƒAƒCƒeƒ€AnullAŠi”[‚µ‚æ‚¤‚Æ‚µ‚Ä‚¢‚é‚à‚Ì‚Ì‚¢‚¸‚ê‚©
+    /// æ ¼ç´ã—ã‚ˆã†ã¨ã—ã¦ã„ã‚‹ã‚‚ã®ã®ç¨®é¡ã«ã‚ˆã£ã¦ã€æ ¼ç´ã•ã‚Œã¦ã„ãŸã‚¢ã‚¤ãƒ†ãƒ ã€nullã€æ ¼ç´ã—ã‚ˆã†ã¨ã—ã¦ã„ã‚‹ã‚‚ã®ã®ã„ãšã‚Œã‹
     /// </returns>
     public GameObject StoreItem(GameObject item, int inventoryNum)
     {
         if (!item)
         {
-            //‰½‚à‚Á‚Ä‚¢‚È‚¯‚ê‚Înull‚ÅƒCƒ“ƒxƒ“ƒgƒŠ‚ÌŠÖ”‚ğÀs
-            Debug.Log($"ƒCƒ“ƒxƒ“ƒgƒŠ{inventoryNum + 1}‚©‚çæ‚èo‚µ");
+            //ä½•ã‚‚æŒã£ã¦ã„ãªã‘ã‚Œã°nullã§ã‚¤ãƒ³ãƒ™ãƒ³ãƒˆãƒªã®é–¢æ•°ã‚’å®Ÿè¡Œ
+            Debug.Log($"ã‚¤ãƒ³ãƒ™ãƒ³ãƒˆãƒª{inventoryNum + 1}ã‹ã‚‰å–ã‚Šå‡ºã—");
             return _inventoryList[inventoryNum].StoreItem(item);
         }
         else if (item.tag == "Item")
         {
-            //ƒAƒCƒeƒ€‚ğ‚Á‚Ä‚¢‚½‚ç‚»‚ÌƒAƒCƒeƒ€‚ÅƒCƒ“ƒxƒ“ƒgƒŠ‚ÌŠÖ”‚ğÀs
-            Debug.Log($"ƒCƒ“ƒxƒ“ƒgƒŠ{inventoryNum + 1}‚ÉŠi”[");
+            //ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŒã£ã¦ã„ãŸã‚‰ãã®ã‚¢ã‚¤ãƒ†ãƒ ã§ã‚¤ãƒ³ãƒ™ãƒ³ãƒˆãƒªã®é–¢æ•°ã‚’å®Ÿè¡Œ
+            Debug.Log($"ã‚¤ãƒ³ãƒ™ãƒ³ãƒˆãƒª{inventoryNum + 1}ã«æ ¼ç´");
             item.transform.SetParent(this.transform);
             return _inventoryList[inventoryNum].StoreItem(item);
         }
         else
         {
-            //ƒAƒCƒeƒ€ˆÈŠO‚ğŠi”[‚µ‚æ‚¤‚Æ‚µ‚Ä‚¢‚½‚çƒAƒCƒeƒ€æ‚èo‚µ
-            //‚±‚±‚ÍŒã‚Å•ÏX‚·‚é‰Â”\«‚ ‚é‰ÓŠ
-            //‚Á‚Ä‚¢‚é‚à‚Ì‚ğ‚»‚Ìê‚É’u‚­ê‡
+            //ã‚¢ã‚¤ãƒ†ãƒ ä»¥å¤–ã‚’æ ¼ç´ã—ã‚ˆã†ã¨ã—ã¦ã„ãŸã‚‰ã‚¢ã‚¤ãƒ†ãƒ å–ã‚Šå‡ºã—
+            //ã“ã“ã¯å¾Œã§å¤‰æ›´ã™ã‚‹å¯èƒ½æ€§ã‚ã‚‹ç®‡æ‰€
+            //æŒã£ã¦ã„ã‚‹ã‚‚ã®ã‚’ãã®å ´ã«ç½®ãå ´åˆ
             item.transform.SetParent(null);
-            Debug.Log("ƒAƒCƒeƒ€ˆÈŠO‚ğŠi”[‚·‚é‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñ");
+            Debug.Log("ã‚¢ã‚¤ãƒ†ãƒ ä»¥å¤–ã‚’æ ¼ç´ã™ã‚‹ã“ã¨ã¯ã§ãã¾ã›ã‚“");
             return _inventoryList[inventoryNum].StoreItem(null);
         }
     }
 
     /// <summary>
-    /// ƒCƒ“ƒxƒ“ƒgƒŠ‚Ìƒf[ƒ^‚ÌƒNƒ‰ƒX
+    /// ã‚¤ãƒ³ãƒ™ãƒ³ãƒˆãƒªã®ãƒ‡ãƒ¼ã‚¿ã®ã‚¯ãƒ©ã‚¹
     /// </summary>
     [System.Serializable]
     public class InventoryData
@@ -53,29 +53,28 @@ public class Inventory : MonoBehaviour
         Queue<GameObject> _inventory = new Queue<GameObject>();
 
         /// <summary>
-        /// ƒAƒCƒeƒ€‚ÌŠi”[Aæ‚èo‚µ‚ğs‚¤ŠÖ”
+        /// ã‚¢ã‚¤ãƒ†ãƒ ã®æ ¼ç´ã€å–ã‚Šå‡ºã—ã‚’è¡Œã†é–¢æ•°
         /// </summary>
-        /// <param name="item">Ši”[‚·‚éƒAƒCƒeƒ€</param>
-        /// <returns>æ‚èo‚µ‚½ƒAƒCƒeƒ€‚©null</returns>
+        /// <param name="item">æ ¼ç´ã™ã‚‹ã‚¢ã‚¤ãƒ†ãƒ </param>
+        /// <returns>å–ã‚Šå‡ºã—ãŸã‚¢ã‚¤ãƒ†ãƒ ã‹null</returns>
         public GameObject StoreItem(GameObject item)
         {
-            //ƒAƒCƒeƒ€‚ğæ‚èo‚·ˆ—
+            //ã‚¢ã‚¤ãƒ†ãƒ ã‚’å–ã‚Šå‡ºã™å‡¦ç†
             GameObject go = null;
             if (_inventory.Count > 0)
             {
                 go = _inventory.Dequeue();
                 go.SetActive(true);
-                //_image.sprite = null;
+                _image.sprite = null;
             }
 
-            //ƒAƒCƒeƒ€‚ğ‚µ‚Ü‚¤ˆ—
+            //ã‚¢ã‚¤ãƒ†ãƒ ã‚’ã—ã¾ã†å‡¦ç†
             if (item)
             {
                 _inventory.Enqueue(item);
                 item.SetActive(false);
-                //ƒAƒCƒeƒ€‚ÌƒXƒvƒ‰ƒCƒg‚ğİ’è‚·‚é
-                //ƒXƒvƒ‰ƒCƒg‚ğ‚Ç‚¤‚â‚Á‚Ä•Û‚µ‚Ä‚¢‚é‚©‚í‚©‚ç‚È‚¢‚½‚ß•Û—¯
-                //_image.sprite = ;
+                //ã‚¢ã‚¤ãƒ†ãƒ ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’è¨­å®šã™ã‚‹
+                _image.sprite = item.GetComponent<ItemBase>().Sprite;
             }
 
             return go;

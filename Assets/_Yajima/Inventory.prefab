@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inventoryList:
-  - _image: {fileID: 0}
-  - _image: {fileID: 0}
-  - _image: {fileID: 0}
-  - _image: {fileID: 0}
+  - _image: {fileID: 6718459830664137691, guid: 513d4622776885947a8ac97211d8fc4e, type: 3}
+  - _image: {fileID: 114196286300409547, guid: 090708ff4f3b8294c9a2194153922a06, type: 3}
+  - _image: {fileID: 2358475126299179779, guid: accf31d8dbcbd3a41bad6866c8cbbe04, type: 3}
+  - _image: {fileID: 2131714751898530259, guid: 9cbcf9e3fa35003489ce9ead990c3e2d, type: 3}
