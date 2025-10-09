@@ -124,6 +124,30 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 5ced8aeb49e1ee3418b6badab445c36a, type: 3}
   m_PrefabInstance: {fileID: 935778490}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &241871243 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5106125131100085936, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
+  m_PrefabInstance: {fileID: 736647933}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &241871245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 241871243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfb42d327cd56ac40afe7cf4474cca6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _trapRange: {fileID: 2114187806}
+  _duration: 2
+  _loopNumber: -1
+  _upDuration: 0.2
+  _downDuration: 0.2
+  _upPauseDuration: 0.5
+  _downPauseDuration: 2
 --- !u!1 &272739632
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,14 +644,61 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.029000044
       objectReference: {fileID: 0}
+    - target: {fileID: 23008813928714042, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: dc008d540f488f04f870a58ab633941a, type: 2}
+    - target: {fileID: 23024739037874072, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: dc008d540f488f04f870a58ab633941a, type: 2}
+    - target: {fileID: 23124783542801482, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: dc008d540f488f04f870a58ab633941a, type: 2}
+    - target: {fileID: 23248802485315498, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: dc008d540f488f04f870a58ab633941a, type: 2}
+    - target: {fileID: 23279996916830800, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: dc008d540f488f04f870a58ab633941a, type: 2}
+    - target: {fileID: 23739020642098042, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: dc008d540f488f04f870a58ab633941a, type: 2}
+    - target: {fileID: 23771608123197894, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: dc008d540f488f04f870a58ab633941a, type: 2}
+    - target: {fileID: 23774227400217108, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: dc008d540f488f04f870a58ab633941a, type: 2}
+    - target: {fileID: 23829621543932378, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: dc008d540f488f04f870a58ab633941a, type: 2}
+    - target: {fileID: 23837492293159518, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: dc008d540f488f04f870a58ab633941a, type: 2}
     - target: {fileID: 114953712324284294, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
       propertyPath: spikeTrapAnim
       value: 
       objectReference: {fileID: 736647936}
+    - target: {fileID: 1867491983956532013, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5106125131100085936, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 241871245}
   m_SourcePrefab: {fileID: 100100000, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
 --- !u!1 &736647934 stripped
 GameObject:
