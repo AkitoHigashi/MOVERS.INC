@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public abstract class ItemBase : MonoBehaviour
 {
     /// <summary>
-    /// ‰Šúİ’è‚ğs‚¤ŠÖ”‚ÅA•K‚¸base‚àŒÄ‚Ño‚·‚±‚Æ
+    /// åˆæœŸè¨­å®šã‚’è¡Œã†é–¢æ•°ã§ã€å¿…ãšbaseã‚‚å‘¼ã³å‡ºã™ã“ã¨
     /// </summary>
     protected virtual void SetUp()
     {
@@ -14,7 +14,7 @@ public abstract class ItemBase : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒAƒCƒeƒ€‚ÌŒø‰Ê‚ğ”­“®‚·‚éŠÖ”
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã®åŠ¹æœã‚’ç™ºå‹•ã™ã‚‹é–¢æ•°
     /// </summary>
     public abstract void ItemActivate();
 }
