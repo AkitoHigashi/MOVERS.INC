@@ -7,14 +7,21 @@
 public class Luggage : MonoBehaviour
 {
     [SerializeField] private int _score = 100;
+    [SerializeField] public int MaxScore { get; set; } =100;
 
     private void OnCollisionEnter(Collision collision)
     {
         // 衝突時にスコアを減らす（体力のような扱い）
+        Debug.Log(collision.gameObject.name);
+    
         _score--;
         if (_score <= 0) Destroy(gameObject);
     }
+    
 
     // スコアを取得するプロパティ
     public int Score => _score;
+    
+
+
 }

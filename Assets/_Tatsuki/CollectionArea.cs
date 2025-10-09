@@ -14,7 +14,8 @@ public class CollectionArea : MonoBehaviour
     public event Action<GameObject> OnExit;
 
     // スコア管理クラスへの参照 
-    [SerializeField] private ScoreManager scoreManager;
+    [SerializeField] private ScoreManager _scoreManager;
+    [SerializeField] private LuggageManager _luggageManager;
 
     /// <summary>
     /// 荷物がエリアに入ったときにスコアを加算。
@@ -24,8 +25,8 @@ public class CollectionArea : MonoBehaviour
         if (other.CompareTag("Luggage"))
         {
             var luggage = other.gameObject.GetComponent<Luggage>();
-            scoreManager.SetScore(luggage.Score);
-            scoreManager.SetText(scoreManager.NowScore.ToString());
+            _scoreManager.SetScore(luggage.Score);
+            _scoreManager.SetText(_scoreManager.NowScore.ToString());
             OnEnter?.Invoke(other.gameObject);
         }
     }
@@ -38,9 +39,11 @@ public class CollectionArea : MonoBehaviour
         if (other.CompareTag("Luggage"))
         {
             var luggage = other.gameObject.GetComponent<Luggage>();
-            scoreManager.SetScore(-luggage.Score);
-            scoreManager.SetText(scoreManager.NowScore.ToString());
+            _scoreManager.SetScore(-luggage.MaxScore);
+            luggage.MaxScore = luggage.Score;
+            _scoreManager.SetText(_scoreManager.NowScore.ToString());
             OnExit?.Invoke(other.gameObject);
         }
     }
+    
 }

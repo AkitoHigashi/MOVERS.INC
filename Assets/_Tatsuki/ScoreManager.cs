@@ -19,8 +19,14 @@ public class ScoreManager : MonoBehaviour
     // スコアの加算/減算
     public void SetScore(int score)
     {
-        if (!_isEnd) _nowScore += score;
+        if (!_isEnd)
+        {
+            _nowScore = Mathf.Max(_nowScore + score, 0);
+        }
     }
+
+
+
 
     // スコア表示テキストを更新
     public void SetText(string message)

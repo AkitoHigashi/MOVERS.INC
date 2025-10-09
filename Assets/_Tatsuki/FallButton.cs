@@ -36,6 +36,7 @@ public class FallButton : MonoBehaviour
 
             // スコア減少とUI更新
             scoreManager.SetScore(-luggage.Score);
+         
             scoreManager.SetText(scoreManager.NowScore.ToString());
         }
     }
