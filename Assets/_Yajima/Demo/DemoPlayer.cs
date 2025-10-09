@@ -46,7 +46,7 @@ public class DemoPlayer : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
-            _store.PurchaseItem(_go, ref _money);
+            _money -= _store.PurchaseItem(_go, _money);
             Debug.Log(_money);
         }
     }

@@ -41,9 +41,9 @@ public class Store : MonoBehaviour
     /// アイテムを購入する関数
     /// </summary>
     /// <param name="item">購入するアイテム</param>
-    /// <param name="money">所持金の参照</param>
+    /// <param name="money">所持金</param>
     /// <return>払う金額の値を返す</return>
-    public void PurchaseItem(GameObject item, ref int money)
+    public int PurchaseItem(GameObject item,int money)
     {
         var data = item.GetComponent<Display>().Data;
         //お金が足りているかどうか
@@ -53,22 +53,22 @@ public class Store : MonoBehaviour
             {
                 //始めて買うとき
                 Debug.Log("初購入");
-                //所持金を更新
-                money -= (int)data.PurchaseCost;
                 //保管庫に情報を送る
                 StorageData.IteminStorage(data);
                 //保管庫の配置を更新
                 _storage.StorageUpdate();
+
+                return (int)data.PurchaseCost;
             }
             else if (StorageData.PossessCount[data] < data.PossessionLimit)
             {
                 Debug.Log("購入");
-                //所持金を更新
-                money -= (int)data.PurchaseCost;
                 //保管庫に情報を送る
                 StorageData.IteminStorage(data);
                 //保管庫の配置を更新
                 _storage.StorageUpdate();
+
+                return (int)data.PurchaseCost;
             }
             else
             {
@@ -79,5 +79,6 @@ public class Store : MonoBehaviour
         {
             Debug.Log("お金が足りません");
         }
+        return 0;
     }
 }
