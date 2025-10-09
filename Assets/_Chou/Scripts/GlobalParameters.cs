@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GlobalParameters : MonoBehaviour
 {
+    public static GlobalParameters Instance;
+    
     [SerializeField] private int _dayCount; // 日数
     [SerializeField] private int _taxQuota; // 納税ノルマ
     [SerializeField] private int _money; // 所持金
@@ -24,14 +26,28 @@ public class GlobalParameters : MonoBehaviour
         { 5, 5000 }
     };
 
+    private void Awake()
+    {
+        // シングルトーン化
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     /// <summary>
     /// 初期化処理
     /// ゲーム起動やシーン遷移の時に
     /// </summary>
-    public void Init(int dayCount, int taxQuota, int money, int playerRank)
+    public void Init(int dayCount, int money, int playerRank)
     {
         DayCount = dayCount;
-        TaxQuota = taxQuota;
+        TaxQuota = _taxQuotaByRank[playerRank];
         Money = money;
         PlayerRank = playerRank;
     }
@@ -73,13 +89,23 @@ public class GlobalParameters : MonoBehaviour
     }
 
     /// <summary>
-    /// 納税する
-    /// 所持金を減少する
+    /// 納税額がノルマに達成したか判定する
+    /// </summary>
+    /// <param name="paidTax">納税額</param>
+    /// <returns></returns>
+    public bool IsTaxQuotaReached(int paidTax)
+    {
+        return paidTax >= TaxQuota;
+    }
+    /// <summary>
+    /// 納税と伴う一連の処理
     /// </summary>
     /// <param name="amount">納税する金額</param>
     public void PayTax(int amount)
     {
         _money -= amount;
+        JudgePlayerRankByTaxPaid(amount);
+        JudgeTaxQuotaByPlayerRank();
     }
     
     /// <summary>
@@ -96,13 +122,13 @@ public class GlobalParameters : MonoBehaviour
     /// <param name="paidTax">納税した金額</param>
     public void JudgePlayerRankByTaxPaid(int paidTax)
     {
-        if (paidTax < TaxQuota)
+        if (IsTaxQuotaReached(paidTax))
         {
-            ModifyPlayerRank(-1);
+            ModifyPlayerRank(1);
         }
         else
         {
-            ModifyPlayerRank(1);
+            ModifyPlayerRank(-1);
         }
     }
 
