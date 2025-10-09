@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce9e37331544db340957ba7e287bc8a9, type: 3}
-  m_Name: Enemy1Data
+  m_Name: Golem
   m_EditorClassIdentifier: 
-  _enemyHp: 10
-  _enemyMoveSpeed: 10
+  _enemyHp: 50
+  _enemyMoveSpeed: 5
   _enemyFov: 10
   _enemyPower: 10
   _enemyAttackRange: 10
+  _enemyState: 2

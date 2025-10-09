@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     public bool IsGrounded { get; private set; } = true;
     public bool IsSprinting { get; private set; } = false;
+    public bool IsCrouching { get; private set; } = false;
+    public bool IsSliding { get; set; } = false;
+    public bool IsCarrying { get; private set; } = false;
+    public bool CanSliding { get; private set; } = false;
     private InputBuffer _inputBuffer;
     private PlayerData _playerData;
     private PlayerState _playerState;
@@ -13,6 +17,9 @@ public class PlayerController : MonoBehaviour
     private PlayerJump _playerJump;
     private GroundCheck _groundCheck;
     private PlayerSprint _playerSprint;
+    private PlayerCrouch _playerCrouch;
+    private PlayerSliding _playerSliding;
+    private PlayerCarry _playerCarry;
     private Vector2 _currentInput = Vector2.zero;
 
     private void Awake()
@@ -24,6 +31,9 @@ public class PlayerController : MonoBehaviour
         _playerJump = GetComponent<PlayerJump>();
         _groundCheck = GetComponent<GroundCheck>();
         _playerSprint = GetComponent<PlayerSprint>();
+        _playerCrouch = GetComponent<PlayerCrouch>();
+        _playerSliding = GetComponent<PlayerSliding>();
+        _playerCarry = GetComponent<PlayerCarry>();
     }
 
     private void Start()
@@ -33,8 +43,10 @@ public class PlayerController : MonoBehaviour
         _inputBuffer.PlayerJump.started += OnInputJump;
         _inputBuffer.PlayerSprint.started += OnInputSprint;
         _inputBuffer.PlayerSprint.canceled += OnInputSprint;
+        _inputBuffer.PlayerCrouch.started += OnInputCrouch;
+        _inputBuffer.PlayerCarry.started += OnInputCarry;
         SetUp();
-    } 
+    }
 
     private void OnDestroy()
     {
@@ -42,20 +54,24 @@ public class PlayerController : MonoBehaviour
         _inputBuffer.PlayerMove.canceled -= OnInputMove;
         _inputBuffer.PlayerJump.started -= OnInputJump;
         _inputBuffer.PlayerSprint.started -= OnInputSprint;
-        _inputBuffer.PlayerSprint.canceled -= OnInputSprint;    
+        _inputBuffer.PlayerSprint.canceled -= OnInputSprint;
+        _inputBuffer.PlayerCrouch.started -= OnInputCrouch;
+        _inputBuffer.PlayerCarry.started -= OnInputCarry;
     }
 
     private void Update()
     {
         IsGrounded = _groundCheck.IsGrounded(_playerData);
         UpdateReturnBool();
-        _playerState.UpdateState(IsSprinting);
+        UpdateCanBool();
+        UpdateSetBool();
+        _playerState.UpdateState(IsSprinting, IsCrouching, IsSliding, IsCarrying);
         _playerMove?.UpdateSpeed(_playerState);
     }
 
     private void OnInputMove(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if (context.performed)
         {
             Vector2 input = context.ReadValue<Vector2>();
             _currentInput = input;
@@ -81,6 +97,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.started)
         {
+            if (IsCrouching) return;
             _playerSprint?.StartSprint();
         }
         else if (context.canceled)
@@ -89,9 +106,52 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnInputCrouch(InputAction.CallbackContext context)
+    {
+        if (CanSliding)
+        {
+            _playerSliding?.StartSliding();
+        }
+        else if (IsGrounded && !IsCrouching)
+        {
+            _playerCrouch?.StartCrouch();
+        }
+        else if (IsCrouching)
+        {
+            _playerCrouch?.StopCrouch();
+        }
+    }
+
+    private void OnInputCarry(InputAction.CallbackContext context)
+    {
+        _playerCarry?.CarryAction();
+    }
+
+    /// <summary>
+    /// 各種状態の更新のためのブール値の戻り値
+    /// </summary>
     private void UpdateReturnBool()
     {
-        IsSprinting=_playerSprint.ReturnIsSprint();
+        IsSprinting = _playerSprint.ReturnIsSprint();
+        IsCrouching = _playerCrouch.ReturnIsCrouch();
+        IsSliding = _playerSliding.ReturnIsSliding();
+        IsCarrying = _playerCarry.ReturnIsCarrying();
+    }
+
+    /// <summary>
+    /// 可能状態かどうか判定するためのブール値の更新
+    /// </summary>
+    private void UpdateCanBool()
+    {
+        CanSliding = _playerSliding.CanSliding(IsCarrying, IsSprinting, IsGrounded, _currentInput);
+    }
+
+    /// <summary>
+    /// 各種状態の更新のためのブール値のセット
+    /// </summary>
+    private void UpdateSetBool()
+    {
+        _playerMove?.SetBool(IsSliding);
     }
 
     private void SetUp()
@@ -99,5 +159,8 @@ public class PlayerController : MonoBehaviour
         _playerMove?.StartSetVariables(_playerData);
         _playerJump?.StartSetVariables(_playerData);
         _playerSprint?.StartSetVariables(_playerData);
+        _playerCrouch?.StartSetVariables(_playerData);
+        _playerSliding?.StartSetVariables(_playerData);
+        _playerCarry?.StartSetVariables(_playerData);
     }
 }
