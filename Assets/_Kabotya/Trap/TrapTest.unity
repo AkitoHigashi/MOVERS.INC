@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _trapRange: {fileID: 2114187806}
+  _trapSwitch: {fileID: 736647943}
   _duration: 2
   _loopNumber: -1
   _upDuration: 0.2
@@ -696,6 +697,12 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1498791207746926, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 736647943}
+    - targetCorrespondingSourceObject: {fileID: 1498791207746926, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 736647942}
     - targetCorrespondingSourceObject: {fileID: 5106125131100085936, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
       insertIndex: -1
       addedObject: {fileID: 241871245}
@@ -715,6 +722,40 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 95846521961778924, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
   m_PrefabInstance: {fileID: 736647933}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &736647942
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736647934}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.0000005, y: 0.18, z: 2.0000007}
+  m_Center: {x: 0.000000059604645, y: 0.033333294, z: 0.00000011920929}
+--- !u!114 &736647943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736647934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c3bede7703d1c14baca72a604fe6794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isThormTrapped: 0
 --- !u!1001 &935778490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1200,7 +1241,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 20, y: 10, z: 20}
+  m_Size: {x: 4, y: 10, z: 4}
   m_Center: {x: 0, y: 5, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

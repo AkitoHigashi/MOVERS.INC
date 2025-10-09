@@ -4,27 +4,21 @@ using UnityEngine;
 public class ThormTrap : MonoBehaviour
 {
     [SerializeField] private TrapRange _trapRange;
-    [SerializeField, Tooltip("下げたらスピードが上がる")]private float _duration = 1f;
-    [SerializeField,Tooltip("-1ならループ、その他の整数を入れるとその回数ループ")] private int _loopNumber = -1;
-    [Tooltip("針がどのくらい上に行くのか（１が最大）")]private float _thormUp = 1f;
-    [SerializeField,Tooltip("上がる時間")] private float _upDuration = 0.3f;
+    [Tooltip("トラップが動いているか")]　private bool _isTrapped = false;
+    [SerializeField, Tooltip("下げたらスピードが上がる")] private float _duration = 1f;
+    [SerializeField, Tooltip("-1ならループ、その他の整数を入れるとその回数ループ")] private int _loopNumber = -1;
+    [Tooltip("針がどのくらい上に行くのか（１が最大）")] private float _thormUp = 1f;
+    [SerializeField, Tooltip("上がる時間")] private float _upDuration = 0.3f;
     [SerializeField, Tooltip("下がる時間")] private float _downDuration = 0.8f;
-    [SerializeField,Tooltip("上で止まる時間")] private float _upPauseDuration = 0.2f;
+    [SerializeField, Tooltip("上で止まる時間")] private float _upPauseDuration = 0.2f;
     [SerializeField, Tooltip("下で止まる時間")] private float _downPauseDuration = 0.2f;
 
-    private Tween thormTween;
+    private Tween _thormTween;
 
     private void Start()
     {
-        //親オブジェクトと子オブジェクトから探す
         if (_trapRange == null)
-        {
-            _trapRange = GetComponentInParent<TrapRange>();
-            if (_trapRange == null)
-            {
-                _trapRange = GetComponentInChildren<TrapRange>();
-            }
-        }
+            _trapRange = FindScript.FindInParentOrChildren<TrapRange>(gameObject);
         RotateFuriko();
     }
 
@@ -35,26 +29,31 @@ public class ThormTrap : MonoBehaviour
 
     private void TrapCheck()
     {
+        if (_thormTween == null)
+            return;
+
         if (_trapRange._deactivateWhenExit)
         {
-            // プレイヤーが範囲外にいる場合、トラップを停止
-            if (thormTween.IsPlaying())
+            //// プレイヤーが範囲外にいる場合、トラップを停止
+            if (_thormTween.IsPlaying() && _isTrapped == false)
             {
-                thormTween.Pause();
+                _thormTween.Pause();
             }
         }
         else
         {
             // プレイヤーが範囲内にいる場合、トラップを再開
-            if (!thormTween.IsPlaying() && !thormTween.IsComplete())
+            if (!_thormTween.IsPlaying() && !_thormTween.IsComplete() && _isTrapped == true)
             {
-                thormTween.Play();
+                _thormTween.Play();
             }
         }
     }
 
     private void RotateFuriko()
     {
+        //トラップの動きを開始
+        _isTrapped = false;
         Vector3 startPos = transform.localPosition;
         Vector3 upPos = new Vector3(startPos.x, _thormUp, startPos.z);
 
@@ -68,8 +67,13 @@ public class ThormTrap : MonoBehaviour
            .Append(transform.DOLocalMove(startPos, _downDuration)
                     .SetEase(Ease.InSine))  //下がる
            .AppendInterval(_downPauseDuration)  //下で止まる
-           .SetLoops(_loopNumber, LoopType.Restart); //ループ
+           .SetLoops(_loopNumber, LoopType.Restart) //ループ
+           .SetAutoKill(false);
 
-        thormTween = seq;
+            _thormTween = seq;
+
+            _thormTween.Pause();
+        //トラップを止める
+        _isTrapped = true;
     }
 }
