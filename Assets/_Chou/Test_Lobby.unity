@@ -163,7 +163,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 33933486}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -189,7 +189,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter text...
+  m_Text: "\u6574\u6570\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044"
 --- !u!222 &33933489
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -347,7 +347,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 65535
+  m_Text: 
 --- !u!222 &344429984
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -861,7 +861,7 @@ GameObject:
   m_Component:
   - component: {fileID: 710573067}
   m_Layer: 5
-  m_Name: RankNotification
+  m_Name: PaymentResult
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1828,9 +1828,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f101d1d8e6b3e7d408a772e6d259d2d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _taxPaymentBlock: {fileID: 354543937}
-  _rankNotificationBlock: {fileID: 710573066}
-  _notTaxDayNotificationBlock: {fileID: 985964146}
+  _taxPaymentDialog: {fileID: 354543937}
+  _rankNotificationDialog: {fileID: 710573066}
+  _notTaxDayNotificationDialog: {fileID: 985964146}
   _uiMoney: {fileID: 1210620570}
   _uiDay: {fileID: 821940899}
   _uiRank: {fileID: 1763816420}
@@ -1838,9 +1838,9 @@ MonoBehaviour:
   _tpbQuota: {fileID: 1140797696}
   _tpbErrMsg: {fileID: 1393222132}
   _tpbTaxPaid: {fileID: 344429983}
-  _notifReached: {fileID: 1739301084}
-  _notifRankChange: {fileID: 2082269692}
-  _notifRank: {fileID: 1434320372}
+  _resultReached: {fileID: 1739301084}
+  _resultRankChange: {fileID: 2082269692}
+  _resultRank: {fileID: 1434320372}
 --- !u!4 &1414204492
 Transform:
   m_ObjectHideFlags: 0
@@ -2342,7 +2342,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 65535
+  m_Text: 
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
