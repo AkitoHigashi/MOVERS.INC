@@ -9,7 +9,7 @@ public class ScoreManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text _tmpText;
     [SerializeField] private int _nowScore = 0;
-    [SerializeField] private int _endScore = 0;
+    public static  int EndScore { get; set; } = 0;
 
     private bool _isEnd = false;
 
@@ -17,6 +17,10 @@ public class ScoreManager : MonoBehaviour
     public int NowScore => _nowScore;
 
     // スコアの加算/減算
+    public static int  GetScore()
+    {
+        return EndScore;
+    }
     public void SetScore(int score)
     {
         if (!_isEnd)
@@ -24,6 +28,12 @@ public class ScoreManager : MonoBehaviour
             _nowScore = Mathf.Max(_nowScore + score, 0);
         }
     }
+
+  public void End()
+    {
+        EndScore = _nowScore;
+    }
+
 
 
 

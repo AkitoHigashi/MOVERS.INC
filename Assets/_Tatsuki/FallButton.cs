@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 /// <summary>
 /// 指定されたボタンを押すと、対象オブジェクトを上下に動かす（落とす→戻す）制御を行うクラス。
@@ -86,5 +87,6 @@ public class FallButton : MonoBehaviour
 
         // 荷物を回収（スコア処理完了後に呼び出し）
         collector.Collect();
+        scoreManager.End();
     }
 }
