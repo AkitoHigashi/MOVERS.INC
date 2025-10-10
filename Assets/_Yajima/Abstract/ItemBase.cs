@@ -2,6 +2,22 @@
 
 public abstract class ItemBase : MonoBehaviour
 {
+    [SerializeField] Sprite _sprite;
+    public Sprite Sprite
+    {
+        get
+        {
+            return _sprite;
+        }
+        set
+        {
+            if (!_sprite)
+            {
+                _sprite = value;
+            }
+        }
+    }
+
     /// <summary>
     /// 初期設定を行う関数で、必ずbaseも呼び出すこと
     /// </summary>
