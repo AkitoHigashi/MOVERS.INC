@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// 視野トリガー専用スクリプト（子オブジェクトにアタッチ）
+/// 視野トリガー専用スクリプト
 /// </summary>
 public class EnemyVision : MonoBehaviour
 {
@@ -23,7 +23,7 @@ public class EnemyVision : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(PLAYER) || CompareTag(LUGGAGE))
+        if (other.CompareTag(PLAYER) || other.CompareTag(LUGGAGE))
         {
             Debug.Log("範囲内になにか入ってきた");
             _collider = other;
@@ -32,10 +32,10 @@ public class EnemyVision : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") || CompareTag("Baggage"))
+        if (other.CompareTag(PLAYER) || other.CompareTag(LUGGAGE))
         {
-            _enemyBase.ReturnDestination();
             _isTrigger = false;
+            _collider = null;
         }
     }
 }
