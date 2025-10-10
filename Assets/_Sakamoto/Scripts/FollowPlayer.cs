@@ -1,10 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
-    [SerializeField] private Transform _playerPosition;
+    [SerializeField] private Transform _cameraFollowPosition;
     private void Update()
     {
-        transform.position = _playerPosition.position;
+        transform.position = _cameraFollowPosition.position;
     }
 }
