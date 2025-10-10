@@ -1,19 +1,45 @@
-﻿using UnityEngine;
+﻿using UnityEditor.ShaderGraph.Internal;
+using UnityEngine;
 
 /// <summary>
 /// リザード特有の動きを制御するクラス
 /// </summary>
 public class Lizard : EnemyBase
 {
+    [SerializeField, Header("コレクションエリア")]
+    private Transform _collectionArea;
+
+    private GameObject _luggage;
+    private bool _isCarry;
+    private void Awake()
+    {
+        base.BaseAwake();
+    }
+    private void Update()
+    {
+        if(_isCarry) ThrowLuggage();
+        else base.BaseUpdate();
+
+        SetAnimation();
+    }
+    private void OnDisable()
+    {
+        base.BaseOnDisable();
+    }
+    private void SetAnimation()
+    {
+    }
     protected override void ProccesToLuggage(Collider collider, float distance)
     {
+        if (!_hasSeen)FirstSeeing();
+        
         _currentDestination = collider.transform.position;
         if (distance < _stopDistance)
         {
             switch (_currentEnemyState)
             {
                 case EnemyState.Neutral:
-                    CarryBaggage(collider);
+                    CatchLuggage(collider);
                     break;
                 default:
                     break;
@@ -21,12 +47,50 @@ public class Lizard : EnemyBase
         }
     }
     /// <summary>
-    /// 荷物を拾って運ぶ処理
+    /// 荷物を拾う処理
     /// </summary>
     /// <param name="baggage"></param>
-    private void CarryBaggage(Collider baggage)
+    private void CatchLuggage(Collider luggage)
     {
-        //今後追加予定
         Debug.Log("荷物を運ぶ");
+        _luggage = luggage.gameObject;
+        _luggage.transform.position = _facePos.position;
+        _luggage.transform.SetParent(this.transform);
+        _isCarry = true;
+        ResetVision();
+        CarryLuggage();
+        StopAllCoroutines();
+    }
+    /// <summary>
+    /// 荷物を運ぶ処理
+    /// </summary>
+    /// <param name="luggage"></param>
+    private void CarryLuggage()
+    {
+        _currentDestination = _collectionArea.transform.position;
+        _navMeshAgent.SetDestination(_currentDestination);
+    }
+    /// <summary>
+    /// 荷物を下ろす処理
+    /// </summary>
+    /// <param name="distance"></param>
+    private void ThrowLuggage()
+    {
+        Debug.Log("ThrowLuggage");
+        float distance = Vector3.Distance(transform.position, _collectionArea.transform.position);
+        if (distance < _stopDistance)
+        {
+            Debug.Log("親子関係解除");
+            _luggage.transform.SetParent(null);
+            _isCarry = false;
+        }
+    }
+    /// <summary>
+    /// 死んだときにもし荷物を持っていたら親子関係を解除
+    /// </summary>
+    protected override void EnemyDie()
+    {
+        base.EnemyDie();
+        if (_luggage.transform.parent == this) _luggage.transform.SetParent(null);
     }
 }
