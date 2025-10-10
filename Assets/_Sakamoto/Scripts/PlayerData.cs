@@ -36,6 +36,11 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private float _carryRayDistance;
     [SerializeField] private string _luggageTag = "Luggage";
 
+    [Header("Throw")]
+    [SerializeField] private float _throwableTime;
+    [SerializeField] private float _throwForceForward;
+    [SerializeField] private float _throwForceUp;
+
     public float Health => _health;
     public float MuscleStrength => _muscleStrength;
     public Transform CameraForward => _cameraForward;
@@ -56,4 +61,7 @@ public class PlayerData : MonoBehaviour
     public float SlidingYScale => _slidingYScale;
     public float CarryRayDistance => _carryRayDistance;
     public string LuggageTag => _luggageTag;
+    public float ThrowableTime => _throwableTime;
+    public float ThrowForceForward => _throwForceForward;
+    public float ThrowForceUp => _throwForceUp;
 }
