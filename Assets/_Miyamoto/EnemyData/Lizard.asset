@@ -13,8 +13,15 @@ MonoBehaviour:
   m_Name: Lizard
   m_EditorClassIdentifier: 
   _enemyHp: 30
-  _enemyMoveSpeed: 5
-  _enemyFov: 7
+  _enemyWalkSpeed: 3
+  _enemyRunSpeed: 10
+  _enemyFovDistance: 10
   _enemyPower: 5
   _enemyAttackRange: 3
   _enemyState: 1
+  _hokakuwariai: 0.657
+  _waitTime: 1
+  _angularSpeed: 360
+  _stopDistance: 5
+  _fov: 60
+  _patrolFovDistance: 15
