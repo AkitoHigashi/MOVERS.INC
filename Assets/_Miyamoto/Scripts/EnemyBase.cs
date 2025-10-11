@@ -88,6 +88,10 @@ public abstract class EnemyBase : MonoBehaviour
     {
         Patrol();
     }
+    protected void BaseOnEnable()
+    {
+
+    }
     /// <summary>
     /// 継承先でOnDisableから呼び出す
     /// </summary>
@@ -273,7 +277,6 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void FirstSeeing()
     {
         Debug.Log("初めて見えたFirstSeeing呼び出し");
-        _navMeshAgent.speed = _enemyRunSpeed;
         _navMeshAgent.angularSpeed *= 2;
         _fov *= 2;
         _hasSeen = true;
