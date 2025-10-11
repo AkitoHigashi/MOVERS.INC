@@ -20,6 +20,10 @@ public class DemonKing : EnemyBase
         SetAnimation();
         timer += Time.deltaTime;
     }
+    private void OnEnable()
+    {
+        base.BaseOnEnable();
+    }
     private void OnDisable()
     {
         base.BaseOnDisable();
