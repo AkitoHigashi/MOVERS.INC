@@ -22,6 +22,10 @@ public class Lizard : EnemyBase
 
         SetAnimation();
     }
+    private void OnEnable()
+    {
+        base.BaseOnEnable();
+    }
     private void OnDisable()
     {
         base.BaseOnDisable();
@@ -52,14 +56,17 @@ public class Lizard : EnemyBase
     /// <param name="baggage"></param>
     private void CatchLuggage(Collider luggage)
     {
-        Debug.Log("荷物を運ぶ");
-        _luggage = luggage.gameObject;
-        _luggage.transform.position = _facePos.position;
-        _luggage.transform.SetParent(this.transform);
-        _isCarry = true;
-        ResetVision();
-        CarryLuggage();
-        StopAllCoroutines();
+        if (!_isCarry)
+        {
+            Debug.Log("荷物を運ぶ");
+            _luggage = luggage.gameObject;
+            _luggage.transform.position = _facePos.position;
+            _luggage.transform.SetParent(this.transform);
+            _isCarry = true;
+            ResetVision();
+            CarryLuggage();
+            StopAllCoroutines();
+        }
     }
     /// <summary>
     /// 荷物を運ぶ処理
