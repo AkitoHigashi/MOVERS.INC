@@ -1,10 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DemoItem : ItemBase
 {
     private void Start()
     {
-        base.SetUp();
+        base.Init();
     }
 
     public override void ItemActivate()

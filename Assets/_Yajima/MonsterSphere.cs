@@ -25,17 +25,22 @@ public class MonsterSphere : ItemBase
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Monster")
+        if (!_monster)
         {
-            var enemy = collision.gameObject.GetComponent<EnemyBase>();
-            //if(enemy.EnemyData.CanGet(enemy.)){
-            //  GetMonster(collision.gameObject);
-            //}
+            if (collision.gameObject.tag == "Monster")
+            {
+                var enemy = collision.gameObject.GetComponent<EnemyBase>();
+                //if(enemy.EnemyData.CanGet(enemy.))
+                //{
+                //  _monster = collision.gameObject;
+                //  ItemActivate();
+                //}
+            }
         }
     }
 
     public override void ItemActivate()
     {
-        
+        _monster.transform.SetParent(this.transform);
     }
 }

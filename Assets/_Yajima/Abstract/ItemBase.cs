@@ -18,10 +18,15 @@ public abstract class ItemBase : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Init();
+    }
+
     /// <summary>
     /// 初期設定を行う関数で、必ずbaseも呼び出すこと
     /// </summary>
-    protected virtual void SetUp()
+    protected virtual void Init()
     {
         if (tag != "Item")
         {

@@ -1,21 +1,16 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ƒ‚ƒ“ƒXƒ^[ƒ{[ƒ‹i‰¼j
+/// ãƒ¢ãƒ³ã‚¹ã‚¿ãƒ¼ãƒœãƒ¼ãƒ«ï¼ˆä»®ï¼‰
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
 public class DemoMonsterBall : ItemBase
 {
     Rigidbody _rb;
 
-    private void Start()
+    protected override void Init()
     {
-        SetUp();
-    }
-
-    protected override void SetUp()
-    {
-        base.SetUp();
+        base.Init();
         _rb = GetComponent<Rigidbody>();
         _rb.isKinematic = true;
     }
@@ -23,6 +18,6 @@ public class DemoMonsterBall : ItemBase
     {
         _rb.isKinematic = false;
         _rb.AddForce(GameObject.Find("DemoPlayer").transform.forward, ForceMode.Impulse);
-        Debug.Log("ƒ{[ƒ‹‚ğ“Š‚°‚½");
+        Debug.Log("ãƒœãƒ¼ãƒ«ã‚’æŠ•ã’ãŸ");
     }
 }
