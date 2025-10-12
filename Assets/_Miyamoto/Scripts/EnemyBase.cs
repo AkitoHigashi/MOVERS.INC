@@ -71,7 +71,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected NavMeshAgent _navMeshAgent;
     protected Animator _animator;
-    private Coroutine _coroutine;
+    protected Coroutine _coroutine;
 
     /// <summary>
     /// 継承先でAwakeから呼び出す
@@ -155,18 +155,19 @@ public abstract class EnemyBase : MonoBehaviour
 
         float distance = Vector3.Distance(this.transform.position, _currentDestination);
 
-        // プレイヤーを見つけていない場合で目的地付近にいるなら次の目的地へ
+        // アイテムを見つけていない場合で目的地付近にいるなら次の目的地へ
         if (!_navMeshAgent.isStopped && !_hasSeen && distance <= _stopDistance && _coroutine == null)
         {
+            Debug.Log("コルーチン開始");
             _coroutine = StartCoroutine(ChangeDestination());
         }
-        // プレイヤー追跡中は巡回変更処理を止める
-        else if(_hasSeen && _coroutine != null)
+        // アイテム追跡中は徘徊変更処理を止める
+        else if (_hasSeen && _coroutine != null)
         {
+            Debug.Log("コルーチン停止");
             StopCoroutine(_coroutine);
             _coroutine = null;
             _navMeshAgent.isStopped = false;
-            _lookAround = false;
             _navMeshAgent.speed = _enemyWalkSpeed;
         }
     }
@@ -178,7 +179,6 @@ public abstract class EnemyBase : MonoBehaviour
     {
         if(_hasSeen) yield break;
 
-        _navMeshAgent.isStopped = true;
         _lookAround = true;
         _navMeshAgent.velocity = Vector3.zero; // 速度をゼロにする
         Debug.Log("一時停止");
@@ -186,9 +186,10 @@ public abstract class EnemyBase : MonoBehaviour
 
         _lastDestination = _currentDestination;
         _currentDestination = _destinations[Random.Range(0, _destinations.Count)].position;
-        _navMeshAgent.isStopped = false;
         _lookAround = false;
         _navMeshAgent.speed = _enemyWalkSpeed;
+
+        _coroutine = null;  
         Debug.Log("再開");
     }
     /// <summary>
@@ -237,11 +238,12 @@ public abstract class EnemyBase : MonoBehaviour
         Vector3 origin = transform.position;
         Vector3 toTarget = (collider.transform.position - origin).normalized;
         float targetAngle = Vector3.Angle(transform.forward, toTarget);
-        float currentFov = _hasSeen ? _enemyFovDistance : _patrolFovDistance;
+        float currentFov = _hasSeen ? _patrolFovDistance : _enemyFovDistance;
 
         bool inSight = targetAngle < _fov / 2 &&
                        Physics.Raycast(origin, toTarget, out hit, currentFov) &&
                        hit.collider == collider;
+
 
         if (inSight) Debug.DrawRay(origin, toTarget * hit.distance, Color.red);
 
@@ -287,7 +289,6 @@ public abstract class EnemyBase : MonoBehaviour
     protected void ResetVision()
     {
         Debug.Log("視野角リセットResetVision呼び出し");
-        _navMeshAgent.speed = _enemyWalkSpeed;
         _navMeshAgent.angularSpeed /= 2;
         _fov /= 2;
         _hasSeen = false;
@@ -360,7 +361,7 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
     #endregion
-    //敵の視界を可視化する関数(必要に応じてコメントアウトして<3)
+    //  敵の視界を可視化する関数(必要に応じてコメントアウトして<3)
     private void OnDrawGizmos()
     {
         if (_navMeshAgent == null) return;
