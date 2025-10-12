@@ -18,11 +18,13 @@ public class Result : MonoBehaviour
     {
         // --- メイン報酬の計算 ---
         int sum = 1;
+        //あとで計算式を追加します
         mainScore = ScoreManager.EndScore * (sum + luggageNumbers);
       
         main_text.text = $"mainScore {mainScore}";
 
         // --- 荷物を全て届けたか ---
+        //仮bool
         bool isDelivered = true;
         if (isDelivered)
         {
@@ -32,6 +34,7 @@ public class Result : MonoBehaviour
         else sub1_text.text = "0";
 
         // --- モンスターを捕まえたか ---
+        //仮bool
         bool hasCaughtMonster = true;
         if (hasCaughtMonster)
         {
@@ -41,6 +44,7 @@ public class Result : MonoBehaviour
         else sub2_text.text = "0";
 
         // --- 無傷でクリアしたか ---
+        //仮bool
         bool isUndamaged = true;
         if (isUndamaged)
         {
