@@ -1,4 +1,5 @@
-﻿using UnityEditor.ShaderGraph.Internal;
+﻿using Unity.XR.Oculus.Input;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 /// <summary>
@@ -17,7 +18,7 @@ public class Lizard : EnemyBase
     }
     private void Update()
     {
-        if(_isCarry) ThrowLuggage();
+        if (_isCarry) ThrowLuggage();
         else base.BaseUpdate();
 
         SetAnimation();
@@ -35,8 +36,8 @@ public class Lizard : EnemyBase
     }
     protected override void ProccesToLuggage(Collider collider, float distance)
     {
-        if (!_hasSeen)FirstSeeing();
-        
+        if (!_hasSeen) FirstSeeing();
+
         _currentDestination = collider.transform.position;
         if (distance < _stopDistance)
         {
@@ -59,6 +60,7 @@ public class Lizard : EnemyBase
         if (!_isCarry)
         {
             Debug.Log("荷物を運ぶ");
+            luggage.isTrigger = true;
             _luggage = luggage.gameObject;
             _luggage.transform.position = _facePos.position;
             _luggage.transform.SetParent(this.transform);
@@ -66,6 +68,7 @@ public class Lizard : EnemyBase
             ResetVision();
             CarryLuggage();
             StopAllCoroutines();
+            _coroutine = null;
         }
     }
     /// <summary>
@@ -88,10 +91,13 @@ public class Lizard : EnemyBase
         if (distance < _stopDistance)
         {
             Debug.Log("親子関係解除");
+            Collider collider = _luggage.GetComponent<Collider>();
             _luggage.transform.SetParent(null);
+            collider.isTrigger = true;
             _isCarry = false;
         }
     }
+
     /// <summary>
     /// 死んだときにもし荷物を持っていたら親子関係を解除
     /// </summary>
@@ -99,5 +105,15 @@ public class Lizard : EnemyBase
     {
         base.EnemyDie();
         if (_luggage.transform.parent == this) _luggage.transform.SetParent(null);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("CollectionArea"))
+            _isCarry = true;
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("CollectionArea"))
+            _isCarry = false;
     }
 }
