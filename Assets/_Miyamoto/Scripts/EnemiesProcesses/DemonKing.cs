@@ -10,6 +10,7 @@ public class DemonKing : EnemyBase
     private float _coolTime = 2f;
 
     private float timer;
+    private bool _attack;
     private void Awake()
     {
         base.BaseAwake();
@@ -17,7 +18,7 @@ public class DemonKing : EnemyBase
     private void Update()
     {
         base.BaseUpdate();
-        SetAnimation();
+        SetAnimationBool();
         timer += Time.deltaTime;
     }
     private void OnEnable()
@@ -32,20 +33,21 @@ public class DemonKing : EnemyBase
         _animator.SetBool("Run", false);
         _animator.SetBool("LookAround", false);
     }
-    private void SetAnimation()
+    private void SetAnimationBool()
     {
         _animator.SetBool("LookAround", _lookAround);
         _animator.SetBool("Run", HasSeen);
+        _animator.SetBool("Idle", timer >= _coolTime);
+        _animator.SetBool("Attack", _attack);
     }
     protected override void ProccesToPlayer(Collider collider, float distance)
     {
-
         if (!_hasSeen) FirstSeeing();
        
         _navMeshAgent.speed = _enemyRunSpeed;
         _currentDestination = collider.transform.position;
 
-        if (CanAction(distance))
+        if (CanAttack(distance))
         {
             switch (_currentEnemyState)
             {
@@ -62,7 +64,7 @@ public class DemonKing : EnemyBase
     /// </summary>
     /// <param name="distance"></param>
     /// <returns></returns>
-    private bool CanAction(float distance)
+    private bool CanAttack(float distance)
     {
         if (distance < _stopDistance && timer >= _coolTime)
         {
