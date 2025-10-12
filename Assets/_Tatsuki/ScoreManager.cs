@@ -9,6 +9,7 @@ public class ScoreManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text _tmpText;
     [SerializeField] private int _nowScore = 0;
+   
     public static  int EndScore { get; set; } = 0;
 
     private bool _isEnd = false;
@@ -19,8 +20,11 @@ public class ScoreManager : MonoBehaviour
     // スコアの加算/減算
     public static int  GetScore()
     {
-        return EndScore;
+       
+        return EndScore   ;
     }
+   
+    
     public void SetScore(int score)
     {
         if (!_isEnd)
