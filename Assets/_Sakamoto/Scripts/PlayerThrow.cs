@@ -2,6 +2,8 @@
 
 public class PlayerThrow : MonoBehaviour, IStartSetVariables
 {
+    private Collider _playerCollider;
+    private PlayerCarry _playerCarry;
     private LuggageData _luggageData;
     private Transform _cameraForward;
     private float _throwForceForward;
@@ -14,6 +16,8 @@ public class PlayerThrow : MonoBehaviour, IStartSetVariables
     private void Start()
     {
         _luggageData = GetComponent<LuggageData>();
+        _playerCarry = GetComponent<PlayerCarry>();
+        _playerCollider = GetComponent<Collider>();
     }
 
     private void Update()
@@ -46,16 +50,24 @@ public class PlayerThrow : MonoBehaviour, IStartSetVariables
 
     private void Throw()
     {
-        GameObject luggage = _luggageData.Luggage;
+        _luggageData.LuggageRb.useGravity = true;
+        GameObject luggage = _luggageData.LuggageGameObject;
         Rigidbody rb = _luggageData.LuggageRb;
+        Collider collider = _luggageData.LuggageCollider;
+        // PlayerとLuggageのColliderが両方存在する場合、衝突を無視しない
+        if (_playerCollider != null && collider != null)
+            Physics.IgnoreCollision(_playerCollider, collider, false);
         if (luggage == null || rb == null) return;
+        _luggageData.LuggageRb.isKinematic = false;
         luggage.transform.SetParent(null);
         Vector3 forceToAdd = _cameraForward.transform.forward * _throwForceForward
                            + transform.up * _throwForceUp;
         rb.AddForce(forceToAdd, ForceMode.Impulse);
-        _luggageData.Luggage = null;
+        _luggageData.LuggageGameObject = null;
         _luggageData.LuggageRb = null;
         _isThrowing = false;
+        _isCarry = false;
+        _playerCarry.CarryingBoolFalse();
     }
 
     public void StartSetVariables(PlayerData playerData)

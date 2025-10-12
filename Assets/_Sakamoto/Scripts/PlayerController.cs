@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
         UpdateReturnBool();
         UpdateCanBool();
         UpdateSetBool();
-        _playerState.UpdateState(IsSprinting, IsCrouching, IsSliding, IsCarrying);
+        _playerState.UpdateState(IsSprinting, IsCrouching, IsSliding, IsCarrying,IsThrowing);
         _playerMove?.UpdateSpeed(_playerState);
     }
 
