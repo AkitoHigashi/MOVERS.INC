@@ -101,4 +101,9 @@ public class DemonKing : EnemyBase
         base.FirstSeeing();
         _navMeshAgent.speed = _enemyRunSpeed;
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("CollectionArea"))
+            ReturnDestination();
+    }
 }

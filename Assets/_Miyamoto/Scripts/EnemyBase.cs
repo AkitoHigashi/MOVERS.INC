@@ -73,6 +73,8 @@ public abstract class EnemyBase : MonoBehaviour
     protected Animator _animator;
     protected Coroutine _coroutine;
 
+    protected bool _isInCollectionArea;
+    private float _currentFov;
     /// <summary>
     /// 継承先でAwakeから呼び出す
     /// </summary>
@@ -128,6 +130,8 @@ public abstract class EnemyBase : MonoBehaviour
         _lastDestination = _currentDestination;
 
         _navMeshAgent.angularSpeed = _angularSpeed;
+
+        _currentFov = _enemyFovDistance;
     }
     #region 移動関係
     /// <summary>
@@ -177,8 +181,9 @@ public abstract class EnemyBase : MonoBehaviour
     /// <returns></returns>
     private IEnumerator ChangeDestination()
     {
-        if(_hasSeen) yield break;
+        if (_hasSeen) yield break;
 
+        _navMeshAgent.isStopped = true;
         _lookAround = true;
         _navMeshAgent.velocity = Vector3.zero; // 速度をゼロにする
         Debug.Log("一時停止");
@@ -186,10 +191,11 @@ public abstract class EnemyBase : MonoBehaviour
 
         _lastDestination = _currentDestination;
         _currentDestination = _destinations[Random.Range(0, _destinations.Count)].position;
+        _navMeshAgent.isStopped = false;
         _lookAround = false;
         _navMeshAgent.speed = _enemyWalkSpeed;
 
-        _coroutine = null;  
+        _coroutine = null;
         Debug.Log("再開");
     }
     /// <summary>
@@ -211,7 +217,7 @@ public abstract class EnemyBase : MonoBehaviour
     /// <param name="collider"></param>
     public void FindObject(Collider collider)
     {
-        if (collider == null) return;
+        if (collider == null || _isInCollectionArea) return;
 
         float distance = Vector3.Distance(this.transform.position, collider.transform.position);
 
@@ -240,14 +246,11 @@ public abstract class EnemyBase : MonoBehaviour
         float targetAngle = Vector3.Angle(transform.forward, toTarget);
         float currentFov = _hasSeen ? _patrolFovDistance : _enemyFovDistance;
 
-        bool inSight = targetAngle < _fov / 2 &&
-                       Physics.Raycast(origin, toTarget, out hit, currentFov) &&
-                       hit.collider == collider;
+        Debug.DrawRay(origin, transform.forward * currentFov, _hasSeen ? Color.red : Color.blue);
 
-
-        if (inSight) Debug.DrawRay(origin, toTarget * hit.distance, Color.red);
-
-        return inSight;
+        return targetAngle < _fov / 2 &&
+                         Physics.Raycast(origin, toTarget, out hit, currentFov) &&
+                         hit.collider == collider ? true : false;
     }
     /// <summary>
     ///　見つけた時の判定
@@ -380,8 +383,8 @@ public abstract class EnemyBase : MonoBehaviour
             float angle1 = -_fov / 2 + (viewAngle * i / segments);
             float angle2 = -_fov / 2 + (viewAngle * (i + 1) / segments);
 
-            Vector3 dir1 = Quaternion.Euler(0, angle1, 0) * forward * _enemyFovDistance;
-            Vector3 dir2 = Quaternion.Euler(0, angle2, 0) * forward * _enemyFovDistance;
+            Vector3 dir1 = Quaternion.Euler(0, angle1, 0) * forward * _currentFov;
+            Vector3 dir2 = Quaternion.Euler(0, angle2, 0) * forward * _currentFov;
 
             // 三角形を描画
             Vector3[] vertices = new Vector3[] { origin, origin + dir1, origin + dir2 };

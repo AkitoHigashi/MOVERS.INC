@@ -36,11 +36,13 @@ public class Lizard : EnemyBase
     }
     protected override void ProccesToLuggage(Collider collider, float distance)
     {
+        Debug.Log("hasSeenがTrueだぞー");
         if (!_hasSeen) FirstSeeing();
 
         _currentDestination = collider.transform.position;
-        if (distance < _stopDistance)
+        if (distance <= _stopDistance)
         {
+            Debug.Log("action開始");
             switch (_currentEnemyState)
             {
                 case EnemyState.Neutral:
@@ -57,14 +59,24 @@ public class Lizard : EnemyBase
     /// <param name="baggage"></param>
     private void CatchLuggage(Collider luggage)
     {
+        if (_isInCollectionArea) return;
+
         if (!_isCarry)
         {
-            Debug.Log("荷物を運ぶ");
+            Debug.Log("荷物を手に取る");
             luggage.isTrigger = true;
             _luggage = luggage.gameObject;
             _luggage.transform.position = _facePos.position;
             _luggage.transform.SetParent(this.transform);
             _isCarry = true;
+
+            //目的地から除外
+            Transform luggageTransform = luggage.transform;
+            if (_destinations.Contains(luggageTransform))
+            {
+                _destinations.Remove(luggageTransform);
+            }
+
             ResetVision();
             CarryLuggage();
             StopAllCoroutines();
@@ -77,6 +89,7 @@ public class Lizard : EnemyBase
     /// <param name="luggage"></param>
     private void CarryLuggage()
     {
+        Debug.Log("荷物を運ぶ");
         _currentDestination = _collectionArea.transform.position;
         _navMeshAgent.SetDestination(_currentDestination);
     }
@@ -88,12 +101,13 @@ public class Lizard : EnemyBase
     {
         Debug.Log("ThrowLuggage");
         float distance = Vector3.Distance(transform.position, _collectionArea.transform.position);
-        if (distance < _stopDistance)
+        if (distance <= _stopDistance)
         {
             Debug.Log("親子関係解除");
+            _currentDestination = _destinations[Random.Range(0, _destinations.Count)].position;
             Collider collider = _luggage.GetComponent<Collider>();
             _luggage.transform.SetParent(null);
-            collider.isTrigger = true;
+            collider.isTrigger = false;
             _isCarry = false;
         }
     }
@@ -109,11 +123,11 @@ public class Lizard : EnemyBase
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("CollectionArea"))
-            _isCarry = true;
+            _isInCollectionArea = true;
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("CollectionArea"))
-            _isCarry = false;
+            _isInCollectionArea = false;
     }
 }
