@@ -2,7 +2,7 @@
 
 public class PlayerData : MonoBehaviour
 {
-    [Header("Paramatta")]
+    [Header("Parameter")]
     [SerializeField] private float _health = 100f;
     [SerializeField] private float _muscleStrength = 1f;
 

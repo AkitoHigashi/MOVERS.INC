@@ -69,8 +69,8 @@ public class PlayerThrow : MonoBehaviour, IStartSetVariables
     /// <summary>
     /// 持っているかどうかのフラグをセットする
     /// </summary>
-    /// <param name="isCarry"></param>
-    public void SetBoolIsCarry(bool isCarry) => _isCarry = isCarry;
+    /// <param name="value"></param>
+    public void SetBoolIsCarry(bool value) => _isCarry = value;
 
     /// <summary>
     /// 投げる動作をしているかどうかを返す
