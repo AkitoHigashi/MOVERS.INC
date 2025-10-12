@@ -90,6 +90,9 @@ public abstract class EnemyBase : MonoBehaviour
     {
         Patrol();
     }
+    /// <summary>
+    /// 継承先でOnEnableから呼び出す
+    /// </summary>
     protected void BaseOnEnable()
     {
 
@@ -328,7 +331,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void ProccesToLuggage(Collider baggage, float distance) { }
     #endregion
 
-    #region 体力関係
+    #region 状態関係
     //private void OnCollisionEnter(Collision collision)
     //{
     //    if (collision.gameObject.CompareTag(TRAP))
@@ -363,6 +366,15 @@ public abstract class EnemyBase : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    /// <summary>
+    /// 友好関係を変える
+    /// </summary>
+    /// <param name="enemyState"></param>
+    protected void ChangeState(EnemyState enemyState)
+    {
+        _currentEnemyState = enemyState;
+    }
+
     #endregion
     //  敵の視界を可視化する関数(必要に応じてコメントアウトして<3)
     private void OnDrawGizmos()
