@@ -42,6 +42,7 @@ public class PlayerThrow : MonoBehaviour, IStartSetVariables
     /// </summary>
     public void StopThrow()
     {
+        _isThrowing = false;
         if (_isCarry && _throwTime >= _throwableTime)
         {
             Throw();
@@ -65,7 +66,6 @@ public class PlayerThrow : MonoBehaviour, IStartSetVariables
         rb.AddForce(forceToAdd, ForceMode.Impulse);
         _luggageData.LuggageGameObject = null;
         _luggageData.LuggageRb = null;
-        _isThrowing = false;
         _isCarry = false;
         _playerCarry.CarryingBoolFalse();
     }
