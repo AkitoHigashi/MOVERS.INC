@@ -4,9 +4,6 @@ using UnityEngine;
 public class ThormTrap : MonoBehaviour
 {
     [SerializeField] private TrapRange _trapRange;
-    [Tooltip("トラップが動いているか")] private bool _isTrapped = false;
-    [SerializeField, Tooltip("下げたらスピードが上がる")] private float _duration = 1f;
-    [SerializeField, Tooltip("-1ならループ、その他の整数を入れるとその回数ループ")] private int _loopNumber = -1;
     [Tooltip("針がどのくらい上に行くのか（１が最大）")] private float _thormUp = 1f;
     [SerializeField, Tooltip("上がる時間")] private float _upDuration = 0.3f;
     [SerializeField, Tooltip("下がる時間")] private float _downDuration = 0.8f;
@@ -32,14 +29,13 @@ public class ThormTrap : MonoBehaviour
 
         if (!_trapRange._deactivateWhenExit)
         {
-            // プレイヤーが範囲内にいる場合、トラップを再開
+            Debug.Log("動いた！！");
             UpThorm();
         }
     }
 
     private void UpThorm()
     {
-        Debug.Log("a", this);
 
         Vector3 startPos = transform.localPosition;
         Vector3 upPos = new Vector3(startPos.x, _thormUp, startPos.z);
