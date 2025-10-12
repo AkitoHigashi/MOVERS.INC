@@ -15,7 +15,7 @@ MonoBehaviour:
   _enemyHp: 30
   _enemyWalkSpeed: 3
   _enemyRunSpeed: 10
-  _enemyFovDistance: 10
+  _enemyFovDistance: 5
   _enemyPower: 5
   _enemyAttackRange: 3
   _enemyState: 1
