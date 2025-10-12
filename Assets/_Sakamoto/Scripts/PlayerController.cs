@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public bool IsCrouching { get; private set; } = false;
     public bool IsSliding { get; set; } = false;
     public bool IsCarrying { get; private set; } = false;
+    public bool IsThrowing { get; private set; } = false;
     public bool CanSliding { get; private set; } = false;
     private InputBuffer _inputBuffer;
     private PlayerData _playerData;
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private PlayerCrouch _playerCrouch;
     private PlayerSliding _playerSliding;
     private PlayerCarry _playerCarry;
+    private PlayerThrow _playerThrow;
     private Vector2 _currentInput = Vector2.zero;
 
     private void Awake()
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
         _playerCrouch = GetComponent<PlayerCrouch>();
         _playerSliding = GetComponent<PlayerSliding>();
         _playerCarry = GetComponent<PlayerCarry>();
+        _playerThrow = GetComponent<PlayerThrow>();
     }
 
     private void Start()
@@ -45,6 +48,8 @@ public class PlayerController : MonoBehaviour
         _inputBuffer.PlayerSprint.canceled += OnInputSprint;
         _inputBuffer.PlayerCrouch.started += OnInputCrouch;
         _inputBuffer.PlayerCarry.started += OnInputCarry;
+        _inputBuffer.PlayerThrow.started += OnInputThrowAction;
+        _inputBuffer.PlayerThrow.canceled += OnInputThrowAction;
         SetUp();
     }
 
@@ -57,6 +62,8 @@ public class PlayerController : MonoBehaviour
         _inputBuffer.PlayerSprint.canceled -= OnInputSprint;
         _inputBuffer.PlayerCrouch.started -= OnInputCrouch;
         _inputBuffer.PlayerCarry.started -= OnInputCarry;
+        _inputBuffer.PlayerThrow.started -= OnInputThrowAction;
+        _inputBuffer.PlayerThrow.canceled -= OnInputThrowAction;
     }
 
     private void Update()
@@ -127,6 +134,18 @@ public class PlayerController : MonoBehaviour
         _playerCarry?.CarryAction();
     }
 
+    private void OnInputThrowAction(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            _playerThrow?.StartThrow();
+        }
+        else if (context.canceled)
+        {
+            _playerThrow?.StopThrow();
+        }
+    }
+
     /// <summary>
     /// 各種状態の更新のためのブール値の戻り値
     /// </summary>
@@ -136,6 +155,7 @@ public class PlayerController : MonoBehaviour
         IsCrouching = _playerCrouch.ReturnIsCrouch();
         IsSliding = _playerSliding.ReturnIsSliding();
         IsCarrying = _playerCarry.ReturnIsCarrying();
+        IsThrowing = _playerThrow.ReturnIsThrowing();
     }
 
     /// <summary>
@@ -152,6 +172,7 @@ public class PlayerController : MonoBehaviour
     private void UpdateSetBool()
     {
         _playerMove?.SetBool(IsSliding);
+        _playerThrow?.SetBoolIsCarry(IsCarrying);
     }
 
     private void SetUp()
@@ -162,5 +183,6 @@ public class PlayerController : MonoBehaviour
         _playerCrouch?.StartSetVariables(_playerData);
         _playerSliding?.StartSetVariables(_playerData);
         _playerCarry?.StartSetVariables(_playerData);
+        _playerThrow?.StartSetVariables(_playerData);
     }
 }
