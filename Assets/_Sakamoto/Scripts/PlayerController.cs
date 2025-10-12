@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public bool IsCrouching { get; private set; } = false;
     public bool IsSliding { get; set; } = false;
     public bool IsCarrying { get; private set; } = false;
+    public bool IsThrowing { get; private set; } = false;
     public bool CanSliding { get; private set; } = false;
     private InputBuffer _inputBuffer;
     private PlayerData _playerData;
@@ -154,6 +155,7 @@ public class PlayerController : MonoBehaviour
         IsCrouching = _playerCrouch.ReturnIsCrouch();
         IsSliding = _playerSliding.ReturnIsSliding();
         IsCarrying = _playerCarry.ReturnIsCarrying();
+        IsThrowing = _playerThrow.ReturnIsThrowing();
     }
 
     /// <summary>
@@ -170,6 +172,7 @@ public class PlayerController : MonoBehaviour
     private void UpdateSetBool()
     {
         _playerMove?.SetBool(IsSliding);
+        _playerThrow?.SetBoolIsCarry(IsCarrying);
     }
 
     private void SetUp()
@@ -180,5 +183,6 @@ public class PlayerController : MonoBehaviour
         _playerCrouch?.StartSetVariables(_playerData);
         _playerSliding?.StartSetVariables(_playerData);
         _playerCarry?.StartSetVariables(_playerData);
+        _playerThrow?.StartSetVariables(_playerData);
     }
 }
