@@ -9,14 +9,14 @@ public class EnemyVision : MonoBehaviour
     const string LUGGAGE = "Luggage";
     private EnemyBase _enemyBase;
     private Collider _collider;
-    private bool _isTrigger;
+    private bool _isInSide;
     private void Start()
     {
         _enemyBase = GetComponentInParent<EnemyBase>();
     }
     private void Update()
     {
-        if (_isTrigger)
+        if (_isInSide)
         {
             _enemyBase.FindObject(_collider);
         }
@@ -27,14 +27,14 @@ public class EnemyVision : MonoBehaviour
         {
             Debug.Log("範囲内になにか入ってきた");
             _collider = other;
-            _isTrigger = true;
+            _isInSide = true;
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(PLAYER) || other.CompareTag(LUGGAGE))
         {
-            _isTrigger = false;
+            _isInSide = false;
             _collider = null;
         }
     }
