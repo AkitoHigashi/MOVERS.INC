@@ -18,3 +18,8 @@ MonoBehaviour:
   _enemyPower: 0
   _enemyAttackRange: 0
   _enemyState: 0
+  _waitTime: 1
+  _angularSpeed: 360
+  _stopDistance: 5
+  _angle: 60
+  _magnification: 1.5

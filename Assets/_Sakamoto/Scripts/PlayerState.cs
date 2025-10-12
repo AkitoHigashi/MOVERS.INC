@@ -19,7 +19,7 @@ public class PlayerState : MonoBehaviour
     /// </summary>
     /// <param name="isSprint"></param>
     /// <param name="isCrouch"></param>
-    public void UpdateState(bool isSprint, bool isCrouch, bool isSliding,bool isCarrying)
+    public void UpdateState(bool isSprint, bool isCrouch, bool isSliding, bool isCarrying, bool isThrowing)
     {
         if (isSliding)
         {
@@ -36,6 +36,10 @@ public class PlayerState : MonoBehaviour
         else if (isCarrying)
         {
             CurrentState = State.Carrying;
+        }
+        else if (isThrowing)
+        {
+            CurrentState = State.Throwing;
         }
         else
         {
