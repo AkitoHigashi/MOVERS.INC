@@ -4,56 +4,94 @@ using TMPro;
 public class Result : MonoBehaviour
 {
     [SerializeField] private TMP_Text main_text;   // メインスコア表示用テキスト
-    [SerializeField] private TMP_Text sub1_text;   // サブスコア①（荷物）
-    [SerializeField] private TMP_Text sub2_text;   // サブスコア②（モンスター）
-    [SerializeField] private TMP_Text sub3_text;   // サブスコア③（無傷）
+    [SerializeField] private TMP_Text cargo_text;   // サブスコア①（荷物）ボーナス
+    [SerializeField] private TMP_Text capture_text;   // サブスコア②（モンスター）ボーナス
+    [SerializeField] private TMP_Text undamage_text;   // サブスコア③（無傷）ボーナス
     [SerializeField] private TMP_Text total_text;  // トータルスコア表示用テキスト
 
-    [SerializeField] private int bonusScore = 3;   // 各ボーナスのスコア値
-    private int score;                             // サブスコアの合計
-    private int mainScore;                         // メインスコア（荷物数 × スコア）
+    [SerializeField] private TMP_Text cargoStatus_text; //割合
+    [SerializeField] private TMP_Text undamageStatus_text;//割合
+    [SerializeField] private TMP_Text captureStatus_text;//捕獲結果
+
+
+   // [SerializeField] private int bonusScore = 1000;   
+    [SerializeField] private int cargoBonus = 2000;     // 荷物
+    [SerializeField] private int captureBonus = 1000;      // 敵や荷物を捕まえた報酬
+    [SerializeField] private int luggageUnDamageBonus = 1000;       // 荷物が無傷だった場合の追加ボーナス
+
+    private int bonusReward = 0;                             // サブスコアの合計
+    private int mainReward = 0;                     // メインスコア（荷物数 × スコア）
     private int luggageNumbers = 1;                // 荷物の数
+
+    private int Quest = 10;   //クエストの指定荷物の数
+    private int luggageDamage = 0;　//各荷物の合計の割合をいれる
+
+    //荷物品質ボーナスのテスト用の値 
+    //ここに各荷物のダメージ割合をいれていく
+    private int lug1 = 50;
+    private int lug2 = 60;
+    private int lug3 = 100;
+
+    //捕獲ボーナステスト用
+    //ここに捕まえたかどうかの結果をいれる
+    private bool iscapture = true;
 
     private void Start()
     {
         // --- メイン報酬の計算 ---
-        int sum = 1;
-        //あとで計算式を追加します
-        mainScore = ScoreManager.EndScore * (sum + luggageNumbers);
+
       
-        main_text.text = $"mainScore {mainScore}";
+        
+        mainReward = Mathf.RoundToInt(ScoreManager.EndScore * ((float)luggageNumbers /Quest));
+        main_text.text = $" +{mainReward}";
 
         // --- 荷物を全て届けたか ---
         //仮bool
         bool isDelivered = true;
         if (isDelivered)
         {
-            sub1_text.text = $"sub1Score {bonusScore}";
-            score += bonusScore;
+            cargo_text.text = $"+{cargoBonus}";
+            bonusReward += cargoBonus;
         }
-        else sub1_text.text = "0";
+        else cargo_text.text = "+0";
 
         // --- モンスターを捕まえたか ---
         //仮bool
         bool hasCaughtMonster = true;
         if (hasCaughtMonster)
         {
-            sub2_text.text = $"sub2Score {bonusScore}";
-            score += bonusScore;
+            capture_text.text = $"+{captureBonus}";
+            bonusReward += captureBonus;
         }
-        else sub2_text.text = "0";
+        else capture_text.text = "+0";
 
         // --- 無傷でクリアしたか ---
         //仮bool
         bool isUndamaged = true;
         if (isUndamaged)
         {
-            sub3_text.text = $"sub3Score {bonusScore}";
-            score += bonusScore;
+            undamage_text.text = $"+{luggageUnDamageBonus}";
+            bonusReward += luggageUnDamageBonus;
         }
-        else sub3_text.text = "0";
+        else undamage_text.text = "+0";
 
         // --- トータルスコアの計算 ---
-        total_text.text = $"totalScore {mainScore + score}";
+        total_text.text = $"{mainReward + bonusReward}";
+
+
+        ///<summary>
+        ///ボーナス報酬計算
+        ///</summary>
+
+        
+        cargoStatus_text.text = $"{luggageNumbers}/{Quest}";
+
+        luggageDamage = Mathf.RoundToInt((float)(lug1 + lug2 + lug3) / 3);
+        undamageStatus_text.text = $"{luggageDamage}%";
+
+        if(iscapture)
+        captureStatus_text.text = $"成功!!";
+        else captureStatus_text.text = "失敗";
+
     }
 }
