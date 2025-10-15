@@ -2,6 +2,8 @@
 
 public class MonsterSphere : ItemBase
 {
+    [SerializeField] float _throwPower = 10;
+    [SerializeField] GameObject _caughtSphere;
     GameObject _monster;
 
     /// <summary>
@@ -10,17 +12,13 @@ public class MonsterSphere : ItemBase
     /// <param name="monster">捕獲するモンスター</param>
     void GetMonster(GameObject monster)
     {
+        //モンスターを捕まえた瞬間の処理
         _monster = monster;
         _monster.SetActive(false);
-    }
-
-    /// <summary>
-    /// モンスターを解放する関数
-    /// </summary>
-    void ReleaseMonster()
-    {
-        _monster.SetActive(true);
-        _monster = null;
+        gameObject.SetActive(false);
+        //捕まえた直後の処理
+        Instantiate(_caughtSphere, transform.position, Quaternion.identity);
+        _caughtSphere.GetComponent<MonsterCaught>().MonsterCatch(monster, _itemdata);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -30,17 +28,23 @@ public class MonsterSphere : ItemBase
             if (collision.gameObject.tag == "Monster")
             {
                 var enemy = collision.gameObject.GetComponent<EnemyBase>();
-                //if(enemy.EnemyData.CanGet(enemy.))
-                //{
-                //  _monster = collision.gameObject;
-                //  ItemActivate();
-                //}
+                if (enemy.EnemyData.CanGet(enemy.EnemyHP))
+                {
+                    //捕まえられるHPなら
+                    GetMonster(enemy.gameObject);
+                }
             }
         }
     }
 
     public override void ItemActivate()
     {
-        _monster.transform.SetParent(this.transform);
+        _rb.isKinematic = false;
+        transform.SetParent(null);
+        //カメラの中心から前方に飛ばす
+        transform.position = Camera.main.transform.position;
+        _rb.AddForce(Camera.main.transform.forward * _throwPower, ForceMode.Impulse);
+        //アイテムを使った情報を保管庫に知らせる
+        StorageData.ItemUse(_itemdata);
     }
 }
