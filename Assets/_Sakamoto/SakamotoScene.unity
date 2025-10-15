@@ -975,6 +975,7 @@ GameObject:
   - component: {fileID: 1042758134}
   - component: {fileID: 1042758136}
   - component: {fileID: 1042758138}
+  - component: {fileID: 1042758139}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1304,8 +1305,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26c45aad1fd46e74c8906ae82396031f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Luggage: {fileID: 0}
+  LuggageGameObject: {fileID: 0}
   LuggageRb: {fileID: 0}
+  LuggageCollider: {fileID: 0}
 --- !u!114 &1042758138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1318,6 +1320,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39cd8b1c3e02525498fd74447a683636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerThrow
+--- !u!114 &1042758139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042758119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3bea7d37bd201d40b955e6fce7fd539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerItemUse
 --- !u!1 &1173633068
 GameObject:
   m_ObjectHideFlags: 0

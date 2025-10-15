@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private PlayerSliding _playerSliding;
     private PlayerCarry _playerCarry;
     private PlayerThrow _playerThrow;
+    private Interact _interact;
     private Vector2 _currentInput = Vector2.zero;
 
     private void Awake()
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
         _playerSliding = GetComponent<PlayerSliding>();
         _playerCarry = GetComponent<PlayerCarry>();
         _playerThrow = GetComponent<PlayerThrow>();
+        _interact = GetComponent<Interact>();
     }
 
     private void Start()
@@ -50,6 +52,8 @@ public class PlayerController : MonoBehaviour
         _inputBuffer.PlayerCarry.started += OnInputCarry;
         _inputBuffer.PlayerThrow.started += OnInputThrowAction;
         _inputBuffer.PlayerThrow.canceled += OnInputThrowAction;
+        _inputBuffer.PlayerInteract.started += OnInputInteractAction;
+        _inputBuffer.PlayerInteract.canceled += OnInputInteractAction;
         SetUp();
     }
 
@@ -64,6 +68,8 @@ public class PlayerController : MonoBehaviour
         _inputBuffer.PlayerCarry.started -= OnInputCarry;
         _inputBuffer.PlayerThrow.started -= OnInputThrowAction;
         _inputBuffer.PlayerThrow.canceled -= OnInputThrowAction;
+        _inputBuffer.PlayerInteract.started -= OnInputInteractAction;
+        _inputBuffer.PlayerInteract.canceled -= OnInputInteractAction;
     }
 
     private void Update()
@@ -143,6 +149,18 @@ public class PlayerController : MonoBehaviour
         else if (context.canceled)
         {
             _playerThrow?.StopThrow();
+        }
+    }
+
+    private void OnInputInteractAction(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+
+        }
+        else if (!context.canceled)
+        {
+
         }
     }
 
