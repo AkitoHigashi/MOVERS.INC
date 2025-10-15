@@ -10,11 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce9e37331544db340957ba7e287bc8a9, type: 3}
-  m_Name: Golem
+  m_Name: DemonKing
   m_EditorClassIdentifier: 
   _enemyHp: 50
-  _enemyMoveSpeed: 5
-  _enemyFov: 10
+  _enemyWalkSpeed: 3
+  _enemyRunSpeed: 10
+  _enemyFovDistance: 10
   _enemyPower: 10
   _enemyAttackRange: 10
   _enemyState: 2
+  _hokakuwariai: 0.633
+  _waitTime: 1
+  _angularSpeed: 360
+  _stopDistance: 5
+  _fov: 60
+  _patrolFovDistance: 15

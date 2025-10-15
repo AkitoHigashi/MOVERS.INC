@@ -2,6 +2,7 @@
 
 public class LuggageData : MonoBehaviour
 {
-    [HideInInspector] public GameObject Luggage;
+    [HideInInspector] public GameObject LuggageGameObject;
     [HideInInspector] public Rigidbody LuggageRb;
+    [HideInInspector] public Collider LuggageCollider;
 }
