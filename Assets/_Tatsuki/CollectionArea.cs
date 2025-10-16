@@ -9,9 +9,11 @@ public class CollectionArea : MonoBehaviour
 {
     // 範囲内に入ったときに通知されるイベント
     public event Action<GameObject> OnEnter;
+    public event Action<int> OnEnterLuggage;
 
     // 範囲から出たときに通知されるイベント
     public event Action<GameObject> OnExit;
+    public event Action<int> OnExitLuggage;
 
     // スコア管理クラスへの参照 
     [SerializeField] private ScoreManager _scoreManager;
@@ -28,6 +30,8 @@ public class CollectionArea : MonoBehaviour
             _scoreManager.SetScore(luggage.Score);
             _scoreManager.SetText(_scoreManager.NowScore.ToString());
             OnEnter?.Invoke(other.gameObject);
+
+          //  OnEnterLuggage?.Invoke(1); text更新用
         }
     }
 
@@ -43,6 +47,8 @@ public class CollectionArea : MonoBehaviour
             luggage.MaxScore = luggage.Score;
             _scoreManager.SetText(_scoreManager.NowScore.ToString());
             OnExit?.Invoke(other.gameObject);
+           
+           //     OnExitLuggage?.Invoke(-1);
         }
     }
     
