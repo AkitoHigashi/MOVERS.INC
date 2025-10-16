@@ -498,7 +498,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 558244636}
-  - component: {fileID: 558244635}
+  - component: {fileID: 558244637}
   m_Layer: 0
   m_Name: TestInvoke
   m_TagString: Untagged
@@ -506,7 +506,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &558244635
+--- !u!4 &558244636
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558244634}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 989, y: 557.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &558244637
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -518,21 +533,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6cd4313835598942a27f66c47f0db0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InvokeSystem
---- !u!4 &558244636
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 558244634}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 989, y: 557.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  currentHp: 1
+  currentRunGauge: 1
+  item: 1
 --- !u!1 &683680339
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,7 +1394,7 @@ MonoBehaviour:
   hpslider: {fileID: 1554936421}
   runhsliders: {fileID: 1702321394}
   luggagehsviders: {fileID: 1408483628}
-  InvokeSystem: {fileID: 558244635}
+  InvokeSystem: {fileID: 558244637}
 --- !u!114 &1227420050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1405,7 +1408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LuggageUI
   luggagetext: {fileID: 1017170023}
-  invokeSystem: {fileID: 558244635}
+  invokeSystem: {fileID: 558244637}
 --- !u!1 &1408483626
 GameObject:
   m_ObjectHideFlags: 0
@@ -1491,7 +1494,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1791,7 +1794,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.881
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2157,7 +2160,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.865
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

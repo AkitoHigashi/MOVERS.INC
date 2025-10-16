@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+
 public class LuggageUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text luggagetext;
     [SerializeField] private InvokeSystem invokeSystem;
+
 
     int total = 0;
 
@@ -18,12 +20,8 @@ public class LuggageUI : MonoBehaviour
         invokeSystem.GetLuggage -= LuggageSetText;
     }
 
-    public void LuggageSetText(int  text)
+    public void LuggageSetText(int text)
     {
-        
-        if(total < InvokeSystem.maxItem) 
-        total += text;  //テスト用に加算にしてる　本当は代入
-        luggagetext.text =$"{total}/{InvokeSystem.maxItem}";
+        luggagetext.text = $"{text}/{TestStatus.maxItem}";
     }
-
 }
