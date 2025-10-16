@@ -363,7 +363,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
         if (_enemyHp <= 0)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
             _animator.SetTrigger("Die");
         }
     }
