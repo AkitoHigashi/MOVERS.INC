@@ -25,7 +25,7 @@ public class textUImanager : MonoBehaviour
 
     public void LuggageSetText(int text)
     {
-        luggagetext.text = $"{text}/{TestStatus.maxItem}";
+        luggagetext.text = $"{text}/{UITestStatus.maxItem}";
     }
 
     public void TimerSetText(float ctx)
