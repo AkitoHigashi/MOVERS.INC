@@ -1,6 +1,4 @@
-﻿using Unity.XR.Oculus.Input;
-using UnityEditor.ShaderGraph.Internal;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// リザード特有の動きを制御するクラス
