@@ -153,10 +153,16 @@ MonoBehaviour:
     _luggageList: {fileID: 11400000, guid: 5a33c016c1c902c46af638895b0b8b6c, type: 2}
     _generatePos:
     - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
   _smallLuggage:
     _generateValue: 0
     _luggageList: {fileID: 11400000, guid: 92b16f695f3741840ac764e989d68761, type: 2}
     _generatePos:
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
     - {x: 0, y: 0, z: 0}
 --- !u!4 &33894806
 Transform:
