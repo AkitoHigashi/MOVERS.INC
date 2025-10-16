@@ -31,6 +31,7 @@ public class Lizard : EnemyBase
     }
     private void SetAnimation()
     {
+        _animator.SetFloat("WalkSpeed", _navMeshAgent.speed);
     }
     protected override void ProccesToLuggage(Collider collider, float distance)
     {
