@@ -1001,7 +1001,7 @@ MonoBehaviour:
   - {fileID: 1877343815}
   - {fileID: 1005542408}
   _facePos: {fileID: 0}
-  _destroySpeed: 0
+  _destroyTime: 1
 --- !u!1 &381176969
 GameObject:
   m_ObjectHideFlags: 0
@@ -1118,7 +1118,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &629933192
 Transform:
   m_ObjectHideFlags: 0
@@ -2625,7 +2625,7 @@ MonoBehaviour:
   - {fileID: 1690289243}
   - {fileID: 1570403154}
   _facePos: {fileID: 1023634557}
-  _destroySpeed: 0
+  _destroyTime: 1
   _collectionArea: {fileID: 1968393736}
 --- !u!54 &1195496757
 Rigidbody:
@@ -4225,7 +4225,7 @@ MonoBehaviour:
   - {fileID: 307630874}
   - {fileID: 251640072}
   _facePos: {fileID: 381176970}
-  _destroySpeed: 0
+  _destroyTime: 1
   _collectionArea: {fileID: 1968393736}
 --- !u!195 &1588464961
 NavMeshAgent:
@@ -4451,7 +4451,7 @@ MonoBehaviour:
   - {fileID: 1877343815}
   - {fileID: 1005542408}
   _facePos: {fileID: 397108075}
-  _destroySpeed: 0
+  _destroyTime: 1
 --- !u!1 &1770958201
 GameObject:
   m_ObjectHideFlags: 0
@@ -5426,7 +5426,7 @@ MonoBehaviour:
   - {fileID: 780290682}
   - {fileID: 846973995}
   _facePos: {fileID: 186326224}
-  _destroySpeed: 0
+  _destroyTime: 1
   _coolTime: 2
 --- !u!195 &1861686584
 NavMeshAgent:

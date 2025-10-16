@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -39,8 +40,8 @@ public abstract class EnemyBase : MonoBehaviour
     protected List<Transform> _destinations = new List<Transform>();
     [SerializeField, Header("顔の場所")]
     protected Transform _facePos;
-    [SerializeField]
-    protected float _destroySpeed;
+    [SerializeField, Header("敵が消滅するまでの時間")]
+    protected float _destroyTime = 1f;
 
     #region ステータス
     //ステータス
@@ -74,7 +75,6 @@ public abstract class EnemyBase : MonoBehaviour
     protected Coroutine _coroutine;
 
     protected bool _isInCollectionArea;
-    private float _currentFov;
     private Rigidbody _rb;
     /// <summary>
     /// 継承先でAwakeから呼び出す
@@ -90,13 +90,15 @@ public abstract class EnemyBase : MonoBehaviour
     protected void BaseUpdate()
     {
         Patrol();
+        SetAnimation();
     }
     /// <summary>
     /// 継承先でOnEnableから呼び出す
     /// </summary>
     protected void BaseOnEnable()
     {
-
+        _animator.SetTrigger("Reset");
+        _animator.SetBool("LookAround", false);
     }
     /// <summary>
     /// 継承先でOnDisableから呼び出す
@@ -135,9 +137,12 @@ public abstract class EnemyBase : MonoBehaviour
         _lastDestination = _currentDestination;
 
         _navMeshAgent.angularSpeed = _angularSpeed;
-
-        _currentFov = _enemyFovDistance;
         _rb.isKinematic = true;
+
+    }
+    private void SetAnimation()
+    {
+        _animator.SetBool("LookAround", _lookAround);
     }
     #region 移動関係
     /// <summary>
@@ -367,6 +372,7 @@ public abstract class EnemyBase : MonoBehaviour
         {
             //Destroy(gameObject);
             _animator.SetTrigger("Die");
+            Destroy(this.gameObject, _destroyTime);
         }
     }
     /// <summary>

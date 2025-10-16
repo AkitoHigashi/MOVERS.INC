@@ -22,6 +22,6 @@ MonoBehaviour:
   _hokakuwariai: 0.575
   _waitTime: 1
   _angularSpeed: 360
-  _stopDistance: 5
+  _stopDistance: 2
   _fov: 60
   _patrolFovDistance: 15
