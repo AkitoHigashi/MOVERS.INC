@@ -8,8 +8,11 @@ public class InvokeSystem : MonoBehaviour
     public event Action<float> GetRunGauge;
     public event Action<int> GetLuggage;
 
+    public event Action<float> Gettimer;
 
-     private float time = 0f;   
+
+     private float time = 0f;   //test用変数
+     
      [Header("現在の体力")]
     [SerializeField,Min(0)] private int currentHp = 1;
      
@@ -18,6 +21,9 @@ public class InvokeSystem : MonoBehaviour
      
     [Header("現在の取得アイテム数")]
     [SerializeField,Min(0)] private int item = 1;
+
+    [Header("インゲーム経過時間")]
+    [SerializeField, Min(0)] private float timer = 0f;
     
 
     public int StatusValue
@@ -35,7 +41,9 @@ public class InvokeSystem : MonoBehaviour
 
     private void Update()
     {
-        time += Time.deltaTime;
+        time += Time.deltaTime; //test用
+
+        timer += Time.deltaTime;//ingame経過時間用
         if (time > 1f)
         {
             GetHp?.Invoke(currentHp);
@@ -44,5 +52,6 @@ public class InvokeSystem : MonoBehaviour
 
             time = 0f;
         }
+        Gettimer?.Invoke(timer);
     }
 }
