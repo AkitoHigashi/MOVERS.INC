@@ -536,6 +536,7 @@ MonoBehaviour:
   currentHp: 1
   currentRunGauge: 1
   item: 1
+  timer: 0
 --- !u!1 &683680339
 GameObject:
   m_ObjectHideFlags: 0
@@ -1408,6 +1409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LuggageUI
   luggagetext: {fileID: 1017170023}
+  timertext: {fileID: 844911372}
   invokeSystem: {fileID: 558244637}
 --- !u!1 &1408483626
 GameObject:
