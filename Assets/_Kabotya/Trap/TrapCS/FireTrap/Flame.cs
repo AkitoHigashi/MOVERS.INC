@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Fire : MonoBehaviour
+public class Fire : TrapBase
 {
     private ParticleSystem _fireEffect;
     //初期値は８

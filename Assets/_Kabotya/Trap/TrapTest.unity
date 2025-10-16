@@ -897,6 +897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc35fb0f1c91594791d6f0d707f5827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fire
+  _trapDamage: 0
   _paticularSpeed: 8
   _paticularDisappearTime: 1.25
 --- !u!198 &803099750 stripped
@@ -941,6 +942,7 @@ MonoBehaviour:
   _maxHitSize: 2.25
   _fireEffect: {fileID: 803099750}
   _trapRange: {fileID: 845612416}
+  _flameCoolDown: 5
   _fireDuratopn: 5
 --- !u!114 &803099753
 MonoBehaviour:
@@ -1398,6 +1400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfb42d327cd56ac40afe7cf4474cca6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ThormTrap
+  _trapDamage: 0
   _trapRange: {fileID: 1781671748}
   _upDuration: 0.3
   _downDuration: 0.8
@@ -1528,6 +1531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af52f44bd2151a8498f72826ae15d0a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _trapDamage: 0
   _trapRange: {fileID: 1195811964}
   _duration: 1
   _loopNumber: -1
@@ -1618,6 +1622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfb42d327cd56ac40afe7cf4474cca6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ThormTrap
+  _trapDamage: 0
   _trapRange: {fileID: 2114187806}
   _upDuration: 0.3
   _downDuration: 0.8

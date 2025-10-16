@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-public class ThormTrap : MonoBehaviour
+public class ThormTrap : TrapBase
 {
     [SerializeField] private TrapRange _trapRange;
     [Tooltip("針がどのくらい上に行くのか（１が最大）")] private float _thormUp = 1f;
