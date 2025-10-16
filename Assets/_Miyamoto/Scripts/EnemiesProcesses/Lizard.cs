@@ -1,6 +1,4 @@
-﻿using Unity.XR.Oculus.Input;
-using UnityEditor.ShaderGraph.Internal;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// リザード特有の動きを制御するクラス
@@ -33,6 +31,7 @@ public class Lizard : EnemyBase
     }
     private void SetAnimation()
     {
+        _animator.SetFloat("WalkSpeed", _navMeshAgent.speed);
     }
     protected override void ProccesToLuggage(Collider collider, float distance)
     {
