@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 /// <summary>
 /// 敵の基底クラス
@@ -41,6 +39,8 @@ public abstract class EnemyBase : MonoBehaviour
     protected List<Transform> _destinations = new List<Transform>();
     [SerializeField, Header("顔の場所")]
     protected Transform _facePos;
+    [SerializeField]
+    protected float _destroySpeed;
 
     #region ステータス
     //ステータス
@@ -90,6 +90,9 @@ public abstract class EnemyBase : MonoBehaviour
     {
         Patrol();
     }
+    /// <summary>
+    /// 継承先でOnEnableから呼び出す
+    /// </summary>
     protected void BaseOnEnable()
     {
 
@@ -323,12 +326,12 @@ public abstract class EnemyBase : MonoBehaviour
     /// <summary>
     /// 荷物に何かしらの行動を行う
     /// </summary>
-    /// <param name="baggage"></param>
+    /// <param name="luggage"></param>
     /// <param name="distance"></param>
-    protected virtual void ProccesToLuggage(Collider baggage, float distance) { }
+    protected virtual void ProccesToLuggage(Collider luggage, float distance) { }
     #endregion
 
-    #region 体力関係
+    #region 状態関係
     //private void OnCollisionEnter(Collision collision)
     //{
     //    if (collision.gameObject.CompareTag(TRAP))
@@ -360,9 +363,19 @@ public abstract class EnemyBase : MonoBehaviour
     {
         if (_enemyHp <= 0)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            _animator.SetTrigger("Die");
         }
     }
+    /// <summary>
+    /// 友好関係を変える
+    /// </summary>
+    /// <param name="enemyState"></param>
+    protected void ChangeState(EnemyState enemyState)
+    {
+        _currentEnemyState = enemyState;
+    }
+
     #endregion
     //  敵の視界を可視化する関数(必要に応じてコメントアウトして<3)
     private void OnDrawGizmos()
