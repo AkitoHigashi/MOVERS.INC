@@ -156,11 +156,11 @@ public class PlayerController : MonoBehaviour
     {
         if (context.started)
         {
-
+            _interact?.StartInteract();
         }
-        else if (!context.canceled)
+        else if (context.canceled)
         {
-
+            _interact?.StopInteract();
         }
     }
 
@@ -202,5 +202,6 @@ public class PlayerController : MonoBehaviour
         _playerSliding?.StartSetVariables(_playerData);
         _playerCarry?.StartSetVariables(_playerData);
         _playerThrow?.StartSetVariables(_playerData);
+        _interact?.StartSetVariables(_playerData);
     }
 }

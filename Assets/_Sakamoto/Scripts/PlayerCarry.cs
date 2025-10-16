@@ -36,8 +36,8 @@ public class PlayerCarry : MonoBehaviour, IStartSetVariables
                 _target = hit.collider.gameObject;
                 if (_target.CompareTag(_luggageTag))
                 {
-                    Rigidbody _targetRb = _target.GetComponent<Rigidbody>();
                     Collider _targetCollider = _target.GetComponent<Collider>();
+                    Rigidbody _targetRb = _target.GetComponent<Rigidbody>();
                     //_luggageCollider = _target.GetComponent<Collider>();
                     // PlayerとLuggageのColliderが両方存在する場合、衝突を無視する
                     if (_playerCollider != null && _targetCollider != null)
