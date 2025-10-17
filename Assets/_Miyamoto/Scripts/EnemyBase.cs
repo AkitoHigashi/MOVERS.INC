@@ -1,6 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -69,13 +69,14 @@ public abstract class EnemyBase : MonoBehaviour
     protected Vector3 _currentDestination;
     /// <summary>最後に訪れた目的地</summary>
     protected Vector3 _lastDestination;
+    /// <summary>収集地点に入ったかのフラグ</summary>
+    protected bool _isInCollectionArea;
 
     protected NavMeshAgent _navMeshAgent;
     protected Animator _animator;
     protected Coroutine _coroutine;
-
-    protected bool _isInCollectionArea;
     private Rigidbody _rb;
+    private EnemyVision _enemyVision;
     /// <summary>
     /// 継承先でAwakeから呼び出す
     /// </summary>
@@ -83,6 +84,8 @@ public abstract class EnemyBase : MonoBehaviour
     {
         SetParameter();
         VisionGenerator();
+        _enemyVision = GetComponentInChildren<EnemyVision>();
+        _enemyVision.OnFind += FindObject;
     }
     /// <summary>
     /// 継承先でUpdateから呼び出す
@@ -201,7 +204,7 @@ public abstract class EnemyBase : MonoBehaviour
         yield return new WaitForSeconds(_waitTime);
 
         _lastDestination = _currentDestination;
-        _currentDestination = _destinations[Random.Range(0, _destinations.Count)].position;
+        _currentDestination = _destinations[UnityEngine.Random.Range(0, _destinations.Count)].position;
         _navMeshAgent.isStopped = false;
         _lookAround = false;
         _navMeshAgent.speed = _enemyWalkSpeed;
@@ -226,7 +229,7 @@ public abstract class EnemyBase : MonoBehaviour
     /// オブジェクトが視界に入ったかどうか判定する
     /// </summary>
     /// <param name="collider"></param>
-    public void FindObject(Collider collider)
+    private void FindObject(Collider collider)
     {
         if (collider == null || _isInCollectionArea) return;
 
@@ -339,7 +342,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void ProccesToLuggage(Collider luggage, float distance) { }
     #endregion
 
-     #region 状態関係
+    #region 状態関係
     //private void OnCollisionEnter(Collision collision)
     //{
     //    if (collision.gameObject.CompareTag(TRAP))
