@@ -7,7 +7,7 @@ public class FlameEffectColController : MonoBehaviour
     [SerializeField] private float _maxHitSize = 5;
     [SerializeField] private ParticleSystem _fireEffect;
     [SerializeField] private TrapRange _trapRange;
-    [Tooltip("boxの膨張スピード")] private float _boxSpeed = 0.1f;
+    [SerializeField,Tooltip("boxの膨張スピード")] private float _boxSpeed = 0.1f;
     [SerializeField, Tooltip("炎のクールダウン")] private float _flameCoolDown = 10f;
     [Tooltip("炎が打てるかどうか")] private bool _flameTrigger = false;
     [SerializeField, Tooltip("炎が消えるまでの時間")] private float _fireDuratopn = 5;

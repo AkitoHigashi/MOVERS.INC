@@ -942,6 +942,7 @@ MonoBehaviour:
   _maxHitSize: 2.25
   _fireEffect: {fileID: 803099750}
   _trapRange: {fileID: 845612416}
+  _boxSpeed: 0.1
   _flameCoolDown: 5
   _fireDuratopn: 5
 --- !u!114 &803099753
@@ -1201,7 +1202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf7510810afc2446b38cf228cd5a0a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _trapDamage: 1
 --- !u!1 &946050565
 GameObject:
   m_ObjectHideFlags: 0
@@ -1389,6 +1389,7 @@ MonoBehaviour:
   _maxHitSize: 2.25
   _fireEffect: {fileID: 969408977}
   _trapRange: {fileID: 946050566}
+  _boxSpeed: 0.005
   _flameCoolDown: 5
   _fireDuratopn: 5
 --- !u!114 &969408975
