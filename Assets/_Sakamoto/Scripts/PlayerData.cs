@@ -41,6 +41,10 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private float _throwForceForward;
     [SerializeField] private float _throwForceUp;
 
+    [Header("Interact")]
+    [SerializeField] private float _interactTime = 2f;
+    [SerializeField] private float _interactDistance = 3f;
+
     public float Health => _health;
     public float MuscleStrength => _muscleStrength;
     public Transform CameraForward => _cameraForward;
@@ -64,4 +68,6 @@ public class PlayerData : MonoBehaviour
     public float ThrowableTime => _throwableTime;
     public float ThrowForceForward => _throwForceForward;
     public float ThrowForceUp => _throwForceUp;
+    public float InteractTime => _interactTime;
+    public float InteractDistance => _interactDistance;
 }
