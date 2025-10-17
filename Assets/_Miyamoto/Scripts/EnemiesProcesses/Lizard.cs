@@ -63,7 +63,8 @@ public class Lizard : EnemyBase
         if (!_isCarry)
         {
             Debug.Log("荷物を手に取る");
-            luggage.isTrigger = true;
+            var rb = luggage.GetComponent<Rigidbody>();
+
             _luggage = luggage.gameObject;
             _luggage.transform.position = _facePos.position;
             _luggage.transform.SetParent(this.transform);
@@ -79,6 +80,7 @@ public class Lizard : EnemyBase
             ResetVision();
             CarryLuggage();
             StopAllCoroutines();
+            rb.Sleep();
             _coroutine = null;
         }
     }
@@ -105,8 +107,10 @@ public class Lizard : EnemyBase
             Debug.Log("親子関係解除");
             _currentDestination = _destinations[Random.Range(0, _destinations.Count)].position;
             Collider collider = _luggage.GetComponent<Collider>();
+            var rb = collider.GetComponent<Rigidbody>();
+
             _luggage.transform.SetParent(null);
-            collider.isTrigger = false;
+            rb.WakeUp();
             _isCarry = false;
         }
     }

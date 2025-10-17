@@ -75,6 +75,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected bool _isInCollectionArea;
     private float _currentFov;
+    private Rigidbody _rb;
     /// <summary>
     /// 継承先でAwakeから呼び出す
     /// </summary>
@@ -111,6 +112,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
+        _rb = GetComponent<Rigidbody>();
 
         _enemyHp = _enemyData.EnemyHpData;
         _enemyWalkSpeed = _enemyData.EnemyWalkSpeedData;
@@ -135,6 +137,7 @@ public abstract class EnemyBase : MonoBehaviour
         _navMeshAgent.angularSpeed = _angularSpeed;
 
         _currentFov = _enemyFovDistance;
+        _rb.isKinematic = true;
     }
     #region 移動関係
     /// <summary>
@@ -244,7 +247,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
         hit = default;
 
-        Vector3 origin = transform.position;
+        Vector3 origin = _facePos.position;
         Vector3 toTarget = (collider.transform.position - origin).normalized;
         float targetAngle = Vector3.Angle(transform.forward, toTarget);
         float currentFov = _hasSeen ? _patrolFovDistance : _enemyFovDistance;
@@ -331,17 +334,17 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void ProccesToLuggage(Collider luggage, float distance) { }
     #endregion
 
-    #region 状態関係
+     #region 状態関係
     //private void OnCollisionEnter(Collision collision)
     //{
     //    if (collision.gameObject.CompareTag(TRAP))
     //    {
-    //        var trap = GetComponent<Trap>();
-    //        TakeDamage(trap.Damage);
+    //        var trap = collision.gameObject.GetComponent<TrapBase>();
+    //        TakeDamage(trap.TrapDamage);
     //    }
     //    else if (collision.gameObject.CompareTag(ITEM))
     //    {
-    //        var item = GetComponent<Item>();
+    //        var item = collision.gameObject.GetComponent<ItemBase>();
     //        TakeDamage(item.Damage);
     //    }
     //}
@@ -354,7 +357,6 @@ public abstract class EnemyBase : MonoBehaviour
     {
         _enemyHp -= damage;
         EnemyDie();
-        return;
     }
     /// <summary>
     /// HPが0以下になったら破壊
@@ -378,46 +380,46 @@ public abstract class EnemyBase : MonoBehaviour
 
     #endregion
     //  敵の視界を可視化する関数(必要に応じてコメントアウトして<3)
-    private void OnDrawGizmos()
-    {
-        if (_navMeshAgent == null) return;
+    //private void OnDrawGizmos()
+    //{
+    //    if (_navMeshAgent == null) return;
 
-        Vector3 origin = transform.position;
-        Vector3 forward = transform.forward;
-        float viewAngle = _fov; // 視野角
-        int segments = 20;
+    //    Vector3 origin = transform.position;
+    //    Vector3 forward = transform.forward;
+    //    float viewAngle = _fov; // 視野角
+    //    int segments = 20;
 
-        // 色を設定
-        Gizmos.color = _hasSeen ? new Color(0, 1, 0) : new Color(1, 0, 0);
+    //    // 色を設定
+    //    Gizmos.color = _hasSeen ? new Color(0, 1, 0) : new Color(1, 0, 0);
 
-        // 扇形を三角形で塗りつぶす
-        for (int i = 0; i < segments; i++)
-        {
-            float angle1 = -_fov / 2 + (viewAngle * i / segments);
-            float angle2 = -_fov / 2 + (viewAngle * (i + 1) / segments);
+    //    // 扇形を三角形で塗りつぶす
+    //    for (int i = 0; i < segments; i++)
+    //    {
+    //        float angle1 = -_fov / 2 + (viewAngle * i / segments);
+    //        float angle2 = -_fov / 2 + (viewAngle * (i + 1) / segments);
 
-            Vector3 dir1 = Quaternion.Euler(0, angle1, 0) * forward * _currentFov;
-            Vector3 dir2 = Quaternion.Euler(0, angle2, 0) * forward * _currentFov;
+    //        Vector3 dir1 = Quaternion.Euler(0, angle1, 0) * forward * _currentFov;
+    //        Vector3 dir2 = Quaternion.Euler(0, angle2, 0) * forward * _currentFov;
 
-            // 三角形を描画
-            Vector3[] vertices = new Vector3[] { origin, origin + dir1, origin + dir2 };
+    //        // 三角形を描画
+    //        Vector3[] vertices = new Vector3[] { origin, origin + dir1, origin + dir2 };
 
-            // Gizmosで三角形を塗りつぶし
-            DrawTriangle(vertices[0], vertices[1], vertices[2]);
-        }
-    }
-    private void DrawTriangle(Vector3 p1, Vector3 p2, Vector3 p3)
-    {
-        Gizmos.DrawLine(p1, p2);
-        Gizmos.DrawLine(p2, p3);
-        Gizmos.DrawLine(p3, p1);
+    //        // Gizmosで三角形を塗りつぶし
+    //        DrawTriangle(vertices[0], vertices[1], vertices[2]);
+    //    }
+    //}
+    //private void DrawTriangle(Vector3 p1, Vector3 p2, Vector3 p3)
+    //{
+    //    Gizmos.DrawLine(p1, p2);
+    //    Gizmos.DrawLine(p2, p3);
+    //    Gizmos.DrawLine(p3, p1);
 
-        // 少し高さを変えて重ねることで塗りつぶしのように見せる
-        for (float t = 0; t <= 1; t += 0.1f)
-        {
-            Vector3 a = Vector3.Lerp(p1, p2, t);
-            Vector3 b = Vector3.Lerp(p1, p3, t);
-            Gizmos.DrawLine(a, b);
-        }
-    }
+    //    // 少し高さを変えて重ねることで塗りつぶしのように見せる
+    //    for (float t = 0; t <= 1; t += 0.1f)
+    //    {
+    //        Vector3 a = Vector3.Lerp(p1, p2, t);
+    //        Vector3 b = Vector3.Lerp(p1, p3, t);
+    //        Gizmos.DrawLine(a, b);
+    //    }
+    //}
 }
