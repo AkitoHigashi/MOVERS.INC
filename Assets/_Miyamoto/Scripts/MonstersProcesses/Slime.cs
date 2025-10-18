@@ -4,7 +4,7 @@ using UnityEngine.AI;
 /// <summary>
 /// スライム特有の動きを制御するクラス
 /// </summary>
-public class Slime : EnemyBase
+public class Slime : MonsterBase
 {
     private void Awake()
     {

@@ -3,7 +3,7 @@
 /// <summary>
 /// リザード特有の動きを制御するクラス
 /// </summary>
-public class Lizard : EnemyBase
+public class Lizard : MonsterBase
 {
     [SerializeField, Header("コレクションエリア")]
     private Transform _collectionArea;
@@ -44,7 +44,7 @@ public class Lizard : EnemyBase
             Debug.Log("action開始");
             switch (_currentEnemyState)
             {
-                case EnemyState.Neutral:
+                case MonsterState.Neutral:
                     CatchLuggage(collider);
                     break;
                 default:
