@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private PlayerCarry _playerCarry;
     private PlayerThrow _playerThrow;
     private Interact _interact;
+    private PlayerHealth _playerHealth;
     private Vector2 _currentInput = Vector2.zero;
 
     private void Awake()
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour
         _playerCarry = GetComponent<PlayerCarry>();
         _playerThrow = GetComponent<PlayerThrow>();
         _interact = GetComponent<Interact>();
+        _playerHealth = GetComponent<PlayerHealth>();
     }
 
     private void Start()
@@ -203,5 +205,6 @@ public class PlayerController : MonoBehaviour
         _playerCarry?.StartSetVariables(_playerData);
         _playerThrow?.StartSetVariables(_playerData);
         _interact?.StartSetVariables(_playerData);
+        _playerHealth?.StartSetVariables(_playerData);
     }
 }
