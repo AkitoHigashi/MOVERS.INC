@@ -85,7 +85,6 @@ public abstract class EnemyBase : MonoBehaviour
         SetParameter();
         VisionGenerator();
         _enemyVision = GetComponentInChildren<EnemyVision>();
-        _enemyVision.OnFind += FindObject;
     }
     /// <summary>
     /// 継承先でUpdateから呼び出す
@@ -102,6 +101,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
         _animator.SetTrigger("Reset");
         _animator.SetBool("LookAround", false);
+        _enemyVision.OnFind += FindObject;
     }
     /// <summary>
     /// 継承先でOnDisableから呼び出す
@@ -109,6 +109,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected void BaseOnDisable()
     {
         StopAllCoroutines();
+        _enemyVision.OnFind -= FindObject;
     }
     /// <summary>
     /// 敵の初期値を設定する
