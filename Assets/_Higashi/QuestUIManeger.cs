@@ -10,6 +10,8 @@ public class QuestUIManeger : MonoBehaviour
     [SerializeField] Text _requiredDeliveryCount;
     [SerializeField] Text _reward;
     [SerializeField] Image _trapIcon;
+
+    [SerializeField] Canvas _canvas;
     //[SerializeField] Image _monsterIcon;
 
     private void Start()
@@ -22,4 +24,10 @@ public class QuestUIManeger : MonoBehaviour
         _trapIcon.sprite = _questData.Traps[0].TrapIcon;
       //= _questData.Traps[0].IsPlacedInQuset;
     }
+
+    public void Back()
+    {
+        _canvas.gameObject.SetActive(false);
+    }
+
 }

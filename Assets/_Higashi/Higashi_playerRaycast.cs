@@ -2,9 +2,11 @@
 
 public class Higashi_playerRaycast : MonoBehaviour
 {
-    [SerializeField] private QuestUI _questUI;
     [SerializeField] private float _rayDistance = 2f;
     [SerializeField] private bool _raycastOn = true;//raycastを出すのか
+    [SerializeField] private Canvas _canvas;
+
+    [SerializeField, Range(0f, 1f)]
     private RaycastHit hit;
     public void Update()
     {
@@ -16,6 +18,7 @@ public class Higashi_playerRaycast : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.F))//離した瞬間の１フレーム
                 {
+                    _canvas.gameObject.SetActive(true);
                     Debug.Log("当たってる");
                 }
             }
