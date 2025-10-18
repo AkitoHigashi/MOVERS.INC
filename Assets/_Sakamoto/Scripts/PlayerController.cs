@@ -22,7 +22,8 @@ public class PlayerController : MonoBehaviour
     private PlayerSliding _playerSliding;
     private PlayerCarry _playerCarry;
     private PlayerThrow _playerThrow;
-    private PlayerItemUse _playerItemUse;
+    private Interact _interact;
+    private PlayerHealth _playerHealth;
     private Vector2 _currentInput = Vector2.zero;
 
     private void Awake()
@@ -38,7 +39,8 @@ public class PlayerController : MonoBehaviour
         _playerSliding = GetComponent<PlayerSliding>();
         _playerCarry = GetComponent<PlayerCarry>();
         _playerThrow = GetComponent<PlayerThrow>();
-        _playerItemUse = GetComponent<PlayerItemUse>();
+        _interact = GetComponent<Interact>();
+        _playerHealth = GetComponent<PlayerHealth>();
     }
 
     private void Start()
@@ -52,7 +54,8 @@ public class PlayerController : MonoBehaviour
         _inputBuffer.PlayerCarry.started += OnInputCarry;
         _inputBuffer.PlayerThrow.started += OnInputThrowAction;
         _inputBuffer.PlayerThrow.canceled += OnInputThrowAction;
-        _inputBuffer.PlayerItemUse.started += OnInputItemUseAction;
+        _inputBuffer.PlayerInteract.started += OnInputInteractAction;
+        _inputBuffer.PlayerInteract.canceled += OnInputInteractAction;
         SetUp();
     }
 
@@ -67,7 +70,8 @@ public class PlayerController : MonoBehaviour
         _inputBuffer.PlayerCarry.started -= OnInputCarry;
         _inputBuffer.PlayerThrow.started -= OnInputThrowAction;
         _inputBuffer.PlayerThrow.canceled -= OnInputThrowAction;
-        _inputBuffer.PlayerItemUse.started -= OnInputItemUseAction;
+        _inputBuffer.PlayerInteract.started -= OnInputInteractAction;
+        _inputBuffer.PlayerInteract.canceled -= OnInputInteractAction;
     }
 
     private void Update()
@@ -150,15 +154,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnInputItemUseAction(InputAction.CallbackContext context)
+    private void OnInputInteractAction(InputAction.CallbackContext context)
     {
-        if (!IsCarrying)
+        if (context.started)
         {
-            return;
+            _interact?.StartInteract();
         }
-        else
+        else if (context.canceled)
         {
-            _playerItemUse?.ItemUse();
+            _interact?.StopInteract();
         }
     }
 
@@ -200,5 +204,7 @@ public class PlayerController : MonoBehaviour
         _playerSliding?.StartSetVariables(_playerData);
         _playerCarry?.StartSetVariables(_playerData);
         _playerThrow?.StartSetVariables(_playerData);
+        _interact?.StartSetVariables(_playerData);
+        _playerHealth?.StartSetVariables(_playerData);
     }
 }
