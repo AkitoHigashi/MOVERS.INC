@@ -2,23 +2,23 @@
 /// <summary>
 /// 敵の初期値を管理するデータクラス
 /// </summary>
-[CreateAssetMenu(fileName = "Data", menuName = "Data/EnemyData")]
-public class EnemyData : ScriptableObject
+[CreateAssetMenu(fileName = "Data", menuName = "Data/MonsterData")]
+public class MonsterData : ScriptableObject
 { 
     /// <summary>敵のHP初期値</summary>
-    public float EnemyHpData => _enemyHp;
+    public float MonsterHpData => _monsterHp;
     /// <summary>敵の歩く速度の初期値</summary>
-    public float EnemyWalkSpeedData => _enemyWalkSpeed;
+    public float MonsterWalkSpeedData => _monsterWalkSpeed;
     /// <summary>敵の走る速度の初期値</summary>
-    public float EnemyRunSpeedData => _enemyRunSpeed;
+    public float MonsterRunSpeedData => _monsterRunSpeed;
     /// <summary>敵の視野の初期値</summary>
-    public float EnemyFoVData => _enemyFovDistance;
+    public float MonsterFoVData => _monsterFovDistance;
     /// <summary>敵の攻撃力の初期値</summary>
-    public float EnemyPowerData => _enemyPower;
+    public float MonsterPowerData => _monsterPower;
     /// <summary>敵の攻撃範囲の初期値</summary>
-    public float EnemyAttackRangeData => _enemyAttackRange;
+    public float MonsterAttackRangeData => _monsterAttackRange;
     /// <summary>敵対関係</summary>
-    public EnemyState EnemyStateData => _enemyState;
+    public MonsterState MonsterStateData => _monsterState;
     /// <summary>目的地に到着した時の待機時間</summary>
     public float WaitTime => _waitTime;
     /// <summary>目的地に視点を合わせる速度</summary>
@@ -37,19 +37,19 @@ public class EnemyData : ScriptableObject
     /// <returns></returns>
     public bool CanGet(float currentHP)
     {
-        return currentHP / _enemyHp <= _hokakuwariai ? true : false;
+        return currentHP / _monsterHp <= _hokakuwariai ? true : false;
     }
 
     [Header("敵の初期値")]
-    [SerializeField] private float _enemyHp;
-    [SerializeField] private float _enemyWalkSpeed;
-    [SerializeField] private float _enemyRunSpeed;
-    [SerializeField] private float _enemyFovDistance;
-    [SerializeField] private float _enemyPower;
-    [SerializeField] private float _enemyAttackRange;
+    [SerializeField] private float _monsterHp;
+    [SerializeField] private float _monsterWalkSpeed;
+    [SerializeField] private float _monsterRunSpeed;
+    [SerializeField] private float _monsterFovDistance;
+    [SerializeField] private float _monsterPower;
+    [SerializeField] private float _monsterAttackRange;
 
     [Header("敵対関係")]
-    [SerializeField] private EnemyState _enemyState;
+    [SerializeField] private MonsterState _monsterState;
     [SerializeField, Range(0, 1)] private float _hokakuwariai;
 
     [Header("移動関係")]
@@ -61,7 +61,7 @@ public class EnemyData : ScriptableObject
     [SerializeField] private float _fov = 60f;
     [SerializeField] private float _patrolFovDistance = 15f;
 }
-public enum EnemyState
+public enum MonsterState
 {
     Friendly, // 友好的
     Neutral,  // 中立的
