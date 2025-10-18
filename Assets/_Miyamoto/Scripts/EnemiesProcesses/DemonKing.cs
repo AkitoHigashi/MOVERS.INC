@@ -27,14 +27,10 @@ public class DemonKing : EnemyBase
     private void OnDisable()
     {
         base.BaseOnDisable();
-
-        _animator.SetTrigger("Reset");
         _animator.SetBool("Run", false);
-        _animator.SetBool("LookAround", false);
     }
     private void SetAnimationBool()
     {
-        _animator.SetBool("LookAround", _lookAround);
         _animator.SetBool("Run", HasSeen);
         _animator.SetBool("Idle", timer >= _coolTime);
         _animator.SetBool("Attack", _attack);

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// 視野トリガー専用スクリプト
@@ -7,18 +8,14 @@ public class EnemyVision : MonoBehaviour
 {
     const string PLAYER = "Player";
     const string LUGGAGE = "Luggage";
-    private EnemyBase _enemyBase;
+    public event Action<Collider> OnFind;
     private Collider _collider;
     private bool _isInSide;
-    private void Start()
-    {
-        _enemyBase = GetComponentInParent<EnemyBase>();
-    }
     private void Update()
     {
         if (_isInSide)
         {
-            _enemyBase.FindObject(_collider);
+            OnFind.Invoke(_collider);
         }
     }
     private void OnTriggerEnter(Collider other)

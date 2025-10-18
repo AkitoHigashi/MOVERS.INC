@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -39,8 +40,8 @@ public abstract class EnemyBase : MonoBehaviour
     protected List<Transform> _destinations = new List<Transform>();
     [SerializeField, Header("顔の場所")]
     protected Transform _facePos;
-    [SerializeField]
-    protected float _destroySpeed;
+    [SerializeField, Header("敵が消滅するまでの時間")]
+    protected float _destroyTime = 1f;
 
     #region ステータス
     //ステータス
@@ -68,14 +69,14 @@ public abstract class EnemyBase : MonoBehaviour
     protected Vector3 _currentDestination;
     /// <summary>最後に訪れた目的地</summary>
     protected Vector3 _lastDestination;
+    /// <summary>収集地点に入ったかのフラグ</summary>
+    protected bool _isInCollectionArea;
 
     protected NavMeshAgent _navMeshAgent;
     protected Animator _animator;
     protected Coroutine _coroutine;
-
-    protected bool _isInCollectionArea;
-    private float _currentFov;
     private Rigidbody _rb;
+    private EnemyVision _enemyVision;
     /// <summary>
     /// 継承先でAwakeから呼び出す
     /// </summary>
@@ -83,6 +84,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
         SetParameter();
         VisionGenerator();
+        _enemyVision = GetComponentInChildren<EnemyVision>();
     }
     /// <summary>
     /// 継承先でUpdateから呼び出す
@@ -90,13 +92,16 @@ public abstract class EnemyBase : MonoBehaviour
     protected void BaseUpdate()
     {
         Patrol();
+        SetAnimation();
     }
     /// <summary>
     /// 継承先でOnEnableから呼び出す
     /// </summary>
     protected void BaseOnEnable()
     {
-
+        _animator.SetTrigger("Reset");
+        _animator.SetBool("LookAround", false);
+        _enemyVision.OnFind += FindObject;
     }
     /// <summary>
     /// 継承先でOnDisableから呼び出す
@@ -104,6 +109,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected void BaseOnDisable()
     {
         StopAllCoroutines();
+        _enemyVision.OnFind -= FindObject;
     }
     /// <summary>
     /// 敵の初期値を設定する
@@ -135,9 +141,12 @@ public abstract class EnemyBase : MonoBehaviour
         _lastDestination = _currentDestination;
 
         _navMeshAgent.angularSpeed = _angularSpeed;
-
-        _currentFov = _enemyFovDistance;
         _rb.isKinematic = true;
+
+    }
+    private void SetAnimation()
+    {
+        _animator.SetBool("LookAround", _lookAround);
     }
     #region 移動関係
     /// <summary>
@@ -196,7 +205,7 @@ public abstract class EnemyBase : MonoBehaviour
         yield return new WaitForSeconds(_waitTime);
 
         _lastDestination = _currentDestination;
-        _currentDestination = _destinations[Random.Range(0, _destinations.Count)].position;
+        _currentDestination = _destinations[UnityEngine.Random.Range(0, _destinations.Count)].position;
         _navMeshAgent.isStopped = false;
         _lookAround = false;
         _navMeshAgent.speed = _enemyWalkSpeed;
@@ -221,7 +230,7 @@ public abstract class EnemyBase : MonoBehaviour
     /// オブジェクトが視界に入ったかどうか判定する
     /// </summary>
     /// <param name="collider"></param>
-    public void FindObject(Collider collider)
+    private void FindObject(Collider collider)
     {
         if (collider == null || _isInCollectionArea) return;
 
@@ -334,7 +343,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void ProccesToLuggage(Collider luggage, float distance) { }
     #endregion
 
-     #region 状態関係
+    #region 状態関係
     //private void OnCollisionEnter(Collision collision)
     //{
     //    if (collision.gameObject.CompareTag(TRAP))
@@ -367,6 +376,7 @@ public abstract class EnemyBase : MonoBehaviour
         {
             //Destroy(gameObject);
             _animator.SetTrigger("Die");
+            Destroy(this.gameObject, _destroyTime);
         }
     }
     /// <summary>
