@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// 視野トリガー専用スクリプト
 /// </summary>
-public class EnemyVision : MonoBehaviour
+public class MonsterVision : MonoBehaviour
 {
     const string PLAYER = "Player";
     const string LUGGAGE = "Luggage";
