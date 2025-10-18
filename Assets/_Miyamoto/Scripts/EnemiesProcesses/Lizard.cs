@@ -71,10 +71,9 @@ public class Lizard : EnemyBase
             _isCarry = true;
 
             //目的地から除外
-            Transform luggageTransform = luggage.transform;
-            if (_destinations.Contains(luggageTransform))
+            if (_destinations.Contains(luggage.transform))
             {
-                _destinations.Remove(luggageTransform);
+                _destinations.Remove(luggage.transform);
             }
 
             ResetVision();
