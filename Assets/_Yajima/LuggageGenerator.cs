@@ -8,10 +8,12 @@ public class LuggageGenerator : MonoBehaviour
     class LuggageData
     {
         [SerializeField] int _generateValue;
+        [SerializeField] int _targetValue;
         [SerializeField] LuggageList _luggageList;
         [SerializeField] List<Vector3> _generatePos;
 
         public int GenerateValue => _generateValue;
+        public int TargetValue => _targetValue;
         public LuggageList LuggageList => _luggageList;
         public List<Vector3> GeneratePos => _generatePos;
     }
@@ -33,22 +35,36 @@ public class LuggageGenerator : MonoBehaviour
     /// <param name="luggage">荷物生成に関するクラス</param>
     void LuggageGenerateAlgorithm(LuggageData luggage)
     {
+        //リストの初期化
+        _setPos = new List<Vector3>();
+
+        //指定の荷物を生成する回数を記録
+        int targetValue = luggage.TargetValue;
+
         //荷物生成を行う関数
-        Action<int> generate = index =>
+        Action<int, bool> generate = (index, target) =>
         {
             int rand = UnityEngine.Random.Range(0, luggage.LuggageList.List.Count);
-            Instantiate(luggage.LuggageList.List[rand].Prefab, luggage.GeneratePos[index], Quaternion.identity);
+            var go = Instantiate(luggage.LuggageList.List[rand].Prefab, luggage.GeneratePos[index], Quaternion.identity);
+            if (target)
+            {
+                //指定の荷物の時はパーティクルを子オブジェクトにする
+                Instantiate(luggage.LuggageList.List[rand].Particle, go.transform);
+                //指定の荷物にした回数を記録
+                targetValue--;
+            }
             //置いた場所を保存
             _setPos.Add(luggage.GeneratePos[index]);
             luggage.GeneratePos.RemoveAt(index);
         };
 
-        //リストの初期化
-        _setPos = new List<Vector3>();
-
-        //一つ目の荷物は任意の場所を選んで生成
+        //一つ目の荷物を生成する場所を選ぶ
         int rand = UnityEngine.Random.Range(0, luggage.GeneratePos.Count);
-        generate(rand);
+        //指定の荷物にするかどうかを判定
+        int targetRand = UnityEngine.Random.Range(0, 2);
+        bool target = targetRand == 0 && targetValue > 0 ? true : false;
+        //荷物生成
+        generate(rand, target);
 
         //指定の生成回数繰り返す
         for (int i = 0; i < luggage.GenerateValue; i++)
@@ -83,8 +99,15 @@ public class LuggageGenerator : MonoBehaviour
 
             //インデックス外の時は飛ばす
             if (index == -1) continue;
+
+            //まだ指定の荷物を指定できるときに指定の荷物にするかどうかを判定
+            if (targetValue > 0)
+            {
+                targetRand = UnityEngine.Random.Range(0, 2);
+                target = targetRand == 0 ? true : false;
+            }
             //荷物生成
-            generate(index);
+            generate(index, target);
         }
     }
 }
