@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce9e37331544db340957ba7e287bc8a9, type: 3}
-  m_Name: Lizard
+  m_Name: Slime
   m_EditorClassIdentifier: 
-  _enemyHp: 30
+  _enemyHp: 10
   _enemyWalkSpeed: 3
-  _enemyRunSpeed: 10
+  _enemyRunSpeed: 3
   _enemyFovDistance: 5
-  _enemyPower: 5
-  _enemyAttackRange: 3
-  _enemyState: 1
-  _hokakuwariai: 0.657
+  _enemyPower: 0
+  _enemyAttackRange: 0
+  _enemyState: 0
+  _hokakuwariai: 0.575
   _waitTime: 1
   _angularSpeed: 360
-  _stopDistance: 5
+  _stopDistance: 2
   _fov: 60
   _patrolFovDistance: 15

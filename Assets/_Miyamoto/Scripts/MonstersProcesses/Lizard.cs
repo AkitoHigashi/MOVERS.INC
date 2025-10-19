@@ -1,11 +1,9 @@
-﻿using Unity.XR.Oculus.Input;
-using UnityEditor.ShaderGraph.Internal;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// リザード特有の動きを制御するクラス
 /// </summary>
-public class Lizard : EnemyBase
+public class Lizard : MonsterBase
 {
     [SerializeField, Header("コレクションエリア")]
     private Transform _collectionArea;
@@ -33,6 +31,7 @@ public class Lizard : EnemyBase
     }
     private void SetAnimation()
     {
+        _animator.SetFloat("WalkSpeed", _navMeshAgent.speed);
     }
     protected override void ProccesToLuggage(Collider collider, float distance)
     {
@@ -45,7 +44,7 @@ public class Lizard : EnemyBase
             Debug.Log("action開始");
             switch (_currentEnemyState)
             {
-                case EnemyState.Neutral:
+                case MonsterState.Neutral:
                     CatchLuggage(collider);
                     break;
                 default:
@@ -64,22 +63,23 @@ public class Lizard : EnemyBase
         if (!_isCarry)
         {
             Debug.Log("荷物を手に取る");
-            luggage.isTrigger = true;
+            var rb = luggage.GetComponent<Rigidbody>();
+
             _luggage = luggage.gameObject;
             _luggage.transform.position = _facePos.position;
             _luggage.transform.SetParent(this.transform);
             _isCarry = true;
 
             //目的地から除外
-            Transform luggageTransform = luggage.transform;
-            if (_destinations.Contains(luggageTransform))
+            if (_destinations.Contains(luggage.transform))
             {
-                _destinations.Remove(luggageTransform);
+                _destinations.Remove(luggage.transform);
             }
 
             ResetVision();
             CarryLuggage();
             StopAllCoroutines();
+            rb.Sleep();
             _coroutine = null;
         }
     }
@@ -106,8 +106,10 @@ public class Lizard : EnemyBase
             Debug.Log("親子関係解除");
             _currentDestination = _destinations[Random.Range(0, _destinations.Count)].position;
             Collider collider = _luggage.GetComponent<Collider>();
+            var rb = collider.GetComponent<Rigidbody>();
+
             _luggage.transform.SetParent(null);
-            collider.isTrigger = false;
+            rb.WakeUp();
             _isCarry = false;
         }
     }
