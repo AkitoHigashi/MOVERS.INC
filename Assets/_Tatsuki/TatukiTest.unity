@@ -1681,6 +1681,7 @@ GameObject:
   - component: {fileID: 530705518}
   - component: {fileID: 530705517}
   - component: {fileID: 530705521}
+  - component: {fileID: 530705522}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -1802,6 +1803,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 2.220446e-16, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &530705522
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530705516}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &541868522
 GameObject:
   m_ObjectHideFlags: 0
@@ -5503,6 +5531,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4457192618437349340, guid: 04deacff1d938114d859b0b266a3c352, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4603012680989884535, guid: 04deacff1d938114d859b0b266a3c352, type: 3}
       propertyPath: _score
       value: 10000
@@ -6496,6 +6528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2d7a0ea532bd8488d788b25dcefb68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LuggageSpeed
+  Ishave: 0
   _rb: {fileID: 1831086486}
 --- !u!1 &1858852454
 GameObject:
