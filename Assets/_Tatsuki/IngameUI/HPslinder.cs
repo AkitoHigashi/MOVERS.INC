@@ -26,16 +26,16 @@ public class HPslinder : MonoBehaviour
 
     public void HpSetSlider(float sliderValue)
     {
-        hpslider.value = sliderValue / TestStatus.UImaxHp;
+        hpslider.value = sliderValue / UITestStatus.UImaxHp;
     }
 
     public void RunSetSlider(float sliderValue)
     {
-        runhsliders.value = sliderValue / TestStatus.UImaxRunGauge;
+        runhsliders.value = sliderValue / UITestStatus.UImaxRunGauge;
     }
 
     public void LuggageNum(int sliderValue)
     {
-        luggagehsviders.value = (float)sliderValue / TestStatus.maxItem;
+        luggagehsviders.value = (float)sliderValue / UITestStatus.maxItem;
     }
 }

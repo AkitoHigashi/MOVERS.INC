@@ -7,25 +7,28 @@ public class textUImanager : MonoBehaviour
     [SerializeField] private TMP_Text luggagetext; //現在荷物
     [SerializeField] private TMP_Text timertext;//タイマー
     [SerializeField] private InvokeSystem invokeSystem;//通知
+    [SerializeField] private CollectionArea CollectionArea;
     
 
 
   
     private void OnEnable()
     {
-        invokeSystem.GetLuggage += LuggageSetText;
+       CollectionArea.OnEnterLuggage += LuggageSetText;
+        CollectionArea.OnExitLuggage += LuggageSetText;
         invokeSystem.Gettimer +=  TimerSetText;
     }
 
     private void OnDisable()
     {
-        invokeSystem.GetLuggage -= LuggageSetText;
+        CollectionArea.OnEnterLuggage -= LuggageSetText;
+        CollectionArea.OnExitLuggage -= LuggageSetText;
         invokeSystem.Gettimer -= TimerSetText;
     }
 
     public void LuggageSetText(int text)
     {
-        luggagetext.text = $"{text}/{TestStatus.maxItem}";
+        luggagetext.text = $"{text}/{UITestStatus.maxItem}";
     }
 
     public void TimerSetText(float ctx)
