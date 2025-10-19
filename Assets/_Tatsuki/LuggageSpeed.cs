@@ -7,7 +7,7 @@ public class LuggageSpeed : MonoBehaviour
     private Vector3 currentPosition;
     private Vector3 luggagevelocity;
     private float  totalSpeed  ;
-    private bool Ishave = false; //アイテムをもっているときだけ計算する
+  [SerializeField]  private bool Ishave = false; //アイテムをもっているときだけ計算する
     [SerializeField] private Rigidbody _rb;
     private void Start()
     {
@@ -36,8 +36,7 @@ public class LuggageSpeed : MonoBehaviour
     }
  
 
-    public float GetLuggageSpeed()=>luggagevelocity.magnitude;
-    public float GetLuggageRbSpeed()=>_rb.linearVelocity.magnitude;
+   
     public float GetTotalSpeed()=> totalSpeed;
    
 }
