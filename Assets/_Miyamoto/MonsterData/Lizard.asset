@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce9e37331544db340957ba7e287bc8a9, type: 3}
+  m_Name: Lizard
+  m_EditorClassIdentifier: 
+  _monsterHp: 1
+  _monsterWalkSpeed: 3
+  _monsterRunSpeed: 5
+  _monsterFovDistance: 5
+  _monsterPower: 10
+  _monsterAttackRange: 10
+  _monsterState: 1
+  _hokakuwariai: 0.657
+  _waitTime: 1
+  _angularSpeed: 360
+  _stopDistance: 3
+  _fov: 60
+  _patrolFovDistance: 15

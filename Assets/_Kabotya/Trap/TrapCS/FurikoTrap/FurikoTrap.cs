@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-public class Furiko : MonoBehaviour
+public class Furiko : TrapBase
 {
     [SerializeField] private TrapRange _trapRange;
 
