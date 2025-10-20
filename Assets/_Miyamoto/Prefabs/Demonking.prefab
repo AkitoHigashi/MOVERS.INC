@@ -25,11 +25,11 @@ Transform:
   m_GameObject: {fileID: 496090155539109739}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.12920475, y: 2.0119364, z: 0.6263714}
+  m_LocalPosition: {x: -0.07820511, y: 2.0179365, z: 0.75637054}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2324824891116202152}
+  m_Father: {fileID: 195399789788401774}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1934860825026432851
 GameObject:
@@ -92,7 +92,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 215358700996874631}
   - {fileID: 195399789788401774}
   m_Father: {fileID: 5297489289080297547}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -802,6 +801,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7489784827475812805, guid: fdc43348b19aeb24d8cad334415d015a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 215358700996874631}
     - targetCorrespondingSourceObject: {fileID: 21557179453070784, guid: fdc43348b19aeb24d8cad334415d015a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8810334065646513988}
@@ -881,7 +883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9638acdee1bfde54480d444a7ea810b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyData: {fileID: 11400000, guid: 14899abc4f84288429c19319f83f7fae, type: 2}
+  _monsterData: {fileID: 0}
   _destinations:
   - {fileID: 0}
   - {fileID: 0}

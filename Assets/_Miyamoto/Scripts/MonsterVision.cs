@@ -8,14 +8,18 @@ public class MonsterVision : MonoBehaviour
 {
     const string PLAYER = "Player";
     const string LUGGAGE = "Luggage";
-    public event Action<Collider> OnFind;
+    private MonsterBase _monsterBase;
     private Collider _collider;
     private bool _isInSide;
+    private void Start()
+    {
+        _monsterBase = GetComponentInParent<MonsterBase>();
+    }
     private void Update()
     {
         if (_isInSide)
         {
-            OnFind.Invoke(_collider);
+            _monsterBase.FindObject(_collider);
         }
     }
     private void OnTriggerEnter(Collider other)
