@@ -216,6 +216,16 @@ public abstract class MonsterBase : MonoBehaviour
     {
         Debug.Log("見失ったReturnDestination呼び出し");
         _hasSeen = false;
+        float _currentDistance = float.MaxValue;
+        foreach (var destination in Destinations)
+        {
+            float distance = Vector3.Distance(this.transform.position, destination.position);
+            if (distance < _currentDistance)
+            {
+                _currentDistance = distance;
+                _lastDestination = destination.position;
+            }
+        }
         _currentDestination = _lastDestination; //元の目的地に戻る
         _navMeshAgent.isStopped = false;
     }
