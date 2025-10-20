@@ -3,7 +3,6 @@
 [RequireComponent(typeof(Rigidbody))]
 public abstract class ItemBase : MonoBehaviour
 {
-    [SerializeField] Sprite _sprite;
     protected Rigidbody _rb;
     protected ItemData _itemdata;
     /// <summary>
