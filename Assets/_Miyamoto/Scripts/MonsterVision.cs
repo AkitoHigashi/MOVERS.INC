@@ -37,6 +37,7 @@ public class MonsterVision : MonoBehaviour
         {
             _isInSide = false;
             _collider = null;
+            _monsterBase.ReturnDestination();
         }
     }
 }
