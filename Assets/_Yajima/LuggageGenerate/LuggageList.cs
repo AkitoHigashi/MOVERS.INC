@@ -6,6 +6,11 @@ public class LuggageList : ScriptableObject
 {
     [SerializeField] List<LuggageClass> _list;
     public List<LuggageClass> List => _list;
+
+    public override string ToString()
+    {
+        return name;
+    }
 }
 
 [System.Serializable]

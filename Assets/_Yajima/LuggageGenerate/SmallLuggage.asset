@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: SmallLuggage
   m_EditorClassIdentifier: Assembly-CSharp::LuggageList
   _list:
-  - _prefab: {fileID: 0}
+  - _prefab: {fileID: 1143289278402375810, guid: 7d54c895ffed58f42bd5ebde8dc52aef, type: 3}
     _particle: {fileID: 0}
-  - _prefab: {fileID: 0}
+  - _prefab: {fileID: 7346152775169024359, guid: 8e0de3939c840344caa81147c4f7a7cb, type: 3}
     _particle: {fileID: 0}
-  - _prefab: {fileID: 0}
+  - _prefab: {fileID: 1845441666629179081, guid: fca82e2e344582b4383d24079a7c6506, type: 3}
+    _particle: {fileID: 0}
+  - _prefab: {fileID: 1845441666629179081, guid: 0ad0f4c5157f60c4d9f19703cf18a85d, type: 3}
     _particle: {fileID: 0}

@@ -148,22 +148,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a84714990d90fdf41ab89b67ee8482d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LuggageSpawner
-  _bigLuggage:
-    _generateValue: 0
-    _luggageList: {fileID: 11400000, guid: 5a33c016c1c902c46af638895b0b8b6c, type: 2}
-    _generatePos:
-    - {x: 0, y: 0, z: 0}
-    - {x: 0, y: 0, z: 0}
-    - {x: 0, y: 0, z: 0}
-    - {x: 0, y: 0, z: 0}
   _smallLuggage:
-    _generateValue: 0
+    _generateValue: 5
+    _targetValue: 3
     _luggageList: {fileID: 11400000, guid: 92b16f695f3741840ac764e989d68761, type: 2}
     _generatePos:
-    - {x: 0, y: 0, z: 0}
-    - {x: 0, y: 0, z: 0}
-    - {x: 0, y: 0, z: 0}
-    - {x: 0, y: 0, z: 0}
+    - {x: 4, y: 0, z: 7}
+    - {x: 5, y: 0, z: 3}
+    - {x: 6, y: 0, z: 6}
+    - {x: 4, y: 0, z: 4}
+    - {x: 1, y: 0, z: 2}
+    - {x: 2, y: 0, z: 1}
+    - {x: 3, y: 0, z: 2}
+    - {x: 4, y: 0, z: 2}
+    - {x: 4, y: 0, z: 8}
+    - {x: 0, y: 0, z: 5}
+  _bigLuggage:
+    _generateValue: 5
+    _targetValue: 2
+    _luggageList: {fileID: 11400000, guid: 5a33c016c1c902c46af638895b0b8b6c, type: 2}
+    _generatePos:
+    - {x: 1, y: 0, z: 1}
+    - {x: 2, y: 0, z: 2}
+    - {x: 4, y: 0, z: 3}
+    - {x: 5, y: 0, z: 7}
+    - {x: 5, y: 0, z: 1}
+    - {x: 7, y: 0, z: 2}
+    - {x: 10, y: 0, z: 8}
+    - {x: 0, y: 0, z: 4}
 --- !u!4 &33894806
 Transform:
   m_ObjectHideFlags: 0
@@ -190,6 +202,7 @@ GameObject:
   - component: {fileID: 776127033}
   - component: {fileID: 776127032}
   - component: {fileID: 776127031}
+  - component: {fileID: 776127034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -271,6 +284,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &776127034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776127030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &1102740953
 GameObject:
   m_ObjectHideFlags: 0
