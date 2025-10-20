@@ -76,7 +76,6 @@ public abstract class MonsterBase : MonoBehaviour
     protected Animator _animator;
     protected Coroutine _coroutine;
     private Rigidbody _rb;
-    private MonsterVision _enemyVision;
     /// <summary>
     /// 継承先でAwakeから呼び出す
     /// </summary>
@@ -84,7 +83,6 @@ public abstract class MonsterBase : MonoBehaviour
     {
         SetParameter();
         VisionGenerator();
-        _enemyVision = GetComponentInChildren<MonsterVision>();
     }
     /// <summary>
     /// 継承先でUpdateから呼び出す
@@ -101,7 +99,6 @@ public abstract class MonsterBase : MonoBehaviour
     {
         _animator.SetTrigger("Reset");
         _animator.SetBool("LookAround", false);
-        _enemyVision.OnFind += FindObject;
     }
     /// <summary>
     /// 継承先でOnDisableから呼び出す
@@ -109,7 +106,6 @@ public abstract class MonsterBase : MonoBehaviour
     protected void BaseOnDisable()
     {
         StopAllCoroutines();
-        _enemyVision.OnFind -= FindObject;
     }
     /// <summary>
     /// 敵の初期値を設定する
@@ -230,7 +226,7 @@ public abstract class MonsterBase : MonoBehaviour
     /// オブジェクトが視界に入ったかどうか判定する
     /// </summary>
     /// <param name="collider"></param>
-    private void FindObject(Collider collider)
+    public void FindObject(Collider collider)
     {
         if (collider == null || _isInCollectionArea) return;
 
@@ -275,7 +271,7 @@ public abstract class MonsterBase : MonoBehaviour
     /// <param name="hit"></param>
     private void OnTargetFind(Collider collider, float distance, RaycastHit hit)
     {
-        EnemyProcces(collider, distance);
+        MonsterProcces(collider, distance);
         _coroutine = null;
     }
     /// <summary>
@@ -316,7 +312,7 @@ public abstract class MonsterBase : MonoBehaviour
     /// </summary>
     /// <param name="collider"></param>
     /// <param name="distance"></param>
-    private void EnemyProcces(Collider collider, float distance)
+    private void MonsterProcces(Collider collider, float distance)
     {
         if (collider == null) return;
 

@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce9e37331544db340957ba7e287bc8a9, type: 3}
   m_Name: Lizard
   m_EditorClassIdentifier: 
-  _enemyHp: 30
-  _enemyWalkSpeed: 3
-  _enemyRunSpeed: 10
-  _enemyFovDistance: 5
-  _enemyPower: 5
-  _enemyAttackRange: 3
-  _enemyState: 1
+  _monsterHp: 1
+  _monsterWalkSpeed: 3
+  _monsterRunSpeed: 5
+  _monsterFovDistance: 5
+  _monsterPower: 10
+  _monsterAttackRange: 10
+  _monsterState: 1
   _hokakuwariai: 0.657
   _waitTime: 1
   _angularSpeed: 360
