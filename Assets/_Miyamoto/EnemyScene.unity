@@ -2212,7 +2212,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _playerHeight: 2
-  _walkSpeed: 5
+  _walkSpeed: 12
   _sprintSpeed: 10
   _crouchSpeed: 3
   _slidingSpeed: 20
