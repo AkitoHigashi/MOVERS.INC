@@ -3,7 +3,7 @@
 /// <summary>
 /// デーモンキング特有の動きを制御するクラス
 /// </summary>
-public class DemonKing : EnemyBase
+public class DemonKing : MonsterBase
 {
     [SerializeField, Header("攻撃のクールタイム(秒)")]
     private float _coolTime = 2f;
@@ -27,14 +27,10 @@ public class DemonKing : EnemyBase
     private void OnDisable()
     {
         base.BaseOnDisable();
-
-        _animator.SetTrigger("Reset");
         _animator.SetBool("Run", false);
-        _animator.SetBool("LookAround", false);
     }
     private void SetAnimationBool()
     {
-        _animator.SetBool("LookAround", _lookAround);
         _animator.SetBool("Run", HasSeen);
         _animator.SetBool("Idle", timer >= _coolTime);
         _animator.SetBool("Attack", _attack);
@@ -43,14 +39,14 @@ public class DemonKing : EnemyBase
     {
         if (!_hasSeen) FirstSeeing();
        
-        _navMeshAgent.speed = _enemyRunSpeed;
+        _navMeshAgent.speed = _monsterRunSpeed;
         _currentDestination = collider.transform.position;
 
         if (CanAttack(distance))
         {
             switch (_currentEnemyState)
             {
-                case EnemyState.Hostile:
+                case MonsterState.Hostile:
                     Attack(collider);
                     break;
                 default:
@@ -98,7 +94,7 @@ public class DemonKing : EnemyBase
     protected override void FirstSeeing()
     {
         base.FirstSeeing();
-        _navMeshAgent.speed = _enemyRunSpeed;
+        _navMeshAgent.speed = _monsterRunSpeed;
     }
     private void OnTriggerEnter(Collider other)
     {

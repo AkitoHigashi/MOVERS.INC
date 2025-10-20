@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,27 +7,27 @@ using UnityEngine.AI;
 /// <summary>
 /// 敵の基底クラス
 /// </summary>
-public abstract class EnemyBase : MonoBehaviour
+public abstract class MonsterBase : MonoBehaviour
 {
     const string PLAYER = "Player";
     const string LUGGAGE = "Luggage";
     const string ITEM = "Item";
     const string TRAP = "Trap";
     #region プロパティ
-    public EnemyData EnemyData => _enemyData;
+    public MonsterData EnemyData => _monsterData;
     public List<Transform> Destinations => _destinations;
     public float WaitTime => _waitTime;
     public float AngularSpeed => _angularSpeed;
     public float StopDistance => _stopDistance;
     public float FoV => _fov;
     public float PatrolFovDistance => _patrolFovDistance;
-    public float EnemyHP => _enemyHp;
-    public float EnemyWalkSpeed => _enemyWalkSpeed;
-    public float EnemyRunSpeed => _enemyRunSpeed;
+    public float MonsterHP => _monsterHp;
+    public float MonsterWalkSpeed => _monsterWalkSpeed;
+    public float MonsterRunSpeed => _monsterRunSpeed;
     public float CurrentSpeed => _currentSpeed;
-    public float EnemyFovDistance => _enemyFovDistance;
-    public float EnemyPower => _enemyPower;
-    public float EnemyAttackRange => _enemyAttackRange;
+    public float MonsterFovDistance => _monsterFovDistance;
+    public float MonsterPower => _monsterPower;
+    public float MonsterAttackRange => _monsterAttackRange;
     public NavMeshAgent NavMeshAgent => _navMeshAgent;
     public Vector3 CurrentDestination => _currentDestination;
     public Vector3 LastDesination => _lastDestination;
@@ -34,22 +35,22 @@ public abstract class EnemyBase : MonoBehaviour
     #endregion
 
     [SerializeField, Header("敵のデータ")]
-    protected EnemyData _enemyData;
+    protected MonsterData _monsterData;
     [SerializeField, Header("目的地のリスト")]
     protected List<Transform> _destinations = new List<Transform>();
     [SerializeField, Header("顔の場所")]
     protected Transform _facePos;
-    [SerializeField]
-    protected float _destroySpeed;
+    [SerializeField, Header("敵が消滅するまでの時間")]
+    protected float _destroyTime = 1f;
 
     #region ステータス
     //ステータス
-    protected float _enemyHp;
-    protected float _enemyWalkSpeed;
-    protected float _enemyRunSpeed;
-    protected float _enemyFovDistance;
-    protected float _enemyPower;
-    protected float _enemyAttackRange;
+    protected float _monsterHp;
+    protected float _monsterWalkSpeed;
+    protected float _monsterRunSpeed;
+    protected float _monsterFovDistance;
+    protected float _monsterPower;
+    protected float _monsterAttackRange;
     protected float _waitTime;
     protected float _angularSpeed;
     protected float _stopDistance;
@@ -63,19 +64,19 @@ public abstract class EnemyBase : MonoBehaviour
     /// <summary>周りを見渡すフラグ<summary>
     protected bool _lookAround = false;
     /// <summary>現在の敵の友好関係<summary>
-    protected EnemyState _currentEnemyState;
+    protected MonsterState _currentEnemyState;
     /// <summary>現在の目的地</summary>
     protected Vector3 _currentDestination;
     /// <summary>最後に訪れた目的地</summary>
     protected Vector3 _lastDestination;
+    /// <summary>収集地点に入ったかのフラグ</summary>
+    protected bool _isInCollectionArea;
 
     protected NavMeshAgent _navMeshAgent;
     protected Animator _animator;
     protected Coroutine _coroutine;
-
-    protected bool _isInCollectionArea;
-    private float _currentFov;
     private Rigidbody _rb;
+    private MonsterVision _enemyVision;
     /// <summary>
     /// 継承先でAwakeから呼び出す
     /// </summary>
@@ -83,6 +84,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
         SetParameter();
         VisionGenerator();
+        _enemyVision = GetComponentInChildren<MonsterVision>();
     }
     /// <summary>
     /// 継承先でUpdateから呼び出す
@@ -90,13 +92,16 @@ public abstract class EnemyBase : MonoBehaviour
     protected void BaseUpdate()
     {
         Patrol();
+        SetAnimation();
     }
     /// <summary>
     /// 継承先でOnEnableから呼び出す
     /// </summary>
     protected void BaseOnEnable()
     {
-
+        _animator.SetTrigger("Reset");
+        _animator.SetBool("LookAround", false);
+        _enemyVision.OnFind += FindObject;
     }
     /// <summary>
     /// 継承先でOnDisableから呼び出す
@@ -104,6 +109,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected void BaseOnDisable()
     {
         StopAllCoroutines();
+        _enemyVision.OnFind -= FindObject;
     }
     /// <summary>
     /// 敵の初期値を設定する
@@ -114,30 +120,33 @@ public abstract class EnemyBase : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();
 
-        _enemyHp = _enemyData.EnemyHpData;
-        _enemyWalkSpeed = _enemyData.EnemyWalkSpeedData;
-        _enemyRunSpeed = _enemyData.EnemyRunSpeedData;
-        _currentSpeed = _enemyWalkSpeed;
-        _enemyFovDistance = _enemyData.EnemyFoVData;
-        _enemyPower = _enemyData.EnemyPowerData;
-        _enemyAttackRange = _enemyData.EnemyAttackRangeData;
-        _currentEnemyState = _enemyData.EnemyStateData;
+        _monsterHp = _monsterData.MonsterHpData;
+        _monsterWalkSpeed = _monsterData.MonsterWalkSpeedData;
+        _monsterRunSpeed = _monsterData.MonsterRunSpeedData;
+        _currentSpeed = _monsterWalkSpeed;
+        _monsterFovDistance = _monsterData.MonsterFoVData;
+        _monsterPower = _monsterData.MonsterPowerData;
+        _monsterAttackRange = _monsterData.MonsterAttackRangeData;
+        _currentEnemyState = _monsterData.MonsterStateData;
 
-        _waitTime = _enemyData.WaitTime;
-        _angularSpeed = _enemyData.AngularSpeed;
-        _stopDistance = _enemyData.StopDistance;
+        _waitTime = _monsterData.WaitTime;
+        _angularSpeed = _monsterData.AngularSpeed;
+        _stopDistance = _monsterData.StopDistance;
         _navMeshAgent.stoppingDistance = _stopDistance;
-        _fov = _enemyData.FoV;
-        _patrolFovDistance = _enemyData.PatrolFov;
+        _fov = _monsterData.FoV;
+        _patrolFovDistance = _monsterData.PatrolFov;
 
         _navMeshAgent.speed = _currentSpeed;
         _currentDestination = _destinations[0].position;
         _lastDestination = _currentDestination;
 
         _navMeshAgent.angularSpeed = _angularSpeed;
-
-        _currentFov = _enemyFovDistance;
         _rb.isKinematic = true;
+
+    }
+    private void SetAnimation()
+    {
+        _animator.SetBool("LookAround", _lookAround);
     }
     #region 移動関係
     /// <summary>
@@ -145,14 +154,14 @@ public abstract class EnemyBase : MonoBehaviour
     /// </summary>
     private void VisionGenerator()
     {
-        GameObject vision = new GameObject("EnemyVision");
+        GameObject vision = new GameObject("MonsterVision");
 
         SphereCollider sphere = vision.AddComponent<SphereCollider>();
-        EnemyVision enemyVision = vision.AddComponent<EnemyVision>();
+        MonsterVision enemyVision = vision.AddComponent<MonsterVision>();
         vision.transform.SetParent(transform);
         vision.transform.localPosition = _facePos.localPosition;
 
-        sphere.radius = _enemyFovDistance;
+        sphere.radius = _monsterFovDistance;
         sphere.isTrigger = true;
     }
     /// <summary>
@@ -178,7 +187,7 @@ public abstract class EnemyBase : MonoBehaviour
             StopCoroutine(_coroutine);
             _coroutine = null;
             _navMeshAgent.isStopped = false;
-            _navMeshAgent.speed = _enemyWalkSpeed;
+            _navMeshAgent.speed = _monsterWalkSpeed;
         }
     }
     /// <summary>
@@ -196,10 +205,10 @@ public abstract class EnemyBase : MonoBehaviour
         yield return new WaitForSeconds(_waitTime);
 
         _lastDestination = _currentDestination;
-        _currentDestination = _destinations[Random.Range(0, _destinations.Count)].position;
+        _currentDestination = _destinations[UnityEngine.Random.Range(0, _destinations.Count)].position;
         _navMeshAgent.isStopped = false;
         _lookAround = false;
-        _navMeshAgent.speed = _enemyWalkSpeed;
+        _navMeshAgent.speed = _monsterWalkSpeed;
 
         _coroutine = null;
         Debug.Log("再開");
@@ -221,7 +230,7 @@ public abstract class EnemyBase : MonoBehaviour
     /// オブジェクトが視界に入ったかどうか判定する
     /// </summary>
     /// <param name="collider"></param>
-    public void FindObject(Collider collider)
+    private void FindObject(Collider collider)
     {
         if (collider == null || _isInCollectionArea) return;
 
@@ -250,7 +259,7 @@ public abstract class EnemyBase : MonoBehaviour
         Vector3 origin = _facePos.position;
         Vector3 toTarget = (collider.transform.position - origin).normalized;
         float targetAngle = Vector3.Angle(transform.forward, toTarget);
-        float currentFov = _hasSeen ? _patrolFovDistance : _enemyFovDistance;
+        float currentFov = _hasSeen ? _patrolFovDistance : _monsterFovDistance;
 
         Debug.DrawRay(origin, transform.forward * currentFov, _hasSeen ? Color.red : Color.blue);
 
@@ -334,7 +343,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void ProccesToLuggage(Collider luggage, float distance) { }
     #endregion
 
-     #region 状態関係
+    #region 状態関係
     //private void OnCollisionEnter(Collision collision)
     //{
     //    if (collision.gameObject.CompareTag(TRAP))
@@ -355,7 +364,7 @@ public abstract class EnemyBase : MonoBehaviour
     /// <param name="damage"></param>
     private void TakeDamage(float damage)
     {
-        _enemyHp -= damage;
+        _monsterHp -= damage;
         EnemyDie();
     }
     /// <summary>
@@ -363,17 +372,18 @@ public abstract class EnemyBase : MonoBehaviour
     /// </summary>
     protected virtual void EnemyDie()
     {
-        if (_enemyHp <= 0)
+        if (_monsterHp <= 0)
         {
             //Destroy(gameObject);
             _animator.SetTrigger("Die");
+            Destroy(this.gameObject, _destroyTime);
         }
     }
     /// <summary>
     /// 友好関係を変える
     /// </summary>
     /// <param name="enemyState"></param>
-    protected void ChangeState(EnemyState enemyState)
+    protected void ChangeState(MonsterState enemyState)
     {
         _currentEnemyState = enemyState;
     }

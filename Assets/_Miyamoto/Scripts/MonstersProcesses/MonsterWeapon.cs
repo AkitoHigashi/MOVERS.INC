@@ -8,12 +8,12 @@ public class MonsterWeapon : MonoBehaviour
     public float Power => _power;
 
     [SerializeField, Tooltip("この武器を持っているモンスターのベース")]
-    private EnemyBase _enemyBase;
+    private MonsterBase _enemyBase;
 
     private float _power;
 
     private void Awake()
     {
-        _power = _enemyBase.EnemyPower;
+        _power = _enemyBase.MonsterPower;
     }
 }
