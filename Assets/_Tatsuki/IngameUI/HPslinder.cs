@@ -7,20 +7,23 @@ public class HPslinder : MonoBehaviour
     [SerializeField] private Slider runhsliders;
     [SerializeField] private Slider luggagehsviders;
     [SerializeField] private InvokeSystem InvokeSystem;
-
+    [SerializeField]private CollectionArea collectionArea;
 
     private void OnEnable()
     {
         InvokeSystem.GetHp += HpSetSlider;
         InvokeSystem.GetRunGauge += RunSetSlider;
-        InvokeSystem.GetLuggage += LuggageNum;
+        
+        collectionArea.OnEnterLuggage += LuggageNum;
+        collectionArea.OnExitLuggage += LuggageNum;
     }
 
     private void OnDisable()
     {
         InvokeSystem.GetHp -= HpSetSlider;
         InvokeSystem.GetRunGauge -= RunSetSlider;
-        InvokeSystem.GetLuggage -= LuggageNum;
+        collectionArea.OnEnterLuggage -= LuggageNum;
+        collectionArea.OnExitLuggage -= LuggageNum;
     }
 
 
