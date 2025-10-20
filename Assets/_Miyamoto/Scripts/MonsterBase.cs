@@ -385,47 +385,4 @@ public abstract class MonsterBase : MonoBehaviour
     }
 
     #endregion
-    //  敵の視界を可視化する関数(必要に応じてコメントアウトして<3)
-    //private void OnDrawGizmos()
-    //{
-    //    if (_navMeshAgent == null) return;
-
-    //    Vector3 origin = transform.position;
-    //    Vector3 forward = transform.forward;
-    //    float viewAngle = _fov; // 視野角
-    //    int segments = 20;
-
-    //    // 色を設定
-    //    Gizmos.color = _hasSeen ? new Color(0, 1, 0) : new Color(1, 0, 0);
-
-    //    // 扇形を三角形で塗りつぶす
-    //    for (int i = 0; i < segments; i++)
-    //    {
-    //        float angle1 = -_fov / 2 + (viewAngle * i / segments);
-    //        float angle2 = -_fov / 2 + (viewAngle * (i + 1) / segments);
-
-    //        Vector3 dir1 = Quaternion.Euler(0, angle1, 0) * forward * _currentFov;
-    //        Vector3 dir2 = Quaternion.Euler(0, angle2, 0) * forward * _currentFov;
-
-    //        // 三角形を描画
-    //        Vector3[] vertices = new Vector3[] { origin, origin + dir1, origin + dir2 };
-
-    //        // Gizmosで三角形を塗りつぶし
-    //        DrawTriangle(vertices[0], vertices[1], vertices[2]);
-    //    }
-    //}
-    //private void DrawTriangle(Vector3 p1, Vector3 p2, Vector3 p3)
-    //{
-    //    Gizmos.DrawLine(p1, p2);
-    //    Gizmos.DrawLine(p2, p3);
-    //    Gizmos.DrawLine(p3, p1);
-
-    //    // 少し高さを変えて重ねることで塗りつぶしのように見せる
-    //    for (float t = 0; t <= 1; t += 0.1f)
-    //    {
-    //        Vector3 a = Vector3.Lerp(p1, p2, t);
-    //        Vector3 b = Vector3.Lerp(p1, p3, t);
-    //        Gizmos.DrawLine(a, b);
-    //    }
-    //}
 }

@@ -15,7 +15,7 @@ MonoBehaviour:
   _monsterHp: 5
   _monsterWalkSpeed: 4
   _monsterRunSpeed: 10
-  _monsterFovDistance: 1
+  _monsterFovDistance: 10
   _monsterPower: 10
   _monsterAttackRange: 10
   _monsterState: 2
