@@ -42,10 +42,12 @@ namespace Item
         [InspectorName("棒")] Rod,
         [InspectorName("ツールキット")]　Tool_Kit,
         [InspectorName("段ボール")] Cardboard,
+        [InspectorName("強化段ボール")] StrongCardboard,
         [InspectorName("クッションマット")] Cushion,
         [InspectorName("ローブ")] Robe,
         [InspectorName("回復ポーション")] Potion,
         [InspectorName("梯子")] Ladder,
-        [InspectorName("モンスタースフィア")] Sphere
+        [InspectorName("モンスタースフィア")] Sphere,
+        [InspectorName("筋力上昇ポーション")] MusclePotion
     }
 }
