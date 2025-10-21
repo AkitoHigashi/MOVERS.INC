@@ -1,28 +1,40 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public abstract class ItemBase : MonoBehaviour
 {
     [SerializeField] Sprite _sprite;
-    public Sprite Sprite
+    protected Rigidbody _rb;
+    protected ItemData _itemdata;
+    /// <summary>
+    /// アイテムのデータのやり取りをするプロパティ
+    /// </summary>
+    public ItemData ItemData
     {
         get
         {
-            return _sprite;
+            return _itemdata;
         }
         set
         {
-            if (!_sprite)
+            if (_itemdata == null)
             {
-                _sprite = value;
+                _itemdata = value;
             }
         }
+    }
+
+    private void Start()
+    {
+        Init();
     }
 
     /// <summary>
     /// 初期設定を行う関数で、必ずbaseも呼び出すこと
     /// </summary>
-    protected virtual void SetUp()
+    protected virtual void Init()
     {
+        _rb = GetComponent<Rigidbody>();
         if (tag != "Item")
         {
             tag = "Item";

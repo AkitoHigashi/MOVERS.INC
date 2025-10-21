@@ -74,7 +74,7 @@ public class Inventory : MonoBehaviour
                 _inventory.Enqueue(item);
                 item.SetActive(false);
                 //アイテムのスプライトを設定する
-                _image.sprite = item.GetComponent<ItemBase>().Sprite;
+                _image.sprite = item.GetComponent<ItemBase>().ItemData.Sprite;
             }
 
             return go;
