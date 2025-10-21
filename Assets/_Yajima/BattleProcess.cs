@@ -10,6 +10,6 @@ public static class BattleProcess
     /// <param name="hit">ダメージを受ける側</param>
     public static void DamageCalcurate(IAttackable attack,IHittable hit)
     {
-        hit.TakeDamage(attack.Power);
+        hit.TakeDamage(attack.Attack());
     }
 }
