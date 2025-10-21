@@ -17,7 +17,7 @@ public class Inventory : MonoBehaviour
     /// <returns>
     /// 格納しようとしているものの種類によって、格納されていたアイテム、null、格納しようとしているもののいずれか
     /// </returns>
-    public GameObject StoreItem(GameObject item, int inventoryNum)
+    public GameObject StoreItem(ItemBase item, int inventoryNum)
     {
         if (!item)
         {
@@ -50,20 +50,20 @@ public class Inventory : MonoBehaviour
     public class InventoryData
     {
         [SerializeField] Image _image;
-        Queue<GameObject> _inventory = new Queue<GameObject>();
+        Queue<ItemBase> _inventory = new Queue<ItemBase>();
 
         /// <summary>
         /// アイテムの格納、取り出しを行う関数
         /// </summary>
         /// <param name="item">格納するアイテム</param>
         /// <returns>取り出したアイテムかnull</returns>
-        public GameObject StoreItem(GameObject item)
+        public GameObject StoreItem(ItemBase item)
         {
             //アイテムを取り出す処理
             GameObject go = null;
             if (_inventory.Count > 0)
             {
-                go = _inventory.Dequeue();
+                go = _inventory.Dequeue().gameObject;
                 go.SetActive(true);
                 _image.sprite = null;
             }
@@ -72,9 +72,9 @@ public class Inventory : MonoBehaviour
             if (item)
             {
                 _inventory.Enqueue(item);
-                item.SetActive(false);
+                item.gameObject.SetActive(false);
                 //アイテムのスプライトを設定する
-                _image.sprite = item.GetComponent<ItemBase>().ItemData.Sprite;
+                _image.sprite = item.ItemData.Sprite;
             }
 
             return go;

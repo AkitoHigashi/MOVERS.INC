@@ -5,6 +5,8 @@ public abstract class ItemBase : MonoBehaviour
 {
     protected Rigidbody _rb;
     protected ItemData _itemdata;
+    Inventory _inventory;
+
     /// <summary>
     /// アイテムのデータのやり取りをするプロパティ
     /// </summary>
@@ -33,11 +35,33 @@ public abstract class ItemBase : MonoBehaviour
     /// </summary>
     protected virtual void Init()
     {
-        _rb = GetComponent<Rigidbody>();
         if (tag != "Item")
         {
             tag = "Item";
         }
+        _rb = GetComponent<Rigidbody>();
+        _inventory = FindFirstObjectByType<Inventory>();
+    }
+
+    /// <summary>
+    /// 手に持たれたときに呼び出す関数
+    /// </summary>
+    /// <param name="inventoryNum">入力キー</param>
+    public void Caught(InventoryKey inventoryNum)
+    {
+        _rb.isKinematic = true;
+        _inventory.StoreItem(this, (int)inventoryNum);
+    }
+
+    [ContextMenu("A")]
+    public void AAAA()
+    {
+        Debug.Log((int)InventoryKey.Alpha);
+    }
+
+    public enum InventoryKey
+    {
+        Alpha = KeyCode.Alpha1
     }
 
     /// <summary>
