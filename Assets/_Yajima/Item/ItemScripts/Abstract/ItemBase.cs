@@ -47,21 +47,10 @@ public abstract class ItemBase : MonoBehaviour
     /// 手に持たれたときに呼び出す関数
     /// </summary>
     /// <param name="inventoryNum">入力キー</param>
-    public void Caught(InventoryKey inventoryNum)
+    public void Caught(int inventoryNum)
     {
         _rb.isKinematic = true;
-        _inventory.StoreItem(this, (int)inventoryNum);
-    }
-
-    [ContextMenu("A")]
-    public void AAAA()
-    {
-        Debug.Log((int)InventoryKey.Alpha);
-    }
-
-    public enum InventoryKey
-    {
-        Alpha = KeyCode.Alpha1
+        _inventory.StoreItem(this, inventoryNum);
     }
 
     /// <summary>
