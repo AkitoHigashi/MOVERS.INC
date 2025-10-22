@@ -8,11 +8,11 @@ public class HPslinder : MonoBehaviour
     [SerializeField] private Slider luggagehsviders;
     [SerializeField] private InvokeSystem InvokeSystem;
     [SerializeField]private CollectionArea collectionArea;
-
+ int count = 0;
     private void OnEnable()
     {
-        InvokeSystem.GetHp += HpSetSlider;
-        InvokeSystem.GetRunGauge += RunSetSlider;
+        // InvokeSystem.GetHp += HpSetSlider;
+        // InvokeSystem.GetRunGauge += RunSetSlider;
         
         collectionArea.OnEnterLuggage += LuggageNum;
         collectionArea.OnExitLuggage += LuggageNum;
@@ -20,8 +20,8 @@ public class HPslinder : MonoBehaviour
 
     private void OnDisable()
     {
-        InvokeSystem.GetHp -= HpSetSlider;
-        InvokeSystem.GetRunGauge -= RunSetSlider;
+        // InvokeSystem.GetHp -= HpSetSlider;
+        // InvokeSystem.GetRunGauge -= RunSetSlider;
         collectionArea.OnEnterLuggage -= LuggageNum;
         collectionArea.OnExitLuggage -= LuggageNum;
     }
@@ -39,6 +39,7 @@ public class HPslinder : MonoBehaviour
 
     public void LuggageNum(int sliderValue)
     {
-        luggagehsviders.value = (float)sliderValue / UITestStatus.maxItem;
+        count += sliderValue;
+        luggagehsviders.value = (float)count/ UITestStatus.maxItem;
     }
 }
