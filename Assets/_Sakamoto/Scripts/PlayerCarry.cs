@@ -8,6 +8,7 @@ public class PlayerCarry : MonoBehaviour, IStartSetVariables
     private GameObject _target;
     private float _carryRayDistance;
     private string _luggageTag = "Luggage";
+    private string _itemTag = "Item";
     private bool _isCarrying = false;
 
     private void Start()
@@ -34,7 +35,7 @@ public class PlayerCarry : MonoBehaviour, IStartSetVariables
             if (Physics.Raycast(ray, out hit, _carryRayDistance))
             {
                 _target = hit.collider.gameObject;
-                if (_target.CompareTag(_luggageTag))
+                if (_target.CompareTag(_luggageTag) || _target.CompareTag(_itemTag))
                 {
                     Collider _targetCollider = _target.GetComponent<Collider>();
                     Rigidbody _targetRb = _target.GetComponent<Rigidbody>();
