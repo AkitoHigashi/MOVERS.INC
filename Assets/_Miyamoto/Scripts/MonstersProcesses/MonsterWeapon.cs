@@ -15,5 +15,6 @@ public class MonsterWeapon : MonoBehaviour
     private void Awake()
     {
         _power = _enemyBase.MonsterPower;
+        this.gameObject.SetActive(false);
     }
 }

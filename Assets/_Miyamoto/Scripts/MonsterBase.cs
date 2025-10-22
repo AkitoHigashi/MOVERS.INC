@@ -76,7 +76,6 @@ public abstract class MonsterBase : MonoBehaviour
     protected Animator _animator;
     protected Coroutine _coroutine;
     private Rigidbody _rb;
-    private MonsterVision _enemyVision;
     /// <summary>
     /// 継承先でAwakeから呼び出す
     /// </summary>
@@ -84,7 +83,6 @@ public abstract class MonsterBase : MonoBehaviour
     {
         SetParameter();
         VisionGenerator();
-        _enemyVision = GetComponentInChildren<MonsterVision>();
     }
     /// <summary>
     /// 継承先でUpdateから呼び出す
@@ -101,7 +99,6 @@ public abstract class MonsterBase : MonoBehaviour
     {
         _animator.SetTrigger("Reset");
         _animator.SetBool("LookAround", false);
-        _enemyVision.OnFind += FindObject;
     }
     /// <summary>
     /// 継承先でOnDisableから呼び出す
@@ -109,7 +106,6 @@ public abstract class MonsterBase : MonoBehaviour
     protected void BaseOnDisable()
     {
         StopAllCoroutines();
-        _enemyVision.OnFind -= FindObject;
     }
     /// <summary>
     /// 敵の初期値を設定する
@@ -220,6 +216,16 @@ public abstract class MonsterBase : MonoBehaviour
     {
         Debug.Log("見失ったReturnDestination呼び出し");
         _hasSeen = false;
+        float _currentDistance = float.MaxValue;
+        foreach (var destination in Destinations)
+        {
+            float distance = Vector3.Distance(this.transform.position, destination.position);
+            if (distance < _currentDistance)
+            {
+                _currentDistance = distance;
+                _lastDestination = destination.position;
+            }
+        }
         _currentDestination = _lastDestination; //元の目的地に戻る
         _navMeshAgent.isStopped = false;
     }
@@ -230,7 +236,7 @@ public abstract class MonsterBase : MonoBehaviour
     /// オブジェクトが視界に入ったかどうか判定する
     /// </summary>
     /// <param name="collider"></param>
-    private void FindObject(Collider collider)
+    public void FindObject(Collider collider)
     {
         if (collider == null || _isInCollectionArea) return;
 
@@ -275,7 +281,7 @@ public abstract class MonsterBase : MonoBehaviour
     /// <param name="hit"></param>
     private void OnTargetFind(Collider collider, float distance, RaycastHit hit)
     {
-        EnemyProcces(collider, distance);
+        MonsterProcces(collider, distance);
         _coroutine = null;
     }
     /// <summary>
@@ -316,7 +322,7 @@ public abstract class MonsterBase : MonoBehaviour
     /// </summary>
     /// <param name="collider"></param>
     /// <param name="distance"></param>
-    private void EnemyProcces(Collider collider, float distance)
+    private void MonsterProcces(Collider collider, float distance)
     {
         if (collider == null) return;
 
@@ -389,47 +395,4 @@ public abstract class MonsterBase : MonoBehaviour
     }
 
     #endregion
-    //  敵の視界を可視化する関数(必要に応じてコメントアウトして<3)
-    //private void OnDrawGizmos()
-    //{
-    //    if (_navMeshAgent == null) return;
-
-    //    Vector3 origin = transform.position;
-    //    Vector3 forward = transform.forward;
-    //    float viewAngle = _fov; // 視野角
-    //    int segments = 20;
-
-    //    // 色を設定
-    //    Gizmos.color = _hasSeen ? new Color(0, 1, 0) : new Color(1, 0, 0);
-
-    //    // 扇形を三角形で塗りつぶす
-    //    for (int i = 0; i < segments; i++)
-    //    {
-    //        float angle1 = -_fov / 2 + (viewAngle * i / segments);
-    //        float angle2 = -_fov / 2 + (viewAngle * (i + 1) / segments);
-
-    //        Vector3 dir1 = Quaternion.Euler(0, angle1, 0) * forward * _currentFov;
-    //        Vector3 dir2 = Quaternion.Euler(0, angle2, 0) * forward * _currentFov;
-
-    //        // 三角形を描画
-    //        Vector3[] vertices = new Vector3[] { origin, origin + dir1, origin + dir2 };
-
-    //        // Gizmosで三角形を塗りつぶし
-    //        DrawTriangle(vertices[0], vertices[1], vertices[2]);
-    //    }
-    //}
-    //private void DrawTriangle(Vector3 p1, Vector3 p2, Vector3 p3)
-    //{
-    //    Gizmos.DrawLine(p1, p2);
-    //    Gizmos.DrawLine(p2, p3);
-    //    Gizmos.DrawLine(p3, p1);
-
-    //    // 少し高さを変えて重ねることで塗りつぶしのように見せる
-    //    for (float t = 0; t <= 1; t += 0.1f)
-    //    {
-    //        Vector3 a = Vector3.Lerp(p1, p2, t);
-    //        Vector3 b = Vector3.Lerp(p1, p3, t);
-    //        Gizmos.DrawLine(a, b);
-    //    }
-    //}
 }

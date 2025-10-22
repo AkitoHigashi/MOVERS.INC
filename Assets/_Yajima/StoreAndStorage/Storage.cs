@@ -50,8 +50,8 @@ public class Storage : MonoBehaviour
                 {
                     //アイテムを保管庫に並べる
                     var go = Instantiate(item.Item);
-                    //アイテムにインベントリに表示する画像を持たせる
-                    go.GetComponent<ItemBase>().Sprite = item.Sprite;
+                    //アイテムにデータを持たせる
+                    go.GetComponent<ItemBase>().ItemData = item;
                     //設置場所（空のオブジェクト）の子オブジェクトにする
                     go.transform.SetParent(_itemShelfDic[item.ItemLabel].ShelfDatas[i].Position);
                     go.transform.localPosition = Vector3.zero;
@@ -90,5 +90,10 @@ public static class StorageData
             _possessCount.Add(itemData, 0);
         }
         _possessCount[itemData]++;
+    }
+
+    public static void ItemUse(ItemData itemData)
+    {
+        _possessCount[itemData]--;
     }
 }
