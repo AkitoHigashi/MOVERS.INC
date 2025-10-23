@@ -9,16 +9,16 @@ using TMPro;
 /// </summary>
 public class FallButton : MonoBehaviour
 {
-    [SerializeField] private Button button;               // 押すボタン
-    [SerializeField] private Transform target;            // 落ちる対象オブジェクト
-    [SerializeField] private float fallDistance = 2f;     // 落ちる距離
-    [SerializeField] private float fallSpeed = 5f;        // 落ちる速度
-    [SerializeField] private LuggageCollector collector;  // 回収処理を行うクラス
-    [SerializeField] private LuggageManager luggageManager; // エリア内の荷物管理クラス
-    [SerializeField] private ScoreManager scoreManager;   // スコア管理クラス
+    [SerializeField] private Button _button;               // 押すボタン
+    [SerializeField] private Transform _target;            // 落ちる対象オブジェクト
+    [SerializeField] private float _fallDistance = 2f;     // 落ちる距離
+    [SerializeField] private float _fallSpeed = 5f;        // 落ちる速度
+    [SerializeField] private LuggageCollector _collector;  // 回収処理を行うクラス
+    [SerializeField] private LuggageManager _luggageManager; // エリア内の荷物管理クラス
+    [SerializeField] private ScoreManager _scoreManager;   // スコア管理クラス
 
-    private Vector3 originalPosition; // オブジェクトの初期位置
-    private bool isFalling = false;   // 落下中フラグ（二重実行防止）
+    private Vector3 _originalPosition; // オブジェクトの初期位置
+    private bool _isFalling = false;   // 落下中フラグ（二重実行防止）
 
     /// <summary>
     /// 荷物（Luggage）との衝突を検知し、スコアを減少・オブジェクト破棄を行う。
@@ -30,15 +30,15 @@ public class FallButton : MonoBehaviour
             var luggage = collision.gameObject.GetComponent<Luggage>();
 
             // 管理リストから削除
-            luggageManager.UnregisterItem(collision.gameObject);
+            _luggageManager.UnregisterItem(collision.gameObject);
 
             // 荷物を破壊
             Destroy(collision.gameObject);
 
             // スコア減少とUI更新
-            scoreManager.SetScore(-luggage.Score);
+            _scoreManager.SetScore(-luggage.Score);
          
-            scoreManager.SetText(scoreManager.NowScore.ToString());
+            _scoreManager.SetText(_scoreManager.NowScore.ToString());
         }
     }
 
@@ -47,10 +47,10 @@ public class FallButton : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        originalPosition = target.position;
+        _originalPosition = _target.position;
 
         // ボタン押下時に「落下→戻る」動作を開始
-        button.onClick.AddListener(() => StartCoroutine(FallAndReturn()));
+        _button.onClick.AddListener(() => StartCoroutine(FallAndReturn()));
     }
 
     /// <summary>
@@ -59,15 +59,15 @@ public class FallButton : MonoBehaviour
     /// </summary>
     private IEnumerator FallAndReturn()
     {
-        if (isFalling) yield break; // 二重実行防止
-        isFalling = true;
+        if (_isFalling) yield break; // 二重実行防止
+        _isFalling = true;
 
-        Vector3 targetPosition = originalPosition + Vector3.down * fallDistance;
+        Vector3 targetPosition = _originalPosition + Vector3.down * _fallDistance;
 
         // ===== 落下フェーズ =====
-        while (Vector3.Distance(target.position, targetPosition) > 0.01f)
+        while (Vector3.Distance(_target.position, targetPosition) > 0.01f)
         {
-            target.position = Vector3.MoveTowards(target.position, targetPosition, fallSpeed * Time.deltaTime);
+            _target.position = Vector3.MoveTowards(_target.position, targetPosition, _fallSpeed * Time.deltaTime);
             yield return null;
         }
 
@@ -77,16 +77,16 @@ public class FallButton : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // ===== 上昇フェーズ =====
-        while (Vector3.Distance(target.position, originalPosition) > 0.01f)
+        while (Vector3.Distance(_target.position, _originalPosition) > 0.01f)
         {
-            target.position = Vector3.MoveTowards(target.position, originalPosition, fallSpeed * Time.deltaTime);
+            _target.position = Vector3.MoveTowards(_target.position, _originalPosition, _fallSpeed * Time.deltaTime);
             yield return null;
         }
 
-        isFalling = false;
+        _isFalling = false;
 
         // 荷物を回収（スコア処理完了後に呼び出し）
-        collector.Collect();
-        scoreManager.End();
+        _collector.Collect();
+        _scoreManager.End();
     }
 }
