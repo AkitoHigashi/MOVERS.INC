@@ -26,11 +26,5 @@ public class Fire : TrapBase
             main.startSpeed = _paticularSpeed;
             main.startLifetime = _paticularDisappearTime;
         }
-        else 
-        {
-            Debug.Log("エフェクトが終わった！");
-        }
-
-
     }
 }
