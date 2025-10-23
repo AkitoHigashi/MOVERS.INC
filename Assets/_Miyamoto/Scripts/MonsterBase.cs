@@ -350,19 +350,19 @@ public abstract class MonsterBase : MonoBehaviour
     #endregion
 
     #region 状態関係
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag(TRAP))
-    //    {
-    //        var trap = collision.gameObject.GetComponent<TrapBase>();
-    //        TakeDamage(trap.TrapDamage);
-    //    }
-    //    else if (collision.gameObject.CompareTag(ITEM))
-    //    {
-    //        var item = collision.gameObject.GetComponent<ItemBase>();
-    //        TakeDamage(item.Damage);
-    //    }
-    //}
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag(TRAP))
+        {
+            var trap = collision.gameObject.GetComponent<TrapBase>();
+            TakeDamage(trap.TrapDamage);
+        }
+        //else if (collision.gameObject.CompareTag(ITEM))
+        //{
+        //    var item = collision.gameObject.GetComponent<ItemBase>();
+        //    TakeDamage(item.Damage);
+        //}
+    }
 
     /// <summary>
     /// 攻撃を食らった時の計算
@@ -376,11 +376,12 @@ public abstract class MonsterBase : MonoBehaviour
     /// <summary>
     /// HPが0以下になったら破壊
     /// </summary>
+    [ContextMenu("Die")]
     protected virtual void EnemyDie()
     {
         if (_monsterHp <= 0)
         {
-            //Destroy(gameObject);
+            _navMeshAgent.speed = 0;
             _animator.SetTrigger("Die");
             Destroy(this.gameObject, _destroyTime);
         }
