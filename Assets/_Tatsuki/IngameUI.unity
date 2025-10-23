@@ -1396,6 +1396,7 @@ MonoBehaviour:
   runhsliders: {fileID: 1702321394}
   luggagehsviders: {fileID: 1408483628}
   InvokeSystem: {fileID: 558244637}
+  collectionArea: {fileID: 0}
 --- !u!114 &1227420050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1411,6 +1412,7 @@ MonoBehaviour:
   luggagetext: {fileID: 1017170023}
   timertext: {fileID: 844911372}
   invokeSystem: {fileID: 558244637}
+  CollectionArea: {fileID: 0}
 --- !u!1 &1408483626
 GameObject:
   m_ObjectHideFlags: 0

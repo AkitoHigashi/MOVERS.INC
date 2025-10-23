@@ -26,5 +26,14 @@ public class PlayerHealth : MonoBehaviour, IStartSetVariables
                 Dead();
             }
         }
+        else if (other.CompareTag("Trap"))
+        {
+            var trap=other.GetComponent<TrapBase>();
+            _currentHP -= trap.TrapDamage;
+            if (_currentHP <= 0)
+            {
+                Dead();
+            }
+        }
     }
 }

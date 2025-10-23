@@ -99,28 +99,48 @@ public class Lizard : MonsterBase
     /// <param name="distance"></param>
     private void ThrowLuggage()
     {
-        Debug.Log("ThrowLuggage");
         float distance = Vector3.Distance(transform.position, _collectionArea.transform.position);
         if (distance <= _stopDistance)
         {
-            Debug.Log("親子関係解除");
-            _currentDestination = _destinations[Random.Range(0, _destinations.Count)].position;
-            Collider collider = _luggage.GetComponent<Collider>();
-            var rb = collider.GetComponent<Rigidbody>();
+            Debug.Log("荷物を下す");
+            ReleaseLuggage();
 
-            _luggage.transform.SetParent(null);
-            rb.WakeUp();
-            _isCarry = false;
+            if (_destinations != null && _destinations.Count > 0)
+            {
+                _currentDestination = _destinations[Random.Range(0, _destinations.Count)].position;
+                _navMeshAgent.SetDestination( _currentDestination);
+            }
         }
+    }
+    /// <summary>
+    /// 荷物を親子関係から外す
+    /// </summary>
+    private void ReleaseLuggage()
+    {
+        if (!_luggage) return;
+
+        Debug.Log("荷物開放");
+        _luggage.transform.SetParent(null);
+        var rb = _luggage.GetComponent<Rigidbody>();
+
+        if (rb)
+        {
+            rb.isKinematic = false;
+            rb.WakeUp();
+        }
+
+        _luggage = null;
+        _isCarry = false;
     }
 
     /// <summary>
     /// 死んだときにもし荷物を持っていたら親子関係を解除
     /// </summary>
+    [ContextMenu("LizardDie")]
     protected override void EnemyDie()
     {
+        ReleaseLuggage();
         base.EnemyDie();
-        if (_luggage.transform.parent == this) _luggage.transform.SetParent(null);
     }
     private void OnTriggerEnter(Collider other)
     {

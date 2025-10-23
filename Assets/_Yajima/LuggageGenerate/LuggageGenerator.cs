@@ -6,7 +6,7 @@ using System.Linq;
 public class LuggageGenerator : MonoBehaviour
 {
     [System.Serializable]
-    class LuggageData
+  public  class LuggageData
     {
         [SerializeField] int _generateValue;
         [SerializeField] int _targetValue;
@@ -43,6 +43,7 @@ public class LuggageGenerator : MonoBehaviour
     [SerializeField] LuggageData _smallLuggage;
     [SerializeField] LuggageData _bigLuggage;
 
+
     private void Start()
     {
         //不正を検知
@@ -51,6 +52,11 @@ public class LuggageGenerator : MonoBehaviour
             LuggageGenerateAlgorithm(_smallLuggage);
             LuggageGenerateAlgorithm(_bigLuggage);
         }
+    }
+
+    public int GetTargetValue()
+    {
+        return _smallLuggage.TargetValue + _bigLuggage.GenerateValue;
     }
 
     /// <summary>
