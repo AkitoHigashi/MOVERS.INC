@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IStartSetVariables
 {
@@ -6,6 +7,7 @@ public class PlayerHealth : MonoBehaviour, IStartSetVariables
     public float CurrentHP => _currentHP;
     private float _playerHP;
     private float _currentHP;
+    public event Action <float> PlayerHealthChanged;
     public void StartSetVariables(PlayerData playerData)
     {
         _playerHP = playerData.Health;
@@ -23,6 +25,7 @@ public class PlayerHealth : MonoBehaviour, IStartSetVariables
         {
             var weapon = other.GetComponent<MonsterWeapon>();
             _currentHP -= weapon.Power;
+            PlayerHealthChanged(_currentHP);
             if (_currentHP <= 0)
             {
                 Dead();
@@ -32,6 +35,7 @@ public class PlayerHealth : MonoBehaviour, IStartSetVariables
         {
             var trap=other.GetComponent<TrapBase>();
             _currentHP -= trap.TrapDamage;
+            PlayerHealthChanged(_currentHP);
             if (_currentHP <= 0)
             {
                 Dead();
