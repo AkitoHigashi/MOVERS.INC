@@ -43,4 +43,9 @@ public class PlayerHealth : MonoBehaviour, IStartSetVariables
             }
         }
     }
+    public void TestDamage()
+    {
+        _currentHP = 10f;
+        PlayerHealthChanged(_currentHP);
+    }
 }

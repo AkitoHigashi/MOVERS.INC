@@ -2,7 +2,7 @@
 using TMPro.EditorUtilities;
 using UnityEngine;
 
-public class UITestStatus : MonoBehaviour
+public class StatusNotifer : MonoBehaviour
 {
     private LuggageGenerator _luggageGenerator;
     public static int maxItem = 0;
@@ -26,6 +26,7 @@ public class UITestStatus : MonoBehaviour
         Debug.Log($"{UImaxHp}{CurrentHp}");
         
     }
+    
     private void OnEnable()
     {
         _playerHealth.PlayerHealthChanged += SetHealth;
