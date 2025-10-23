@@ -1,12 +1,18 @@
 ﻿using System;
 using UnityEngine;
 
+public enum LuggageState
+{
+    big,
+    small,
+}
 /// <summary>
 /// 荷物オブジェクト。スコア値を保持し、
 /// 一定以上のダメージを受けると破壊される。
 /// </summary>
 public class Luggage : MonoBehaviour
 {
+    [SerializeField] private LuggageState state;
     [SerializeField] private int _score = 100;
     [SerializeField] private LuggageSpeed _luggageSpeed;
     [SerializeField] private float damageThreshold = 3f; // この速さ未満ならノーダメージ
