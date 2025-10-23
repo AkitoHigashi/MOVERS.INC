@@ -3,35 +3,25 @@
 /// <summary>
 /// 横に薙ぎ払うものにアタッチするクラス
 /// </summary>
-[RequireComponent(typeof(Animator))]
 public class Sweep : ItemBase
 {
-    [SerializeField] string _animationName;
-    [SerializeField] float _power;
-    Animator _anim;
-    /// <summary>2度振り禁止フラグ</summary>
-    bool _isPlaying;
+    [SerializeField] GameObject _sweep;
 
     protected override void Init()
     {
         base.Init();
-        _anim = GetComponent<Animator>();
+        _sweep.SetActive(false);
     }
 
+    [ContextMenu("a")]
     public override void ItemActivate()
     {
-        if (!_isPlaying)
+        if (!_sweep.activeSelf)
         {
-            _isPlaying = true;
-            _anim.Play(_animationName);
+            //プレイヤーの子にする想定
+            _sweep.transform.SetParent(transform.parent);
+            _sweep.SetActive(true);
+            gameObject.SetActive(false);
         }
-    }
-
-    /// <summary>
-    /// アニメーションイベントで呼び出す
-    /// </summary>
-    public void ActivateEnd()
-    {
-        _isPlaying = false;
     }
 }
