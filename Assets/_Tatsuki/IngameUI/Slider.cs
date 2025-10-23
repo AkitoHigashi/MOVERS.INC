@@ -4,12 +4,12 @@ using DG;
 using DG.Tweening;
 using System.Net.NetworkInformation;
 
-public class slider : MonoBehaviour
+public class Slider : MonoBehaviour
 {
-    [SerializeField] private Slider _hpslider;
-    [SerializeField] private Slider _runhsliders;
-    [SerializeField] private Slider _luggagehsviders;
-    [SerializeField] private Slider _throwGauge;
+    [SerializeField] private UnityEngine.UI.Slider _hpslider;
+    [SerializeField] private UnityEngine.UI.Slider _runhsliders;
+    [SerializeField] private UnityEngine.UI.Slider _luggagehsviders;
+    [SerializeField] private UnityEngine.UI.Slider _throwGauge;　　
 
     //  [SerializeField] private InvokeSystem InvokeSystem;
     [SerializeField] private CollectionArea _collectionArea;
@@ -41,14 +41,20 @@ public class slider : MonoBehaviour
         HpSetSlider();
         SetThrowGauge();
     }
+    /// <summary>
+    /// スローゲージスライダーの更新をする
+    /// </summary>
     private void SetThrowGauge()
     {
         float max = _playerThrow.ThrowableTime;
-        float current = _playerThrow.ThrowTime;
+        float current = _playerThrow.ThrowTime;　
         float a = current / max;
         _throwGauge.DOValue(a, 1f).SetEase(Ease.OutCubic);
 
     }
+    /// <summary>
+    /// ヘルススライダーの更新をする
+    /// </summary>
 
     public void HpSetSlider()
     {
@@ -62,6 +68,10 @@ public class slider : MonoBehaviour
         // runhsliders.value = sliderValue / StatusNotifer.UImaxRunGauge;
     }
 
+    /// <summary>
+    /// 指定荷物のカウントスライダーの更新をする
+    /// </summary>
+    /// <param name="sliderValue"></param>
     public void LuggageNum(int sliderValue)
     {
 

@@ -2,6 +2,10 @@
 using TMPro.EditorUtilities;
 using UnityEngine;
 
+/// <summary>
+/// インゲームにつかう情報を取得するクラス
+/// </summary>
+/// このクラスはなくして直接スライダークラスとつなぐようにする予定
 public class StatusNotifer : MonoBehaviour
 {
     private LuggageGenerator _luggageGenerator;
@@ -21,8 +25,7 @@ public class StatusNotifer : MonoBehaviour
     }
     private void Start()
     {
-        //UImaxHp = 100;
-        //CurrentHp = 100;
+       
         MaxHp = (int)_playerHealth.PlayerHP;
         CurrentHp = (int)_playerHealth.CurrentHP;
         Debug.Log($"{MaxHp}{CurrentHp}");
