@@ -23,7 +23,7 @@ public class Luggage : MonoBehaviour
     {
 
         float speed =  _luggageSpeed.GetTotalSpeed();
-        Debug.Log(speed);
+     //   Debug.Log(speed);
        if(speed < damageThreshold)return;
        int damage = Mathf.RoundToInt((speed - damageThreshold) * damageScale);
        int scaledDamage = Mathf.RoundToInt((MaxScore / 100f) * damage);
