@@ -10,7 +10,7 @@ public class TextUImanager : MonoBehaviour
     [SerializeField] private InvokeSystem _invokeSystem;//通知
     [SerializeField] private CollectionArea _collectionArea;
     [SerializeField] private StatusNotifer _statusNotifer;
-     int count = 0;
+     private int _count = 0; //荷物の出し入れをカウントする
 
 
   
@@ -30,8 +30,8 @@ public class TextUImanager : MonoBehaviour
 
     public void LuggageSetText(int text)
     {
-        count += text;
-        _luggagetext.text = $"{count}/{_statusNotifer.MaxItem}";
+        _count += text;
+        _luggagetext.text = $"{_count}/{_statusNotifer.MaxItem}";
     }
 
     public void TimerSetText(float ctx)

@@ -24,8 +24,7 @@ public class slider : MonoBehaviour
     }
     private void OnEnable()
     {
-        // InvokeSystem.GetHp += HpSetSlider;
-        // InvokeSystem.GetRunGauge += RunSetSlider;
+  
 
         _collectionArea.OnEnterLuggage += LuggageNum;
         _collectionArea.OnExitLuggage += LuggageNum;
@@ -33,8 +32,7 @@ public class slider : MonoBehaviour
 
     private void OnDisable()
     {
-        // InvokeSystem.GetHp -= HpSetSlider;
-        // InvokeSystem.GetRunGauge -= RunSetSlider;
+     
         _collectionArea.OnEnterLuggage -= LuggageNum;
         _collectionArea.OnExitLuggage -= LuggageNum;
     }
