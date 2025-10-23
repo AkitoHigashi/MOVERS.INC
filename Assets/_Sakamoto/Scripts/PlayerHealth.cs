@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour, IStartSetVariables
     public float CurrentHP => _currentHP;
     private float _playerHP;
     private float _currentHP;
+    //[SerializeField]private int TestNum = 0;
     public event Action <float> PlayerHealthChanged;
     public void StartSetVariables(PlayerData playerData)
     {
@@ -43,9 +44,10 @@ public class PlayerHealth : MonoBehaviour, IStartSetVariables
             }
         }
     }
-    public void TestDamage()
-    {
-        _currentHP = 10f;
-        PlayerHealthChanged(_currentHP);
-    }
+    //public void TestDamage()
+    //{
+    //    _currentHP = TestNum;
+    //    PlayerHealthChanged(_currentHP);
+    //}
+   
 }

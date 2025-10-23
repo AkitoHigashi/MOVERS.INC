@@ -21,6 +21,8 @@ public class StatusNotifer : MonoBehaviour
     }
     private void Start()
     {
+        //UImaxHp = 100;
+        //CurrentHp = 100;
         UImaxHp = (int)_playerHealth.PlayerHP;
         CurrentHp = (int)_playerHealth.CurrentHP;
         Debug.Log($"{UImaxHp}{CurrentHp}");

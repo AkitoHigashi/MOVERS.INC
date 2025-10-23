@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using DG;
+using DG.Tweening;
 
 public class HPslinder : MonoBehaviour
 {
@@ -34,7 +36,8 @@ public class HPslinder : MonoBehaviour
     public void HpSetSlider()
     {
        // Debug.Log(StatusNotifer.CurrentHp / StatusNotifer.UImaxHp);
-        hpslider.value = (float)StatusNotifer.CurrentHp / StatusNotifer.UImaxHp;
+        float targetvalue = (float)StatusNotifer.CurrentHp / StatusNotifer.UImaxHp;
+        hpslider.DOValue(targetvalue,1f).SetEase(Ease.OutCubic);
     }
 
     public void RunSetSlider(float sliderValue)
