@@ -8,7 +8,7 @@ public class textUImanager : MonoBehaviour
     [SerializeField] private TMP_Text timertext;//タイマー
     [SerializeField] private InvokeSystem invokeSystem;//通知
     [SerializeField] private CollectionArea CollectionArea;
-    
+     int count = 0;
 
 
   
@@ -28,7 +28,8 @@ public class textUImanager : MonoBehaviour
 
     public void LuggageSetText(int text)
     {
-        luggagetext.text = $"{text}/{UITestStatus.maxItem}";
+        count += text;
+        luggagetext.text = $"{count}/{UITestStatus.maxItem}";
     }
 
     public void TimerSetText(float ctx)
