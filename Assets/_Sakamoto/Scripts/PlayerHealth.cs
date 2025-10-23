@@ -2,6 +2,8 @@
 
 public class PlayerHealth : MonoBehaviour, IStartSetVariables
 {
+    public float PlayerHP => _playerHP;
+    public float CurrentHP => _currentHP;
     private float _playerHP;
     private float _currentHP;
     public void StartSetVariables(PlayerData playerData)
