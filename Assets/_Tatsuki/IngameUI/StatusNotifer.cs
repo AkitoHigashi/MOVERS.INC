@@ -5,30 +5,30 @@ using UnityEngine;
 public class StatusNotifer : MonoBehaviour
 {
     private LuggageGenerator _luggageGenerator;
-    public static int maxItem = 0;
-    public static int UImaxHp = 0;
-    public static int CurrentHp = 0;
-    public static int UImaxRunGauge = 100;
-   [SerializeField] private PlayerHealth _playerHealth;
+    public int MaxItem = 0;
+    public int MaxHp = 0;
+    public int CurrentHp = 0;
+    public int MaxRunGauge = 100;
+    [SerializeField] private PlayerHealth _playerHealth;
 
     private void Awake()
     {
-       // _playerHealth = FindAnyObjectByType<PlayerHealth>();
+        // _playerHealth = FindAnyObjectByType<PlayerHealth>();
         _luggageGenerator = FindAnyObjectByType<LuggageGenerator>();
-        maxItem = _luggageGenerator.GetTargetValue();
-     
+        MaxItem = _luggageGenerator.GetTargetValue();
+
 
     }
     private void Start()
     {
         //UImaxHp = 100;
         //CurrentHp = 100;
-        UImaxHp = (int)_playerHealth.PlayerHP;
+        MaxHp = (int)_playerHealth.PlayerHP;
         CurrentHp = (int)_playerHealth.CurrentHP;
-        Debug.Log($"{UImaxHp}{CurrentHp}");
-        
+        Debug.Log($"{MaxHp}{CurrentHp}");
+
     }
-    
+
     private void OnEnable()
     {
         _playerHealth.PlayerHealthChanged += SetHealth;
@@ -40,7 +40,7 @@ public class StatusNotifer : MonoBehaviour
 
     public void SetHealth(float currentHp)
     {
-       Debug.Log(currentHp);
+        Debug.Log(currentHp);
         CurrentHp = (int)currentHp;
     }
 }

@@ -3,14 +3,14 @@
 public class PanelSwitch : MonoBehaviour
 {
 
-    [SerializeField] private GameObject InGameUI;
-    [SerializeField] private GameObject OutGameUI;
+    [SerializeField] private GameObject _inGameUI;
+    [SerializeField] private GameObject _outGameUI;
 
 
     public void SetPanelButton()
     {
-       InGameUI.SetActive(false);
-       OutGameUI.SetActive(true);
+       _inGameUI.SetActive(false);
+       _outGameUI.SetActive(true);
 
     }
 }
