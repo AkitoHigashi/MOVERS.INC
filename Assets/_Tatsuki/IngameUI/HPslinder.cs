@@ -25,11 +25,15 @@ public class HPslinder : MonoBehaviour
         collectionArea.OnEnterLuggage -= LuggageNum;
         collectionArea.OnExitLuggage -= LuggageNum;
     }
-
-
-    public void HpSetSlider(float sliderValue)
+    private void Update()
     {
-        hpslider.value = sliderValue / UITestStatus.UImaxHp;
+        HpSetSlider();
+    }
+
+
+    public void HpSetSlider()
+    {
+        hpslider.value = UITestStatus.CurrentHp / UITestStatus.UImaxHp;
     }
 
     public void RunSetSlider(float sliderValue)

@@ -21,9 +21,17 @@ public class UITestStatus : MonoBehaviour
         CurrentHp = (int)_playerHealth.CurrentHP;
 
     }
-
-    public void SetHealth()
+    private void OnEnable()
     {
-        UImaxHp  = (int)_playerHealth.CurrentHP;
+        _playerHealth.PlayerHealthChanged += SetHealth;
+    }
+    private void OnDisable()
+    {
+        _playerHealth.PlayerHealthChanged -= SetHealth;
+    }
+
+    public void SetHealth(float currentHp)
+    {
+        CurrentHp = (int)currentHp;
     }
 }
