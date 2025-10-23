@@ -6,8 +6,6 @@
 [RequireComponent(typeof(Rigidbody))]
 public class DemoMonsterBall : ItemBase
 {
-    Rigidbody _rb;
-
     protected override void Init()
     {
         base.Init();
