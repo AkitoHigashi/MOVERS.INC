@@ -27,17 +27,17 @@ public class DemoPlayer : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            _go = _inventory.StoreItem(_go, 0);
+            _go = _inventory.StoreItem(_go.GetComponent<ItemBase>(), 0);
             _go?.transform.SetParent(transform);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            _go = _inventory.StoreItem(_go, 1);
+            _go = _inventory.StoreItem(_go.GetComponent<ItemBase>(), 1);
             _go?.transform.SetParent(transform);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            _go = _inventory.StoreItem(_go, 2);
+            _go = _inventory.StoreItem(_go.GetComponent<ItemBase>(), 2);
             _go?.transform.SetParent(transform);
         }
         if (Input.GetMouseButtonDown(0))
