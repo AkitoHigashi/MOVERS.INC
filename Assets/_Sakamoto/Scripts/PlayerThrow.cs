@@ -13,6 +13,9 @@ public class PlayerThrow : MonoBehaviour, IStartSetVariables
     private bool _isThrowing = false;
     private bool _isCarry = false;
 
+    public float ThrowTime => _throwTime;  //abe
+    public float ThrowableTime => _throwableTime; //abe
+
     private void Start()
     {
         _luggageData = GetComponent<LuggageData>();
@@ -43,10 +46,12 @@ public class PlayerThrow : MonoBehaviour, IStartSetVariables
     public void StopThrow()
     {
         _isThrowing = false;
+       
         if (_isCarry && _throwTime >= _throwableTime)
         {
             Throw();
         }
+        _throwTime = 0f; //abe
     }
 
     private void Throw()
@@ -68,6 +73,7 @@ public class PlayerThrow : MonoBehaviour, IStartSetVariables
         _luggageData.LuggageRb = null;
         _isCarry = false;
         _playerCarry.CarryingBoolFalse();
+        _throwTime = 0f; //abe
     }
 
     public void StartSetVariables(PlayerData playerData)
