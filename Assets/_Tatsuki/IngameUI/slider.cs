@@ -62,7 +62,7 @@ public class slider : MonoBehaviour
 
     public void LuggageNum(int sliderValue)
     {
-        count += sliderValue;
-       // luggagehsviders.value = (float)count/ StatusNotifer.maxItem;
+        
+        luggagehsviders.value = (float)sliderValue/ StatusNotifer.maxItem;
     }
 }
