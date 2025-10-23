@@ -5,21 +5,26 @@ using UnityEngine;
 public class UITestStatus : MonoBehaviour
 {
     private LuggageGenerator _luggageGenerator;
-    public static int maxItem = 10;
-    public static int UImaxHp = 100;
-    public static int CurrentHp = 100;
+    public static int maxItem = 0;
+    public static int UImaxHp = 0;
+    public static int CurrentHp = 0;
     public static int UImaxRunGauge = 100;
-    private PlayerHealth _playerHealth;
+   [SerializeField] private PlayerHealth _playerHealth;
 
     private void Awake()
     {
-        _playerHealth = FindAnyObjectByType<PlayerHealth>();
+       // _playerHealth = FindAnyObjectByType<PlayerHealth>();
         _luggageGenerator = FindAnyObjectByType<LuggageGenerator>();
         maxItem = _luggageGenerator.GetTargetValue();
-        Debug.Log(maxItem);
+     
+
+    }
+    private void Start()
+    {
         UImaxHp = (int)_playerHealth.PlayerHP;
         CurrentHp = (int)_playerHealth.CurrentHP;
-
+        Debug.Log($"{UImaxHp}{CurrentHp}");
+        
     }
     private void OnEnable()
     {
@@ -32,6 +37,7 @@ public class UITestStatus : MonoBehaviour
 
     public void SetHealth(float currentHp)
     {
+       Debug.Log(currentHp);
         CurrentHp = (int)currentHp;
     }
 }

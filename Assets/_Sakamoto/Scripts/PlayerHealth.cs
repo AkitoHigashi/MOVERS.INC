@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour, IStartSetVariables
     {
         _playerHP = playerData.Health;
         _currentHP = _playerHP;
+     
     }
 
     private void Dead()
