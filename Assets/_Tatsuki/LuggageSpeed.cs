@@ -3,21 +3,21 @@ using UnityEngine;
 
 public class LuggageSpeed : MonoBehaviour
 {
-    private Vector3 prevPosition;
-    private Vector3 currentPosition;
-    private Vector3 luggagevelocity;
-    private float  totalSpeed  ;
-  [SerializeField]  private bool Ishave = false; //アイテムをもっているときだけ計算する
+    private Vector3 _prevPosition;
+    private Vector3 _currentPosition;
+    private Vector3 _luggagevelocity;
+    private float  _totalSpeed  ;
+  [SerializeField]  private bool _ishave = false; //アイテムをもっているときだけ計算する
     [SerializeField] private Rigidbody _rb;
     private void Start()
     {
-        prevPosition = transform.position;
+        _prevPosition = transform.position;
     }
 
     private void FixedUpdate()
     {
-        if(Ishave)TakeLuggageSpeed();
-        totalSpeed = luggagevelocity.magnitude + _rb.linearVelocity.magnitude;
+        if(_ishave)TakeLuggageSpeed();
+        _totalSpeed = _luggagevelocity.magnitude + _rb.linearVelocity.magnitude;
 
     }
 
@@ -27,16 +27,16 @@ public class LuggageSpeed : MonoBehaviour
         if (Mathf.Approximately(Time.deltaTime, 0)) 
             return;
         
-        currentPosition = transform.position;
+        _currentPosition = transform.position;
         
-        luggagevelocity  = (currentPosition - prevPosition)/Time.deltaTime;
+        _luggagevelocity  = (_currentPosition - _prevPosition)/Time.deltaTime;
         
-        Debug.Log(luggagevelocity.magnitude);
-        prevPosition = currentPosition; 
+        Debug.Log(_luggagevelocity.magnitude);
+        _prevPosition = _currentPosition; 
     }
  
 
    
-    public float GetTotalSpeed()=> totalSpeed;
+    public float GetTotalSpeed()=> _totalSpeed;
    
 }
