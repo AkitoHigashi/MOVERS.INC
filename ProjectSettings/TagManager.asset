@@ -5,6 +5,13 @@ TagManager:
   serializedVersion: 3
   tags:
   - Luggage
+  - Item
+  - MonsterWeapon
+  - CollectionArea
+  - Trap
+  - TrapBase
+  - Monster
+  - QuestPaper
   layers:
   - Default
   - TransparentFX
@@ -12,13 +19,13 @@ TagManager:
   - _ground
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - _player
+  - _wall
+  - _ceiling
+  - _luggage
+  - _item
+  - _trap
+  - _monster
   - 
   - 
   - 
