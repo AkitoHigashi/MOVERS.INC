@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using TMPro;
+
 
 /// <summary>
 /// 指定されたボタンを押すと、対象オブジェクトを上下に動かす（落とす→戻す）制御を行うクラス。
