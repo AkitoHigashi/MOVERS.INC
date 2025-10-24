@@ -42,8 +42,8 @@ public class CollectionArea : MonoBehaviour
         if (other.CompareTag("Luggage"))
         {
             var luggage = other.gameObject.GetComponent<Luggage>();
-            _scoreManager.SetScore(-luggage.MaxScore);
-            luggage.MaxScore = luggage.Score;
+            _scoreManager.SetScore(-luggage.Score);
+           // luggage.MaxScore = luggage.Score;
             _scoreManager.SetText(_scoreManager.NowScore.ToString());
             OnExit?.Invoke(other.gameObject);
            OnExitLuggage?.Invoke(-1);
