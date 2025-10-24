@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using TMPro;
-using UnityEngine.InputSystem;
-using DG;
+
 
 public class TextUImanager : MonoBehaviour
 {
     [SerializeField] private TMP_Text _luggagetext; //現在荷物
     [SerializeField] private TMP_Text _timertext;//タイマー
-    [SerializeField] private InvokeSystem _invokeSystem;//通知
+
     [SerializeField] private CollectionArea _collectionArea;
     [SerializeField] private StatusNotifer _statusNotifer;
      private int _count = 0; //荷物の出し入れをカウントする
@@ -18,14 +17,14 @@ public class TextUImanager : MonoBehaviour
     {
        _collectionArea.OnEnterLuggage += LuggageSetText;
         _collectionArea.OnExitLuggage += LuggageSetText;
-        _invokeSystem.Gettimer +=  TimerSetText;
+        
     }
 
     private void OnDisable()
     {
         _collectionArea.OnEnterLuggage -= LuggageSetText;
         _collectionArea.OnExitLuggage -= LuggageSetText;
-        _invokeSystem.Gettimer -= TimerSetText;
+        
     }
 
     public void LuggageSetText(int text)

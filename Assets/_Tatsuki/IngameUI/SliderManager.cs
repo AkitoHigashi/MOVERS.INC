@@ -1,17 +1,15 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using DG;
 using DG.Tweening;
-using System.Net.NetworkInformation;
 
-public class Slider : MonoBehaviour
+
+public class SliderManager : MonoBehaviour
 {
     [SerializeField] private UnityEngine.UI.Slider _hpslider;
     [SerializeField] private UnityEngine.UI.Slider _runhsliders;
     [SerializeField] private UnityEngine.UI.Slider _luggagehsviders;
     [SerializeField] private UnityEngine.UI.Slider _throwGauge;　　
 
-    //  [SerializeField] private InvokeSystem InvokeSystem;
+  
     [SerializeField] private CollectionArea _collectionArea;
     private StatusNotifer _statusNotifer;
     private PlayerThrow _playerThrow;

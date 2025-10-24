@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro.EditorUtilities;
+﻿
 using UnityEngine;
 
 /// <summary>
@@ -28,7 +27,7 @@ public class StatusNotifer : MonoBehaviour
        
         MaxHp = (int)_playerHealth.PlayerHP;
         CurrentHp = (int)_playerHealth.CurrentHP;
-        Debug.Log($"{MaxHp}{CurrentHp}");
+       // Debug.Log($"{MaxHp}{CurrentHp}");
 
     }
 
