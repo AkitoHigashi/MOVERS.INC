@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 
 
 public class SliderManager : MonoBehaviour
 {
-    [SerializeField] private UnityEngine.UI.Slider _hpslider;
-    [SerializeField] private UnityEngine.UI.Slider _runhsliders;
-    [SerializeField] private UnityEngine.UI.Slider _luggagehsviders;
-    [SerializeField] private UnityEngine.UI.Slider _throwGauge;　　
+    [SerializeField] private Slider _hpslider;
+    [SerializeField] private Slider _runhsliders;
+    [SerializeField] private Slider _luggagehsviders;
+    [SerializeField] private Slider _throwGauge;　　
 
   
     [SerializeField] private CollectionArea _collectionArea;
