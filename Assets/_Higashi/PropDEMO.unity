@@ -437,7 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2d7a0ea532bd8488d788b25dcefb68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LuggageSpeed
-  _ishave: 0
+  Ishave: 0
   _rb: {fileID: 941619836}
 --- !u!114 &343269036
 MonoBehaviour:
@@ -453,8 +453,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Luggage
   _score: 100
   _luggageSpeed: {fileID: 941619837}
-  _damageThreshold: 3
-  _damageScale: 1
+  damageThreshold: 3
+  damageScale: 1
   MaxScore: 0
 --- !u!1001 &366871087
 PrefabInstance:
@@ -520,17 +520,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4743810094832240347, guid: f8ef0842fa1bd26409c96b0a318877f0, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 5610839985542755889, guid: f8ef0842fa1bd26409c96b0a318877f0, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5610839985542755889, guid: f8ef0842fa1bd26409c96b0a318877f0, type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -665,112 +657,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 02_Kitchen_01_CookingPot#1
       objectReference: {fileID: 0}
-    - target: {fileID: 4279734645060891848, guid: 16dfe05c8ffa4d84681d7cd84ab17842, type: 3}
-      propertyPath: m_TagString
-      value: Luggage
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4279734645060891848, guid: 16dfe05c8ffa4d84681d7cd84ab17842, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 413223948}
-    - targetCorrespondingSourceObject: {fileID: 4279734645060891848, guid: 16dfe05c8ffa4d84681d7cd84ab17842, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 413223951}
-    - targetCorrespondingSourceObject: {fileID: 4279734645060891848, guid: 16dfe05c8ffa4d84681d7cd84ab17842, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 413223950}
-    - targetCorrespondingSourceObject: {fileID: 4279734645060891848, guid: 16dfe05c8ffa4d84681d7cd84ab17842, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 413223949}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16dfe05c8ffa4d84681d7cd84ab17842, type: 3}
---- !u!1 &413223947 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4279734645060891848, guid: 16dfe05c8ffa4d84681d7cd84ab17842, type: 3}
-  m_PrefabInstance: {fileID: 413223946}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &413223948
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 413223947}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -4792081414705846232, guid: 80870dfe9805f444fab1862626cae728, type: 3}
---- !u!114 &413223949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 413223947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af2d7a0ea532bd8488d788b25dcefb68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LuggageSpeed
-  _ishave: 0
-  _rb: {fileID: 869372660}
---- !u!114 &413223950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 413223947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be6f906936536d243804c91209652662, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Luggage
-  _score: 100
-  _luggageSpeed: {fileID: 869372658}
-  _damageThreshold: 3
-  _damageScale: 1
-  MaxScore: 0
---- !u!54 &413223951
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 413223947}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1001 &485002762
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -782,10 +673,6 @@ PrefabInstance:
     - target: {fileID: 1635295810059159630, guid: 2aa6286db4bf6c24ba9c943b1b942f94, type: 3}
       propertyPath: m_Name
       value: 02_Kitchen_01_CookingPot#3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1635295810059159630, guid: 2aa6286db4bf6c24ba9c943b1b942f94, type: 3}
-      propertyPath: m_TagString
-      value: Luggage
       objectReference: {fileID: 0}
     - target: {fileID: 2160158047634363124, guid: 2aa6286db4bf6c24ba9c943b1b942f94, type: 3}
       propertyPath: m_LocalPosition.x
@@ -830,105 +717,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1635295810059159630, guid: 2aa6286db4bf6c24ba9c943b1b942f94, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 485002764}
-    - targetCorrespondingSourceObject: {fileID: 1635295810059159630, guid: 2aa6286db4bf6c24ba9c943b1b942f94, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 485002767}
-    - targetCorrespondingSourceObject: {fileID: 1635295810059159630, guid: 2aa6286db4bf6c24ba9c943b1b942f94, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 485002766}
-    - targetCorrespondingSourceObject: {fileID: 1635295810059159630, guid: 2aa6286db4bf6c24ba9c943b1b942f94, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 485002765}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2aa6286db4bf6c24ba9c943b1b942f94, type: 3}
---- !u!1 &485002763 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1635295810059159630, guid: 2aa6286db4bf6c24ba9c943b1b942f94, type: 3}
-  m_PrefabInstance: {fileID: 485002762}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &485002764
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 485002763}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -9066026482410315590, guid: 7d1974cd9f00a6642becc6a9c5f9dd16, type: 3}
---- !u!114 &485002765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 485002763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af2d7a0ea532bd8488d788b25dcefb68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LuggageSpeed
-  _ishave: 0
-  _rb: {fileID: 869372660}
---- !u!114 &485002766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 485002763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be6f906936536d243804c91209652662, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Luggage
-  _score: 100
-  _luggageSpeed: {fileID: 869372658}
-  _damageThreshold: 3
-  _damageScale: 1
-  MaxScore: 0
---- !u!54 &485002767
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 485002763}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &542143477
 GameObject:
   m_ObjectHideFlags: 0
@@ -1084,8 +874,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Luggage
   _score: 10000
   _luggageSpeed: {fileID: 542143484}
-  _damageThreshold: 3
-  _damageScale: 1
+  damageThreshold: 3
+  damageScale: 1
   MaxScore: 0
 --- !u!114 &542143484
 MonoBehaviour:
@@ -1099,7 +889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2d7a0ea532bd8488d788b25dcefb68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LuggageSpeed
-  _ishave: 0
+  Ishave: 0
   _rb: {fileID: 542143482}
 --- !u!4 &563514096
 Transform:
@@ -1201,112 +991,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 03_Blacksmith_01_CooperBar
       objectReference: {fileID: 0}
-    - target: {fileID: 854268278939408518, guid: d9c87df41475ca343b77b12b71160898, type: 3}
-      propertyPath: m_TagString
-      value: Luggage
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 854268278939408518, guid: d9c87df41475ca343b77b12b71160898, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 623291697}
-    - targetCorrespondingSourceObject: {fileID: 854268278939408518, guid: d9c87df41475ca343b77b12b71160898, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 623291700}
-    - targetCorrespondingSourceObject: {fileID: 854268278939408518, guid: d9c87df41475ca343b77b12b71160898, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 623291699}
-    - targetCorrespondingSourceObject: {fileID: 854268278939408518, guid: d9c87df41475ca343b77b12b71160898, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 623291698}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9c87df41475ca343b77b12b71160898, type: 3}
---- !u!1 &623291696 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 854268278939408518, guid: d9c87df41475ca343b77b12b71160898, type: 3}
-  m_PrefabInstance: {fileID: 623291695}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &623291697
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 623291696}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -835987817210681674, guid: f0ee873b9c72e8849a5bf14636c21c4f, type: 3}
---- !u!114 &623291698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 623291696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af2d7a0ea532bd8488d788b25dcefb68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LuggageSpeed
-  _ishave: 0
-  _rb: {fileID: 869372660}
---- !u!114 &623291699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 623291696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be6f906936536d243804c91209652662, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Luggage
-  _score: 100
-  _luggageSpeed: {fileID: 869372658}
-  _damageThreshold: 3
-  _damageScale: 1
-  MaxScore: 0
---- !u!54 &623291700
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 623291696}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &630474913
 GameObject:
   m_ObjectHideFlags: 0
@@ -2100,10 +1789,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 03_Blacksmith_01_Blower
       objectReference: {fileID: 0}
-    - target: {fileID: 5051549545667315401, guid: a39dd3b8bbc8afd46aba5478c68d400c, type: 3}
-      propertyPath: m_TagString
-      value: Luggage
-      objectReference: {fileID: 0}
     - target: {fileID: 5571345405108100211, guid: a39dd3b8bbc8afd46aba5478c68d400c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.266008
@@ -2114,7 +1799,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5571345405108100211, guid: a39dd3b8bbc8afd46aba5478c68d400c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 75.65
+      value: 70.88488
       objectReference: {fileID: 0}
     - target: {fileID: 5571345405108100211, guid: a39dd3b8bbc8afd46aba5478c68d400c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2147,105 +1832,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5051549545667315401, guid: a39dd3b8bbc8afd46aba5478c68d400c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 869372657}
-    - targetCorrespondingSourceObject: {fileID: 5051549545667315401, guid: a39dd3b8bbc8afd46aba5478c68d400c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 869372660}
-    - targetCorrespondingSourceObject: {fileID: 5051549545667315401, guid: a39dd3b8bbc8afd46aba5478c68d400c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 869372659}
-    - targetCorrespondingSourceObject: {fileID: 5051549545667315401, guid: a39dd3b8bbc8afd46aba5478c68d400c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 869372658}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a39dd3b8bbc8afd46aba5478c68d400c, type: 3}
---- !u!1 &869372656 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5051549545667315401, guid: a39dd3b8bbc8afd46aba5478c68d400c, type: 3}
-  m_PrefabInstance: {fileID: 869372655}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &869372657
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 869372656}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6826385023807214051, guid: 10054154c56d50d4d94c140c976354e6, type: 3}
---- !u!114 &869372658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 869372656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af2d7a0ea532bd8488d788b25dcefb68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LuggageSpeed
-  _ishave: 0
-  _rb: {fileID: 869372660}
---- !u!114 &869372659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 869372656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be6f906936536d243804c91209652662, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Luggage
-  _score: 100
-  _luggageSpeed: {fileID: 869372658}
-  _damageThreshold: 3
-  _damageScale: 1
-  MaxScore: 0
---- !u!54 &869372660
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 869372656}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &871173112
 GameObject:
   m_ObjectHideFlags: 0
@@ -2472,7 +2060,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2d7a0ea532bd8488d788b25dcefb68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LuggageSpeed
-  _ishave: 0
+  Ishave: 0
   _rb: {fileID: 941619836}
 --- !u!114 &941619838
 MonoBehaviour:
@@ -2488,8 +2076,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Luggage
   _score: 100
   _luggageSpeed: {fileID: 941619837}
-  _damageThreshold: 3
-  _damageScale: 1
+  damageThreshold: 3
+  damageScale: 1
   MaxScore: 0
 --- !u!1001 &953022578
 PrefabInstance:
@@ -2558,10 +2146,6 @@ PrefabInstance:
     - target: {fileID: 8668271862120698753, guid: f17f9be6e9bab6a458c0d00be3b55457, type: 3}
       propertyPath: m_Name
       value: Inventory
-      objectReference: {fileID: 0}
-    - target: {fileID: 8668271862120698753, guid: f17f9be6e9bab6a458c0d00be3b55457, type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4558,10 +4142,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 03_Blacksmith_01_Anvil
       objectReference: {fileID: 0}
-    - target: {fileID: 1426254898626095101, guid: 6c4f80978ba9d5643881d5508aee3dba, type: 3}
-      propertyPath: m_TagString
-      value: Luggage
-      objectReference: {fileID: 0}
     - target: {fileID: 1765626466226453831, guid: 6c4f80978ba9d5643881d5508aee3dba, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.751072
@@ -4605,105 +4185,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1426254898626095101, guid: 6c4f80978ba9d5643881d5508aee3dba, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1772843868}
-    - targetCorrespondingSourceObject: {fileID: 1426254898626095101, guid: 6c4f80978ba9d5643881d5508aee3dba, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1772843871}
-    - targetCorrespondingSourceObject: {fileID: 1426254898626095101, guid: 6c4f80978ba9d5643881d5508aee3dba, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1772843870}
-    - targetCorrespondingSourceObject: {fileID: 1426254898626095101, guid: 6c4f80978ba9d5643881d5508aee3dba, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1772843869}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c4f80978ba9d5643881d5508aee3dba, type: 3}
---- !u!1 &1772843867 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1426254898626095101, guid: 6c4f80978ba9d5643881d5508aee3dba, type: 3}
-  m_PrefabInstance: {fileID: 1772843866}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &1772843868
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1772843867}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -7821927241818185307, guid: 19ec89ffd5564c746b7efc29eaf2fddb, type: 3}
---- !u!114 &1772843869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1772843867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af2d7a0ea532bd8488d788b25dcefb68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LuggageSpeed
-  _ishave: 0
-  _rb: {fileID: 869372660}
---- !u!114 &1772843870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1772843867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be6f906936536d243804c91209652662, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Luggage
-  _score: 100
-  _luggageSpeed: {fileID: 869372658}
-  _damageThreshold: 3
-  _damageScale: 1
-  MaxScore: 0
---- !u!54 &1772843871
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1772843867}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1001 &1819083793
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4756,112 +4239,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 02_Kitchen_01_Chopper
       objectReference: {fileID: 0}
-    - target: {fileID: 1849875836332357052, guid: 5c3b2f97e5ae4a542b61db3ba11403ff, type: 3}
-      propertyPath: m_TagString
-      value: Luggage
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1849875836332357052, guid: 5c3b2f97e5ae4a542b61db3ba11403ff, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1819083795}
-    - targetCorrespondingSourceObject: {fileID: 1849875836332357052, guid: 5c3b2f97e5ae4a542b61db3ba11403ff, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1819083798}
-    - targetCorrespondingSourceObject: {fileID: 1849875836332357052, guid: 5c3b2f97e5ae4a542b61db3ba11403ff, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1819083797}
-    - targetCorrespondingSourceObject: {fileID: 1849875836332357052, guid: 5c3b2f97e5ae4a542b61db3ba11403ff, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1819083796}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c3b2f97e5ae4a542b61db3ba11403ff, type: 3}
---- !u!1 &1819083794 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1849875836332357052, guid: 5c3b2f97e5ae4a542b61db3ba11403ff, type: 3}
-  m_PrefabInstance: {fileID: 1819083793}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &1819083795
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1819083794}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 7221619299139587146, guid: 21676d294d655b5478ce76c58d15f06e, type: 3}
---- !u!114 &1819083796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1819083794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af2d7a0ea532bd8488d788b25dcefb68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LuggageSpeed
-  _ishave: 0
-  _rb: {fileID: 869372660}
---- !u!114 &1819083797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1819083794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be6f906936536d243804c91209652662, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Luggage
-  _score: 100
-  _luggageSpeed: {fileID: 869372658}
-  _damageThreshold: 3
-  _damageScale: 1
-  MaxScore: 0
---- !u!54 &1819083798
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1819083794}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &1834180925
 GameObject:
   m_ObjectHideFlags: 0
@@ -5511,7 +4893,7 @@ Transform:
   m_GameObject: {fileID: 1950854238}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.19, y: 0.02, z: 20.93}
+  m_LocalPosition: {x: 11.27, y: 0.02, z: 21.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5556,7 +4938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2d7a0ea532bd8488d788b25dcefb68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LuggageSpeed
-  _ishave: 0
+  Ishave: 0
   _rb: {fileID: 1950854243}
 --- !u!114 &1950854245
 MonoBehaviour:
@@ -5572,8 +4954,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Luggage
   _score: 1000
   _luggageSpeed: {fileID: 1950854244}
-  _damageThreshold: 3
-  _damageScale: 1
+  damageThreshold: 3
+  damageScale: 1
   MaxScore: 0
 --- !u!1 &1959268252 stripped
 GameObject:
@@ -5814,7 +5196,7 @@ Transform:
   m_GameObject: {fileID: 6563031672272692113}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.65, y: 0.72, z: 6.86}
+  m_LocalPosition: {x: 11.65, y: 0.41, z: 6.86}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -5933,7 +5315,7 @@ Transform:
   m_GameObject: {fileID: 7215856735577999387}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.86, y: 0.417, z: 7.4}
+  m_LocalPosition: {x: -10.68, y: 0.417, z: 15.73}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
