@@ -191,7 +191,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void UpdateSetBool()
     {
-        _playerMove?.SetBool(IsSliding);
+        _playerMove?.SetBool(IsSliding,IsCarrying);
         _playerThrow?.SetBoolIsCarry(IsCarrying);
     }
 

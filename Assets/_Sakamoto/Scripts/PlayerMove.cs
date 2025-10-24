@@ -3,15 +3,21 @@ using UnityEngine.EventSystems;
 
 public class PlayerMove : MonoBehaviour, IStartSetVariables
 {
+    private LuggageData _luggageData;
     private Rigidbody _rb;
     private Transform _cameraForward;
+    private bool _currentMuscleItem;
     private float _moveSpeed;
     private float _walkSpeed;
     private float _sprintSpeed;
     private float _crouchSpeed;
     private float _slidingSpeed;
     private float _slidingForce;
+    private float _dragSpeedMultiplier;
+    private float _bigLuggageSpeedMultiplier;
+    private float _startBigLuggageSpeedMultiplier;
     private bool _isSliding = false;
+    private bool _isCarrying = false;
     private Vector2 _currentInput;
     private Vector3 _moveDirection;
 
@@ -42,11 +48,15 @@ public class PlayerMove : MonoBehaviour, IStartSetVariables
 
     public void StartSetVariables(PlayerData playerData)
     {
+        _currentMuscleItem = playerData.MuscleItem;
         _walkSpeed = playerData.WalkSpeed;
         _sprintSpeed = playerData.SprintSpeed;
         _crouchSpeed = playerData.CrouchSpeed;
         _slidingSpeed = playerData.SlidingSpeed;
         _slidingForce = playerData.SlidingForce;
+        _dragSpeedMultiplier = playerData.DragSpeedMultiplier;
+        _bigLuggageSpeedMultiplier = playerData.LuggageBigSpeedMultiplier;
+        _startBigLuggageSpeedMultiplier = _bigLuggageSpeedMultiplier;
     }
 
     public void Move(Vector2 input, PlayerData playerData)
@@ -86,14 +96,58 @@ public class PlayerMove : MonoBehaviour, IStartSetVariables
     private void SpeedControl()
     {
         Vector3 flatVel = new Vector3(_rb.linearVelocity.x, 0f, _rb.linearVelocity.z);
-        if (flatVel.magnitude > _moveSpeed)
+        //Todo:バフ中かどうか判定する
+        if (!_currentMuscleItem)
         {
-            Vector3 limitedVel = flatVel.normalized * _moveSpeed;
-            _rb.linearVelocity = new Vector3(limitedVel.x, _rb.linearVelocity.y, limitedVel.z);
+            //荷物を持っているときの速度制限
+            if (_luggageData != null && _isCarrying)
+            {
+                //大きい荷物を持っているときの速度制限
+                if (_luggageData.LuggageScript.State == LuggageState.big)
+                {
+                    if (flatVel.magnitude > _moveSpeed * _bigLuggageSpeedMultiplier)
+                    {
+                        Vector3 limitedVel = flatVel.normalized * _moveSpeed * _bigLuggageSpeedMultiplier;
+                        _rb.linearVelocity = new Vector3(limitedVel.x, _rb.linearVelocity.y, limitedVel.z);
+                    }
+                }
+            }
+            //荷物を持ってないときの速度制限
+            else if (flatVel.magnitude > _moveSpeed)
+            {
+                Vector3 limitedVel = flatVel.normalized * _moveSpeed;
+                _rb.linearVelocity = new Vector3(limitedVel.x, _rb.linearVelocity.y, limitedVel.z);
+            }
+        }
+        else
+        {
+            //荷物を持っているときの速度制限
+            if (_luggageData != null && _isCarrying)
+            {
+                //大きい荷物を持っているときのバフ速度制限
+                if (_luggageData.LuggageScript.State == LuggageState.big)
+                {
+                    if (flatVel.magnitude > _moveSpeed)
+                    {
+                        Vector3 limitedVel = flatVel.normalized * _moveSpeed;
+                        _rb.linearVelocity = new Vector3(limitedVel.x, _rb.linearVelocity.y, limitedVel.z);
+                    }
+                }
+            }
+            //バフ中の速度制限
+            if (flatVel.magnitude > _moveSpeed * _dragSpeedMultiplier)
+            {
+                Vector3 limitedVel = flatVel.normalized * _moveSpeed * _dragSpeedMultiplier;
+                _rb.linearVelocity = new Vector3(limitedVel.x, _rb.linearVelocity.y, limitedVel.z);
+            }
         }
     }
 
-    public void SetBool(bool isSliding) => _isSliding = isSliding;
+    public void SetBool(bool isSliding, bool isCarrying)
+    {
+        _isSliding = isSliding;
+        _isCarrying = isCarrying;
+    }
 
     /// <summary>
     /// 速度更新

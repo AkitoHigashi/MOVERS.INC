@@ -39,6 +39,10 @@ public class PlayerCarry : MonoBehaviour, IStartSetVariables
                 {
                     Collider _targetCollider = _target.GetComponent<Collider>();
                     Rigidbody _targetRb = _target.GetComponent<Rigidbody>();
+                    if (_target.TryGetComponent<Luggage>(out var luggageScript))
+                    {
+                        _luggageData.LuggageScript = luggageScript;
+                    }
                     //_luggageCollider = _target.GetComponent<Collider>();
                     // PlayerとLuggageのColliderが両方存在する場合、衝突を無視する
                     if (_playerCollider != null && _targetCollider != null)
@@ -72,6 +76,7 @@ public class PlayerCarry : MonoBehaviour, IStartSetVariables
                 Physics.IgnoreCollision(_playerCollider, _luggageData.LuggageCollider, false);
             _luggageData.LuggageRb.isKinematic = false;
             _luggageData.LuggageGameObject.transform.SetParent(null);
+            _luggageData.LuggageScript = null;
             _isCarrying = false;
         }
     }
