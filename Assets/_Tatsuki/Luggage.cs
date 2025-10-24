@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// 荷物の大きさを指定する
 /// </summary>
-enum LuggageState
+public enum LuggageState
 {
     small,
     big,
@@ -14,13 +14,14 @@ enum LuggageState
 /// </summary>
 public class Luggage : MonoBehaviour
 {
+    public int MaxScore;
+    public LuggageState State => state;
     [SerializeField] private LuggageState state;
     [SerializeField] private int _score = 100;
     [SerializeField] private LuggageSpeed _luggageSpeed;
     [SerializeField] private float _damageThreshold = 3f; // この速さ未満ならノーダメージ
     [SerializeField] private float _damageScale = 1.0f;   // 速度→ダメージ変換倍率
 
-    [SerializeField] public int MaxScore;
 
     private void Start()
     {
