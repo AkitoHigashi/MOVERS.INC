@@ -4,7 +4,7 @@ using UnityEngine;
 public class PotionGarbageCollecter : MonoBehaviour
 {
     [SerializeField] PlayerHealth _playerHealth;
-    [SerializeField] PlayerCarry _playerCarry;
+    [SerializeField] PlayerMove _playerCarry;
     Coroutine _muscleCor;
     static PotionGarbageCollecter _instance;
 
@@ -36,9 +36,9 @@ public class PotionGarbageCollecter : MonoBehaviour
 
     IEnumerator MusclePotionCoroutine(float time)
     {
-        //_playerCarry.IsMuscleItem(true);
+        _playerCarry.IsMuscleItem(true);
         yield return new WaitForSeconds(time);
-        //_playerCarry.IsMuscleItem(true);
+        _playerCarry.IsMuscleItem(false);
         yield break;
     }
 
