@@ -4,7 +4,7 @@ public class PlayerData : MonoBehaviour
 {
     [Header("Parameter")]
     [SerializeField] private float _health = 100f;
-    [SerializeField] private float _muscleStrength = 1f;
+    [SerializeField] private bool _muscleItem;
 
     [Header("Reference")]
     [SerializeField] private Transform _cameraForward;
@@ -19,6 +19,10 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private float _slidingSpeed;
     [SerializeField] private float _stamina = 100f;
     [SerializeField] private float _staminaRecoverySpeed = 2f;
+
+    [Header("速度の倍率")]
+    [SerializeField] private float _dragSpeedMultiplier = 1.2f;
+    [SerializeField] private float _luggageBigSpeedMultiplier = 0.4f;
 
     [Header("Jump")]
     [SerializeField] private float _jumpForce;
@@ -46,7 +50,7 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private float _interactDistance = 3f;
 
     public float Health => _health;
-    public float MuscleStrength => _muscleStrength;
+    public bool MuscleItem => _muscleItem;
     public Transform CameraForward => _cameraForward;
     public Transform LuggagePosition => _luggagePosition;
     public LayerMask GroundLayer => _groundLayer;
@@ -57,6 +61,8 @@ public class PlayerData : MonoBehaviour
     public float SlidingSpeed => _slidingSpeed;
     public float Stamina => _stamina;
     public float StaminaRecoverySpeed => _staminaRecoverySpeed;
+    public float DragSpeedMultiplier => _dragSpeedMultiplier;
+    public float LuggageBigSpeedMultiplier => _luggageBigSpeedMultiplier;
     public float JumpForce => _jumpForce;
     public float CrouchHeight => _crouchHeight;
     public float SlidingForce => _slidingForce;
