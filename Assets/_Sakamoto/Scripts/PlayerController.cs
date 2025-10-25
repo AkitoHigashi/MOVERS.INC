@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private PlayerThrow _playerThrow;
     private Interact _interact;
     private PlayerHealth _playerHealth;
+    private PlayerItemUse _playerItemUse;
     private Vector2 _currentInput = Vector2.zero;
 
     private void Awake()
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
         _playerThrow = GetComponent<PlayerThrow>();
         _interact = GetComponent<Interact>();
         _playerHealth = GetComponent<PlayerHealth>();
+        _playerItemUse = GetComponent<PlayerItemUse>();
     }
 
     private void Start()
@@ -56,6 +58,7 @@ public class PlayerController : MonoBehaviour
         _inputBuffer.PlayerThrow.canceled += OnInputThrowAction;
         _inputBuffer.PlayerInteract.started += OnInputInteractAction;
         _inputBuffer.PlayerInteract.canceled += OnInputInteractAction;
+        _inputBuffer.PlayerItemUse.started += OnInputItemUse;
         SetUp();
     }
 
@@ -72,6 +75,7 @@ public class PlayerController : MonoBehaviour
         _inputBuffer.PlayerThrow.canceled -= OnInputThrowAction;
         _inputBuffer.PlayerInteract.started -= OnInputInteractAction;
         _inputBuffer.PlayerInteract.canceled -= OnInputInteractAction;
+        _inputBuffer.PlayerItemUse.started -= OnInputItemUse;
     }
 
     private void Update()
@@ -164,6 +168,11 @@ public class PlayerController : MonoBehaviour
         {
             _interact?.StopInteract();
         }
+    }
+
+    private void OnInputItemUse(InputAction.CallbackContext context)
+    {
+        _playerItemUse?.ItemUse();
     }
 
     /// <summary>
