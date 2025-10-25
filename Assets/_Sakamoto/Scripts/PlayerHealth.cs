@@ -8,12 +8,12 @@ public class PlayerHealth : MonoBehaviour, IStartSetVariables
     private float _playerHP;
     private float _currentHP;
     //[SerializeField]private int TestNum = 0;
-    public event Action <float> PlayerHealthChanged;
+    public event Action<float> PlayerHealthChanged;
     public void StartSetVariables(PlayerData playerData)
     {
         _playerHP = playerData.Health;
         _currentHP = _playerHP;
-     
+
     }
 
     private void Dead()
@@ -35,7 +35,7 @@ public class PlayerHealth : MonoBehaviour, IStartSetVariables
         }
         else if (other.CompareTag("Trap"))
         {
-            var trap=other.GetComponent<TrapBase>();
+            var trap = other.GetComponent<TrapBase>();
             _currentHP -= trap.TrapDamage;
             PlayerHealthChanged(_currentHP);
             if (_currentHP <= 0)
@@ -44,10 +44,20 @@ public class PlayerHealth : MonoBehaviour, IStartSetVariables
             }
         }
     }
+
+    public void Heal(float heal)
+    {
+        _currentHP += heal;
+        if (_currentHP >= _playerHP)
+        {
+            _currentHP = _playerHP;
+        }
+    }
+
     //public void TestDamage()
     //{
     //    _currentHP = TestNum;
     //    PlayerHealthChanged(_currentHP);
     //}
-   
+
 }
