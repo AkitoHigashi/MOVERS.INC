@@ -143,6 +143,11 @@ public class PlayerMove : MonoBehaviour, IStartSetVariables
         }
     }
 
+    public void IsMuscleItem(bool isMuscleItem)
+    {
+        _currentMuscleItem = isMuscleItem;
+    }
+
     public void SetBool(bool isSliding, bool isCarrying)
     {
         _isSliding = isSliding;
