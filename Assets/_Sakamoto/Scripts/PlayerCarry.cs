@@ -10,6 +10,7 @@ public class PlayerCarry : MonoBehaviour, IStartSetVariables
     private string _luggageTag = "Luggage";
     private string _itemTag = "Item";
     private bool _isCarrying = false;
+    private LayerMask _carryIgnoreLayer;
 
     private void Start()
     {
@@ -22,6 +23,60 @@ public class PlayerCarry : MonoBehaviour, IStartSetVariables
         _luggagePosition = playerData.LuggagePosition;
         _carryRayDistance = playerData.CarryRayDistance;
         _luggageTag = playerData.LuggageTag;
+        _carryIgnoreLayer = playerData.CarryIgnoreLayer; 
+    }
+
+    private void Update()
+    {
+        if (_isCarrying && _luggageData.LuggageGameObject != null)
+        {
+            CheckLuggageCollision();
+        }
+    }
+
+    private void CheckLuggageCollision()
+    {
+        Collider luggageCollider = _luggageData.LuggageCollider;
+        if (luggageCollider == null) return;
+
+        // 荷物のColliderの中心と半径を取得
+        Vector3 center = luggageCollider.bounds.center;
+        Vector3 halfExtents = luggageCollider.bounds.extents;
+        // プレイヤーレイヤーと指定された無視レイヤーを除外
+        int layerMask = ~(LayerMask.GetMask("Player") | _carryIgnoreLayer);
+        // 荷物のColliderと重なっている他のColliderを検出
+        Collider[] hitColliders = Physics.OverlapBox(
+            center,
+            halfExtents,
+            luggageCollider.transform.rotation,
+            layerMask
+        );
+        // 重なっているColliderの中にPlayer以外のものがあるか確認
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider != _playerCollider &&
+                hitCollider != luggageCollider)
+            {
+                Debug.Log($"荷物が{hitCollider.name}に接触したため離します");
+                ForceDropLuggage();
+                break;
+            }
+        }
+    }
+
+    private void ForceDropLuggage()
+    {
+        if (_luggageData.LuggageRb != null)
+        {
+            _luggageData.LuggageRb.useGravity = true;
+        }
+        if (_playerCollider != null && _luggageData.LuggageCollider != null)
+            Physics.IgnoreCollision(_playerCollider, _luggageData.LuggageCollider, false);
+
+        _luggageData.LuggageRb.isKinematic = false;
+        _luggageData.LuggageGameObject.transform.SetParent(null);
+        _luggageData.LuggageScript = null;
+        _isCarrying = false;
     }
 
     public void CarryAction()
