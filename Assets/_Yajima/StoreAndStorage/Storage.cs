@@ -75,9 +75,9 @@ public class Storage : MonoBehaviour
 public static class StorageData
 {
     /// <summary>各アイテムの所持数を保持する辞書</summary>
-    static Dictionary<ItemData, uint> _possessCount = new Dictionary<ItemData, uint>();
+    static Dictionary<ItemData, int> _possessCount = new Dictionary<ItemData, int>();
     /// <summary>各アイテムの所持数を保持する辞書を受け取るプロパティ</summary>
-    public static Dictionary<ItemData, uint> PossessCount => _possessCount;
+    public static Dictionary<ItemData, int> PossessCount => _possessCount;
 
     /// <summary>
     /// 購入したアイテムの所持数を1増やす関数
@@ -85,15 +85,19 @@ public static class StorageData
     /// <param name="itemData">購入したアイテム</param>
     public static void IteminStorage(ItemData itemData)
     {
-        if (!_possessCount.ContainsKey(itemData))
-        {
-            _possessCount.Add(itemData, 0);
-        }
-        _possessCount[itemData]++;
+        //アイテムの購入が初めてなら１を辞書に登録
+        //初めてじゃなければ現在の数に１足した数で更新
+        _possessCount[itemData] = _possessCount.GetValueOrDefault<ItemData, int>(itemData, 0) + 1;
     }
 
+    /// <summary>
+    /// 消費系アイテムを使ったときに呼び出す関数
+    /// </summary>
+    /// <param name="itemData">使ったアイテム</param>
     public static void ItemUse(ItemData itemData)
     {
         _possessCount[itemData]--;
+        //アイテムの個数が0を下回ることはない
+        if (_possessCount[itemData] <= 0) _possessCount[itemData] = 0;
     }
 }
