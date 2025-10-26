@@ -6,6 +6,7 @@ public abstract class ItemBase : MonoBehaviour
     protected Rigidbody _rb;
     protected ItemData _itemdata;
     Inventory _inventory;
+    protected Transform _cameraTrans;
 
     /// <summary>
     /// アイテムのデータのやり取りをするプロパティ
@@ -40,6 +41,7 @@ public abstract class ItemBase : MonoBehaviour
             tag = "Item";
         }
         _rb = GetComponent<Rigidbody>();
+        _cameraTrans = GameObject.Find("Camera").transform;
         _inventory = FindFirstObjectByType<Inventory>();
     }
 

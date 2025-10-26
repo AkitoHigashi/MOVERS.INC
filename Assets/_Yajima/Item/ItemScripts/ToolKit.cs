@@ -17,9 +17,9 @@ public class ToolKit : ItemBase
 
     private void OnDisable()
     {
-        if( _coroutine != null)
+        if (_coroutine != null)
         {
-            StopCoroutine( _coroutine );
+            StopCoroutine(_coroutine);
             _coroutine = null;
         }
     }
@@ -34,8 +34,8 @@ public class ToolKit : ItemBase
 
     IEnumerator CoolTimeCoroutine()
     {
-        transform.localPosition = Vector3.zero;
-        transform.rotation = Quaternion.identity;
+        transform.position = _cameraTrans.position;
+        transform.rotation = _cameraTrans.rotation;
         _bc.enabled = true;
         yield return new WaitForSeconds(_effectiveTime);
         _bc.enabled = false;
