@@ -1,58 +1,26 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider))]
 public class ToolKit : ItemBase
 {
-    [SerializeField, Tooltip("効果発動時間")] float _effectiveTime = 1;
-    BoxCollider _bc;
-    Coroutine _coroutine;
+    [SerializeField] GameObject _tool;
 
     protected override void Init()
     {
         base.Init();
-        _bc = GetComponent<BoxCollider>();
-        _bc.enabled = false;
+        _tool.gameObject.SetActive(false);
     }
 
-    private void OnDisable()
-    {
-        if (_coroutine != null)
-        {
-            StopCoroutine(_coroutine);
-            _coroutine = null;
-        }
-    }
-
+    [ContextMenu("a")]
     public override void ItemActivate()
     {
-        if (_coroutine == null)
+        if (!_tool.activeSelf)
         {
-            _coroutine = StartCoroutine(CoolTimeCoroutine());
+            _tool.transform.SetParent(transform.parent);
+            _tool.SetActive(true);
+            _tool.transform.position = _cameraTrans.position;
+            _tool.transform.rotation = _cameraTrans.rotation;
+            gameObject.SetActive(false);
         }
-    }
-
-    IEnumerator CoolTimeCoroutine()
-    {
-        transform.position = _cameraTrans.position;
-        transform.rotation = _cameraTrans.rotation;
-        _bc.enabled = true;
-        yield return new WaitForSeconds(_effectiveTime);
-        _bc.enabled = false;
-        _coroutine = null;
-        yield break;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "TrapBase")
-        {
-            TrapDestroy(other.gameObject);
-        }
-    }
-
-    void TrapDestroy(GameObject trap)
-    {
-        Destroy(trap);
     }
 }
