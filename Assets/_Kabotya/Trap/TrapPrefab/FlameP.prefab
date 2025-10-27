@@ -136,6 +136,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7454062886487777339}
+  - component: {fileID: -3589928393391107355}
   m_Layer: 0
   m_Name: FlameP
   m_TagString: Untagged
@@ -159,6 +160,19 @@ Transform:
   - {fileID: 5545655118784145775}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3589928393391107355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3811649140106443208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19dff6d6e4a22984987d0ae2e43582f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrapDemolished
+  _luggageTrap: {fileID: 8325924851901982848, guid: cbc73605a517055469632e81493afa73, type: 3}
 --- !u!1 &7293223778880252694
 GameObject:
   m_ObjectHideFlags: 0

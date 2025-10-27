@@ -35,7 +35,7 @@ public class ToolKitInstance : ItemBase
         if (other.gameObject.tag == "TrapBase")
         {
             //トラップ解体
-            other.gameObject.GetComponent<TrapBase>().Demolished();
+            other.gameObject.GetComponent<TrapDemolished>().Demolished(transform.GetChild(0));
         }
     }
 }

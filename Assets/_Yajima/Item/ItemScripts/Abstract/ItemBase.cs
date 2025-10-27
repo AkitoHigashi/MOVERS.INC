@@ -26,7 +26,7 @@ public abstract class ItemBase : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         Init();
     }

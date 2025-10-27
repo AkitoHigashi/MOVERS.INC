@@ -963,6 +963,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5652604177751035990}
   - component: {fileID: 7903600658517649647}
+  - component: {fileID: -3027645210630039774}
   m_Layer: 0
   m_Name: ThornTrap
   m_TagString: Untagged
@@ -1007,3 +1008,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4, y: 10, z: 4}
   m_Center: {x: 0, y: 5, z: 0}
+--- !u!114 &-3027645210630039774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9024347011276855488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92e2572e14bddf545b10d542009cb78e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LuggageTrap
