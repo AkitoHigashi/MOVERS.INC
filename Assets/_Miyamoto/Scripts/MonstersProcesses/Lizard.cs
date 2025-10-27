@@ -33,10 +33,9 @@ public class Lizard : MonsterBase
     {
         _animator.SetFloat("WalkSpeed", _navMeshAgent.speed);
     }
-    protected override void ProccesToLuggage(Collider collider, float distance)
+    protected override void ProcessToLuggage(Collider collider, float distance)
     {
-        Debug.Log("hasSeenがTrueだぞー");
-        if (!_hasSeen) FirstSeeing();
+        if (!HasSeen) FirstSeeing();
 
         _currentDestination = collider.transform.position;
         if (distance <= _stopDistance)
