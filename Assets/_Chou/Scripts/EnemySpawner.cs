@@ -142,7 +142,7 @@ public class EnemySpawner : MonoBehaviour
         }
 
         // モンスター生成処理
-        bool spawnResult = pos.SpawnMonster(GetRandomMonster());
+        bool spawnResult = pos.SpawnMonster(GetRandomMonster()._monsterPrefab);
         if (spawnResult)
         {
             _monsterCount++;
@@ -252,7 +252,7 @@ public class TempMonsterData
     public float RandomWeight;
     /// <summary>重み更新するごとの加算値</summary>
     public float WeightIncrement;
-    public Material Material;
+    public GameObject _monsterPrefab;
 
     /// <summary>
     /// 乱数重みを加算する
