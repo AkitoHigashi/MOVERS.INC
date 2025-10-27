@@ -36,14 +36,17 @@ public class PotionGarbageCollecter : MonoBehaviour
 
     IEnumerator MusclePotionCoroutine(float time)
     {
+        Debug.Log("筋力増強開始");
         _playerCarry.IsMuscleItem(true);
         yield return new WaitForSeconds(time);
+        Debug.Log("筋力増強終了");
         _playerCarry.IsMuscleItem(false);
         yield break;
     }
 
     public void HealingPotion(HealingPotion heal)
     {
+        Debug.Log($"HPを{heal.Heal}回復");
         _playerHealth.Heal(heal.Heal);
     }
 }

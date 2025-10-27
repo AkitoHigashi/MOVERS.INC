@@ -11,6 +11,7 @@ public class HealingPotion : ItemBase
         _pgc = FindFirstObjectByType<PotionGarbageCollecter>();
     }
 
+    [ContextMenu("a")]
     public override void ItemActivate()
     {
         _pgc.HealingPotion(this);
