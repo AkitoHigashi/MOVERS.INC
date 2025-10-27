@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
+using Unity.VisualScripting;
 
 /// <summary>
 /// 敵の基底クラス
@@ -16,6 +17,8 @@ public abstract class MonsterBase : MonoBehaviour
     #region プロパティ
     public MonsterData EnemyData => _monsterData;
     public List<Transform> Destinations => _destinations;
+    public LayerMask LayerMask => _layerMask;
+    public List<string> TargetTags => _targetTags;
     public float WaitTime => _waitTime;
     public float AngularSpeed => _angularSpeed;
     public float StopDistance => _stopDistance;
@@ -40,11 +43,14 @@ public abstract class MonsterBase : MonoBehaviour
     protected List<Transform> _destinations = new List<Transform>();
     [SerializeField, Header("顔の場所")]
     protected Transform _facePos;
-    [SerializeField, Header("敵が消滅するまでの時間")]
-    protected float _destroyTime = 1f;
+    [SerializeField, Header("敵が視認できるオブジェクトのレイヤー")]
+    protected LayerMask _layerMask;
+    [SerializeField, Header("死亡時のエネミーオブジェクト")]
+    private GameObject _deadPrefab;
+    [SerializeField, Header("ターゲットにするタグ")]
+    private List<string> _targetTags;
 
     #region ステータス
-    //ステータス
     protected float _monsterHp;
     protected float _monsterWalkSpeed;
     protected float _monsterRunSpeed;
@@ -63,14 +69,14 @@ public abstract class MonsterBase : MonoBehaviour
     protected bool _hasSeen = false;
     /// <summary>周りを見渡すフラグ<summary>
     protected bool _lookAround = false;
+    /// <summary>収集地点に入ったかのフラグ</summary>
+    protected bool _isInCollectionArea;
     /// <summary>現在の敵の友好関係<summary>
     protected MonsterState _currentEnemyState;
     /// <summary>現在の目的地</summary>
     protected Vector3 _currentDestination;
     /// <summary>最後に訪れた目的地</summary>
     protected Vector3 _lastDestination;
-    /// <summary>収集地点に入ったかのフラグ</summary>
-    protected bool _isInCollectionArea;
 
     protected NavMeshAgent _navMeshAgent;
     protected Animator _animator;
@@ -138,12 +144,15 @@ public abstract class MonsterBase : MonoBehaviour
 
         _navMeshAgent.angularSpeed = _angularSpeed;
         _rb.isKinematic = true;
-
     }
     private void SetAnimation()
     {
         _animator.SetBool("LookAround", _lookAround);
     }
+    //private void SetDestination()
+    //{
+    //    Transform[] destinations = Find;
+    //}
     #region 移動関係
     /// <summary>
     /// 視野を生成
@@ -201,7 +210,7 @@ public abstract class MonsterBase : MonoBehaviour
         yield return new WaitForSeconds(_waitTime);
 
         _lastDestination = _currentDestination;
-        _currentDestination = _destinations[UnityEngine.Random.Range(0, _destinations.Count)].position;
+        _currentDestination = _destinations[Random.Range(0, _destinations.Count)].position;
         _navMeshAgent.isStopped = false;
         _lookAround = false;
         _navMeshAgent.speed = _monsterWalkSpeed;
@@ -215,6 +224,7 @@ public abstract class MonsterBase : MonoBehaviour
     public void ReturnDestination()
     {
         Debug.Log("見失ったReturnDestination呼び出し");
+
         _hasSeen = false;
         float _currentDistance = float.MaxValue;
         foreach (var destination in Destinations)
@@ -243,13 +253,13 @@ public abstract class MonsterBase : MonoBehaviour
         float distance = Vector3.Distance(this.transform.position, collider.transform.position);
 
         // 視野角内にいるか判定
-        if (IsInSight(collider, out RaycastHit hit))
+        if (IsInSight(collider, out RaycastHit hit, _layerMask))
         {
-            OnTargetFind(collider, distance, hit);
+            OnTargetFind(collider, distance, hit);   
         }
         else
         {
-            OnTarGetLost();
+            OnTargetLost();
         }
     }
     /// <summary>
@@ -258,7 +268,7 @@ public abstract class MonsterBase : MonoBehaviour
     /// <param name="collider"></param>
     /// <param name="hit"></param>
     /// <returns></returns>
-    private bool IsInSight(Collider collider, out RaycastHit hit)
+    private bool IsInSight(Collider collider, out RaycastHit hit, LayerMask layers)
     {
         hit = default;
 
@@ -270,7 +280,7 @@ public abstract class MonsterBase : MonoBehaviour
         Debug.DrawRay(origin, transform.forward * currentFov, _hasSeen ? Color.red : Color.blue);
 
         return targetAngle < _fov / 2 &&
-                         Physics.Raycast(origin, toTarget, out hit, currentFov) &&
+                         Physics.Raycast(origin, toTarget, out hit, currentFov, _layerMask) &&
                          hit.collider == collider ? true : false;
     }
     /// <summary>
@@ -281,13 +291,13 @@ public abstract class MonsterBase : MonoBehaviour
     /// <param name="hit"></param>
     private void OnTargetFind(Collider collider, float distance, RaycastHit hit)
     {
-        MonsterProcces(collider, distance);
+        MonsterProcess(collider, distance);
         _coroutine = null;
     }
     /// <summary>
     /// 見失った時に呼び出す
     /// </summary>
-    private void OnTarGetLost()
+    private void OnTargetLost()
     {
         if (_hasSeen)
         {
@@ -298,7 +308,6 @@ public abstract class MonsterBase : MonoBehaviour
     }
     /// <summary>
     /// 視界内に初めて入った時に呼び出す
-    /// ProccesTo～～内で呼び出して
     /// </summary>
     protected virtual void FirstSeeing()
     {
@@ -322,17 +331,17 @@ public abstract class MonsterBase : MonoBehaviour
     /// </summary>
     /// <param name="collider"></param>
     /// <param name="distance"></param>
-    private void MonsterProcces(Collider collider, float distance)
+    private void MonsterProcess(Collider collider, float distance)
     {
         if (collider == null) return;
 
         if (collider.CompareTag(PLAYER))
         {
-            ProccesToPlayer(collider, distance);
+            ProcessToPlayer(collider, distance);
         }
         else if (collider.CompareTag(LUGGAGE))
         {
-            ProccesToLuggage(collider, distance);
+            ProcessToLuggage(collider, distance);
         }
     }
     /// <summary>
@@ -340,17 +349,17 @@ public abstract class MonsterBase : MonoBehaviour
     /// </summary>
     /// <param name="player"></param>
     /// <param name="distance"></param>
-    protected virtual void ProccesToPlayer(Collider player, float distance) { }
+    protected virtual void ProcessToPlayer(Collider player, float distance) { }
     /// <summary>
     /// 荷物に何かしらの行動を行う
     /// </summary>
     /// <param name="luggage"></param>
     /// <param name="distance"></param>
-    protected virtual void ProccesToLuggage(Collider luggage, float distance) { }
+    protected virtual void ProcessToLuggage(Collider luggage, float distance) { }
     #endregion
 
     #region 状態関係
-    private void OnCollisionEnter(Collision collision)
+    protected virtual void BaseOnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag(TRAP))
         {
@@ -363,7 +372,6 @@ public abstract class MonsterBase : MonoBehaviour
         //    TakeDamage(item.Damage);
         //}
     }
-
     /// <summary>
     /// 攻撃を食らった時の計算
     /// </summary>
@@ -371,20 +379,22 @@ public abstract class MonsterBase : MonoBehaviour
     private void TakeDamage(float damage)
     {
         _monsterHp -= damage;
-        EnemyDie();
+        if (_monsterHp <= 0)
+        {
+            EnemyDie();
+        }
+        
     }
     /// <summary>
-    /// HPが0以下になったら破壊
+    /// HPが0以下になったら死亡
     /// </summary>
     [ContextMenu("Die")]
     protected virtual void EnemyDie()
     {
-        if (_monsterHp <= 0)
-        {
-            _navMeshAgent.speed = 0;
-            _animator.SetTrigger("Die");
-            Destroy(this.gameObject, _destroyTime);
-        }
+        _navMeshAgent.speed = 0;
+        Quaternion quaternion = transform.rotation;
+        Instantiate(_deadPrefab, this.transform.position, quaternion);
+        Destroy(this.gameObject);
     }
     /// <summary>
     /// 友好関係を変える
@@ -394,6 +404,5 @@ public abstract class MonsterBase : MonoBehaviour
     {
         _currentEnemyState = enemyState;
     }
-
     #endregion
 }
