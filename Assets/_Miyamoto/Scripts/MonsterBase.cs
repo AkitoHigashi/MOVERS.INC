@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
-using DG.Tweening;
-using Unity.VisualScripting;
 
 /// <summary>
 /// 敵の基底クラス
@@ -82,6 +81,8 @@ public abstract class MonsterBase : MonoBehaviour
     protected Animator _animator;
     protected Coroutine _coroutine;
     private Rigidbody _rb;
+    private Renderer _renderer;
+    private Color _defaultColor;
     /// <summary>
     /// 継承先でAwakeから呼び出す
     /// </summary>
@@ -121,6 +122,8 @@ public abstract class MonsterBase : MonoBehaviour
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();
+        _renderer = GetComponentInChildren<Renderer>();
+        _defaultColor = _renderer.material.color;
 
         _monsterHp = _monsterData.MonsterHpData;
         _monsterWalkSpeed = _monsterData.MonsterWalkSpeedData;
@@ -379,11 +382,19 @@ public abstract class MonsterBase : MonoBehaviour
     private void TakeDamage(float damage)
     {
         _monsterHp -= damage;
+        Damaged();
         if (_monsterHp <= 0)
         {
             EnemyDie();
         }
-        
+    }
+    [ContextMenu("Damaged")]
+    private void Damaged()
+    {
+        _renderer.material.DOColor(Color.red, 0.5f).OnComplete(() =>
+        {
+            _renderer.material.DOColor(_defaultColor, 0.5f);
+        });
     }
     /// <summary>
     /// HPが0以下になったら死亡
