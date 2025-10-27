@@ -38,8 +38,6 @@ public abstract class MonsterBase : MonoBehaviour
 
     [SerializeField, Header("敵のデータ")]
     protected MonsterData _monsterData;
-    [SerializeField, Header("目的地のリスト")]
-    protected List<Transform> _destinations = new List<Transform>();
     [SerializeField, Header("顔の場所")]
     protected Transform _facePos;
     [SerializeField, Header("敵が視認できるオブジェクトのレイヤー")]
@@ -72,6 +70,8 @@ public abstract class MonsterBase : MonoBehaviour
     protected bool _isInCollectionArea;
     /// <summary>現在の敵の友好関係<summary>
     protected MonsterState _currentEnemyState;
+    /// <summary>目的地のリスト</summary>
+    protected List<Transform> _destinations = new List<Transform>();
     /// <summary>現在の目的地</summary>
     protected Vector3 _currentDestination;
     /// <summary>最後に訪れた目的地</summary>
@@ -88,6 +88,7 @@ public abstract class MonsterBase : MonoBehaviour
     /// </summary>
     protected void BaseAwake()
     {
+        GetDestination();
         SetParameter();
         VisionGenerator();
     }
@@ -152,10 +153,14 @@ public abstract class MonsterBase : MonoBehaviour
     {
         _animator.SetBool("LookAround", _lookAround);
     }
-    //private void SetDestination()
-    //{
-    //    Transform[] destinations = Find;
-    //}
+    protected virtual void GetDestination()
+    {
+        GameObject[] destinations = GameObject.FindGameObjectsWithTag("Destination");
+        foreach (GameObject dest in destinations)
+        {
+            _destinations.Add(dest.transform);
+        }
+    }
     #region 移動関係
     /// <summary>
     /// 視野を生成
@@ -258,7 +263,7 @@ public abstract class MonsterBase : MonoBehaviour
         // 視野角内にいるか判定
         if (IsInSight(collider, out RaycastHit hit, _layerMask))
         {
-            OnTargetFind(collider, distance, hit);   
+            OnTargetFind(collider, distance, hit);
         }
         else
         {
