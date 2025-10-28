@@ -4,7 +4,7 @@ using UnityEngine;
 public class SpawnPositionController : MonoBehaviour
 {
     private MeshRenderer _renderer;
-    [SerializeField] private Material _origMaterial;
+    //[SerializeField] private Material _origMaterial;
 
     private void Start()
     {
@@ -16,14 +16,15 @@ public class SpawnPositionController : MonoBehaviour
     /// </summary>
     /// <param name="monster"></param>
     /// <returns></returns>
-    public bool SpawnMonster(TempMonsterData monster)
+    public bool SpawnMonster(GameObject monster)
     {
         // TODO Instantiateなどを使うはず。ここではデバッグ的な挙動にする
 
-        _renderer.material = monster.Material;
-        transform.DOScale(Vector3.one * 8, 1f)
-            .SetLoops(2, LoopType.Yoyo)
-            .OnComplete(() => _renderer.material = _origMaterial);
+        //_renderer.material = monster.Material;
+        //transform.DOScale(Vector3.one * 8, 1f)
+        //    .SetLoops(2, LoopType.Yoyo)
+        //    .OnComplete(() => _renderer.material = _origMaterial);
+        Instantiate(monster,transform.position, Quaternion.identity);
         return true;
     }
 
@@ -33,7 +34,8 @@ public class SpawnPositionController : MonoBehaviour
     /// </summary>
     public void SkipSpawn()
     {
-        transform.DOScale(Vector3.one * 8, 0.5f)
-            .SetLoops(2, LoopType.Yoyo);
+        Debug.Log("選定したけど、プレイヤー近いからやめた");
+        //transform.DOScale(Vector3.one * 8, 0.5f)
+        //    .SetLoops(2, LoopType.Yoyo);
     }
 }

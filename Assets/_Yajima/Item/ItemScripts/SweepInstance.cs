@@ -9,8 +9,8 @@ public class SweepInstance : ItemBase
     protected override void Init()
     {
         base.Init();
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
+        //transform.localPosition = Vector3.zero;
+        //transform.localRotation = Quaternion.identity;
         _rb.isKinematic = true;
     }
 
