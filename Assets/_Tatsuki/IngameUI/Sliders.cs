@@ -8,13 +8,14 @@ public class Sliders : MonoBehaviour
     [SerializeField] private Slider _runhsliders;
     [SerializeField] private Slider _luggagehsviders;
     [SerializeField] private Slider _throwGauge;
+    [SerializeField] private GameObject _throuSlider;
     
    
     [SerializeField] private CollectionArea _collectionArea;
     private StatusNotifer _statusNotifer;
     private PlayerThrow _playerThrow;
     private PlayerSprint _playerSprint;
-    
+    private Tween _gaugeTween;
 
     private void Start()
     {
@@ -45,11 +46,23 @@ public class Sliders : MonoBehaviour
     /// </summary>
     private void SetThrowGauge()
     {
-        float max = _playerThrow.ThrowableTime;
-        float current = _playerThrow.ThrowTime;　
-        float a = current / max;
-        _throwGauge.DOValue(a, 1f).SetEase(Ease.OutCubic);
+        if (_playerThrow.IsThrowing)
+        {
+            _throuSlider.SetActive(true);
+            float max = _playerThrow.ThrowableTime;
+            float current = _playerThrow.ThrowTime;
+            float ratio = current / max;
+            _gaugeTween?.Kill();
 
+            // 新しいTweenをセット
+            _gaugeTween = _throwGauge.DOValue(ratio, 0.2f).SetEase(Ease.OutCubic);
+        }
+        else
+        {
+            _gaugeTween?.Kill();
+            _throwGauge.value = 0f;
+            _throuSlider.SetActive(false);
+        }
     }
     /// <summary>
     /// ヘルススライダーの更新をする
