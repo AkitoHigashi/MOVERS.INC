@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5828507a7064348a9dffc3f4be7a10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SweepInstance
-  _power: 0
+  _power: 5
   _item: {fileID: 0}
   _anim: {fileID: 6799086416821418467}
   _animName: Bat

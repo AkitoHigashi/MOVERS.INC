@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5828507a7064348a9dffc3f4be7a10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SweepInstance
-  _power: 0
+  _power: 10
   _item: {fileID: 0}
   _anim: {fileID: 8087595878502721358}
   _animName: Sword
