@@ -17,7 +17,7 @@ public class Mask : ItemBase
 
     public override void ItemActivate(LuggageData luggage)
     {
-        if (_isActivate)
+        if (!_isActivate)
         {
             //被ってるとき
             if (_coroutine == null)
@@ -26,14 +26,17 @@ public class Mask : ItemBase
             }
             StartCoroutine(_coroutine);
             _player.gameObject.tag = null;
+            _canStore = false;
+            _isActivate = true;
         }
         else
         {
             //被ってないとき
             StopCoroutine(_coroutine);
             _player.gameObject.tag = "Player";
+            _canStore = true;
+            _isActivate = false;
         }
-        _isActivate = !_isActivate;
     }
 
     IEnumerator EffectiveCoroutine()
