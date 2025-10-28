@@ -8,6 +8,7 @@ public class Sliders : MonoBehaviour
     [SerializeField] private Slider _runhsliders;
     [SerializeField] private Slider _luggagehsviders;
     [SerializeField] private Slider _throwGauge;
+    [SerializeField] private PlayerCarry _playerCarry;
     [SerializeField] private GameObject _throuSlider;
     
    
@@ -46,7 +47,7 @@ public class Sliders : MonoBehaviour
     /// </summary>
     private void SetThrowGauge()
     {
-        if (_playerThrow.IsThrowing)
+        if (_playerThrow.IsThrowing&&_playerCarry.IsCarrying)
         {
             _throuSlider.SetActive(true);
             float max = _playerThrow.ThrowableTime;
