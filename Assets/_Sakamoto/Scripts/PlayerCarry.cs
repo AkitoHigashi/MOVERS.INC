@@ -137,6 +137,16 @@ public class PlayerCarry : MonoBehaviour, IStartSetVariables
         }
     }
 
+    public ItemBase ReturnLuggageItemBase()
+    {
+        if (_luggageData.LuggageGameObject != null &&
+            _luggageData.LuggageGameObject.TryGetComponent<ItemBase>(out var itemBase))
+        {
+            return itemBase;
+        }
+        return null;
+    }
+
     public void CarryingBoolFalse() => _isCarrying = !_isCarrying;
     public bool ReturnIsCarrying() => _isCarrying;
 }
