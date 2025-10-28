@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6464511407139664930}
   - component: {fileID: 7750779312182072350}
   - component: {fileID: 9089003839012093716}
+  - component: {fileID: 3784613659335272112}
   m_Layer: 0
   m_Name: CirculBladeTrap
   m_TagString: Untagged
@@ -128,6 +129,19 @@ MonoBehaviour:
   _trapDamage: 0
   _gameObject: {fileID: 2236282994406186101}
   _circulBladeTrapXSpeed: 1.5
+--- !u!114 &3784613659335272112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2236282994406186101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19dff6d6e4a22984987d0ae2e43582f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrapDemolished
+  _luggageTrap: {fileID: -5492100187406598741, guid: 7a7f961cf61413149b3dbc0c0ac155e2, type: 3}
 --- !u!1 &4491529372713201204
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,6 +302,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &8057602475126072251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3740652380937166069, guid: 8b57bc9c835784a5c9d30686ddb7c80c, type: 3}
+  m_PrefabInstance: {fileID: 6645955458597666638}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7248977280507246849}
+  m_Layer: 0
+  m_Name: 'spin blade (1) (Missing Prefab with guid: 8b57bc9c835784a5c9d30686ddb7c80c)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7248977280507246849
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4081008007210255951, guid: 8b57bc9c835784a5c9d30686ddb7c80c, type: 3}
+  m_PrefabInstance: {fileID: 6645955458597666638}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8057602475126072251}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7103355025331838816}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6645955458597666638
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -357,13 +402,3 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b57bc9c835784a5c9d30686ddb7c80c, type: 3}
---- !u!4 &7248977280507246849 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4081008007210255951, guid: 8b57bc9c835784a5c9d30686ddb7c80c, type: 3}
-  m_PrefabInstance: {fileID: 6645955458597666638}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8057602475126072251 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3740652380937166069, guid: 8b57bc9c835784a5c9d30686ddb7c80c, type: 3}
-  m_PrefabInstance: {fileID: 6645955458597666638}
-  m_PrefabAsset: {fileID: 0}

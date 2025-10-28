@@ -4,14 +4,20 @@ public class SweepInstance : ItemBase
 {
     [SerializeField] float _power;
     [SerializeField] GameObject _item;
+    [SerializeField] Animator _anim;
+    [SerializeField] string _animName;
     public float Power => _power;
 
     protected override void Init()
     {
         base.Init();
-        //transform.localPosition = Vector3.zero;
-        //transform.localRotation = Quaternion.identity;
         _rb.isKinematic = true;
+        _anim = GetComponent<Animator>();
+    }
+
+    private void OnEnable()
+    {
+        _anim.Play(_animName);
     }
 
     public void ActivateEnd()
