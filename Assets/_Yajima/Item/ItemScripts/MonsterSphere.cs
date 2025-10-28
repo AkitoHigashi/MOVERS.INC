@@ -39,9 +39,10 @@ public class MonsterSphere : ItemBase
     }
 
     [ContextMenu("ItemActivate")]
-    public override void ItemActivate()
+    public override void ItemActivate(LuggageData luggage)
     {
-        _rb.isKinematic = false;
+        luggage.LuggageRb.isKinematic = false;
+        luggage.LuggageScript = null;
         transform.SetParent(null);
         //カメラの中心から前方に飛ばす
         _rb.linearVelocity = Vector3.zero;

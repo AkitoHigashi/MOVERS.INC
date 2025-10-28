@@ -12,7 +12,7 @@ public class ToolKit : ItemBase
     }
 
     [ContextMenu("a")]
-    public override void ItemActivate()
+    public override void ItemActivate(LuggageData luggage)
     {
         if (!_tool.activeSelf)
         {

@@ -11,8 +11,11 @@ public class HealingPotion : ItemBase
         _pgc = FindFirstObjectByType<PotionGarbageCollecter>();
     }
 
-    public override void ItemActivate()
+    [ContextMenu("a")]
+    public override void ItemActivate(LuggageData luggage)
     {
+        luggage.LuggageRb.isKinematic = false;
+        luggage.LuggageScript = null;
         _pgc.HealingPotion(this);
         StorageData.ItemUse(ItemData);
         Destroy(gameObject);
