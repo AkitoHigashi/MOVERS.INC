@@ -3,6 +3,11 @@
 public class PlayerItemUse : MonoBehaviour
 {
     private LuggageData _luggageData;
+    private void Start()
+    {
+        _luggageData = GetComponent<LuggageData>();
+    }
+
     public void ItemUse()
     {
         if (_luggageData.LuggageGameObject.TryGetComponent<ItemBase>(out var itemEffect))

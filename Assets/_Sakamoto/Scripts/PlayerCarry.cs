@@ -131,6 +131,7 @@ public class PlayerCarry : MonoBehaviour, IStartSetVariables
                 Physics.IgnoreCollision(_playerCollider, _luggageData.LuggageCollider, false);
             _luggageData.LuggageRb.isKinematic = false;
             _luggageData.LuggageGameObject.transform.SetParent(null);
+            _luggageData.LuggageGameObject = null;
             _luggageData.LuggageScript = null;
             _isCarrying = false;
         }
