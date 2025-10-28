@@ -2,16 +2,18 @@
 
 public class PlayerCarry : MonoBehaviour, IStartSetVariables
 {
+    public bool IsCarrying => _isCarrying;
+    private bool _isCarrying = false;
     private Collider _playerCollider;
     private LuggageData _luggageData;
     private Transform _luggagePosition;
     private GameObject _target;
     private float _carryRayDistance;
+    private float _collisionCheckDelay;
+    private float _carryStartTime;
     private string _luggageTag = "Luggage";
     private string _itemTag = "Item";
-    private bool _isCarrying = false;
     private LayerMask _carryIgnoreLayer;
-    public bool IsCarrying => _isCarrying;
 
     private void Start()
     {
@@ -24,14 +26,18 @@ public class PlayerCarry : MonoBehaviour, IStartSetVariables
         _luggagePosition = playerData.LuggagePosition;
         _carryRayDistance = playerData.CarryRayDistance;
         _luggageTag = playerData.LuggageTag;
-        _carryIgnoreLayer = playerData.CarryIgnoreLayer; 
+        _carryIgnoreLayer = playerData.CarryIgnoreLayer;
+        _collisionCheckDelay = playerData.CollisionCheckDelay;
     }
 
     private void Update()
     {
         if (_isCarrying && _luggageData.LuggageGameObject != null)
         {
-            CheckLuggageCollision();
+            if (Time.time - _carryStartTime > _collisionCheckDelay)
+            {
+                CheckLuggageCollision();
+            }
         }
     }
 
@@ -114,6 +120,7 @@ public class PlayerCarry : MonoBehaviour, IStartSetVariables
                     _luggageData.LuggageRb.isKinematic = true;
                     _luggageData.LuggageRb.useGravity = false;
                     _isCarrying = true;
+                    _carryStartTime = Time.time;
                 }
             }
             else

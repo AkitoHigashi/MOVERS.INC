@@ -38,6 +38,7 @@ public class PlayerData : MonoBehaviour
 
     [Header("Carry")]
     [SerializeField] private float _carryRayDistance;
+    [SerializeField] private float _collisionCheckDelay = 0.3f;
     [SerializeField] private string _luggageTag = "Luggage";
     [SerializeField] private LayerMask _carryIgnoreLayer;
 
@@ -71,6 +72,7 @@ public class PlayerData : MonoBehaviour
     public float SlidingCoolTime => _slidingCoolTime;
     public float SlidingYScale => _slidingYScale;
     public float CarryRayDistance => _carryRayDistance;
+    public float CollisionCheckDelay => _collisionCheckDelay;
     public LayerMask CarryIgnoreLayer => _carryIgnoreLayer;
     public string LuggageTag => _luggageTag;
     public float ThrowableTime => _throwableTime;

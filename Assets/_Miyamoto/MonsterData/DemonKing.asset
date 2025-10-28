@@ -15,7 +15,7 @@ MonoBehaviour:
   _monsterHp: 5
   _monsterWalkSpeed: 4
   _monsterRunSpeed: 10
-  _monsterFovDistance: 10
+  _monsterFovDistance: 20
   _monsterPower: 10
   _monsterAttackRange: 10
   _monsterState: 2
@@ -23,5 +23,5 @@ MonoBehaviour:
   _waitTime: 1
   _angularSpeed: 360
   _stopDistance: 5
-  _fov: 60
-  _patrolFovDistance: 15
+  _fov: 90
+  _patrolFovDistance: 30
