@@ -374,11 +374,11 @@ public abstract class MonsterBase : MonoBehaviour
             var trap = collision.gameObject.GetComponent<TrapBase>();
             TakeDamage(trap.TrapDamage);
         }
-        //else if (collision.gameObject.CompareTag(ITEM))
-        //{
-        //    var item = collision.gameObject.GetComponent<ItemBase>();
-        //    TakeDamage(item.Damage);
-        //}
+        else if (collision.gameObject.CompareTag(ITEM))
+        {
+            var item = collision.gameObject.GetComponent<ItemBase>();
+            TakeDamage(item.Power);
+        }
     }
     /// <summary>
     /// 攻撃を食らった時の計算
@@ -386,6 +386,7 @@ public abstract class MonsterBase : MonoBehaviour
     /// <param name="damage"></param>
     private void TakeDamage(float damage)
     {
+        Debug.Log("攻撃を受けた");
         _monsterHp -= damage;
         Damaged();
         if (_monsterHp <= 0)

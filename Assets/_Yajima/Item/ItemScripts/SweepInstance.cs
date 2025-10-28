@@ -2,11 +2,9 @@
 
 public class SweepInstance : ItemBase
 {
-    [SerializeField] float _power;
     [SerializeField] GameObject _item;
     [SerializeField] Animator _anim;
     [SerializeField] string _animName;
-    public float Power => _power;
 
     protected override void Init()
     {
