@@ -21,6 +21,7 @@ public class Luggage : MonoBehaviour
     [SerializeField] private LuggageSpeed _luggageSpeed;
     [SerializeField] private float _damageThreshold = 3f; // この速さ未満ならノーダメージ
     [SerializeField] private float _damageScale = 1.0f;   // 速度→ダメージ変換倍率
+    protected bool _damage = true;
 
 
     private void Start()
@@ -30,24 +31,42 @@ public class Luggage : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (_damage)
+        {
+            float speed = _luggageSpeed.GetTotalSpeed();
+            //   Debug.Log(speed);
+            if (speed < _damageThreshold) return;
+            int damage = Mathf.RoundToInt((speed - _damageThreshold) * _damageScale);
+            int scaledDamage = Mathf.RoundToInt((MaxScore / 100f) * damage);
 
-        float speed =  _luggageSpeed.GetTotalSpeed();
-     //   Debug.Log(speed);
-       if(speed < _damageThreshold)return;
-       int damage = Mathf.RoundToInt((speed - _damageThreshold) * _damageScale);
-       int scaledDamage = Mathf.RoundToInt((MaxScore / 100f) * damage);
-       
-  
-       _score -=  scaledDamage;
-       Debug.Log($"衝突: {collision.gameObject.name}, 速度: {speed:F2}, ダメージ: {scaledDamage}, 残りHP: {_score}");
 
-        if (_score <= 0) Destroy(gameObject);
+            _score -= scaledDamage;
+            Debug.Log($"衝突: {collision.gameObject.name}, 速度: {speed:F2}, ダメージ: {scaledDamage}, 残りHP: {_score}");
+
+            if (_score <= 0)
+            {
+                DemolishedLuggage();
+            }
+        }
+        else
+        {
+            PutLuggage(collision);
+        }
     }
-    
+
+    protected virtual void PutLuggage(Collision collision)
+    {
+        //Empty
+    }
+
+    protected virtual void DemolishedLuggage()
+    {
+        Destroy(gameObject);
+    }
 
     // スコアを取得するプロパティ
     public int Score => _score;
-    
+
 
 
 }
