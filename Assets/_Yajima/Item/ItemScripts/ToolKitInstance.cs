@@ -6,7 +6,7 @@ public class ToolKitInstance : ItemBase
     [SerializeField] Animator _anim;
     [SerializeField] string _animName;
 
-    public override void ItemActivate()
+    public override void ItemActivate(LuggageData luggage)
     {
         //Empty
     }

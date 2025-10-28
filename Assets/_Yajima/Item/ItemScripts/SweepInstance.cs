@@ -27,7 +27,7 @@ public class SweepInstance : ItemBase
         gameObject.SetActive(false);
     }
 
-    public override void ItemActivate()
+    public override void ItemActivate(LuggageData luggage)
     {
         //Empty
     }
