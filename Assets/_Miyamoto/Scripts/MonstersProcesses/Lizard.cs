@@ -87,7 +87,7 @@ public class Lizard : MonsterBase
             ResetVision();
             CarryLuggage();
             StopAllCoroutines();
-            rb.Sleep();
+            rb.isKinematic = true;
             _coroutine = null;
         }
     }
@@ -134,7 +134,6 @@ public class Lizard : MonsterBase
         if (rb)
         {
             rb.isKinematic = false;
-            rb.WakeUp();
         }
 
         _luggage = null;
