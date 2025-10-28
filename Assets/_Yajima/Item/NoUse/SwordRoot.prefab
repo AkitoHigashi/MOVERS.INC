@@ -120,6 +120,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SweepInstance
   _power: 0
   _item: {fileID: 0}
+  _anim: {fileID: 8087595878502721358}
+  _animName: Sword
 --- !u!1001 &6995423774913952228
 PrefabInstance:
   m_ObjectHideFlags: 0
