@@ -33,9 +33,9 @@ public class Lizard : MonsterBase
     {
         _animator.SetFloat("WalkSpeed", _navMeshAgent.speed);
     }
-    protected override void SetDestination()
+    protected override void GetDestination()
     {
-        base.SetDestination();
+        base.GetDestination();
         GameObject[] _luggages = GameObject.FindGameObjectsWithTag("Luggage");
         foreach (var luggage in _luggages)
         {

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using NUnit.Framework;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// デーモンキング特有の動きを制御するクラス
