@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// インゲームにつかう情報を取得するクラス
@@ -15,40 +14,41 @@ public class StatusNotifer : MonoBehaviour
     public int CurrentRunGauge => _currentRunGauge;
     [SerializeField] private int _maxItem = 0;
     [SerializeField] private int _maxhp = 0;
-     [SerializeField] private int  _currentHp = 0;
+    [SerializeField] private int _currentHp = 0;
     [SerializeField] private int _maxrunGauge = 0;
     [SerializeField] private int _currentRunGauge = 0;
 
     [SerializeField] private PlayerHealth _playerHealth;
     [SerializeField] private PlayerSprint _playerSprint;
+    [SerializeField] private PlayerData _playerData;
 
     private void Awake()
     {
-       
+
         _luggageGenerator = FindAnyObjectByType<LuggageGenerator>();
-       _maxItem = _luggageGenerator.GetTargetValue();
+        _maxItem = _luggageGenerator.GetTargetValue();
 
 
     }
     private void Start()
     {
-       
-        _maxhp = (int)_playerHealth.PlayerHP;
-        _currentHp = (int)_playerHealth.CurrentHP;
+
+        _maxhp = (int)_playerData.Health;
+        _currentHp = (int)_playerData.Health;
         Debug.Log($"{MaxHp}{CurrentHp}");
-        
+
 
     }
 
     private void OnEnable()
     {
         _playerHealth.PlayerHealthChanged += SetHealth;
-        
+
     }
     private void OnDisable()
     {
         _playerHealth.PlayerHealthChanged -= SetHealth;
-        
+
     }
 
     public void SetHealth(float currentHp)
