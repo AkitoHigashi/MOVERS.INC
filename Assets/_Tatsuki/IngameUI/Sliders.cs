@@ -1,15 +1,13 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using DG;
 using DG.Tweening;
-using System.Net.NetworkInformation;
+using UnityEngine.UI;
 
-public class Slider : MonoBehaviour
+public class Sliders : MonoBehaviour
 {
-    [SerializeField] private UnityEngine.UI.Slider _hpslider;
-    [SerializeField] private UnityEngine.UI.Slider _runhsliders;
-    [SerializeField] private UnityEngine.UI.Slider _luggagehsviders;
-    [SerializeField] private UnityEngine.UI.Slider _throwGauge;
+    [SerializeField] private Slider _hpslider;
+    [SerializeField] private Slider _runhsliders;
+    [SerializeField] private Slider _luggagehsviders;
+    [SerializeField] private Slider _throwGauge;
     
    
     [SerializeField] private CollectionArea _collectionArea;
@@ -68,7 +66,7 @@ public class Slider : MonoBehaviour
     {
         float stamina = _playerSprint.Stamina/_playerSprint.StaminaMaxValue;
         _runhsliders.DOValue(stamina, 1f).SetEase(Ease.OutCubic);
-        Debug.Log(stamina.ToString());
+     //   Debug.Log(stamina.ToString());
     }
   
 

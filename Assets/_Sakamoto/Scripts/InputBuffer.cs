@@ -12,6 +12,7 @@ public class InputBuffer : MonoBehaviour
     private const string THROW_ACTION = "Throw";
     private const string INTERACT_ACTION = "Interact";
     private const string ITEMUSE_ACTION= "ItemUse";
+    private const string INVENTORY_ACTION = "Inventory";
 
     public InputAction PlayerMove => _playerMove;
     public InputAction PlayerJump => _playerJump;
@@ -21,6 +22,7 @@ public class InputBuffer : MonoBehaviour
     public InputAction PlayerThrow => _playerThrow;
     public InputAction PlayerInteract => _playerInteract;
     public InputAction PlayerItemUse => _playerItemUse;
+    public InputAction InventoryAction => _inventoryAction;
 
 
     private InputAction _playerMove;
@@ -31,6 +33,7 @@ public class InputBuffer : MonoBehaviour
     private InputAction _playerThrow;
     private InputAction _playerInteract;
     private InputAction _playerItemUse;
+    private InputAction _inventoryAction;
 
     private void Awake()
     {
@@ -44,6 +47,7 @@ public class InputBuffer : MonoBehaviour
             _playerThrow = playerInput.actions[THROW_ACTION];
             _playerInteract = playerInput.actions[INTERACT_ACTION];
             _playerItemUse = playerInput.actions[ITEMUSE_ACTION];
+            _inventoryAction = playerInput.actions[INVENTORY_ACTION];
         }
         else
         {
