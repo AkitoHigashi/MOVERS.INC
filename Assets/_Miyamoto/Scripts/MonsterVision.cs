@@ -38,5 +38,9 @@ public class MonsterVision : MonoBehaviour
         {
             _collider = null;
         }
+        if (_monsterBase.HasSeen)
+        {
+            _monsterBase.OnTargetLost();
+        }
     }
 }

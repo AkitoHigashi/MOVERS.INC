@@ -151,6 +151,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnInputThrowAction(InputAction.CallbackContext context)
     {
+        if (!IsCarrying) return;
         if (context.started)
         {
             _playerThrow?.StartThrow();
@@ -183,8 +184,9 @@ public class PlayerController : MonoBehaviour
     {
         if (!IsCarrying) return;
         var input = context.ReadValue<float>();
-        if (input > 0)
+        if (context.started)
         {
+            Debug.Log(context);
             _inventory?.StoreItem(_playerCarry?.ReturnLuggageItemBase(), (int)input - 1);
         }
     }

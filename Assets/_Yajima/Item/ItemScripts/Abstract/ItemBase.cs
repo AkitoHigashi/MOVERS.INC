@@ -3,11 +3,14 @@
 [RequireComponent(typeof(Rigidbody))]
 public abstract class ItemBase : MonoBehaviour
 {
+
+    [SerializeField] float _power;
     protected Rigidbody _rb;
     protected ItemData _itemdata;
     Inventory _inventory;
     protected Transform _cameraTrans;
 
+    public float Power => _power;
     /// <summary>
     /// アイテムのデータのやり取りをするプロパティ
     /// </summary>

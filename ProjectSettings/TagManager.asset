@@ -12,6 +12,7 @@ TagManager:
   - TrapBase
   - Monster
   - QuestPaper
+  - Destination
   layers:
   - Default
   - TransparentFX
