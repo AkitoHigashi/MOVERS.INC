@@ -33,10 +33,18 @@ public class Lizard : MonsterBase
     {
         _animator.SetFloat("WalkSpeed", _navMeshAgent.speed);
     }
-    protected override void ProccesToLuggage(Collider collider, float distance)
+    protected override void GetDestination()
     {
-        Debug.Log("hasSeenがTrueだぞー");
-        if (!_hasSeen) FirstSeeing();
+        base.GetDestination();
+        GameObject[] _luggages = GameObject.FindGameObjectsWithTag("Luggage");
+        foreach (var luggage in _luggages)
+        {
+            _destinations.Add(luggage.transform);
+        }
+    }
+    protected override void ProcessToLuggage(Collider collider, float distance)
+    {
+        if (!HasSeen) FirstSeeing();
 
         _currentDestination = collider.transform.position;
         if (distance <= _stopDistance)
@@ -108,7 +116,7 @@ public class Lizard : MonsterBase
             if (_destinations != null && _destinations.Count > 0)
             {
                 _currentDestination = _destinations[Random.Range(0, _destinations.Count)].position;
-                _navMeshAgent.SetDestination( _currentDestination);
+                _navMeshAgent.SetDestination(_currentDestination);
             }
         }
     }

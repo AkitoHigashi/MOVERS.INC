@@ -8,8 +8,8 @@ public class DemonKing : MonsterBase
     [SerializeField, Header("攻撃のクールタイム(秒)")]
     private float _coolTime = 2f;
 
-    private float timer;
-    private bool _attack;
+    private float _timer;
+    private bool _isAttacking;
     private void Awake()
     {
         base.BaseAwake();
@@ -17,25 +17,26 @@ public class DemonKing : MonsterBase
     private void Update()
     {
         base.BaseUpdate();
-        SetAnimationBool();
-        timer += Time.deltaTime;
+        SetAnimation();
+        _timer += Time.deltaTime;
     }
     private void OnEnable()
     {
         base.BaseOnEnable();
+        _isAttacking = false;
     }
     private void OnDisable()
     {
         base.BaseOnDisable();
         _animator.SetBool("Run", false);
+        _isAttacking = false;
     }
-    private void SetAnimationBool()
+    private void SetAnimation()
     {
-        _animator.SetBool("Run", HasSeen);
-        _animator.SetBool("Idle", timer >= _coolTime);
-        _animator.SetBool("Attack", _attack);
+        _animator.SetBool("Wait", _timer >= _coolTime);
+        _animator.SetBool("Run", HasSeen); 
     }
-    protected override void ProccesToPlayer(Collider collider, float distance)
+    protected override void ProcessToPlayer(Collider collider, float distance)
     {
         if (!_hasSeen) FirstSeeing();
        
@@ -53,6 +54,10 @@ public class DemonKing : MonsterBase
                     break;
             }
         }
+        else
+        {
+            _isAttacking = false;
+        }
     }
     /// <summary>
     /// アクションを起こせるか判定
@@ -61,13 +66,10 @@ public class DemonKing : MonsterBase
     /// <returns></returns>
     private bool CanAttack(float distance)
     {
-        if (distance < _stopDistance && timer >= _coolTime)
+        if(_isAttacking) return false;
+
+        if (distance < _stopDistance && _timer >= _coolTime)
         {
-            // X軸とZ軸をゼロにし、Y軸は保持して回転はできるように
-            Vector3 velocity = _navMeshAgent.velocity;
-            velocity.x = 0;
-            velocity.z = 0;
-            _navMeshAgent.velocity = velocity;
             return true;
         }
         else
@@ -81,12 +83,18 @@ public class DemonKing : MonsterBase
     /// <param name="player"></param>
     private void Attack(Collider player)
     {
-        if (player == null) return;
+        if (!player) return;
 
         //アニメーションとか攻撃を走らせる
         Debug.Log($"{this.name}の攻撃");
+
+        _isAttacking = true;
+        Vector3 velocity = this.transform.position;
+        velocity.x = 0;
+        velocity.z = 0;
+        _navMeshAgent.velocity = velocity;
         _animator.SetTrigger("Attack");
-        timer = 0;
+        _timer = 0;
     }
     /// <summary>
     /// 速度アップ追加
@@ -94,11 +102,17 @@ public class DemonKing : MonsterBase
     protected override void FirstSeeing()
     {
         base.FirstSeeing();
-        _navMeshAgent.speed = _monsterRunSpeed;
+        _navMeshAgent.speed = _monsterWalkSpeed ;
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("CollectionArea"))
+        BaseOnCollisionEnter(collision);
+
+        if (collision.gameObject.CompareTag("CollectionArea"))
+        {
+            Debug.Log("コレクションエリアに入った");
+            _isAttacking = false;
             ReturnDestination();
+        }
     }
 }
