@@ -9,30 +9,30 @@ public class Slider : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Slider _hpslider;
     [SerializeField] private UnityEngine.UI.Slider _runhsliders;
     [SerializeField] private UnityEngine.UI.Slider _luggagehsviders;
-    [SerializeField] private UnityEngine.UI.Slider _throwGauge;　　
-
-    //  [SerializeField] private InvokeSystem InvokeSystem;
+    [SerializeField] private UnityEngine.UI.Slider _throwGauge;
+    
+   
     [SerializeField] private CollectionArea _collectionArea;
     private StatusNotifer _statusNotifer;
     private PlayerThrow _playerThrow;
+    private PlayerSprint _playerSprint;
     
 
     private void Start()
     {
         _statusNotifer = FindAnyObjectByType<StatusNotifer>();
         _playerThrow = FindAnyObjectByType<PlayerThrow>();
+        _playerSprint = FindAnyObjectByType<PlayerSprint>();
+    
     }
     private void OnEnable()
     {
-  
-
         _collectionArea.OnEnterLuggage += LuggageNum;
         _collectionArea.OnExitLuggage += LuggageNum;
     }
 
     private void OnDisable()
     {
-     
         _collectionArea.OnEnterLuggage -= LuggageNum;
         _collectionArea.OnExitLuggage -= LuggageNum;
     }
@@ -40,6 +40,7 @@ public class Slider : MonoBehaviour
     {
         HpSetSlider();
         SetThrowGauge();
+        RunSetSlider();
     }
     /// <summary>
     /// スローゲージスライダーの更新をする
@@ -63,10 +64,13 @@ public class Slider : MonoBehaviour
         _hpslider.DOValue(targetvalue, 1f).SetEase(Ease.OutCubic);
     }
 
-    public void RunSetSlider(float sliderValue)
+    public void RunSetSlider()
     {
-        // runhsliders.value = sliderValue / StatusNotifer.UImaxRunGauge;
+        float stamina = _playerSprint.Stamina/_playerSprint.StaminaMaxValue;
+        _runhsliders.DOValue(stamina, 1f).SetEase(Ease.OutCubic);
+        Debug.Log(stamina.ToString());
     }
+  
 
     /// <summary>
     /// 指定荷物のカウントスライダーの更新をする

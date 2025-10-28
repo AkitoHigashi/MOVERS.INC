@@ -1,13 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// 視野トリガー専用スクリプト
 /// </summary>
 public class MonsterVision : MonoBehaviour
 {
-    const string PLAYER = "Player";
-    const string LUGGAGE = "Luggage";
     private MonsterBase _monsterBase;
     private Collider _collider;
     private bool _isInSide;
@@ -24,20 +21,22 @@ public class MonsterVision : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(PLAYER) || other.CompareTag(LUGGAGE))
+        foreach (string tag in _monsterBase.TargetTags)
         {
-            Debug.Log("範囲内になにか入ってきた");
-            _collider = other;
-            _isInSide = true;
+            if (other.CompareTag(tag))
+            {
+                Debug.Log("範囲内になにか入ってきた");
+                _collider = other;
+                _isInSide = true;
+                break;
+            }
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(PLAYER) || other.CompareTag(LUGGAGE))
+        if (other == _collider)
         {
-            _isInSide = false;
             _collider = null;
-            _monsterBase.ReturnDestination();
         }
     }
 }

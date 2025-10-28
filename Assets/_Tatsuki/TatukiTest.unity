@@ -404,17 +404,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 932a1ec747889a44cb9c4c4554d010d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  main_text: {fileID: 887048979}
-  cargo_text: {fileID: 347790752}
-  capture_text: {fileID: 2132847406}
-  undamage_text: {fileID: 681718031}
-  total_text: {fileID: 1251977469}
-  cargoStatus_text: {fileID: 1075298114}
-  undamageStatus_text: {fileID: 136301584}
-  captureStatus_text: {fileID: 1051457855}
-  cargoBonus: 1000
-  captureBonus: 1000
-  luggageUnDamageBonus: 1000
+  _main_text: {fileID: 0}
+  _cargo_text: {fileID: 0}
+  _capture_text: {fileID: 0}
+  _undamage_text: {fileID: 0}
+  _total_text: {fileID: 0}
+  _cargoStatus_text: {fileID: 0}
+  _undamageStatus_text: {fileID: 0}
+  _captureStatus_text: {fileID: 0}
+  _cargoBonus: 2000
+  _captureBonus: 1000
+  _luggageUnDamageBonus: 1000
 --- !u!1 &122004950
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
   _health: 100
-  _muscleStrength: 1
+  _muscleItem: 0
   _cameraForward: {fileID: 1007538578}
   _luggagePosition: {fileID: 0}
   _groundLayer:
@@ -471,6 +471,8 @@ MonoBehaviour:
   _slidingSpeed: 0
   _stamina: 100
   _staminaRecoverySpeed: 2
+  _dragSpeedMultiplier: 1.2
+  _luggageBigSpeedMultiplier: 0.4
   _jumpForce: 0
   _crouchHeight: 0
   _slidingForce: 0
@@ -1027,9 +1029,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1777861922}
-        m_TargetAssemblyTypeName: PlayerHealth, Assembly-CSharp
-        m_MethodName: TestDamage
+      - m_Target: {fileID: 1007538580}
+        m_TargetAssemblyTypeName: StatusNotifer, Assembly-CSharp
+        m_MethodName: SetHealth
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 10
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1777861929}
+        m_TargetAssemblyTypeName: PlayerSprint, Assembly-CSharp
+        m_MethodName: Test
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2028,15 +2042,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 567930290}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc3d8ee085bde0042b5b39630d8ab179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LuggageUI
-  luggagetext: {fileID: 1131825964}
-  timertext: {fileID: 1798737029}
-  invokeSystem: {fileID: 1060623041}
-  CollectionArea: {fileID: 1858852456}
+  _luggagetext: {fileID: 0}
+  _timertext: {fileID: 0}
+  _invokeSystem: {fileID: 0}
+  _collectionArea: {fileID: 0}
+  _statusNotifer: {fileID: 0}
 --- !u!114 &567930292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2049,11 +2064,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22996eb5e94708443a6e7f209faf74c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HPslinder
-  hpslider: {fileID: 717356424}
-  runhsliders: {fileID: 961750281}
-  luggagehsviders: {fileID: 962135572}
-  ThrowGauge: {fileID: 1374959655}
-  collectionArea: {fileID: 1858852456}
+  _hpslider: {fileID: 717356424}
+  _runhsliders: {fileID: 961750281}
+  _luggagehsviders: {fileID: 962135572}
+  _throwGauge: {fileID: 1374959655}
+  _collectionArea: {fileID: 1858852456}
 --- !u!4 &567930293
 Transform:
   m_ObjectHideFlags: 0
@@ -2159,7 +2174,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &655748475
 Transform:
   m_ObjectHideFlags: 0
@@ -2191,13 +2206,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573980eff8141344793c15d5da70a02f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 155748890}
-  target: {fileID: 655748475}
-  fallDistance: 2
-  fallSpeed: 5
-  collector: {fileID: 1547002029}
-  luggageManager: {fileID: 853783709}
-  scoreManager: {fileID: 19212238}
+  _button: {fileID: 0}
+  _target: {fileID: 0}
+  _fallDistance: 2
+  _fallSpeed: 5
+  _collector: {fileID: 0}
+  _luggageManager: {fileID: 0}
+  _scoreManager: {fileID: 0}
 --- !u!54 &655748477
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3516,7 +3531,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185dbbe72f2553f499307eb95491352b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UITestStatus
+  _maxItem: 0
+  _maxhp: 0
+  _currentHp: 0
+  _maxrunGauge: 0
+  _currentRunGauge: 0
   _playerHealth: {fileID: 1777861922}
+  _playerSprint: {fileID: 1777861929}
 --- !u!1 &1051457853
 GameObject:
   m_ObjectHideFlags: 0
@@ -4190,8 +4211,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daa6ca95c1a93db4ab3bd8e3beb7eca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PanelSwitch
-  InGameUI: {fileID: 564308389}
-  OutGameUI: {fileID: 1095123456}
+  _inGameUI: {fileID: 0}
+  _outGameUI: {fileID: 0}
 --- !u!4 &1116701498
 Transform:
   m_ObjectHideFlags: 0
@@ -6743,6 +6764,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a13a04a40798b4949a568af808271ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+--- !u!114 &1777861929 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 713031049768357123, guid: f8ef0842fa1bd26409c96b0a318877f0, type: 3}
+  m_PrefabInstance: {fileID: 1406553632}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04662f1f9ebb8b54fa69f4aeb3ea649e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1798737028
 GameObject:
   m_ObjectHideFlags: 0
@@ -7040,7 +7072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2d7a0ea532bd8488d788b25dcefb68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LuggageSpeed
-  Ishave: 0
+  _ishave: 0
   _rb: {fileID: 1831086486}
 --- !u!1 &1858852454
 GameObject:

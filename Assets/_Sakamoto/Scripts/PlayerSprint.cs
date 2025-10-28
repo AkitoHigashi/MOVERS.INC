@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerSprint : MonoBehaviour, IStartSetVariables
 {
@@ -6,6 +7,9 @@ public class PlayerSprint : MonoBehaviour, IStartSetVariables
     private float _stamina;
     private float _staminaMaxValue;
     private bool _isSprint = false;
+
+    public float StaminaMaxValue => _staminaMaxValue;
+    public float Stamina => _stamina;
 
     private void Update()
     {
@@ -66,4 +70,5 @@ public class PlayerSprint : MonoBehaviour, IStartSetVariables
     /// </summary>
     /// <returns></returns>
     public bool ReturnIsSprint() => _isSprint;
+   
 }
