@@ -268,6 +268,7 @@ public abstract class MonsterBase : MonoBehaviour
         else
         {
             OnTargetLost();
+            _navMeshAgent.isStopped = false;
         }
     }
     /// <summary>
@@ -305,7 +306,7 @@ public abstract class MonsterBase : MonoBehaviour
     /// <summary>
     /// 見失った時に呼び出す
     /// </summary>
-    private void OnTargetLost()
+    public void OnTargetLost()
     {
         if (_hasSeen)
         {
@@ -386,6 +387,7 @@ public abstract class MonsterBase : MonoBehaviour
     /// <param name="damage"></param>
     private void TakeDamage(float damage)
     {
+        Debug.Log("ダメージを食らった");
         _monsterHp -= damage;
         Damaged();
         if (_monsterHp <= 0)
