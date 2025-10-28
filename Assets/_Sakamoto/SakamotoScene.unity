@@ -619,7 +619,7 @@ GameObject:
   - component: {fileID: 1312949382}
   - component: {fileID: 1312949381}
   - component: {fileID: 1312949380}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1039,6 +1039,14 @@ PrefabInstance:
       propertyPath: _luggagePosition
       value: 
       objectReference: {fileID: 879427624}
+    - target: {fileID: 1259140848349963320, guid: f8ef0842fa1bd26409c96b0a318877f0, type: 3}
+      propertyPath: _groundLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1259140848349963320, guid: f8ef0842fa1bd26409c96b0a318877f0, type: 3}
+      propertyPath: _carryIgnoreLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4410699780037116505, guid: f8ef0842fa1bd26409c96b0a318877f0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
