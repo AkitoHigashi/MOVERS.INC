@@ -12,9 +12,9 @@ public class PlayerItemUse : MonoBehaviour
     {
         if (_luggageData.LuggageGameObject.TryGetComponent<ItemBase>(out var itemEffect))
         {
-            _luggageData.LuggageRb.isKinematic = false;
-            _luggageData.LuggageScript = null;
-            itemEffect.ItemActivate();
+            //_luggageData.LuggageRb.isKinematic = false;
+            //_luggageData.LuggageScript = null;
+            itemEffect.ItemActivate(_luggageData);
             Debug.Log("ItemUse");
         }
     }

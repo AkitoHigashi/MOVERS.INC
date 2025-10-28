@@ -15,7 +15,7 @@ public class Sweep : ItemBase
     }
 
     [ContextMenu("a")]
-    public override void ItemActivate()
+    public override void ItemActivate(LuggageData luggage)
     {
         if (!_sweep.activeSelf)
         {

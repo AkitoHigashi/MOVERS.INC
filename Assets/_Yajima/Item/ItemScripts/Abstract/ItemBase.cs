@@ -58,5 +58,5 @@ public abstract class ItemBase : MonoBehaviour
     /// <summary>
     /// アイテムの効果を発動する関数
     /// </summary>
-    public abstract void ItemActivate();
+    public abstract void ItemActivate(LuggageData luggage);
 }
