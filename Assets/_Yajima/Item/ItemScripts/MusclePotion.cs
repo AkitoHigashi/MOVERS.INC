@@ -13,8 +13,10 @@ public class MusclePotion : ItemBase
     }
 
     [ContextMenu("a")]
-    public override void ItemActivate()
+    public override void ItemActivate(LuggageData luggage)
     {
+        luggage.LuggageRb.isKinematic = false;
+        luggage.LuggageScript = null;
         _pgc.MusclePotion(this);
         StorageData.ItemUse(ItemData);
         Destroy(gameObject);

@@ -58,6 +58,6 @@ public class DemoPlayer : MonoBehaviour
 
     void UseItem()
     {
-        _item.ItemActivate();
+        //_item.ItemActivate();
     }
 }

@@ -12,7 +12,7 @@ public class DemoMonsterBall : ItemBase
         _rb = GetComponent<Rigidbody>();
         _rb.isKinematic = true;
     }
-    public override void ItemActivate()
+    public override void ItemActivate(LuggageData luggage)
     {
         _rb.isKinematic = false;
         _rb.AddForce(GameObject.Find("DemoPlayer").transform.forward, ForceMode.Impulse);
