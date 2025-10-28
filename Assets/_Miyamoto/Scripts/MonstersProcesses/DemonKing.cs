@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 /// <summary>
 /// デーモンキング特有の動きを制御するクラス
@@ -7,9 +8,12 @@ public class DemonKing : MonsterBase
 {
     [SerializeField, Header("攻撃のクールタイム(秒)")]
     private float _coolTime = 2f;
+    [SerializeField, Header("視界から見失っても追跡できる時間(秒)")]
+    private float _chaseTime;
 
     private float _timer;
     private bool _isAttacking;
+    private float _lostSightTimer;
     private void Awake()
     {
         base.BaseAwake();
@@ -19,6 +23,13 @@ public class DemonKing : MonsterBase
         base.BaseUpdate();
         SetAnimation();
         _timer += Time.deltaTime;
+
+        // 視界を失っても一定時間は追跡を続ける
+        if (!_hasSeen && _lostSightTimer < _chaseTime)
+        {
+            _lostSightTimer += Time.deltaTime;
+            _navMeshAgent.SetDestination(_currentDestination);
+        }
     }
     private void OnEnable()
     {
@@ -38,21 +49,19 @@ public class DemonKing : MonsterBase
     }
     protected override void ProcessToPlayer(Collider collider, float distance)
     {
-        if (!_hasSeen) FirstSeeing();
-       
+        if (!_hasSeen)
+        {
+            FirstSeeing();
+            _lostSightTimer = 0f; // プレイヤーを再度見つけたらリセット
+        }
+
         _navMeshAgent.speed = _monsterRunSpeed;
         _currentDestination = collider.transform.position;
 
         if (CanAttack(distance))
         {
-            switch (_currentEnemyState)
-            {
-                case MonsterState.Hostile:
-                    Attack(collider);
-                    break;
-                default:
-                    break;
-            }
+            if (_currentEnemyState == MonsterState.Hostile)
+                StartCoroutine(AttackRoutine(collider));
         }
         else
         {
@@ -67,34 +76,27 @@ public class DemonKing : MonsterBase
     private bool CanAttack(float distance)
     {
         if(_isAttacking) return false;
-
-        if (distance < _stopDistance && _timer >= _coolTime)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return (distance < _stopDistance && _timer >= _coolTime);
     }
     /// <summary>
-    /// プレイヤーに攻撃
+    /// 攻撃コルーチン
     /// </summary>
-    /// <param name="player"></param>
-    private void Attack(Collider player)
+    private IEnumerator AttackRoutine(Collider player)
     {
-        if (!player) return;
-
-        //アニメーションとか攻撃を走らせる
-        Debug.Log($"{this.name}の攻撃");
+        if (!player) yield break;
+        if (_isAttacking) yield break;
 
         _isAttacking = true;
-        Vector3 velocity = this.transform.position;
-        velocity.x = 0;
-        velocity.z = 0;
-        _navMeshAgent.velocity = velocity;
+        _navMeshAgent.isStopped = true;
+
+        Debug.Log($"{this.name}の攻撃");
         _animator.SetTrigger("Attack");
         _timer = 0;
+
+        yield return new WaitForSeconds(1.2f); // 攻撃アニメーション時間
+
+        _isAttacking = false;
+        _navMeshAgent.isStopped = false;
     }
     /// <summary>
     /// 速度アップ追加
