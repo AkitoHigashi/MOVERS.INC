@@ -13,6 +13,7 @@ public class PlayerThrow : MonoBehaviour, IStartSetVariables
     private bool _isThrowing = false;
     private bool _isCarry = false;
 
+    public bool IsThrowing => _isThrowing;
     public float ThrowTime => _throwTime;  //abe
     public float ThrowableTime => _throwableTime; //abe
 

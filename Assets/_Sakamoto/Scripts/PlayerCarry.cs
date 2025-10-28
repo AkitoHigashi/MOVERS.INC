@@ -11,6 +11,7 @@ public class PlayerCarry : MonoBehaviour, IStartSetVariables
     private string _itemTag = "Item";
     private bool _isCarrying = false;
     private LayerMask _carryIgnoreLayer;
+    public bool IsCarrying => _isCarrying;
 
     private void Start()
     {
