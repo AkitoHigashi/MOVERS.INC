@@ -5,12 +5,14 @@ public class CardboardInstance : InteractBase
 {
     Animator _anim;
     List<Luggage> _luggages = new List<Luggage>();
+    Luggage _luggage;
     bool _canPutin = true;
 
     private void Start()
     {
+        _luggage = GetComponent<Luggage>();
         _anim = GetComponent<Animator>();
-        _damage = false;
+        _luggage.Damge = false;
     }
 
     [ContextMenu("a")]
@@ -18,10 +20,10 @@ public class CardboardInstance : InteractBase
     {
         _anim.SetTrigger("Close");
         _canPutin = false;
-        _damage = true;
+        _luggage.Damge = true;
     }
 
-    protected override void PutLuggage(Collision collision)
+    public override void PutLuggage(Collision collision)
     {
         if (_canPutin)
         {
@@ -37,7 +39,7 @@ public class CardboardInstance : InteractBase
     }
 
     [ContextMenu("b")]
-    protected override void DemolishedLuggage()
+    public override void DemolishedLuggage()
     {
         _anim.SetTrigger("Open");
     }

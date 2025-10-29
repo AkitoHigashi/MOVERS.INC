@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 /// <summary>
 /// 荷物の大きさを指定する
 /// </summary>
@@ -21,11 +20,20 @@ public class Luggage : MonoBehaviour
     [SerializeField] private LuggageSpeed _luggageSpeed;
     [SerializeField] private float _damageThreshold = 3f; // この速さ未満ならノーダメージ
     [SerializeField] private float _damageScale = 1.0f;   // 速度→ダメージ変換倍率
-    protected bool _damage = true;
+    InteractBase _interactBase;
+    private bool _damage = true;
 
+    // スコアを取得するプロパティ
+    public int Score => _score;
+
+    public bool Damge
+    {
+        get; set;
+    }
 
     private void Start()
     {
+        _interactBase = GetComponent<InteractBase>();
         MaxScore = _score;
     }
 
@@ -45,28 +53,12 @@ public class Luggage : MonoBehaviour
 
             if (_score <= 0)
             {
-                DemolishedLuggage();
+                _interactBase?.DemolishedLuggage();
             }
         }
         else
         {
-            PutLuggage(collision);
+            _interactBase?.PutLuggage(collision);
         }
     }
-
-    protected virtual void PutLuggage(Collision collision)
-    {
-        //Empty
-    }
-
-    protected virtual void DemolishedLuggage()
-    {
-        Destroy(gameObject);
-    }
-
-    // スコアを取得するプロパティ
-    public int Score => _score;
-
-
-
 }
