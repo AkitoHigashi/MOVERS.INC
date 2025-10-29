@@ -33,6 +33,10 @@ public class Lizard : MonsterBase
     {
         _animator.SetFloat("WalkSpeed", _navMeshAgent.speed);
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        base.BaseOnCollisionEnter(collision);
+    }
     protected override void GetDestination()
     {
         base.GetDestination();
