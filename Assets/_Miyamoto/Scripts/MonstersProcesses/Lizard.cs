@@ -33,6 +33,10 @@ public class Lizard : MonsterBase
     {
         _animator.SetFloat("WalkSpeed", _navMeshAgent.speed);
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        base.BaseOnCollisionEnter(collision);
+    }
     protected override void GetDestination()
     {
         base.GetDestination();
@@ -87,7 +91,7 @@ public class Lizard : MonsterBase
             ResetVision();
             CarryLuggage();
             StopAllCoroutines();
-            rb.Sleep();
+            rb.isKinematic = true;
             _coroutine = null;
         }
     }
@@ -134,7 +138,6 @@ public class Lizard : MonsterBase
         if (rb)
         {
             rb.isKinematic = false;
-            rb.WakeUp();
         }
 
         _luggage = null;
