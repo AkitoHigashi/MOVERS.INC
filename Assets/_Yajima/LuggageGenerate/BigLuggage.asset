@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LuggageList
   _list:
   - _prefab: {fileID: 299318161905044385, guid: 455db9da6cd369d40a498054e39a2693, type: 3}
-    _particle: {fileID: 0}
+    _particle: {fileID: 3280519133390621005, guid: a71be3e7990efb040a07565c43cbb198, type: 3}
   - _prefab: {fileID: 226359403862279155, guid: e04821c24d2b6794b9df52a07050d48a, type: 3}
-    _particle: {fileID: 0}
+    _particle: {fileID: 3280519133390621005, guid: a71be3e7990efb040a07565c43cbb198, type: 3}
