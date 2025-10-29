@@ -46,6 +46,8 @@ public abstract class MonsterBase : MonoBehaviour
     private GameObject _deadPrefab;
     [SerializeField, Header("ターゲットにするタグ")]
     private List<string> _targetTags;
+    [SerializeField, Header("視野の拡大倍率")]
+    private float _fovMagnification;
 
     #region ステータス
     protected float _monsterHp;
@@ -209,7 +211,10 @@ public abstract class MonsterBase : MonoBehaviour
     /// <returns></returns>
     private IEnumerator ChangeDestination()
     {
-        if (_hasSeen) yield break;
+        if (_hasSeen)
+        {
+            yield break;
+        }
 
         _navMeshAgent.isStopped = true;
         _lookAround = true;
@@ -321,8 +326,8 @@ public abstract class MonsterBase : MonoBehaviour
     protected virtual void FirstSeeing()
     {
         Debug.Log("初めて見えたFirstSeeing呼び出し");
-        _navMeshAgent.angularSpeed *= 2;
-        _fov *= 2;
+        _navMeshAgent.angularSpeed *= _fovMagnification;
+        _fov *= _fovMagnification;
         _hasSeen = true;
     }
     /// <summary>
@@ -331,8 +336,8 @@ public abstract class MonsterBase : MonoBehaviour
     protected void ResetVision()
     {
         Debug.Log("視野角リセットResetVision呼び出し");
-        _navMeshAgent.angularSpeed /= 2;
-        _fov /= 2;
+        _navMeshAgent.angularSpeed /= _fovMagnification;
+        _fov /= _fovMagnification;
         _hasSeen = false;
     }
     /// <summary>
