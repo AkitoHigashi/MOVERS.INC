@@ -6,17 +6,17 @@ using System.Linq;
 public class LuggageGenerator : MonoBehaviour
 {
     [System.Serializable]
-  public  class LuggageData
+    public class LuggageData
     {
         [SerializeField] int _generateValue;
         [SerializeField] int _targetValue;
         [SerializeField] LuggageList _luggageList;
-        [SerializeField] List<Vector3> _generatePos;
+        [SerializeField] List<Transform> _generatePos;
 
         public int GenerateValue => _generateValue;
         public int TargetValue => _targetValue;
         public LuggageList LuggageList => _luggageList;
-        public List<Vector3> GeneratePos => _generatePos;
+        public List<Transform> GeneratePos => _generatePos;
 
         /// <summary>
         /// 荷物の生成についての不正を検知する関数
@@ -68,8 +68,8 @@ public class LuggageGenerator : MonoBehaviour
     bool CheckPositionDupulicate(LuggageData smallLug, LuggageData bigLug)
     {
         //生成ポイントの数の多さによってリストの保持を分ける
-        List<Vector3> shortList = smallLug.GeneratePos.Count < bigLug.GeneratePos.Count ? smallLug.GeneratePos : bigLug.GeneratePos;
-        List<Vector3> largeList = smallLug.GeneratePos.Count < bigLug.GeneratePos.Count ? bigLug.GeneratePos : smallLug.GeneratePos;
+        List<Transform> shortList = smallLug.GeneratePos.Count < bigLug.GeneratePos.Count ? smallLug.GeneratePos : bigLug.GeneratePos;
+        List<Transform> largeList = smallLug.GeneratePos.Count < bigLug.GeneratePos.Count ? bigLug.GeneratePos : smallLug.GeneratePos;
 
         //結果
         bool result = true;
@@ -77,7 +77,7 @@ public class LuggageGenerator : MonoBehaviour
         {
             foreach (var s in shortList)
             {
-                if (l.x == s.x && l.y == s.y && l.z == s.z)
+                if (l.position == s.position)
                 {
                     Debug.LogWarning($"{l}が被っています");
                     result = false;
@@ -99,7 +99,7 @@ public class LuggageGenerator : MonoBehaviour
         //指定の荷物を決定するまで繰り返す
         while (result.Count < luggage.TargetValue)
         {
-            int rand = UnityEngine.Random.Range(0, luggage.LuggageList.List.Count);
+            int rand = UnityEngine.Random.Range(0, luggage.GenerateValue);
             result.Add(rand);
         }
 
@@ -126,16 +126,16 @@ public class LuggageGenerator : MonoBehaviour
         Action<int, bool> generate = (index, target) =>
         {
             int rand = UnityEngine.Random.Range(0, luggage.LuggageList.List.Count);
-            var go = Instantiate(luggage.LuggageList.List[rand].Prefab, luggage.GeneratePos[index], Quaternion.identity);
+            var go = Instantiate(luggage.LuggageList.List[rand].Prefab, luggage.GeneratePos[index].position, Quaternion.identity);
             if (target)
             {
                 //指定の荷物の時はパーティクルを子オブジェクトにする
-                //Instantiate(luggage.LuggageList.List[rand].Particle, go.transform);
-                go.transform.localScale = Vector3.one * 0.5f;
+                Instantiate(luggage.LuggageList.List[rand].Particle, go.transform);
+                //go.transform.localScale = Vector3.one * 0.5f;
                 Debug.Log("Particle");
             }
             //置いた場所を保存
-            setPosition.Add(luggage.GeneratePos[index]);
+            setPosition.Add(luggage.GeneratePos[index].position);
             luggage.GeneratePos.RemoveAt(index);
         };
 
@@ -162,7 +162,7 @@ public class LuggageGenerator : MonoBehaviour
                 //距離の合計を求める
                 foreach (var setPos in setPosition)
                 {
-                    distSum += Vector3.Distance(luggage.GeneratePos[j], setPos);
+                    distSum += Vector3.Distance(luggage.GeneratePos[j].position, setPos);
                 }
 
                 //候補場所に対して距離の平均を調べる
