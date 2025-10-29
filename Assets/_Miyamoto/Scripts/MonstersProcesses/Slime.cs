@@ -28,4 +28,8 @@ public class Slime : MonsterBase
     {
         _animator.SetFloat("WalkSpeed", _navMeshAgent.speed);
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        base.BaseOnCollisionEnter(collision);
+    }
 }
