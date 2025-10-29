@@ -9,7 +9,9 @@ public class SweepInstance : ItemBase
     protected override void Init()
     {
         base.Init();
-        _rb.isKinematic = true;
+        //_rb.isKinematic = true;
+        _rb.useGravity = false;
+        _rb.constraints = RigidbodyConstraints.FreezePositionY;
         _anim = GetComponent<Animator>();
     }
 
