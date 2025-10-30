@@ -19,6 +19,9 @@ public class Inventory : MonoBehaviour
     /// </returns>
     public GameObject StoreItem(ItemBase item, int inventoryNum)
     {
+        //格納できないときはそのまま返す
+        if (!item.CanStore) return item.gameObject;
+
         if (!item)
         {
             //何も持っていなければnullでインベントリの関数を実行

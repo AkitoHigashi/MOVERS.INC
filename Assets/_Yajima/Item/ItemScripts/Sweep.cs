@@ -11,15 +11,18 @@ public class Sweep : ItemBase
     {
         base.Init();
         _sweep.SetActive(false);
+
     }
 
     [ContextMenu("a")]
-    public override void ItemActivate()
+    public override void ItemActivate(LuggageData luggage)
     {
         if (!_sweep.activeSelf)
         {
             //プレイヤーの子にする想定
-            _sweep.transform.SetParent(transform.parent);
+            _sweep.transform.SetParent(_cameraTrans);
+            _sweep.transform.position = _cameraTrans.position;
+            _sweep.transform.rotation = _cameraTrans.rotation;
             _sweep.SetActive(true);
             gameObject.SetActive(false);
         }

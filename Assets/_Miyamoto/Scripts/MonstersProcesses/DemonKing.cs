@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 /// <summary>
 /// デーモンキング特有の動きを制御するクラス
@@ -7,9 +8,12 @@ public class DemonKing : MonsterBase
 {
     [SerializeField, Header("攻撃のクールタイム(秒)")]
     private float _coolTime = 2f;
+    [SerializeField, Header("視界から見失っても追跡できる時間(秒)")]
+    private float _chaseTime;
 
-    private float timer;
-    private bool _attack;
+    private float _timer;
+    private bool _isAttacking;
+    private float _lostSightTimer;
     private void Awake()
     {
         base.BaseAwake();
@@ -17,41 +21,51 @@ public class DemonKing : MonsterBase
     private void Update()
     {
         base.BaseUpdate();
-        SetAnimationBool();
-        timer += Time.deltaTime;
+        SetAnimation();
+        _timer += Time.deltaTime;
+
+        // 視界を失っても一定時間は追跡を続ける
+        if (!_hasSeen && _lostSightTimer < _chaseTime)
+        {
+            _lostSightTimer += Time.deltaTime;
+            _navMeshAgent.SetDestination(_currentDestination);
+        }
     }
     private void OnEnable()
     {
         base.BaseOnEnable();
+        _isAttacking = false;
     }
     private void OnDisable()
     {
         base.BaseOnDisable();
         _animator.SetBool("Run", false);
+        _isAttacking = false;
     }
-    private void SetAnimationBool()
+    private void SetAnimation()
     {
-        _animator.SetBool("Run", HasSeen);
-        _animator.SetBool("Idle", timer >= _coolTime);
-        _animator.SetBool("Attack", _attack);
+        _animator.SetBool("Wait", _timer >= _coolTime);
+        _animator.SetBool("Run", HasSeen); 
     }
-    protected override void ProccesToPlayer(Collider collider, float distance)
+    protected override void ProcessToPlayer(Collider collider, float distance)
     {
-        if (!_hasSeen) FirstSeeing();
-       
+        if (!_hasSeen)
+        {
+            FirstSeeing();
+            _lostSightTimer = 0f; // プレイヤーを再度見つけたらリセット
+        }
+
         _navMeshAgent.speed = _monsterRunSpeed;
         _currentDestination = collider.transform.position;
 
         if (CanAttack(distance))
         {
-            switch (_currentEnemyState)
-            {
-                case MonsterState.Hostile:
-                    Attack(collider);
-                    break;
-                default:
-                    break;
-            }
+            if (_currentEnemyState == MonsterState.Hostile)
+                StartCoroutine(AttackRoutine(collider));
+        }
+        else
+        {
+            _isAttacking = false;
         }
     }
     /// <summary>
@@ -61,32 +75,28 @@ public class DemonKing : MonsterBase
     /// <returns></returns>
     private bool CanAttack(float distance)
     {
-        if (distance < _stopDistance && timer >= _coolTime)
-        {
-            // X軸とZ軸をゼロにし、Y軸は保持して回転はできるように
-            Vector3 velocity = _navMeshAgent.velocity;
-            velocity.x = 0;
-            velocity.z = 0;
-            _navMeshAgent.velocity = velocity;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        if(_isAttacking) return false;
+        return (distance < _stopDistance && _timer >= _coolTime);
     }
     /// <summary>
-    /// プレイヤーに攻撃
+    /// 攻撃コルーチン
     /// </summary>
-    /// <param name="player"></param>
-    private void Attack(Collider player)
+    private IEnumerator AttackRoutine(Collider player)
     {
-        if (player == null) return;
+        if (!player) yield break;
+        if (_isAttacking) yield break;
 
-        //アニメーションとか攻撃を走らせる
+        _isAttacking = true;
+        _navMeshAgent.isStopped = true;
+
         Debug.Log($"{this.name}の攻撃");
         _animator.SetTrigger("Attack");
-        timer = 0;
+        _timer = 0;
+
+        yield return new WaitForSeconds(1.2f); // 攻撃アニメーション時間
+
+        _isAttacking = false;
+        _navMeshAgent.isStopped = false;
     }
     /// <summary>
     /// 速度アップ追加
@@ -94,11 +104,17 @@ public class DemonKing : MonsterBase
     protected override void FirstSeeing()
     {
         base.FirstSeeing();
-        _navMeshAgent.speed = _monsterRunSpeed;
+        _navMeshAgent.speed = _monsterWalkSpeed ;
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("CollectionArea"))
+        BaseOnCollisionEnter(collision);
+
+        if (collision.gameObject.CompareTag("CollectionArea"))
+        {
+            Debug.Log("コレクションエリアに入った");
+            _isAttacking = false;
             ReturnDestination();
+        }
     }
 }

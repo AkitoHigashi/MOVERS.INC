@@ -3,10 +3,15 @@
 [RequireComponent(typeof(Rigidbody))]
 public abstract class ItemBase : MonoBehaviour
 {
+    [SerializeField] float _power;
     protected Rigidbody _rb;
     protected ItemData _itemdata;
     Inventory _inventory;
+    protected Transform _cameraTrans;
+    protected bool _canStore = true;
 
+    public float Power => _power;
+    public bool CanStore => _canStore;
     /// <summary>
     /// アイテムのデータのやり取りをするプロパティ
     /// </summary>
@@ -25,7 +30,7 @@ public abstract class ItemBase : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         Init();
     }
@@ -40,6 +45,7 @@ public abstract class ItemBase : MonoBehaviour
             tag = "Item";
         }
         _rb = GetComponent<Rigidbody>();
+        _cameraTrans = GameObject.Find("Camera").transform;
         _inventory = FindFirstObjectByType<Inventory>();
     }
 
@@ -56,5 +62,5 @@ public abstract class ItemBase : MonoBehaviour
     /// <summary>
     /// アイテムの効果を発動する関数
     /// </summary>
-    public abstract void ItemActivate();
+    public abstract void ItemActivate(LuggageData luggage);
 }

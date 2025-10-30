@@ -1,0 +1,60 @@
+﻿using UnityEngine;
+using System.Collections.Generic;
+
+public class CardboardInstance : InteractBase
+{
+    Animator _anim;
+    List<Luggage> _luggages = new List<Luggage>();
+    Luggage _luggage;
+    bool _canPutin = true;
+
+    private void Start()
+    {
+        _luggage = GetComponent<Luggage>();
+        _anim = GetComponent<Animator>();
+        _luggage.Damge = false;
+    }
+
+    [ContextMenu("a")]
+    public override void Interact()
+    {
+        _anim.SetTrigger("Close");
+        _canPutin = false;
+        _luggage.Damge = true;
+    }
+
+    public override void PutLuggage(Collision collision)
+    {
+        if (_canPutin)
+        {
+            if (collision.gameObject.tag == "Luggage")
+            {
+                if (_luggages.Count < 4)
+                {
+                    _luggages.Add(collision.gameObject.GetComponent<Luggage>());
+                    collision.gameObject.SetActive(false);
+                }
+            }
+        }
+    }
+
+    [ContextMenu("b")]
+    public override void DemolishedLuggage()
+    {
+        _anim.SetTrigger("Open");
+    }
+
+    public void LuggageRelease()
+    {
+        foreach (var luggage in _luggages)
+        {
+            luggage.gameObject.SetActive(true);
+            luggage.transform.position = transform.position;
+        }
+    }
+
+    public void DestroyCardboard()
+    {
+        Destroy(gameObject);
+    }
+}

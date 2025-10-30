@@ -7,7 +7,7 @@ public class DemoItem : ItemBase
         base.Init();
     }
 
-    public override void ItemActivate()
+    public override void ItemActivate(LuggageData luggage)
     {
         Debug.Log("a");
     }

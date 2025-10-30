@@ -55,7 +55,7 @@ public class Furiko : TrapBase
 
     private void RotateFuriko()
     {
-        _furikoTween = transform.DORotate(new Vector3(0, 0, _swingAngle), _duration)
+        _furikoTween = transform.DORotate(new Vector3(0, transform.eulerAngles.y, _swingAngle), _duration)
             .SetLoops(_loopNumber, LoopType.Yoyo)
             .SetEase(Ease.InOutQuad);
     }

@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public bool IsCarrying { get; private set; } = false;
     public bool IsThrowing { get; private set; } = false;
     public bool CanSliding { get; private set; } = false;
+    [SerializeField] private Inventory _inventory;
     private InputBuffer _inputBuffer;
     private PlayerData _playerData;
     private PlayerState _playerState;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private PlayerThrow _playerThrow;
     private Interact _interact;
     private PlayerHealth _playerHealth;
+    private PlayerItemUse _playerItemUse;
     private Vector2 _currentInput = Vector2.zero;
 
     private void Awake()
@@ -41,6 +43,7 @@ public class PlayerController : MonoBehaviour
         _playerThrow = GetComponent<PlayerThrow>();
         _interact = GetComponent<Interact>();
         _playerHealth = GetComponent<PlayerHealth>();
+        _playerItemUse = GetComponent<PlayerItemUse>();
     }
 
     private void Start()
@@ -56,6 +59,8 @@ public class PlayerController : MonoBehaviour
         _inputBuffer.PlayerThrow.canceled += OnInputThrowAction;
         _inputBuffer.PlayerInteract.started += OnInputInteractAction;
         _inputBuffer.PlayerInteract.canceled += OnInputInteractAction;
+        _inputBuffer.PlayerItemUse.started += OnInputItemUse;
+        _inputBuffer.InventoryAction.started += OnInputInventory;
         SetUp();
     }
 
@@ -72,6 +77,8 @@ public class PlayerController : MonoBehaviour
         _inputBuffer.PlayerThrow.canceled -= OnInputThrowAction;
         _inputBuffer.PlayerInteract.started -= OnInputInteractAction;
         _inputBuffer.PlayerInteract.canceled -= OnInputInteractAction;
+        _inputBuffer.PlayerItemUse.started -= OnInputItemUse;
+        _inputBuffer.InventoryAction.started -= OnInputInventory;
     }
 
     private void Update()
@@ -80,7 +87,7 @@ public class PlayerController : MonoBehaviour
         UpdateReturnBool();
         UpdateCanBool();
         UpdateSetBool();
-        _playerState.UpdateState(IsSprinting, IsCrouching, IsSliding, IsCarrying,IsThrowing);
+        _playerState.UpdateState(IsSprinting, IsCrouching, IsSliding, IsCarrying, IsThrowing);
         _playerMove?.UpdateSpeed(_playerState);
     }
 
@@ -144,6 +151,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnInputThrowAction(InputAction.CallbackContext context)
     {
+        if (!IsCarrying) return;
         if (context.started)
         {
             _playerThrow?.StartThrow();
@@ -163,6 +171,23 @@ public class PlayerController : MonoBehaviour
         else if (context.canceled)
         {
             _interact?.StopInteract();
+        }
+    }
+
+    private void OnInputItemUse(InputAction.CallbackContext context)
+    {
+        if (!IsCarrying) return;
+        _playerItemUse?.ItemUse();
+    }
+
+    private void OnInputInventory(InputAction.CallbackContext context)
+    {
+        if (!IsCarrying) return;
+        var input = context.ReadValue<float>();
+        if (context.started)
+        {
+            Debug.Log(context);
+            _inventory?.StoreItem(_playerCarry?.ReturnLuggageItemBase(), (int)input - 1);
         }
     }
 
@@ -191,7 +216,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void UpdateSetBool()
     {
-        _playerMove?.SetBool(IsSliding);
+        _playerMove?.SetBool(IsSliding, IsCarrying);
         _playerThrow?.SetBoolIsCarry(IsCarrying);
     }
 

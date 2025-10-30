@@ -2,16 +2,22 @@
 
 public class SweepInstance : ItemBase
 {
-    [SerializeField] float _power;
     [SerializeField] GameObject _item;
-    public float Power => _power;
+    [SerializeField] Animator _anim;
+    [SerializeField] string _animName;
 
     protected override void Init()
     {
         base.Init();
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
-        _rb.isKinematic = true;
+        //_rb.isKinematic = true;
+        _rb.useGravity = false;
+        _rb.constraints = RigidbodyConstraints.FreezePositionY;
+        _anim = GetComponent<Animator>();
+    }
+
+    private void OnEnable()
+    {
+        _anim.Play(_animName);
     }
 
     public void ActivateEnd()
@@ -21,7 +27,7 @@ public class SweepInstance : ItemBase
         gameObject.SetActive(false);
     }
 
-    public override void ItemActivate()
+    public override void ItemActivate(LuggageData luggage)
     {
         //Empty
     }

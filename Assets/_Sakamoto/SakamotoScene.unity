@@ -132,6 +132,8 @@ GameObject:
   - component: {fileID: 102970574}
   - component: {fileID: 102970573}
   - component: {fileID: 102970577}
+  - component: {fileID: 102970579}
+  - component: {fileID: 102970578}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Luggage
@@ -258,6 +260,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &102970578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102970572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af2d7a0ea532bd8488d788b25dcefb68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LuggageSpeed
+  _ishave: 0
+  _rb: {fileID: 102970577}
+--- !u!114 &102970579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102970572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be6f906936536d243804c91209652662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Luggage
+  MaxScore: 0
+  state: 1
+  _score: 100
+  _luggageSpeed: {fileID: 102970578}
+  _damageThreshold: 3
+  _damageScale: 1
 --- !u!4 &789106276 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4889303194367599510, guid: c7da9644200d78348bdbf098ffdd154f, type: 3}
@@ -585,7 +619,7 @@ GameObject:
   - component: {fileID: 1312949382}
   - component: {fileID: 1312949381}
   - component: {fileID: 1312949380}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1005,6 +1039,14 @@ PrefabInstance:
       propertyPath: _luggagePosition
       value: 
       objectReference: {fileID: 879427624}
+    - target: {fileID: 1259140848349963320, guid: f8ef0842fa1bd26409c96b0a318877f0, type: 3}
+      propertyPath: _groundLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1259140848349963320, guid: f8ef0842fa1bd26409c96b0a318877f0, type: 3}
+      propertyPath: _carryIgnoreLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4410699780037116505, guid: f8ef0842fa1bd26409c96b0a318877f0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
