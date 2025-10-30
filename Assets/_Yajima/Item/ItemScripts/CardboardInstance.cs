@@ -12,7 +12,7 @@ public class CardboardInstance : InteractBase
     {
         _luggage = GetComponent<Luggage>();
         _anim = GetComponent<Animator>();
-        _luggage.Damge = false;
+        _luggage.NoDamage();
     }
 
     [ContextMenu("a")]
@@ -20,7 +20,7 @@ public class CardboardInstance : InteractBase
     {
         _anim.SetTrigger("Close");
         _canPutin = false;
-        _luggage.Damge = true;
+        _luggage.TakeDamage();
     }
 
     public override void PutLuggage(Collision collision)
