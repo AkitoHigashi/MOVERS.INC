@@ -27,7 +27,7 @@ public class LuggageCollector : MonoBehaviour
         foreach (var item in toRemove)
             _luggageManager.UnregisterItem(item);
 
-        _scoreManager.SetEndScore(true);
+      //  _scoreManager.SetEndScore(true);
         Debug.Log($"Collected {collectedCount} items!");
     }
 }

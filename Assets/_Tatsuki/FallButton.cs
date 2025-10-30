@@ -16,6 +16,8 @@ public class FallButton : MonoBehaviour
     [SerializeField] private LuggageCollector _collector;  // 回収処理を行うクラス
     [SerializeField] private LuggageManager _luggageManager; // エリア内の荷物管理クラス
     [SerializeField] private ScoreManager _scoreManager;   // スコア管理クラス
+    private bool _isfall = false;
+    public bool IsFall => _isfall;
 
     private Vector3 _originalPosition; // オブジェクトの初期位置
     private bool _isFalling = false;   // 落下中フラグ（二重実行防止）

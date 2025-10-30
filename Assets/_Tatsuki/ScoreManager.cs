@@ -23,7 +23,7 @@ public class ScoreManager : MonoBehaviour
     }
     public void SetScore(int score)
     {
-        if (!_isEnd)
+        //if (!_isEnd)
         {
             _nowScore = Mathf.Max(_nowScore + score, 0);
         }
@@ -41,10 +41,10 @@ public class ScoreManager : MonoBehaviour
     // スコア表示テキストを更新
     public void SetText(string message)
     {
-        if (!_isEnd)
+       // if (!_isEnd)
             _tmpText.text = message;
     }
 
     // スコア更新を終了状態にする
-    public void SetEndScore(bool end) => _isEnd = end;
+   // public void SetEndScore(bool end) => _isEnd = end;
 }

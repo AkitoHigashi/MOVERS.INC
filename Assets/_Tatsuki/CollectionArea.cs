@@ -30,7 +30,7 @@ public class CollectionArea : MonoBehaviour
             _scoreManager.SetScore(luggage.Score);
             _scoreManager.SetText(_scoreManager.NowScore.ToString());
             OnEnter?.Invoke(other.gameObject);
-           OnEnterLuggage?.Invoke(1); 
+           OnEnterLuggage?.Invoke(1);
         }
     }
 
