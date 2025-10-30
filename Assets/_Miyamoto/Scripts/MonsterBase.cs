@@ -46,7 +46,7 @@ public abstract class MonsterBase : MonoBehaviour
     private GameObject _deadPrefab;
     [SerializeField, Header("ターゲットにするタグ")]
     private List<string> _targetTags;
-    [SerializeField, Header("視野の拡大倍率")]
+    [SerializeField, Header("視野の拡大倍率"), Min(1)]
     private float _fovMagnification;
 
     #region ステータス
@@ -78,6 +78,8 @@ public abstract class MonsterBase : MonoBehaviour
     protected Vector3 _currentDestination;
     /// <summary>最後に訪れた目的地</summary>
     protected Vector3 _lastDestination;
+    /// <summary>徘徊フラグ</summary>
+    protected bool _canPatrol = true;
 
     protected NavMeshAgent _navMeshAgent;
     protected Animator _animator;
@@ -189,20 +191,23 @@ public abstract class MonsterBase : MonoBehaviour
 
         float distance = Vector3.Distance(this.transform.position, _currentDestination);
 
-        // アイテムを見つけていない場合で目的地付近にいるなら次の目的地へ
-        if (!_navMeshAgent.isStopped && !_hasSeen && distance <= _stopDistance && _coroutine == null)
+        if (_canPatrol)
         {
-            Debug.Log("コルーチン開始");
-            _coroutine = StartCoroutine(ChangeDestination());
-        }
-        // アイテム追跡中は徘徊変更処理を止める
-        else if (_hasSeen && _coroutine != null)
-        {
-            Debug.Log("コルーチン停止");
-            StopCoroutine(_coroutine);
-            _coroutine = null;
-            _navMeshAgent.isStopped = false;
-            _navMeshAgent.speed = _monsterWalkSpeed;
+            // アイテムを見つけていない場合で目的地付近にいるなら次の目的地へ
+            if (!_navMeshAgent.isStopped && !_hasSeen && distance <= _stopDistance && _coroutine == null)
+            {
+                Debug.Log("コルーチン開始");
+                _coroutine = StartCoroutine(ChangeDestination());
+            }
+            // アイテム追跡中は徘徊変更処理を止める
+            else if (_hasSeen && _coroutine != null)
+            {
+                Debug.Log("コルーチン停止");
+                StopCoroutine(_coroutine);
+                _coroutine = null;
+                _navMeshAgent.isStopped = false;
+                _navMeshAgent.speed = _monsterWalkSpeed;
+            }
         }
     }
     /// <summary>
