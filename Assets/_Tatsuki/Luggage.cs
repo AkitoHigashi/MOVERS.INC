@@ -20,6 +20,8 @@ public class Luggage : MonoBehaviour
     [SerializeField] private int _score = 100;
     [SerializeField] private float _damageThreshold = 3f; // この速さ未満ならノーダメージ
     [SerializeField] private float _damageScale = 1.0f;   // 速度→ダメージ変換倍率
+    [SerializeField] private float _fixedDamage = 10f;
+
     InteractBase _interactBase;
     private bool _damage = true;
 
@@ -43,10 +45,11 @@ public class Luggage : MonoBehaviour
         if (_damage)
         {
             float speed = _luggageSpeed.GetTotalSpeed();
-            //   Debug.Log(speed);
+            
+            float ratioDamage = (MaxScore / 100f) * speed;
             if (speed < _damageThreshold) return;
-            int damage = Mathf.RoundToInt((speed - _damageThreshold) * _damageScale);
-            int scaledDamage = Mathf.RoundToInt((MaxScore / 100f) * damage);
+            // int damage = Mathf.RoundToInt((speed - _damageThreshold) * _damageScale);
+            int scaledDamage = Mathf.RoundToInt(_fixedDamage + ratioDamage * _damageScale);
 
 
             _score -= scaledDamage;
