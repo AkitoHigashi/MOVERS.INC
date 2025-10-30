@@ -9,6 +9,8 @@ public abstract class ItemBase : MonoBehaviour
     Inventory _inventory;
     protected Transform _cameraTrans;
     protected bool _canStore = true;
+    //消費系アイテムのスクリプトでプレイヤーキャリーを変更できないのでここでクラスを取得する。
+    protected PlayerCarry _playerCarry;
 
     public float Power => _power;
     public bool CanStore => _canStore;
@@ -47,6 +49,7 @@ public abstract class ItemBase : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _cameraTrans = GameObject.Find("Camera").transform;
         _inventory = FindFirstObjectByType<Inventory>();
+        _playerCarry =FindFirstObjectByType<PlayerCarry>();
     }
 
     /// <summary>

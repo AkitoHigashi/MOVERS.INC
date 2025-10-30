@@ -3424,17 +3424,17 @@ MonoBehaviour:
     _targetValue: 0
     _luggageList: {fileID: 11400000, guid: 92b16f695f3741840ac764e989d68761, type: 2}
     _generatePos:
-    - {x: 0, y: 0, z: 0}
-    - {x: 0, y: 0, z: 0}
-    - {x: 0, y: 0, z: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
   _bigLuggage:
     _generateValue: 3
     _targetValue: 3
     _luggageList: {fileID: 11400000, guid: 5a33c016c1c902c46af638895b0b8b6c, type: 2}
     _generatePos:
-    - {x: 0, y: 0, z: 0}
-    - {x: 0, y: 0, z: 0}
-    - {x: 0, y: 0, z: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
 --- !u!114 &1007538580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5578,6 +5578,10 @@ PrefabInstance:
       propertyPath: _luggagePosition
       value: 
       objectReference: {fileID: 787889696}
+    - target: {fileID: 1259140848349963320, guid: f8ef0842fa1bd26409c96b0a318877f0, type: 3}
+      propertyPath: _carryIgnoreLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4410699780037116505, guid: f8ef0842fa1bd26409c96b0a318877f0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6994,11 +6998,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5206888766674516118, guid: 04deacff1d938114d859b0b266a3c352, type: 3}
   m_PrefabInstance: {fileID: 1583926446}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &1831086486 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 4457192618437349340, guid: 04deacff1d938114d859b0b266a3c352, type: 3}
-  m_PrefabInstance: {fileID: 1583926446}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1831086491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7012,7 +7011,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LuggageSpeed
   _ishave: 0
-  _rb: {fileID: 1831086486}
 --- !u!1 &1858852454
 GameObject:
   m_ObjectHideFlags: 0

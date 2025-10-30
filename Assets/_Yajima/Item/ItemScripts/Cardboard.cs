@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using static LuggageGenerator;
 
 public class Cardboard : ItemBase
 {
@@ -7,8 +8,10 @@ public class Cardboard : ItemBase
     {
         luggage.LuggageRb.isKinematic = false;
         luggage.LuggageScript = null;
+        luggage.LuggageGameObject = null;
         Instantiate(_cardboardInstance, _cameraTrans.position + Vector3.forward, Quaternion.identity);
-        StorageData.ItemUse(ItemData);
+        _playerCarry.CarryingBoolFalse();
+        //StorageData.ItemUse(ItemData);
         Destroy(gameObject);
     }
 }
