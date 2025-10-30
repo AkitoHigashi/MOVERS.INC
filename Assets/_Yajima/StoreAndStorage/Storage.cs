@@ -96,6 +96,8 @@ public static class StorageData
     /// <param name="itemData">使ったアイテム</param>
     public static void ItemUse(ItemData itemData)
     {
+        if (!_possessCount.ContainsKey(itemData)) return;
+
         _possessCount[itemData]--;
         //アイテムの個数が0を下回ることはない
         if (_possessCount[itemData] <= 0) _possessCount[itemData] = 0;
