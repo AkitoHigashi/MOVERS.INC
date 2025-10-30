@@ -65,7 +65,7 @@ public class PlayerCarry : MonoBehaviour, IStartSetVariables
                 hitCollider != luggageCollider)
             {
                 Debug.Log($"荷物が{hitCollider.name}に接触したため離します");
-                ForceDropLuggage();
+                // ForceDropLuggage();
                 break;
             }
         }
@@ -88,6 +88,11 @@ public class PlayerCarry : MonoBehaviour, IStartSetVariables
 
     public void CarryAction()
     {
+        //if (_isCarrying == true && _luggageData.LuggageGameObject == null && _luggageData.LuggageRb == null && _luggageData.LuggageScript == null)
+        //{
+        //    CarryingBoolFalse();
+        //    Debug.Log(_isCarrying);
+        //}
         if (!_isCarrying)
         {
             // カメラのビューポート中心からRayを生成

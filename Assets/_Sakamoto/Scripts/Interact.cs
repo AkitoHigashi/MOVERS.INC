@@ -36,6 +36,7 @@ public class Interact : MonoBehaviour, IStartSetVariables
             if (Physics.Raycast(ray, out hit, _interactDistance))
             {
                 var _target = hit.collider.gameObject;
+                Debug.Log(_target);
                 if (_target.TryGetComponent<InteractBase>(out var interact))
                 {
                     _startInteract = interact;

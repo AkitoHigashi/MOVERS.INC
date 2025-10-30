@@ -547,7 +547,6 @@ GameObject:
   - component: {fileID: 212202419175656159}
   - component: {fileID: 285978263151158169}
   - component: {fileID: 325222252491919089}
-  - component: {fileID: 6103575354882112745}
   m_Layer: 0
   m_Name: SpikeTrapD
   m_TagString: Untagged
@@ -604,7 +603,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dc008d540f488f04f870a58ab633941a, type: 2}
+  - {fileID: 2100000, guid: 87b4f5e88fc2f854c9313b90039fe33b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -662,27 +661,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isThormTrapped: 0
---- !u!65 &6103575354882112745
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 190892213622870043}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.0000005, y: 0.18, z: 2.0000007}
-  m_Center: {x: 0.000000059604645, y: 0.033333294, z: 0.00000011920929}
 --- !u!1 &191017070246335407
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,7 +942,7 @@ GameObject:
   - component: {fileID: 8037438772798100651}
   m_Layer: 0
   m_Name: ThornTrap
-  m_TagString: Untagged
+  m_TagString: TrapBase
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1033,6 +1011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrapDemolished
   _luggageTrap: {fileID: -3027645210630039774, guid: 0884aa801fc5f1e479756cd3247e1587, type: 3}
+  _effectiveRange: 1
 --- !u!1 &4935916126129157061
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,9 +1022,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1966338286288434776}
   - component: {fileID: 6123523930705064318}
+  - component: {fileID: 7870483399671035363}
   m_Layer: 0
   m_Name: GameObject
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1086,10 +1066,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfb42d327cd56ac40afe7cf4474cca6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ThormTrap
-  _trapDamage: 0
+  _trapDamage: 6
   _trapRange: {fileID: 8839903940101337890}
-  _thormCollTime: 1
-  _upDuration: 0.3
-  _downDuration: 0.8
-  _upPauseDuration: 0.2
-  _downPauseDuration: 0.2
+  _thormCollTime: 0.4
+  _upDuration: 0.1
+  _downDuration: 0.4
+  _upPauseDuration: 0.3
+  _downPauseDuration: 0.5
+--- !u!65 &7870483399671035363
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4935916126129157061}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 0.09, z: 3}
+  m_Center: {x: 0.000000059604645, y: 0.033333294, z: 0.00000011920929}
