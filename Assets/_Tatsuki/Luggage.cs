@@ -28,16 +28,27 @@ public class Luggage : MonoBehaviour
     // スコアを取得するプロパティ
     public int Score => _score;
 
-    public bool Damge
+    public void NoDamage()
     {
-        get; set;
+        _damage = false;
     }
-
-    private void Start()
+    public void TakeDamage()
+    {
+        _damage = true;
+    }
+    
+   
+    private void Awake()
     {
         _interactBase = GetComponent<InteractBase>();
         _luggageSpeed = GetComponent<LuggageSpeed>();
         MaxScore = _score;
+        _damage = true;
+        
+    }
+
+    private void Start()
+    {
     }
 
     private void OnCollisionEnter(Collision collision)
