@@ -1110,6 +1110,7 @@ GameObject:
   - component: {fileID: 1719100796}
   - component: {fileID: 1719100798}
   - component: {fileID: 1719100797}
+  - component: {fileID: 1719100799}
   m_Layer: 5
   m_Name: TITLE
   m_TagString: Untagged
@@ -1159,7 +1160,7 @@ MonoBehaviour:
   m_text: MOVERS.INC
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 20700f5492ca3a544bf924c3ab381f79, type: 2}
-  m_sharedMaterial: {fileID: 3974983726989887922, guid: 20700f5492ca3a544bf924c3ab381f79, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 0a23c38865136fa44beaffa5bb65125c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1235,6 +1236,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1719100795}
   m_CullTransparentMesh: 1
+--- !u!114 &1719100799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719100795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 1, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 0
 --- !u!1 &1789451278
 GameObject:
   m_ObjectHideFlags: 0
