@@ -29,7 +29,7 @@ public class Luggage : MonoBehaviour
     [SerializeField] private float _damageThreshold = 3f; // この速さ未満ならノーダメージ
     [SerializeField] private float _damageScale = 1.0f;   // 速度→ダメージ変換倍率
     [SerializeField] private float _fixedDamage = 10f;
-    Target _target = Target.NotTarget;
+    [SerializeField] private Target _target = Target.NotTarget;
 
     InteractBase _interactBase;
     private bool _damage = true;
