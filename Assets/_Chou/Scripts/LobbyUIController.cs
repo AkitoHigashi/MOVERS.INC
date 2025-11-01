@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class LobbyUIController : MonoBehaviour
 {
@@ -12,9 +13,9 @@ public class LobbyUIController : MonoBehaviour
     [SerializeField] private GameObject _notTaxDayNotificationDialog;
     
     [Header("UI要素参照")]
-    [SerializeField] private Text _uiMoney;
-    [SerializeField] private Text _uiDay;
-    [SerializeField] private Text _uiRank;
+    [SerializeField] private TextMeshProUGUI _uiMoney;
+    [SerializeField] private TextMeshProUGUI _uiDay;
+    [SerializeField] private TextMeshProUGUI _uiRank;
     [Header("納税ダイアログの要素参照")]
     [SerializeField] private Text _tpbRank;
     [SerializeField] private Text _tpbQuota;

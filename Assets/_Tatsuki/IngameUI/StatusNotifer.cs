@@ -35,7 +35,7 @@ public class StatusNotifer : MonoBehaviour
 
         _maxhp = (int)_playerData.Health;
         _currentHp = (int)_playerData.Health;
-        Debug.Log($"{MaxHp}{CurrentHp}");
+        Debug.Log($"HP{MaxHp}:NowHP{CurrentHp}");
 
 
     }
