@@ -1,19 +1,23 @@
 ﻿using UnityEngine;
-using static LuggageGenerator;
 
 public class Interact : MonoBehaviour, IStartSetVariables
 {
-    private float _interactStartTime;
+    private float _interactCurrentTime;
     private float _interactTime;
     private float _interactDistance;
 
-    LuggageData _luggage;
+    private bool _isInteracting = false;
+    public bool IsInteracting => _isInteracting;
+    public float InteractCurrentTime => _interactCurrentTime;
+    public float InteractTime => _interactTime;
+
+    public float InteractProgress => Mathf.Clamp01(_interactCurrentTime / _interactTime);
+
     PlayerCarry _carry;
     InteractBase _startInteract, _endInteract;
 
     private void Start()
     {
-        _luggage = GetComponent<LuggageData>();
         _carry = GetComponent<PlayerCarry>();
     }
 
@@ -25,7 +29,7 @@ public class Interact : MonoBehaviour, IStartSetVariables
 
     public void StartInteract()
     {
-        _interactStartTime = Time.time;
+        _interactCurrentTime = Time.time;
         Debug.Log("StartInteract");
         if (!_carry.IsCarrying)
         {
@@ -40,6 +44,7 @@ public class Interact : MonoBehaviour, IStartSetVariables
                 if (_target.TryGetComponent<InteractBase>(out var interact))
                 {
                     _startInteract = interact;
+                    _isInteracting = true;
                 }
             }
             else
@@ -51,7 +56,8 @@ public class Interact : MonoBehaviour, IStartSetVariables
 
     public void StopInteract()
     {
-        if (Time.time - _interactStartTime >= _interactTime)
+        _isInteracting = false;
+        if (Time.time - _interactCurrentTime >= _interactTime)
         {
             if (!_carry.IsCarrying)
             {
@@ -82,7 +88,7 @@ public class Interact : MonoBehaviour, IStartSetVariables
 
     private void InteractExecution(InteractBase interact)
     {
-        Debug.Log($"{Time.time - _interactStartTime >= _interactTime}");
-        interact.Interact();
+        Debug.Log($"{Time.time - _interactCurrentTime >= _interactTime}");
+        interact?.Interact();//nullなら呼ばれない。
     }
 }

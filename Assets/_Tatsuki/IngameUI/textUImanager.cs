@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using TMPro;
-using UnityEngine.InputSystem;
-using DG;
 
 public class TextUImanager : MonoBehaviour
 {
