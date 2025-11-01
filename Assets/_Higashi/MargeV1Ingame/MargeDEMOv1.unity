@@ -6453,6 +6453,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 320576042104315608, guid: cedbe82451d79a94092ccc8f294f6acb, type: 3}
   m_PrefabInstance: {fileID: 1345169828}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1404664055 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3042496671132600105, guid: 428908dbafae6c940bb7f84d7256676d, type: 3}
+  m_PrefabInstance: {fileID: 1734731894}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1424786116 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2160158047634363124, guid: 2aa6286db4bf6c24ba9c943b1b942f94, type: 3}
@@ -6989,7 +6994,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6166416845862016359, guid: 428908dbafae6c940bb7f84d7256676d, type: 3}
   m_PrefabInstance: {fileID: 1734731894}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1404664055}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
@@ -8263,9 +8268,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 789063323}
     m_Modifications:
     - target: {fileID: 712994898026322238, guid: 3d48e003fdac55547b5b5852ef87605e, type: 3}
+      propertyPath: _hpGauge
+      value: 
+      objectReference: {fileID: 1009761046}
+    - target: {fileID: 712994898026322238, guid: 3d48e003fdac55547b5b5852ef87605e, type: 3}
       propertyPath: _hpslider
       value: 
       objectReference: {fileID: 1009761046}
+    - target: {fileID: 712994898026322238, guid: 3d48e003fdac55547b5b5852ef87605e, type: 3}
+      propertyPath: _runGauge
+      value: 
+      objectReference: {fileID: 300940951}
     - target: {fileID: 712994898026322238, guid: 3d48e003fdac55547b5b5852ef87605e, type: 3}
       propertyPath: _throwGauge
       value: 
@@ -8290,6 +8303,10 @@ PrefabInstance:
       propertyPath: _luggagehsviders
       value: 
       objectReference: {fileID: 1558105244}
+    - target: {fileID: 712994898026322238, guid: 3d48e003fdac55547b5b5852ef87605e, type: 3}
+      propertyPath: _throwSliderObject
+      value: 
+      objectReference: {fileID: 1404664055}
     - target: {fileID: 5628326564879445155, guid: 3d48e003fdac55547b5b5852ef87605e, type: 3}
       propertyPath: m_Name
       value: SlinderManager
