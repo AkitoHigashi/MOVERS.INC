@@ -1963,7 +1963,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LuggageUI
   _luggagetext: {fileID: 0}
   _timertext: {fileID: 0}
-  _invokeSystem: {fileID: 0}
   _collectionArea: {fileID: 0}
   _statusNotifer: {fileID: 0}
 --- !u!114 &567930292
@@ -1978,12 +1977,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22996eb5e94708443a6e7f209faf74c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HPslinder
-  _hpslider: {fileID: 717356424}
-  _runhsliders: {fileID: 961750281}
+  _hpGauge: {fileID: 0}
+  _runGauge: {fileID: 0}
   _luggagehsviders: {fileID: 962135572}
   _throwGauge: {fileID: 1374959655}
+  _interactFillGauge: {fileID: 0}
+  _throwSliderObject: {fileID: 0}
+  _interactGaugeObject: {fileID: 0}
   _playerCarry: {fileID: 1811542108}
-  _throuSlider: {fileID: 1374959653}
   _collectionArea: {fileID: 1858852456}
 --- !u!4 &567930293
 Transform:
@@ -3747,10 +3748,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6cd4313835598942a27f66c47f0db0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InvokeSystem
-  currentHp: 1
-  currentRunGauge: 1
-  item: 1
-  timer: 0
 --- !u!4 &1060623042
 Transform:
   m_ObjectHideFlags: 0
@@ -6073,6 +6070,10 @@ PrefabInstance:
       value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 4603012680989884535, guid: 04deacff1d938114d859b0b266a3c352, type: 3}
+      propertyPath: _target
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4603012680989884535, guid: 04deacff1d938114d859b0b266a3c352, type: 3}
       propertyPath: _luggageSpeed
       value: 
       objectReference: {fileID: 1831086491}
@@ -7770,6 +7771,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2077774786}
   m_CullTransparentMesh: 1
+--- !u!1001 &2089676910
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4620772876266812281, guid: 1a82060961bfc754cbc5eda6092f3b90, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.09133899
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620772876266812281, guid: 1a82060961bfc754cbc5eda6092f3b90, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5000044
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620772876266812281, guid: 1a82060961bfc754cbc5eda6092f3b90, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.7487845
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620772876266812281, guid: 1a82060961bfc754cbc5eda6092f3b90, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.05665871
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620772876266812281, guid: 1a82060961bfc754cbc5eda6092f3b90, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.0024052286
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620772876266812281, guid: 1a82060961bfc754cbc5eda6092f3b90, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9983901
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620772876266812281, guid: 1a82060961bfc754cbc5eda6092f3b90, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.0011694117
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620772876266812281, guid: 1a82060961bfc754cbc5eda6092f3b90, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -0.149
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620772876266812281, guid: 1a82060961bfc754cbc5eda6092f3b90, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -173.504
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620772876266812281, guid: 1a82060961bfc754cbc5eda6092f3b90, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0.268
+      objectReference: {fileID: 0}
+    - target: {fileID: 8206884011281989008, guid: 1a82060961bfc754cbc5eda6092f3b90, type: 3}
+      propertyPath: m_Name
+      value: ButtonBase1Base
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1a82060961bfc754cbc5eda6092f3b90, type: 3}
 --- !u!1001 &2112642946
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7983,3 +8041,4 @@ SceneRoots:
   - {fileID: 1007538578}
   - {fileID: 2055848010}
   - {fileID: 1659795890}
+  - {fileID: 2089676910}
