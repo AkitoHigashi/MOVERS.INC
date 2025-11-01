@@ -84,7 +84,8 @@ public class Sliders : MonoBehaviour
         if (_interact.IsInteracting)
         {
             _interactGaugeObject.SetActive(true);
-            _interactFillGauge.fillAmount = _interact.InteractProgress;
+            //_interactFillGauge.fillAmount = _interact.InteractProgress;
+            _interactFillGauge.fillAmount = Mathf.Clamp01((Time.time - _interact.InteractCurrentTime) / _interact.InteractTime);
         }
         else
         {
