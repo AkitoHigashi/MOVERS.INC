@@ -79,7 +79,7 @@ public class LuggageGenerator : MonoBehaviour
             {
                 if (l.position == s.position)
                 {
-                    Debug.LogWarning($"{l}が被っています");
+                    Debug.LogWarning($"{l}が被っています"); 
                     result = false;
                 }
             }

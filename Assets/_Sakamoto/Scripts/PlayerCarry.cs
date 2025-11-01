@@ -3,6 +3,7 @@
 public class PlayerCarry : MonoBehaviour, IStartSetVariables
 {
     public bool IsCarrying => _isCarrying;
+
     private bool _isCarrying = false;
     private Collider _playerCollider;
     private LuggageData _luggageData;
