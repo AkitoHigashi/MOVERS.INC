@@ -30,7 +30,7 @@ public class CollectionArea : MonoBehaviour
             _scoreManager.SetScore(luggage.Score);
             _scoreManager.SetText(_scoreManager.NowScore.ToString());
             OnEnter?.Invoke(other.gameObject);
-           OnEnterLuggage?.Invoke(1);
+          if(luggage.Target == Target.Target) OnEnterLuggage?.Invoke(1);
         }
     }
 
@@ -46,7 +46,7 @@ public class CollectionArea : MonoBehaviour
             luggage.MaxScore = luggage.Score;
             _scoreManager.SetText(_scoreManager.NowScore.ToString());
             OnExit?.Invoke(other.gameObject);
-           OnExitLuggage?.Invoke(-1);
+            if (luggage.Target == Target.Target) OnExitLuggage?.Invoke(-1);
         }
     }
     
