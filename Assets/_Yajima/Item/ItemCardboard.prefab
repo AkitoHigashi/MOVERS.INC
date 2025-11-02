@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -9210348705287854854}
   m_Layer: 0
   m_Name: ItemCardboard
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,8 +29,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8809025794315470197}
   - {fileID: 951636065194735586}
@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ee4693c2ca25f4793a9d192d497ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cardboard
+  _power: 0
   _cardboardInstance: {fileID: 1287986787889527751, guid: 675d671343db9454c9177dceeb692721, type: 3}
 --- !u!65 &-9210348705287854854
 BoxCollider:

@@ -7,6 +7,13 @@ public enum LuggageState
     small,
     big,
 }
+
+public enum Target
+{
+    Target,
+    NotTarget
+}
+
 /// <summary>
 /// 荷物オブジェクト。スコア値を保持し、
 /// 一定以上のダメージを受けると破壊される。
@@ -15,12 +22,14 @@ public class Luggage : MonoBehaviour
 {
     public int MaxScore;
     public LuggageState State => state;
+    public Target Target { get { return _target; } set { _target = value; } }
     private LuggageSpeed _luggageSpeed;
     [SerializeField] private LuggageState state;
     [SerializeField] private int _score = 100;
     [SerializeField] private float _damageThreshold = 3f; // この速さ未満ならノーダメージ
     [SerializeField] private float _damageScale = 1.0f;   // 速度→ダメージ変換倍率
     [SerializeField] private float _fixedDamage = 10f;
+    [SerializeField] private Target _target = Target.NotTarget;
 
     InteractBase _interactBase;
     private bool _damage = true;
@@ -36,15 +45,15 @@ public class Luggage : MonoBehaviour
     {
         _damage = true;
     }
-    
-   
+
+
     private void Awake()
     {
         _interactBase = GetComponent<InteractBase>();
         _luggageSpeed = GetComponent<LuggageSpeed>();
         MaxScore = _score;
         _damage = true;
-        
+
     }
 
     private void Start()
@@ -56,7 +65,7 @@ public class Luggage : MonoBehaviour
         if (_damage)
         {
             float speed = _luggageSpeed.GetTotalSpeed();
-            
+
             float ratioDamage = (MaxScore / 100f) * speed;
             if (speed < _damageThreshold) return;
             // int damage = Mathf.RoundToInt((speed - _damageThreshold) * _damageScale);

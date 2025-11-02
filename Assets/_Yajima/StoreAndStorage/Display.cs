@@ -3,8 +3,10 @@
 /// <summary>
 /// ストアに並べるオブジェクトにアタッチするスクリプト
 /// </summary>
-public class Display : MonoBehaviour
+public class Display : InteractBase
 {
+    private Store _store;
+    private GlobalParameters _globalParameter;
     /// <summary>このアイテムのデータ</summary>
     ItemData _data;
 
@@ -26,11 +28,29 @@ public class Display : MonoBehaviour
         }
     }
 
+    public override void DemolishedLuggage()
+    {
+        //Empty
+    }
+
+    public override void Interact()
+    {
+        _globalParameter.ModifyMoney(-_store.PurchaseItem(this.gameObject, _globalParameter.Money));
+        Debug.Log("所持金計算をした");
+    }
+    public override void PutLuggage(Collision collision)
+    {
+        //Empty
+    }
+
     private void Start()
     {
         if (tag != "Item")
         {
             tag = "Item";
         }
+        _store = FindAnyObjectByType<Store>();
+        _globalParameter = FindAnyObjectByType<GlobalParameters>();
     }
+
 }
