@@ -9,7 +9,7 @@ using TMPro;
 /// </summary>
 public class FallButton : MonoBehaviour
 {
-    [SerializeField] private Button _button;               // 押すボタン
+  //  [SerializeField] private Button _button;               // 押すボタン
     [SerializeField] private Transform _target;            // 落ちる対象オブジェクト
     [SerializeField] private float _fallDistance = 2f;     // 落ちる距離
     [SerializeField] private float _fallSpeed = 5f;        // 落ちる速度
@@ -50,14 +50,14 @@ public class FallButton : MonoBehaviour
         _originalPosition = _target.position;
 
         // ボタン押下時に「落下→戻る」動作を開始
-        _button.onClick.AddListener(() => StartCoroutine(FallAndReturn()));
+      //  _button.onClick.AddListener(() => StartCoroutine(FallAndReturn()));
     }
 
     /// <summary>
     /// 対象オブジェクトを落とし、一定時間後に元の位置に戻すコルーチン。
     /// 落下中は再度実行されないよう制御する。
     /// </summary>
-    private IEnumerator FallAndReturn()
+    public IEnumerator FallAndReturn()
     {
         if (_isFalling) yield break; // 二重実行防止
         _isFalling = true;
