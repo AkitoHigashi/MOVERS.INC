@@ -9,22 +9,21 @@ using TMPro;
 /// </summary>
 public class FallButton : MonoBehaviour
 {
-
     [SerializeField, Tooltip("落下させたいターゲットオブジェクト")]
-    private Transform _target;       // 落ちる対象オブジェクト
-    [SerializeField,Tooltip("落ちる距離")] 
-    private float _fallDistance = 2f;     // 落ちる距離
-    [SerializeField,Tooltip("落ちるスピード")]
-    private float _fallSpeed = 5f;        // 落ちる速度
-    [SerializeField,Tooltip("ラゲージコレクター")] 
-    private LuggageCollector _collector;  // 回収処理を行うクラス
-    [SerializeField,Tooltip("ラゲージマネージャー")] 
-    private LuggageManager _luggageManager; // エリア内の荷物管理クラス
-    [SerializeField,Tooltip("スコアマネージャー")] 
-    private ScoreManager _scoreManager;   // スコア管理クラス
+    private Transform _target; // 落ちる対象オブジェクト
 
+    [SerializeField, Tooltip("落ちる距離")] private float _fallDistance = 2f; // 落ちる距離
+    [SerializeField, Tooltip("落ちるスピード")] private float _fallSpeed = 5f; // 落ちる速度
+    [SerializeField, Tooltip("ラゲージコレクター")] private LuggageCollector _collector; // 回収処理を行うクラス
+
+    [SerializeField, Tooltip("ラゲージマネージャー")]
+    private LuggageManager _luggageManager; // エリア内の荷物管理クラス
+
+    [SerializeField, Tooltip("スコアマネージャー")] private ScoreManager _scoreManager; // スコア管理クラス
+
+    private Sliders _sliders;
     private Vector3 _originalPosition; // オブジェクトの初期位置
-    private bool _isFalling = false;   // 落下中フラグ（二重実行防止）
+    private bool _isFalling = false; // 落下中フラグ（二重実行防止）
 
     /// <summary>
     /// 荷物（Luggage）との衝突を検知し、スコアを減少・オブジェクト破棄を行う。
@@ -41,10 +40,10 @@ public class FallButton : MonoBehaviour
             // 管理リストから削除
             _luggageManager.UnregisterItem(collision.gameObject);
 
-
+            _sliders.LuggageSliderUpdate();
             // スコア減少とUI更新
             _scoreManager.SetScore(-luggage.Score);
-         
+
             _scoreManager.SetText(_scoreManager.NowScore.ToString());
         }
     }
@@ -55,9 +54,7 @@ public class FallButton : MonoBehaviour
     private void Start()
     {
         _originalPosition = _target.position;
-
-        // ボタン押下時に「落下→戻る」動作を開始
-      //  _button.onClick.AddListener(() => StartCoroutine(FallAndReturn()));
+        _sliders = FindObjectOfType<Sliders>();
     }
 
     public void FallAndReturnButtonTest()
