@@ -9,13 +9,19 @@ using TMPro;
 /// </summary>
 public class FallButton : MonoBehaviour
 {
-  //  [SerializeField] private Button _button;               // 押すボタン
-    [SerializeField] private Transform _target;            // 落ちる対象オブジェクト
-    [SerializeField] private float _fallDistance = 2f;     // 落ちる距離
-    [SerializeField] private float _fallSpeed = 5f;        // 落ちる速度
-    [SerializeField] private LuggageCollector _collector;  // 回収処理を行うクラス
-    [SerializeField] private LuggageManager _luggageManager; // エリア内の荷物管理クラス
-    [SerializeField] private ScoreManager _scoreManager;   // スコア管理クラス
+
+    [SerializeField, Tooltip("落下させたいターゲットオブジェクト")]
+    private Transform _target;       // 落ちる対象オブジェクト
+    [SerializeField,Tooltip("落ちる距離")] 
+    private float _fallDistance = 2f;     // 落ちる距離
+    [SerializeField,Tooltip("落ちるスピード")]
+    private float _fallSpeed = 5f;        // 落ちる速度
+    [SerializeField,Tooltip("ラゲージコレクター")] 
+    private LuggageCollector _collector;  // 回収処理を行うクラス
+    [SerializeField,Tooltip("ラゲージマネージャー")] 
+    private LuggageManager _luggageManager; // エリア内の荷物管理クラス
+    [SerializeField,Tooltip("スコアマネージャー")] 
+    private ScoreManager _scoreManager;   // スコア管理クラス
 
     private Vector3 _originalPosition; // オブジェクトの初期位置
     private bool _isFalling = false;   // 落下中フラグ（二重実行防止）
@@ -27,13 +33,14 @@ public class FallButton : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Luggage"))
         {
+            Debug.Log("Luggage enter");
             var luggage = collision.gameObject.GetComponent<Luggage>();
-
-            // 管理リストから削除
-            _luggageManager.UnregisterItem(collision.gameObject);
 
             // 荷物を破壊
             Destroy(collision.gameObject);
+            // 管理リストから削除
+            _luggageManager.UnregisterItem(collision.gameObject);
+
 
             // スコア減少とUI更新
             _scoreManager.SetScore(-luggage.Score);
@@ -51,6 +58,11 @@ public class FallButton : MonoBehaviour
 
         // ボタン押下時に「落下→戻る」動作を開始
       //  _button.onClick.AddListener(() => StartCoroutine(FallAndReturn()));
+    }
+
+    public void FallAndReturnButtonTest()
+    {
+        StartCoroutine(FallAndReturn());
     }
 
     /// <summary>
