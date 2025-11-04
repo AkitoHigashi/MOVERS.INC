@@ -131,6 +131,8 @@ MonoBehaviour:
   _score: 100
   _damageThreshold: 3
   _damageScale: 1
+  _fixedDamage: 10
+  _target: 1
 --- !u!114 &-2127369090242279355
 MonoBehaviour:
   m_ObjectHideFlags: 0

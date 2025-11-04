@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLordManager : MonoBehaviour
 {
+    public static SceneLordManager Instance;
     void Awake()
     {
         if (Instance == null)
@@ -16,7 +17,6 @@ public class SceneLordManager : MonoBehaviour
         }
     }
 
-    public static SceneLordManager Instance;
     public void Scnenlode(string sceneName) 
 
     {

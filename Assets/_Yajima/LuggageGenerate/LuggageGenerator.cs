@@ -82,7 +82,7 @@ public class LuggageGenerator : MonoBehaviour
             {
                 if (l.position == s.position)
                 {
-                    Debug.LogWarning($"{l}が被っています"); 
+                    Debug.LogWarning($"{l}が被っています");
                     result = false;
                 }
             }
@@ -135,7 +135,7 @@ public class LuggageGenerator : MonoBehaviour
                 //指定の荷物の時はパーティクルを子オブジェクトにする
                 Instantiate(luggage.LuggageList.List[rand].Particle, go.transform);
                 //状態を指定の荷物に設定
-                luggage.LuggageList.List[rand].Prefab.Target = Target.Target;
+                go.Target = Target.Target;
                 //go.transform.localScale = Vector3.one * 0.5f;
                 Debug.Log("Particle");
             }

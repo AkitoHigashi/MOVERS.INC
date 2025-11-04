@@ -1,4 +1,4 @@
-
+﻿
 using UnityEngine;
 
 
@@ -7,13 +7,13 @@ using UnityEngine;
 /// </summary>
 public class RedButton : InteractBase
 {
-   private FallButton _redButton;
+   private Fall _redButton;
    private Animator _animator;
    TextUImanager  _textUImanager;
 
    private void Start()
    {
-      _redButton = FindAnyObjectByType<FallButton>();
+      _redButton = FindAnyObjectByType<Fall>();
       _animator = GetComponentInChildren<Animator>();
       _textUImanager = FindAnyObjectByType<TextUImanager>();
       _textUImanager.LuggageSetText();

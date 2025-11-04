@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
-using TMPro;
 
 /// <summary>
 /// 指定されたボタンを押すと、対象オブジェクトを上下に動かす（落とす→戻す）制御を行うクラス。
 /// また、Luggage（荷物）との衝突判定やスコア処理も担当する。
 /// </summary>
-public class FallButton : MonoBehaviour
+public class Fall : MonoBehaviour
 {
     [SerializeField, Tooltip("落下させたいターゲットオブジェクト")]
     private Transform _target; // 落ちる対象オブジェクト
@@ -27,7 +25,7 @@ public class FallButton : MonoBehaviour
 
     /// <summary>
     /// 荷物（Luggage）との衝突を検知し、スコアを減少・オブジェクト破棄を行う。
-    /// </summary>
+    /// </summary>q
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Luggage"))
@@ -57,7 +55,8 @@ public class FallButton : MonoBehaviour
     private void Start()
     {
         _originalPosition = _target.position;
-        _sliders = FindObjectOfType<Sliders>();
+        _sliders = FindAnyObjectByType<Sliders>();
+        _scoreManager.SetText();
     }
 
     public void FallAndReturnButtonTest()
