@@ -14,19 +14,24 @@ public class TextUImanager : MonoBehaviour
 
     private void OnEnable()
     {
-        _collectionArea.OnEnterLuggage += LuggageSetText;
-        _collectionArea.OnExitLuggage += LuggageSetText;
+        _collectionArea.OnEnterLuggage += LuggageInput;
+        _collectionArea.OnExitLuggage += LuggageInput;
     }
 
     private void OnDisable()
     {
-        _collectionArea.OnEnterLuggage -= LuggageSetText;
-        _collectionArea.OnExitLuggage -= LuggageSetText;
+        _collectionArea.OnEnterLuggage -= LuggageInput;
+        _collectionArea.OnExitLuggage -= LuggageInput;
     }
 
-    public void LuggageSetText(int text)
+    public void LuggageInput(int text)
     {
         _count += text;
+       // _luggagetext.text = $"{_count}/{_statusNotifer.MaxItem}";
+    }
+
+    public void LuggageSetText()
+    {
         _luggagetext.text = $"{_count}/{_statusNotifer.MaxItem}";
     }
 
