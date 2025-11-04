@@ -3,9 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLordManager : MonoBehaviour
 {
-    public static SceneLordManager Instance;
-    private FadeoutTrigger _fadeoutTrigger;
-    private void Awake()
+    void Awake()
     {
         if (Instance == null)
         {
@@ -16,11 +14,12 @@ public class SceneLordManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        _fadeoutTrigger = GetComponent<FadeoutTrigger>();
     }
-    public void Scnenlode(string name)
+
+    public static SceneLordManager Instance;
+    public void Scnenlode(string sceneName) 
+
     {
-        _fadeoutTrigger.OnFadeButtonPressed();
-        SceneManager.LoadScene(name);
+        SceneManager.LoadScene(sceneName);
     }
 }
