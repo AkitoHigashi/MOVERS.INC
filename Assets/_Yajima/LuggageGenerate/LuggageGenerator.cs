@@ -43,7 +43,6 @@ public class LuggageGenerator : MonoBehaviour
     [SerializeField] LuggageData _smallLuggage;
     [SerializeField] LuggageData _bigLuggage;
 
-
     private void Start()
     {
         //不正を検知
@@ -54,6 +53,10 @@ public class LuggageGenerator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// ターゲットの総和
+    /// </summary>
+    /// <returns></returns>
     public int GetTargetValue()
     {
         return _smallLuggage.TargetValue + _bigLuggage.GenerateValue;
@@ -131,6 +134,8 @@ public class LuggageGenerator : MonoBehaviour
             {
                 //指定の荷物の時はパーティクルを子オブジェクトにする
                 Instantiate(luggage.LuggageList.List[rand].Particle, go.transform);
+                //状態を指定の荷物に設定
+                luggage.LuggageList.List[rand].Prefab.Target = Target.Target;
                 //go.transform.localScale = Vector3.one * 0.5f;
                 Debug.Log("Particle");
             }
