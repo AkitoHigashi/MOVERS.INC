@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8963129118939001705}
   - component: {fileID: 9047409778567608200}
   - component: {fileID: -6354356911147312726}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: furikoTrap
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,7 +68,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 15, y: 15, z: 15}
+  m_Size: {x: 50, y: 15, z: 50}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-6354356911147312726
 MonoBehaviour:
@@ -97,9 +97,9 @@ GameObject:
   - component: {fileID: 9179693974124779}
   - component: {fileID: 9096321716393659599}
   - component: {fileID: 1770904402428172786}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Pivot
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -226,9 +226,9 @@ GameObject:
   - component: {fileID: 8154782299130562321}
   - component: {fileID: 6919850030115657582}
   - component: {fileID: 3126467273133304795}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Blade
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -281,7 +281,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5ced8aeb49e1ee3418b6badab445c36a, type: 3}
+  - {fileID: 2100000, guid: 87b4f5e88fc2f854c9313b90039fe33b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -337,4 +337,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179ac9f42f769e74db88bbc8f99d0811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrapDmg
-  _trapDamage: 0
+  _trapDamage: 5

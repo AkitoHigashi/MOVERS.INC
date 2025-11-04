@@ -2285,6 +2285,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1141454836}
     - target: {fileID: 4467633122216871559, guid: 88423f9acdda1d64d8173d4c5c656665, type: 3}
+      propertyPath: _fovMagnification
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4467633122216871559, guid: 88423f9acdda1d64d8173d4c5c656665, type: 3}
       propertyPath: _layerMask.m_Bits
       value: 640
       objectReference: {fileID: 0}
@@ -4698,7 +4702,7 @@ Transform:
   m_GameObject: {fileID: 1141454832}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.34, y: -0.9, z: 25.93}
+  m_LocalPosition: {x: -13.34, y: 1, z: 25.93}
   m_LocalScale: {x: 3, y: 0.1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []

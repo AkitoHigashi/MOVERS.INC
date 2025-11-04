@@ -5,7 +5,7 @@ using System.Collections;
 /// 指定されたボタンを押すと、対象オブジェクトを上下に動かす（落とす→戻す）制御を行うクラス。
 /// また、Luggage（荷物）との衝突判定やスコア処理も担当する。
 /// </summary>
-public class FallButton : MonoBehaviour
+public class Fall : MonoBehaviour
 {
     [SerializeField, Tooltip("落下させたいターゲットオブジェクト")]
     private Transform _target; // 落ちる対象オブジェクト
@@ -56,7 +56,7 @@ public class FallButton : MonoBehaviour
     {
         _originalPosition = _target.position;
         _sliders = FindAnyObjectByType<Sliders>();
-        _scoreManager.SetText(_scoreManager.NowScore.ToString());
+        _scoreManager.SetText();
     }
 
     public void FallAndReturnButtonTest()
