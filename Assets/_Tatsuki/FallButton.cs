@@ -13,7 +13,7 @@ public class FallButton : MonoBehaviour
     [SerializeField, Tooltip("落ちる距離")] private float _fallDistance = 2f; // 落ちる距離
     [SerializeField, Tooltip("落ちるスピード")] private float _fallSpeed = 5f; // 落ちる速度
     [SerializeField, Tooltip("ラゲージコレクター")] private LuggageCollector _collector; // 回収処理を行うクラス
-
+    
     [SerializeField, Tooltip("ラゲージマネージャー")]
     private LuggageManager _luggageManager; // エリア内の荷物管理クラス
 
@@ -38,11 +38,14 @@ public class FallButton : MonoBehaviour
             // 管理リストから削除
             _luggageManager.UnregisterItem(collision.gameObject);
 
-            _sliders.LuggageSliderUpdate();
             // スコア減少とUI更新
             _scoreManager.SetScore(-luggage.Score);
 
-            _scoreManager.SetText(_scoreManager.NowScore.ToString());
+            _scoreManager.SetText();
+           if(luggage.Target == Target.Target) _sliders.LuggageNum(-1);
+          
+            _sliders.LuggageSliderUpdate();
+            
         }
     }
 
@@ -95,6 +98,7 @@ public class FallButton : MonoBehaviour
 
         // 荷物を回収（スコア処理完了後に呼び出し）
         _collector.Collect();
-        _scoreManager.End();
+        _scoreManager.SetText();    
+        _sliders.LuggageSliderUpdate();
     }
 }
