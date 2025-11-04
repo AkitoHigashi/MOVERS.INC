@@ -9,11 +9,14 @@ public class RedButton : InteractBase
 {
    private FallButton _redButton;
    private Animator _animator;
+   TextUImanager  _textUImanager;
 
    private void Start()
    {
       _redButton = FindAnyObjectByType<FallButton>();
       _animator = GetComponentInChildren<Animator>();
+      _textUImanager = FindAnyObjectByType<TextUImanager>();
+      _textUImanager.LuggageSetText();
    }
 
    public override void Interact()
@@ -21,6 +24,8 @@ public class RedButton : InteractBase
       _animator.SetTrigger("push");
       StartCoroutine(_redButton.FallAndReturn());
       Debug.Log("oriDown");
+      _textUImanager.LuggageSetText();
+      
    }
 
    public override void DemolishedLuggage()
