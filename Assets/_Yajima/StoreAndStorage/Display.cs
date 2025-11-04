@@ -36,7 +36,7 @@ public class Display : InteractBase
     public override void Interact()
     {
         _globalParameter.ModifyMoney(-_store.PurchaseItem(this.gameObject, _globalParameter.Money));
-        Debug.Log("所持金計算をした");
+        Debug.Log($"所持金計算をした:所持金{_globalParameter.Money}円");
     }
     public override void PutLuggage(Collision collision)
     {
