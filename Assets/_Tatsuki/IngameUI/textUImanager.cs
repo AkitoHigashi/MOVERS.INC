@@ -26,8 +26,9 @@ public class TextUImanager : MonoBehaviour
 
     public void LuggageInput(int text)
     {
+        Debug.Log(text);
         _count += text;
-       // _luggagetext.text = $"{_count}/{_statusNotifer.MaxItem}";
+   
     }
 
     public void LuggageSetText()
