@@ -17,7 +17,7 @@ public class Sliders : MonoBehaviour
     [SerializeField] private PlayerCarry _playerCarry;
     [SerializeField] private CollectionArea _collectionArea;
 
-
+    private float _luggageSlider = 0f;
     private StatusNotifer _statusNotifer;
     private PlayerThrow _playerThrow;
     private PlayerSprint _playerSprint;
@@ -118,6 +118,12 @@ public class Sliders : MonoBehaviour
     /// <param name="sliderValue"></param>
     public void LuggageNum(int sliderValue)
     {
-        _luggagehsviders.value += (float)sliderValue / _statusNotifer.MaxItem;
+        _luggageSlider += (float)sliderValue / _statusNotifer.MaxItem;
+    }
+
+    public void LuggageSliderUpdate()
+    {
+        Debug.Log(_luggageSlider);
+        _luggagehsviders.value = _luggageSlider;
     }
 }
