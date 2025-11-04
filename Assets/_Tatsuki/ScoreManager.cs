@@ -9,7 +9,7 @@ public class ScoreManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text _tmpText;
     [SerializeField] private int _nowScore = 0;
-    public static  int EndScore { get; set; } = 0;
+    public static int EndScore { get; set; } = 0;
 
     private bool _isEnd = false;
 
@@ -17,7 +17,7 @@ public class ScoreManager : MonoBehaviour
     public int NowScore => _nowScore;
 
     // スコアの加算/減算
-    public static int  GetScore()
+    public static int GetScore()
     {
         return EndScore;
     }
@@ -29,12 +29,10 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-  public void End()
+    public void End()
     {
         EndScore = _nowScore;
     }
-
-
 
 
 
@@ -42,7 +40,17 @@ public class ScoreManager : MonoBehaviour
     public void SetText(string message)
     {
         if (!_isEnd)
-            _tmpText.text = message;
+        {
+            if (int.TryParse(message, out int score))
+            {
+                _tmpText.text = $"Score : {score:D4}";
+            }
+            else
+            {
+                Debug.LogWarning("スコアテキストを数字に変換失敗");
+                _tmpText.text = message;
+            }
+        }
     }
 
     // スコア更新を終了状態にする

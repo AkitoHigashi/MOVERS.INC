@@ -12,11 +12,11 @@ public class StatusNotifer : MonoBehaviour
     public int CurrentHp => _currentHp;
     public int MaxRunGauge => _maxrunGauge;
     public int CurrentRunGauge => _currentRunGauge;
-    [SerializeField] private int _maxItem = 0;
-    [SerializeField] private int _maxhp = 0;
-    [SerializeField] private int _currentHp = 0;
-    [SerializeField] private int _maxrunGauge = 0;
-    [SerializeField] private int _currentRunGauge = 0;
+    private int _maxItem = 0;
+    private int _maxhp = 0;
+    private int _currentHp = 0;
+    private int _maxrunGauge = 0;
+    private int _currentRunGauge = 0;
 
     [SerializeField] private PlayerHealth _playerHealth;
     [SerializeField] private PlayerSprint _playerSprint;
