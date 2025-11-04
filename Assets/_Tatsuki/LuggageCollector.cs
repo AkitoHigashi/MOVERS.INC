@@ -24,8 +24,8 @@ public class LuggageCollector : MonoBehaviour
         }
 
         // 登録解除とスコア停止
-        foreach (var item in toRemove)
-            _luggageManager.UnregisterItem(item);
+        // foreach (var item in toRemove)
+        //     _luggageManager.UnregisterItem(item);
 
         _scoreManager.SetEndScore(true);
         Debug.Log($"Collected {collectedCount} items!");
