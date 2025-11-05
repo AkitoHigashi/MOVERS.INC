@@ -126,4 +126,12 @@ public class Sliders : MonoBehaviour
         Debug.Log(_luggageSlider);
         _luggagehsviders.value = _luggageSlider;
     }
+/// <summary>
+/// 指定荷物の運んだ割合
+/// </summary>
+/// <returns></returns>
+    public float GetLuggage()
+    {
+        return _luggageSlider;
+    }
 }
