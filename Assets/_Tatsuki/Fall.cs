@@ -13,11 +13,12 @@ public class Fall : MonoBehaviour
     [SerializeField, Tooltip("落ちる距離")] private float _fallDistance = 2f; // 落ちる距離
     [SerializeField, Tooltip("落ちるスピード")] private float _fallSpeed = 5f; // 落ちる速度
     [SerializeField, Tooltip("ラゲージコレクター")] private LuggageCollector _collector; // 回収処理を行うクラス
-    
+
     [SerializeField, Tooltip("ラゲージマネージャー")]
     private LuggageManager _luggageManager; // エリア内の荷物管理クラス
 
     [SerializeField, Tooltip("スコアマネージャー")] private ScoreManager _scoreManager; // スコア管理クラス
+    private InGameTextUIManager _textUImanager;
 
     private Sliders _sliders;
     private Vector3 _originalPosition; // オブジェクトの初期位置
@@ -42,10 +43,10 @@ public class Fall : MonoBehaviour
             _scoreManager.SetScore(-luggage.Score);
 
             _scoreManager.SetText();
-           if(luggage.Target == Target.Target) _sliders.LuggageNum(-1);
-          
+            if (luggage.Target == Target.Target) _sliders.LuggageNum(-1);
+
             _sliders.LuggageSliderUpdate();
-            
+
         }
     }
 
@@ -56,6 +57,7 @@ public class Fall : MonoBehaviour
     {
         _originalPosition = _target.position;
         _sliders = FindAnyObjectByType<Sliders>();
+        _textUImanager = FindAnyObjectByType<InGameTextUIManager>();
         _scoreManager.SetText();
     }
 
@@ -98,7 +100,8 @@ public class Fall : MonoBehaviour
 
         // 荷物を回収（スコア処理完了後に呼び出し）
         _collector.Collect();
-        _scoreManager.SetText();    
+        _scoreManager.SetText();
         _sliders.LuggageSliderUpdate();
+        _textUImanager.LuggageSetText();
     }
 }
