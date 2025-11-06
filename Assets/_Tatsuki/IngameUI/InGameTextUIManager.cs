@@ -50,8 +50,10 @@ public class InGameTextUIManager : MonoBehaviour
         _timertext.text = string.Format("{0:00}:{1:00}", minutes, seconds); // 00:00形式で表示
     }
 
+  
     public void SetText(int score)
     {
+    
         Debug.Log(score);
         _scoreText.text = $"Score : {score:D5}";
     }
