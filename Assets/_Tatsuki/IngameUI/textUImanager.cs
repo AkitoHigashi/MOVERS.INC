@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 
-public class TextUImanager : MonoBehaviour
+public class TextUIManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text _luggagetext; //現在荷物
     [SerializeField] private TMP_Text _timertext;//タイマー

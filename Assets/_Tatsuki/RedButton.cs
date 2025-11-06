@@ -9,13 +9,13 @@ public class RedButton : InteractBase
 {
    private Fall _redButton;
    private Animator _animator;
-   TextUImanager  _textUImanager;
+   TextUIManager  _textUImanager;
 
    private void Start()
    {
       _redButton = FindAnyObjectByType<Fall>();
       _animator = GetComponentInChildren<Animator>();
-      _textUImanager = FindAnyObjectByType<TextUImanager>();
+      _textUImanager = FindAnyObjectByType<TextUIManager>();
       _textUImanager.LuggageSetText();
    }
 
