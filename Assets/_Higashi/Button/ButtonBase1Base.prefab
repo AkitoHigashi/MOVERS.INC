@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2429798437953203796}
   - component: {fileID: 278763313996831160}
   - component: {fileID: 3597721893116737575}
+  - component: {fileID: 2591635690062960644}
   m_Layer: 0
   m_Name: ButtonBase1Base
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8206884011281989008}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.0029999912}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -113,6 +114,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.5, z: 1}
   m_Center: {x: 0, y: 0.24748583, z: 0.0000000073756525}
+--- !u!114 &2591635690062960644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8206884011281989008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab007261456223640b6613d31487f4e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RedButton
 --- !u!1 &9088013671400482538
 GameObject:
   m_ObjectHideFlags: 0

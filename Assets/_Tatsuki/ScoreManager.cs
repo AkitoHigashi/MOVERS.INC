@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class ScoreManager : MonoBehaviour
 {
-    [SerializeField] TextUIManager _textUIManager;
+    [SerializeField] InGameTextUIManager _textUIManager;
     [SerializeField] private int _nowScore = 0;
     public static int EndScore { get; set; } = 0;
 

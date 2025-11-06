@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce9e37331544db340957ba7e287bc8a9, type: 3}
   m_Name: Slime
   m_EditorClassIdentifier: 
-  _enemyHp: 10
-  _enemyWalkSpeed: 3
-  _enemyRunSpeed: 3
-  _enemyFovDistance: 5
-  _enemyPower: 0
-  _enemyAttackRange: 0
-  _enemyState: 0
+  _monsterHp: 1
+  _monsterWalkSpeed: 1
+  _monsterRunSpeed: 1
+  _monsterFovDistance: 1
+  _monsterPower: 1
+  _monsterAttackRange: 1
+  _monsterState: 0
   _hokakuwariai: 0.575
   _waitTime: 1
   _angularSpeed: 360
