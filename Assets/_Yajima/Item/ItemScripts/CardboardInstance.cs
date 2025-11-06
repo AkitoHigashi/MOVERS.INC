@@ -5,6 +5,7 @@ public class CardboardInstance : InteractBase
 {
     Animator _anim;
     List<Luggage> _luggages = new List<Luggage>();
+    public List<Luggage> Luggages => _luggages;
     Luggage _luggage;
     bool _canPutin = true;
 
@@ -21,6 +22,7 @@ public class CardboardInstance : InteractBase
         _anim.SetTrigger("Close");
         _canPutin = false;
         _luggage.TakeDamage();
+        _luggage.ChangeScoreInCardboad(_luggages);
     }
 
     public override void PutLuggage(Collision collision)

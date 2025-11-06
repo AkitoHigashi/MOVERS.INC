@@ -5,6 +5,7 @@ public class TextUIManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text _luggagetext; //現在荷物
     [SerializeField] private TMP_Text _timertext;//タイマー
+    [SerializeField] private TMP_Text _scoreText;
 
     [SerializeField] private CollectionArea _collectionArea;
     [SerializeField] private StatusNotifer _statusNotifer;
@@ -43,5 +44,11 @@ public class TextUIManager : MonoBehaviour
         int seconds = (int)(ctx % 60);    // 秒（余り）
         _timertext.text = string.Format("{0:00}:{1:00}", minutes, seconds); // 00:00形式で表示
 
+    }
+
+    public void SetText(int score)
+    {
+        Debug.Log(score);
+        _scoreText.text = $"Score : {score:D5}";
     }
 }
