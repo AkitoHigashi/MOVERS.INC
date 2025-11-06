@@ -26,6 +26,7 @@ public class PlayerHealth : MonoBehaviour, IStartSetVariables
         {
             var weapon = other.GetComponent<MonsterWeapon>();
             _currentHP -= weapon.Power;
+            SEManager.SEPlay("TakePlayerDamage");
             PlayerHealthChanged(_currentHP);
             if (_currentHP <= 0)
             {
@@ -36,6 +37,7 @@ public class PlayerHealth : MonoBehaviour, IStartSetVariables
         {
             var trap = other.GetComponent<TrapBase>();
             _currentHP -= trap.TrapDamage;
+            SEManager.SEPlay("TakePlayerDamage");
             PlayerHealthChanged(_currentHP);
             if (_currentHP <= 0)
             {
