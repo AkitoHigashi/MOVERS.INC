@@ -5,8 +5,8 @@
 /// </summary>
 public class Lizard : MonsterBase
 {
-    [SerializeField, Header("コレクションエリア")]
-    private Transform _collectionArea;
+    [SerializeField, Header("リザードが荷物を運ぶ場所")]
+    private Transform _lizardCollectionArea;
 
     private GameObject _luggage;
     private bool _isCarry;
@@ -102,7 +102,7 @@ public class Lizard : MonsterBase
     private void CarryLuggage()
     {
         Debug.Log("荷物を運ぶ");
-        _currentDestination = _collectionArea.transform.position;
+        _currentDestination = _lizardCollectionArea.transform.position;
         _navMeshAgent.SetDestination(_currentDestination);
     }
     /// <summary>
@@ -111,7 +111,7 @@ public class Lizard : MonsterBase
     /// <param name="distance"></param>
     private void ThrowLuggage()
     {
-        float distance = Vector3.Distance(transform.position, _collectionArea.transform.position);
+        float distance = Vector3.Distance(transform.position, _lizardCollectionArea.transform.position);
         if (distance <= _stopDistance)
         {
             Debug.Log("荷物を下す");

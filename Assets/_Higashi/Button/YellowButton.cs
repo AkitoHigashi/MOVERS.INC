@@ -6,12 +6,12 @@ using UnityEngine;
 /// </summary>
 public class YellowButton : InteractBase
 {
-    [SerializeField, Header("ロードするシーンの名前")] private string _sceneName;
     [SerializeField, Header("アニメーションの時間")] private float _animTime;
 
     private Animator _animator;
+    private UIManeger _uIManeger;
 
-    private bool _isProcessing = false;
+    private bool _isProcessing = false;//二重防止
     public override void Interact()
     {
         if (_isProcessing) return;
@@ -21,14 +21,21 @@ public class YellowButton : InteractBase
     void Start()
     {
         _animator = GetComponentInChildren<Animator>();
+        _uIManeger = FindAnyObjectByType<UIManeger>();
     }
     private IEnumerator PushEnd()
     {
+        _isProcessing = true;//処理開始
+
         _animator.SetTrigger("push");
 
         yield return new WaitForSeconds(_animTime);
         //再生終了後に実行
-        SceneLordManager.Instance.Scnenlode(_sceneName);
+        _uIManeger.ShowResultUI();
+        GlobalParameters.Instance.ModifyDayCount(1);//一日すすめる。理想はロービーに戻るボタンを押した際。
+        _isProcessing = false;//処理終了
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
     public override void DemolishedLuggage()
     {

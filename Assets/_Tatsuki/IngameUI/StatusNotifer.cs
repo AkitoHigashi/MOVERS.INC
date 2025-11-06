@@ -27,8 +27,6 @@ public class StatusNotifer : MonoBehaviour
 
         _luggageGenerator = FindAnyObjectByType<LuggageGenerator>();
         _maxItem = _luggageGenerator.GetTargetValue();
-
-
     }
     private void Start()
     {

@@ -11,7 +11,7 @@ public class LobbyUIController : MonoBehaviour
     [SerializeField] private GameObject _taxPaymentDialog;
     [SerializeField] private GameObject _rankNotificationDialog;
     [SerializeField] private GameObject _notTaxDayNotificationDialog;
-    
+
     [Header("UI要素参照")]
     [SerializeField] private TextMeshProUGUI _uiMoney;
     [SerializeField] private TextMeshProUGUI _uiDay;
@@ -30,9 +30,18 @@ public class LobbyUIController : MonoBehaviour
     private void Start()
     {
         _gp = GlobalParameters.Instance;
-        _gp.ModifyDayCount(1);
-
         UpdateUI();
+    }
+    private void OnEnable()//canvas切り替え時に使用
+    {
+        if (_gp != null)
+        {
+            UpdateUI();
+        }
+        else
+        {
+            Debug.Log("GlobalParametersがまだ入ってない");
+        }
     }
 
     /// <summary>
@@ -44,7 +53,7 @@ public class LobbyUIController : MonoBehaviour
         _uiDay.text = "日数:" + _gp.DayCount;
         _uiRank.text = "評価値:" + _gp.PlayerRank;
     }
-    
+
     /// <summary>
     /// 納税ダイアログの入力値をチェックする処理
     /// </summary>
@@ -104,7 +113,7 @@ public class LobbyUIController : MonoBehaviour
         _resultReached.text = quotaReached ? "納税ノルマ達成" : "納税ノルマ未達成";
         _resultRankChange.text = quotaReached ? "評価値が上がった" : "納税ノルマ下がった";
         _resultRank.text = "評価値が" + _gp.PlayerRank + "になった";
-        
+
         _rankNotificationDialog.transform.DOScale(Vector3.one, 0.2f);
     }
 
@@ -117,7 +126,7 @@ public class LobbyUIController : MonoBehaviour
         _notTaxDayNotificationDialog.transform.localScale = Vector3.zero;
         _notTaxDayNotificationDialog.transform.DOScale(Vector3.one, 0.2f);
     }
-    
+
     /// <summary>
     /// 納税ボタン（画面左下）押下時処理
     /// </summary>
@@ -134,10 +143,10 @@ public class LobbyUIController : MonoBehaviour
 
         _tpbRank.text = "あなたの評価値は：" + _gp.PlayerRank;
         _tpbQuota.text = "よって、今回の納税ノルマは：" + _gp.TaxQuota;
-        
+
         _taxPaymentDialog.transform.DOScale(Vector3.one, 0.2f);
     }
-    
+
     /// <summary>
     /// 納税ダイアログのOKボタン押下時処理
     /// </summary>
@@ -153,7 +162,7 @@ public class LobbyUIController : MonoBehaviour
             DoTaxPayment();
         });
     }
-    
+
     /// <summary>
     /// 指定されたダイアログ親GameObjectを閉じる
     /// </summary>

@@ -20,6 +20,9 @@ public class LuggageCollector : MonoBehaviour
         {
             collectedCount++;
             toRemove.Add(item);
+            _scoreManager.SetScore(item.GetComponent<Luggage>().Score);
+            _luggageManager.UnregisterItem(item);
+
             Destroy(item);
         }
 

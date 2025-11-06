@@ -32,9 +32,9 @@ public class Result : MonoBehaviour
 
     //荷物品質ボーナスのテスト用の値 
     //ここに各荷物のダメージ割合をいれていく
-    private int lug1 = 50;
-    private int lug2 = 60;
-    private int lug3 = 100;
+    //private int lug1 = 50;
+    //private int lug2 = 60;
+    //private int lug3 = 100;
 
     //捕獲ボーナステスト用
     //ここに捕まえたかどうかの結果をいれる
@@ -50,7 +50,8 @@ public class Result : MonoBehaviour
         // --- メイン報酬の計算 ---
         LuggageTargetCheck();
         Quest = _statusNotifer.MaxItem;
-            mainReward = Mathf.RoundToInt(_scoreManager.NowScore * ((float)luggageNumbers / Quest));
+        mainReward = Mathf.RoundToInt(_scoreManager.NowScore * ((float)luggageNumbers / Quest));
+        Debug.Log(Quest+"QuestNums");
         _main_text.text = $" +{mainReward}";
 
         // --- 荷物を全て届けたか ---
@@ -118,9 +119,9 @@ public class Result : MonoBehaviour
         {
             if (luggage.Target == Target.Target)
             {
-            totalScore += luggage.Score;
-            totalMaxScore += luggage.MaxScore;
-                
+                totalScore += luggage.Score;
+                totalMaxScore += luggage.MaxScore;
+
             }
         }
 
