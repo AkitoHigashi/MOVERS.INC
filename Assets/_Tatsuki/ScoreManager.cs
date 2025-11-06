@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class ScoreManager : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _tmpText;
+    [SerializeField] TextUIManager _textUIManager;
     [SerializeField] private int _nowScore = 0;
     public static int EndScore { get; set; } = 0;
 
@@ -32,8 +32,7 @@ public class ScoreManager : MonoBehaviour
 
     public void SetText()
     {
-        Debug.Log(NowScore);
-        _tmpText.text = $"Score : {NowScore:D5}";
+        _textUIManager.SetText(_nowScore);
     }
 
     // スコア更新を終了状態にする

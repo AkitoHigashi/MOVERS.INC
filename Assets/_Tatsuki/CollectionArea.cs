@@ -27,10 +27,21 @@ public class CollectionArea : MonoBehaviour
         if (other.CompareTag("Luggage"))
         {
             var luggage = other.gameObject.GetComponent<Luggage>();
-           // _scoreManager.SetScore(luggage.Score);
-          //  _scoreManager.SetText(_scoreManager.NowScore.ToString());
+            // _scoreManager.SetScore(luggage.Score);
+            //  _scoreManager.SetText(_scoreManager.NowScore.ToString());
             OnEnter?.Invoke(other.gameObject);
-            if (luggage.Target == Target.Target) OnEnterLuggage?.Invoke(1);
+            if (other.gameObject.TryGetComponent<CardboardInstance>(out var cardboard))
+            {
+                //段ボールが置かれたときの処理
+                foreach(var lug in cardboard.Luggages)
+                {
+                    if (lug.Target == Target.Target) OnEnterLuggage?.Invoke(1);
+                }
+            }
+            else
+            {
+                if (luggage.Target == Target.Target) OnEnterLuggage?.Invoke(1);
+            }
         }
     }
 
@@ -44,9 +55,20 @@ public class CollectionArea : MonoBehaviour
             var luggage = other.gameObject.GetComponent<Luggage>();
             //_scoreManager.SetScore(-luggage.MaxScore);
             luggage.MaxScore = luggage.Score;
-          //  _scoreManager.SetText(_scoreManager.NowScore.ToString());
+            //  _scoreManager.SetText(_scoreManager.NowScore.ToString());
             OnExit?.Invoke(other.gameObject);
-            if (luggage.Target == Target.Target) OnExitLuggage?.Invoke(-1);
+            if (other.gameObject.TryGetComponent<CardboardInstance>(out var cardboard))
+            {
+                //段ボールが置かれたときの処理
+                foreach (var lug in cardboard.Luggages)
+                {
+                    if (lug.Target == Target.Target) OnExitLuggage?.Invoke(-1);
+                }
+            }
+            else
+            {
+                if (luggage.Target == Target.Target) OnExitLuggage?.Invoke(-1);
+            }
         }
     }
 

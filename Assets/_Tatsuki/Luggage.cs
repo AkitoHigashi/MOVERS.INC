@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 /// <summary>
 /// 荷物の大きさを指定する
 /// </summary>
@@ -36,6 +37,19 @@ public class Luggage : MonoBehaviour
 
     // スコアを取得するプロパティ
     public int Score => _score;
+
+    /// <summary>
+    /// スコアを更新する関数（段ボール専用）
+    /// </summary>
+    /// <param name="list"></param>
+    public void ChangeScoreInCardboad(List<Luggage> list)
+    {
+        _score = 0;
+        foreach(var luggage in list)
+        {
+            _score += luggage.Score;
+        }
+    }
 
     public void NoDamage()
     {
