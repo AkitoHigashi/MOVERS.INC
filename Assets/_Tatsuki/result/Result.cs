@@ -23,6 +23,8 @@ public class Result : MonoBehaviour
     [SerializeField] private StatusNotifer _statusNotifer;
     [SerializeField] private Sliders _sliders;
     [SerializeField] private LuggageManager _luggageManager;
+    [SerializeField] private InGameTextUIManager _inGameTextUIManager;
+    [SerializeField] private LuggageCollector _luggageCollector;
     private int bonusReward = 0; // サブスコアの合計
     private int mainReward = 0; // メインスコア（荷物数 × スコア）
     private int luggageNumbers = 0; // 荷物の数
@@ -91,9 +93,9 @@ public class Result : MonoBehaviour
         ///<summary>
         ///ボーナス報酬計算
         ///</summary>
-
-
-        _cargoStatus_text.text = $"{luggageNumbers}/{Quest}";
+        Debug.Log(_inGameTextUIManager.Count);
+        int n = _inGameTextUIManager.Count;
+        _cargoStatus_text.text = $"{n}/{Quest}";
         luggageDamage = Mathf.RoundToInt(_luggageDamageRate * 100f);
         _undamageStatus_text.text = $"{luggageDamage}%";
 
@@ -115,7 +117,7 @@ public class Result : MonoBehaviour
         float totalScore = 0f;
         float totalMaxScore = 0f;
 
-        foreach (var luggage in _luggageManager.GetLuggage())
+        foreach (var luggage in _luggageCollector.GetLuggage())
         {
             if (luggage.Target == Target.Target)
             {
