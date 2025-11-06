@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4228378562382048644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 141286100371374422}
+  - component: {fileID: 8866463681752815573}
+  m_Layer: 0
+  m_Name: SEManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &141286100371374422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4228378562382048644}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.64806, y: -0, z: 6.76651}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8866463681752815573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4228378562382048644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d5f14d804ffb134fbe62fee3d432824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mixer: {fileID: 24100000, guid: 8d6c21c4d664c9148857137139533b0f, type: 2}
+  _mixerGroup: {fileID: 3590031454963829068, guid: 8d6c21c4d664c9148857137139533b0f, type: 2}
+  _seData:
+  - _actionName: Attack
+    _se: {fileID: 8300000, guid: 6258f3a9b8012f647a2fd4a3af5043b4, type: 3}
+  - _actionName: TakePlayerDamage
+    _se: {fileID: 8300000, guid: 4f6fe0b453575bd45bd4173c8903afe1, type: 3}
+  - _actionName: Grap
+    _se: {fileID: 8300000, guid: 5310de5001eb76b48944b0f7ab67c694, type: 3}
+  - _actionName: BrokenLuggage
+    _se: {fileID: 8300000, guid: 5998fd585be9b2549a26db18bb9ea532, type: 3}
+  - _actionName: TrapSwing
+    _se: {fileID: 8300000, guid: 29df3fbc82260b145826127c369830d0, type: 3}
