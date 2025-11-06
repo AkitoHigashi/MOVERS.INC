@@ -16,6 +16,11 @@ public class LuggageCollector : MonoBehaviour
         int collectedCount = 0;
         List<GameObject> toRemove = new List<GameObject>();
 
+        foreach (var item in _luggageManager.GetLuggage())
+        {
+            _luggages.Add(item);
+            
+        }
         // エリア内の全荷物を回収
         foreach (var item in _luggageManager.GetItemInArea())
         {
@@ -28,11 +33,6 @@ public class LuggageCollector : MonoBehaviour
             Destroy(item);
         }
 
-        foreach (var item in _luggageManager.GetLuggage())
-        {
-            _luggages.Add(item);
-            
-        }
 
         // 登録解除とスコア停止
         // foreach (var item in toRemove)

@@ -52,8 +52,12 @@ public class Result : MonoBehaviour
         // --- メイン報酬の計算 ---
         LuggageTargetCheck();
         Quest = _statusNotifer.MaxItem;
+        Debug.Log($"NowScore={_scoreManager.NowScore}");
+        Debug.Log($"Quest{Quest}");
+        Debug.Log($"LuggageNumbers={luggageNumbers}");
+        
         mainReward = Mathf.RoundToInt(_scoreManager.NowScore * ((float)luggageNumbers / Quest));
-        Debug.Log(Quest+"QuestNums");
+        Debug.Log(mainReward);
         _main_text.text = $" +{mainReward}";
 
         // --- 荷物を全て届けたか ---
@@ -93,6 +97,7 @@ public class Result : MonoBehaviour
         ///<summary>
         ///ボーナス報酬計算
         ///</summary>
+
         Debug.Log(_inGameTextUIManager.Count);
         int n = _inGameTextUIManager.Count;
         _cargoStatus_text.text = $"{n}/{Quest}";
@@ -106,7 +111,7 @@ public class Result : MonoBehaviour
 
     private void LuggageTargetCheck()
     {
-        foreach (var luggage in _luggageManager.GetLuggage())
+        foreach (var luggage in _luggageCollector.GetLuggage())
         {
             if (luggage.Target == Target.Target) luggageNumbers++;
         }
@@ -116,6 +121,8 @@ public class Result : MonoBehaviour
     {
         float totalScore = 0f;
         float totalMaxScore = 0f;
+        Debug.Log($"Luggage数: {_luggageManager.GetLuggage().Count}");
+        Debug.Log($"Luggage数: {_luggageCollector.GetLuggage().Count}");
 
         foreach (var luggage in _luggageCollector.GetLuggage())
         {
