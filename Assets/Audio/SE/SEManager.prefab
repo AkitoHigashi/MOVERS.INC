@@ -57,3 +57,11 @@ MonoBehaviour:
     _se: {fileID: 8300000, guid: 5998fd585be9b2549a26db18bb9ea532, type: 3}
   - _actionName: TrapSwing
     _se: {fileID: 8300000, guid: 29df3fbc82260b145826127c369830d0, type: 3}
+  - _actionName: FallObjectSound
+    _se: {fileID: 8300000, guid: 4206b90c394acbd40b42c66a96dc354d, type: 3}
+  - _actionName: PushButtonSound
+    _se: {fileID: 8300000, guid: 2386f7b272b37a14c9922763d74d28f1, type: 3}
+  - _actionName: ThrowLuggageSound
+    _se: {fileID: 8300000, guid: 8a0f5deb9d1de28439c84af664c00652, type: 3}
+  - _actionName: ThornTrap
+    _se: {fileID: 8300000, guid: f2b21d046c946bf49902f46e2797e787, type: 3}
