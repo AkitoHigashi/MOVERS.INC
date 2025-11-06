@@ -23,6 +23,11 @@ public class ScoreManager : MonoBehaviour
         _nowScore = Mathf.Max(_nowScore + score, 0);
 
     }
+
+
+
+
+
     // スコア表示テキストを更新
 
     public void SetText()
