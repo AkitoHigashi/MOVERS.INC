@@ -402,7 +402,7 @@ public abstract class MonsterBase : MonoBehaviour
         Damaged();
         if (_monsterHp <= 0)
         {
-            EnemyDie();
+            MonsterDead();
         }
     }
     [ContextMenu("Damaged")]
@@ -412,17 +412,18 @@ public abstract class MonsterBase : MonoBehaviour
         {
             _renderer.material.DOColor(_defaultColor, 0.5f);
         });
+        SEManager.SEPlay("MonsterDamaged");
     }
     /// <summary>
     /// HPが0以下になったら死亡
     /// </summary>
     [ContextMenu("Die")]
-    protected virtual void EnemyDie()
+    protected virtual void MonsterDead()
     {
         _navMeshAgent.speed = 0;
         Quaternion quaternion = transform.rotation;
+        this.gameObject.SetActive(false);
         Instantiate(_deadPrefab, this.transform.position, quaternion);
-        Destroy(this.gameObject);
     }
     /// <summary>
     /// 友好関係を変える
