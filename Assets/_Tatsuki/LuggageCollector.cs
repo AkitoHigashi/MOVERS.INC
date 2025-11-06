@@ -9,6 +9,7 @@ public class LuggageCollector : MonoBehaviour
 {
     [SerializeField] private LuggageManager _luggageManager;
     [SerializeField] private ScoreManager _scoreManager;
+       private List<Luggage> _luggages = new List<Luggage>();
 
     public void Collect()
     {
@@ -20,10 +21,17 @@ public class LuggageCollector : MonoBehaviour
         {
             collectedCount++;
             toRemove.Add(item);
+            
             _scoreManager.SetScore(item.GetComponent<Luggage>().Score);
             _luggageManager.UnregisterItem(item);
 
             Destroy(item);
+        }
+
+        foreach (var item in _luggageManager.GetLuggage())
+        {
+            _luggages.Add(item);
+            
         }
 
         // 登録解除とスコア停止
@@ -33,4 +41,5 @@ public class LuggageCollector : MonoBehaviour
         _scoreManager.SetEndScore(true);
         Debug.Log($"Collected {collectedCount} items!");
     }
+    public List<Luggage> GetLuggage() => new List<Luggage>(_luggages);
 }
