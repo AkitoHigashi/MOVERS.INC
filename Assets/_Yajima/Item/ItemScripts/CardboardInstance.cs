@@ -14,6 +14,10 @@ public class CardboardInstance : InteractBase
         _luggage = GetComponent<Luggage>();
         _anim = GetComponent<Animator>();
         _luggage.NoDamage();
+        if (tag != "Luggage")
+        {
+            tag = "Luggage";
+        }
     }
 
     [ContextMenu("a")]
