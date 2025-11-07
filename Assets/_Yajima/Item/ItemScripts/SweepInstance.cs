@@ -20,6 +20,11 @@ public class SweepInstance : ItemBase
         _anim.Play(_animName);
     }
 
+    public void SEPlay()
+    {
+        SEManager.SEPlay("Attack");
+    }
+
     public void ActivateEnd()
     {
         _item.SetActive(true);
