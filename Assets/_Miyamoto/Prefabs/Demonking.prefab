@@ -436,7 +436,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 28997d4a051d0e643a18e2071ee627a2, type: 3}
       propertyPath: m_Name
-      value: DemonKing (2)
+      value: Demonking
       objectReference: {fileID: 0}
     - target: {fileID: 1731868978703322528, guid: 28997d4a051d0e643a18e2071ee627a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -839,19 +839,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _monsterData: {fileID: 11400000, guid: 14899abc4f84288429c19319f83f7fae, type: 2}
-  _destinations:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   _facePos: {fileID: 1176829590308954547}
   _layerMask:
     serializedVersion: 2
@@ -859,7 +846,9 @@ MonoBehaviour:
   _deadPrefab: {fileID: 4137361615502705024, guid: 4d61d0f94ea6879458ebcad2c170af01, type: 3}
   _targetTags:
   - Player
+  _fovMagnification: 1
   _coolTime: 2
+  _chaseTime: 0
 --- !u!114 &6086336595583719467
 MonoBehaviour:
   m_ObjectHideFlags: 0
