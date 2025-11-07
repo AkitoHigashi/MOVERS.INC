@@ -76,6 +76,7 @@ public class Fall : MonoBehaviour
         _isFalling = true;
 
         Vector3 targetPosition = _originalPosition + Vector3.down * _fallDistance;
+        SEManager.SEPlay("FallObjectSound");
 
         // ===== 落下フェーズ =====
         while (Vector3.Distance(_target.position, targetPosition) > 0.01f)
@@ -87,7 +88,7 @@ public class Fall : MonoBehaviour
         Debug.Log("Fall ended");
 
         // ===== 停止フェーズ =====
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(4f);
 
         // ===== 上昇フェーズ =====
         while (Vector3.Distance(_target.position, _originalPosition) > 0.01f)
