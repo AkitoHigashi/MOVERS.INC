@@ -26,7 +26,7 @@ public class YellowButton : InteractBase
     private IEnumerator PushEnd()
     {
         _isProcessing = true;//処理開始
-
+        SEManager.SEPlay("PushButtonSound");
         _animator.SetTrigger("push");
 
         yield return new WaitForSeconds(_animTime);

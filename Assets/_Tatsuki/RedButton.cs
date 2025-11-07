@@ -21,6 +21,7 @@ public class RedButton : InteractBase
 
    public override void Interact()
    {
+        SEManager.SEPlay("PushButtonSound");
       _animator.SetTrigger("push");
       StartCoroutine(_redButton.FallAndReturn());
       Debug.Log("oriDown");
