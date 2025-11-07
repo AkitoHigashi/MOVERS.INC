@@ -45,10 +45,6 @@ public class Display : InteractBase
 
     private void Start()
     {
-        if (tag != "Item")
-        {
-            tag = "Item";
-        }
         _store = FindAnyObjectByType<Store>();
         _globalParameter = FindAnyObjectByType<GlobalParameters>();
     }

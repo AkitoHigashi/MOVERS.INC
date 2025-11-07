@@ -67,6 +67,7 @@ public class GlobalParameters : MonoBehaviour
     public void ModifyMoney(int amount)
     {
         Money += amount;
+        FindAnyObjectByType<LobbyUIController>().UpdateUI();
     }
 
     /// <summary>

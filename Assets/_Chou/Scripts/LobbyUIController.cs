@@ -31,6 +31,7 @@ public class LobbyUIController : MonoBehaviour
     {
         _gp = GlobalParameters.Instance;
         UpdateUI();
+        CheckAndShowTaxDialog();
     }
     private void OnEnable()//canvas切り替え時に使用
     {
@@ -47,11 +48,35 @@ public class LobbyUIController : MonoBehaviour
     /// <summary>
     /// UI項目表示を更新する
     /// </summary>
-    private void UpdateUI()
+    public void UpdateUI()
     {
         _uiMoney.text = "所持金:" + _gp.Money;
         _uiDay.text = "日数:" + _gp.DayCount;
         _uiRank.text = "評価値:" + _gp.PlayerRank;
+    }
+
+    /// <summary>
+    /// シーン移行時に納税日かどうかをチェックし、該当ダイアログを表示
+    /// </summary>
+    private void CheckAndShowTaxDialog()
+    {
+        if (_gp == null) return;
+
+        // 納税日ではない場合
+        if (!_gp.IsTaxDay())
+        {
+            ShowNotTaxDayNotification();
+            return;
+        }
+
+        // 納税日の場合は納税ダイアログを表示
+        _taxPaymentDialog.SetActive(true);
+        _taxPaymentDialog.transform.localScale = Vector3.zero;
+
+        _tpbRank.text = "あなたの評価値は：" + _gp.PlayerRank;
+        _tpbQuota.text = "よって、今回の納税ノルマは：" + _gp.TaxQuota;
+
+        _taxPaymentDialog.transform.DOScale(Vector3.one, 0.2f);
     }
 
     /// <summary>
