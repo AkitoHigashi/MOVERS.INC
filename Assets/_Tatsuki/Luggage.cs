@@ -92,6 +92,7 @@ public class Luggage : MonoBehaviour
             if (_score <= 0)
             {
                 _interactBase?.DemolishedLuggage();
+                SEManager.SEPlay("BrokenLuggage");
             }
         }
         else
