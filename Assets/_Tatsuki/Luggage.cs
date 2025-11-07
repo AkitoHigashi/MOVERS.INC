@@ -97,7 +97,7 @@ public class Luggage : MonoBehaviour
                 if (_isDead)
                 {
                     Instantiate(_brokenLuggage, transform.position, Quaternion.identity);
-                    SEManager.SEPlay("broken");
+                    SEManager.SEPlay("BrokenLuggage");
                 }
             }
         }
