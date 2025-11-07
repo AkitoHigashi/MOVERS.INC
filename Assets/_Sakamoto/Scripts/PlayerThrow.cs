@@ -51,6 +51,7 @@ public class PlayerThrow : MonoBehaviour, IStartSetVariables
         if (_isCarry && _throwTime >= _throwableTime)
         {
             Throw();
+            SEManager.SEPlay("ThrowLuggageSound");
         }
         _throwTime = 0f; //abe
     }
