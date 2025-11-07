@@ -7,34 +7,32 @@ using UnityEngine;
 /// </summary>
 public class ScoreManager : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _tmpText;
+    [SerializeField] InGameTextUIManager _textUIManager;
     [SerializeField] private int _nowScore = 0;
-    public static  int EndScore { get; set; } = 0;
+    public static int EndScore { get; set; } = 0;
 
     private bool _isEnd = false;
 
     // 現在のスコアを外部に公開
     public int NowScore => _nowScore;
 
-    
+
     public void SetScore(int score)
     {
-       
-            _nowScore = Mathf.Max(_nowScore + score, 0);
-        
+
+        _nowScore = Mathf.Max(_nowScore + score, 0);
+
     }
 
- 
 
 
 
 
     // スコア表示テキストを更新
-    
+
     public void SetText()
     {
-        Debug.Log(NowScore);
-        _tmpText.text = NowScore.ToString();
+        _textUIManager.SetText(_nowScore);
     }
 
     // スコア更新を終了状態にする

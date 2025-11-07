@@ -105,6 +105,7 @@ public class PlayerCarry : MonoBehaviour, IStartSetVariables
                 _target = hit.collider.gameObject;
                 if (_target.CompareTag(_luggageTag) || _target.CompareTag(_itemTag))
                 {
+                    SEManager.SEPlay("Grap");
                     Collider _targetCollider = _target.GetComponent<Collider>();
                     Rigidbody _targetRb = _target.GetComponent<Rigidbody>();
                     if (_target.TryGetComponent<Luggage>(out var luggageScript))

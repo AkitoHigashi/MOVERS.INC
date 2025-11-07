@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &436558280743155859
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4959239549357312917}
+  - component: {fileID: 4487283338034632912}
+  - component: {fileID: 614041547851313006}
+  - component: {fileID: 6848110766968172700}
+  - component: {fileID: 835205674570750049}
+  m_Layer: 0
+  m_Name: UI Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4959239549357312917
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436558280743155859}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4487283338034632912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436558280743155859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc3d8ee085bde0042b5b39630d8ab179, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextUImanager
+  _luggagetext: {fileID: 0}
+  _timertext: {fileID: 0}
+  _collectionArea: {fileID: 0}
+  _statusNotifer: {fileID: 0}
+--- !u!114 &614041547851313006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436558280743155859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f101d1d8e6b3e7d408a772e6d259d2d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LobbyUIController
+  _taxPaymentDialog: {fileID: 0}
+  _rankNotificationDialog: {fileID: 0}
+  _notTaxDayNotificationDialog: {fileID: 0}
+  _uiMoney: {fileID: 0}
+  _uiDay: {fileID: 0}
+  _uiRank: {fileID: 0}
+  _tpbRank: {fileID: 0}
+  _tpbQuota: {fileID: 0}
+  _tpbErrMsg: {fileID: 0}
+  _tpbTaxPaid: {fileID: 0}
+  _resultReached: {fileID: 0}
+  _resultRankChange: {fileID: 0}
+  _resultRank: {fileID: 0}
+--- !u!114 &6848110766968172700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436558280743155859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22996eb5e94708443a6e7f209faf74c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sliders
+  _luggagehsviders: {fileID: 0}
+  _collectionArea: {fileID: 0}
+--- !u!114 &835205674570750049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436558280743155859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39306e434cd370f41b1a0a1e4ca57a0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CommonSliders
+  _hpGauge: {fileID: 0}
+  _runGauge: {fileID: 0}
+  _throwGauge: {fileID: 0}
+  _interactFillGauge: {fileID: 0}
+  _throwSliderObject: {fileID: 0}
+  _interactGaugeObject: {fileID: 0}

@@ -26,6 +26,8 @@ MonoBehaviour:
     m_path: Assets/Ingame/Lobby.unity
   - m_enabled: 1
     m_path: Assets/Ingame/Ingame.unity
+  - m_enabled: 1
+    m_path: Assets/_Higashi/Scene/buttonDEMO.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings: []

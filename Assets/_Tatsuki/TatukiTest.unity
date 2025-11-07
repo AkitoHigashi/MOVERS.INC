@@ -421,17 +421,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 932a1ec747889a44cb9c4c4554d010d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _main_text: {fileID: 0}
-  _cargo_text: {fileID: 0}
-  _capture_text: {fileID: 0}
-  _undamage_text: {fileID: 0}
-  _total_text: {fileID: 0}
-  _cargoStatus_text: {fileID: 0}
-  _undamageStatus_text: {fileID: 0}
-  _captureStatus_text: {fileID: 0}
+  _main_text: {fileID: 887048979}
+  _cargo_text: {fileID: 347790752}
+  _capture_text: {fileID: 2132847406}
+  _undamage_text: {fileID: 681718031}
+  _total_text: {fileID: 1251977469}
+  _cargoStatus_text: {fileID: 1075298114}
+  _undamageStatus_text: {fileID: 136301584}
+  _captureStatus_text: {fileID: 1051457855}
   _cargoBonus: 2000
   _captureBonus: 1000
   _luggageUnDamageBonus: 1000
+  _scoreManager: {fileID: 19212238}
+  _statusNotifer: {fileID: 1007538580}
+  _sliders: {fileID: 567930292}
+  _luggageManager: {fileID: 853783709}
 --- !u!1 &124256545
 GameObject:
   m_ObjectHideFlags: 0
@@ -2990,7 +2994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2639076978331623408, guid: 04deacff1d938114d859b0b266a3c352, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.671
+      value: 2.018
       objectReference: {fileID: 0}
     - target: {fileID: 2639076978331623408, guid: 04deacff1d938114d859b0b266a3c352, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3058,7 +3062,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5206888766674516118, guid: 04deacff1d938114d859b0b266a3c352, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4191,8 +4195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daa6ca95c1a93db4ab3bd8e3beb7eca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PanelSwitch
-  _inGameUI: {fileID: 0}
-  _outGameUI: {fileID: 0}
+  _inGameUI: {fileID: 564308389}
+  _outGameUI: {fileID: 1095123456}
 --- !u!4 &1116701498
 Transform:
   m_ObjectHideFlags: 0
@@ -4648,7 +4652,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2639076978331623408, guid: 04deacff1d938114d859b0b266a3c352, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.671
+      value: 1.911
       objectReference: {fileID: 0}
     - target: {fileID: 2639076978331623408, guid: 04deacff1d938114d859b0b266a3c352, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4716,7 +4720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5206888766674516118, guid: 04deacff1d938114d859b0b266a3c352, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8187,7 +8191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2338159864421005283, guid: 861b6680bf3168a429f2a3366bf02264, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.987
+      value: 6.54
       objectReference: {fileID: 0}
     - target: {fileID: 2338159864421005283, guid: 861b6680bf3168a429f2a3366bf02264, type: 3}
       propertyPath: m_LocalPosition.z
