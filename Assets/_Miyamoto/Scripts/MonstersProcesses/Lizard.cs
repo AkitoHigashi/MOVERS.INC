@@ -148,10 +148,10 @@ public class Lizard : MonsterBase
     /// 死んだときにもし荷物を持っていたら親子関係を解除
     /// </summary>
     [ContextMenu("LizardDie")]
-    protected override void EnemyDie()
+    protected override void MonsterDead()
     {
         ReleaseLuggage();
-        base.EnemyDie();
+        base.MonsterDead();
     }
     private void OnTriggerEnter(Collider other)
     {
