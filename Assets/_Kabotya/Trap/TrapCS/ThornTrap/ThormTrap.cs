@@ -13,12 +13,12 @@ public class ThormTrap : TrapBase
 
     private Tween _thormTween;
 
-
     void Awake()
     {
         // 初期化時に適切な容量を設定
         DOTween.SetTweensCapacity(1000, 1000);
     }
+
     private void Start()
     {
         if (_trapRange == null)
@@ -33,7 +33,6 @@ public class ThormTrap : TrapBase
     private void TrapCheck()
     {
         if (_thormTween.IsActive() && (_thormTween.IsPlaying() || !_thormTween.IsComplete())) return;
-
         if (!_trapRange._deactivateWhenExit)
         {
             UpThorm();
@@ -51,6 +50,7 @@ public class ThormTrap : TrapBase
 
         // 上昇 → 停止 → 下降 を順に追加
         seq.AppendInterval(_thormCollTime)
+           .AppendCallback(() => SEManager.SEPlay("ThornTrap")) // 上がる直前にSE再生
            .Append(transform.DOLocalMove(upPos, _upDuration)
                     .SetEase(Ease.OutCubic)) //上がる
            .AppendInterval(_upPauseDuration)  //上で止まる

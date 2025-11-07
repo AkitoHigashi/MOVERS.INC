@@ -65,3 +65,5 @@ MonoBehaviour:
     _se: {fileID: 8300000, guid: 8a0f5deb9d1de28439c84af664c00652, type: 3}
   - _actionName: ThornTrap
     _se: {fileID: 8300000, guid: f2b21d046c946bf49902f46e2797e787, type: 3}
+  - _actionName: DamagedEnemySound
+    _se: {fileID: 8300000, guid: 962af9aad11ab6c468d9057f74453ea7, type: 3}
