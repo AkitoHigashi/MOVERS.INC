@@ -31,9 +31,13 @@ public class Luggage : MonoBehaviour
     [SerializeField] private float _damageScale = 1.0f;   // 速度→ダメージ変換倍率
     [SerializeField] private float _fixedDamage = 10f;
     [SerializeField] private Target _target = Target.NotTarget;
+    [SerializeField] private GameObject _brokenLuggage;
+
 
     InteractBase _interactBase;
     private bool _damage = true;
+    private bool _isDead = false;
+    public bool IsDead => _isDead;
 
     // スコアを取得するプロパティ
     public int Score => _score;
@@ -70,9 +74,6 @@ public class Luggage : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -92,7 +93,12 @@ public class Luggage : MonoBehaviour
             if (_score <= 0)
             {
                 _interactBase?.DemolishedLuggage();
-                SEManager.SEPlay("BrokenLuggage");
+                _isDead = true;
+                if (_isDead)
+                {
+                    Instantiate(_brokenLuggage, transform.position, Quaternion.identity);
+                    SEManager.SEPlay("broken");
+                }
             }
         }
         else
